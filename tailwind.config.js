@@ -12,7 +12,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        verde: "#80CF8B"
+        verde: "#80CF8B;",
       },
     },
   },
