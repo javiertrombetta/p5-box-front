@@ -10,7 +10,11 @@ module.exports = {
     "./src/navigation/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        verde: "#80CF8B"
+      },
+    },
   },
   plugins: [],
 };
