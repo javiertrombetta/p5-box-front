@@ -3,6 +3,7 @@ import { Text, View } from "react-native";
 
 import { NativeWindStyleSheet } from "nativewind";
 import HomeGestionarPedido from "./src/components/HomeGestionarPedido";
+import PerfilRepartidor from "./src/components/PerfilRepartidor";
 
 NativeWindStyleSheet.setOutput({
   default: "native",
@@ -11,7 +12,8 @@ NativeWindStyleSheet.setOutput({
 export default function App() {
   return (
     <View className="w-full h-full">
-      <HomeGestionarPedido/>
+      {/* <HomeGestionarPedido/> */}
+      <PerfilRepartidor/>
       <StatusBar style="auto" />
     </View>
   );
