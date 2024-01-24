@@ -6,6 +6,7 @@ import PerfilRepartidor from "./src/components/PerfilRepartidor";
 import Repartidores from "./src/components/Repartidores";
 import Login from "./src/components/Login";
 import Paquetes from "./src/components/Paquetes";
+import AddPackage from "./src/components/AddPackage";
 
 NativeWindStyleSheet.setOutput({
   default: "native",
@@ -16,9 +17,10 @@ export default function App() {
     <View className="w-full h-full">
       {/* <Login /> */}
       {/* <HomeGestionarPedido/> */}
-      {/* <PerfilRepartidor/> */}
+      {/* <PerfilRepartidor /> */}
       {/* <Repartidores /> */}
       {/* <Paquetes/> */}
+      <AddPackage />
       <StatusBar style="auto" />
     </View>
   );
