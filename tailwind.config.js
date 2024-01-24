@@ -10,6 +10,13 @@ module.exports = {
     "./src/navigation/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      'saira': ['SairaRegular'],
+      'sairaBold': ['SairaBold'],
+      'roboto': ['RobotoRegular'],
+      'robotoLight': ['RobotoLight'],
+      'robotoBold': ['RobotoBold'],
+    },
     extend: {
       colors: {
         verde: "#80CF8B",
