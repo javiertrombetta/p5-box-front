@@ -12,36 +12,29 @@ const Login = () => {
   return (
     <View className="flex flex-col w-full h-full justify-center items-center">
       <Image source={backgroundI} />
-
-      <View className="absolute flex top-[205] left[30] w-[300] h-[265] rounded-2xl bg-verde ">
+      <View className="absolute flex top-[205] left[30] w-[300] h-[275] rounded-2xl bg-verde ">
         <TextInput
-          className=" text-texto absolute top-[66] left-[15] h-[24] w-[270] "
+          className=" text-texto font-roboto absolute top-[66] left-[15] h-[24] w-[270] "
           placeholder="Email@contraseña.com"
           onChangeText={(newText) => setText(newText)}
           defaultValue={text}
         />
-
         <TextInput
-          className=" text-texto absolute top-[111] left-[15] h-[24] w-[270] "
+          className=" text-texto font-roboto absolute top-[111] left-[15] h-[24] w-[270] "
           placeholder="**********"
           onChangeText={(newText) => setText(newText)}
           defaultValue={text}
         />
-
         <Image className="absolute top-[108] left-[255] " source={closeEye} />
-
         <View className="absolute top-[90] left-[15] w-[270] h-[1] bg-texto"></View>
-
         <View className="absolute top-[135] left-[15] w-[270] h-[1] bg-texto"></View>
-
-        <Pressable className="absolute left-[15] top-[175] flex flex-row h-7 w-[270] mt-4 justify-center items-center align-middle border rounded-xl bg-texto">
-          <Text className="text-center mr-2 text-amarilloVerdoso text-xs">
+        <Pressable className="absolute left-[15] top-[160] flex flex-row h-[30] w-[270] mt-4 justify-center items-center align-middle border rounded-xl bg-texto">
+          <Text className="text-center mr-2 font-roboto text-amarilloVerdoso text-xs">
             INGRESAR
           </Text>
         </Pressable>
-
-        <Pressable className=" top-[225]  justify-center items-center align-middle">
-          <Text style={{ textDecorationLine: "underline" }}>
+        <Pressable className="top-[225] justify-center items-center align-middle">
+          <Text className="font-roboto" style={{ textDecorationLine: "underline" }}>
             Olvidé mi contraseña
           </Text>
         </Pressable>

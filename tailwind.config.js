@@ -11,7 +11,11 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      'display': ['Saira']
+      'saira': ['SairaRegular'],
+      'sairaBold': ['SairaBold'],
+      'roboto': ['RobotoRegular'],
+      'robotoLight': ['RobotoLight'],
+      'robotoBold': ['RobotoBold'],
     },
     extend: {
       colors: {
