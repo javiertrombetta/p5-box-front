@@ -10,7 +10,22 @@ module.exports = {
     "./src/navigation/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    fontFamily: {
+      'saira': ['SairaRegular'],
+      'sairaBold': ['SairaBold'],
+      'roboto': ['RobotoRegular'],
+      'robotoLight': ['RobotoLight'],
+      'robotoBold': ['RobotoBold'],
+    },
+    extend: {
+      colors: {
+        verde: "#80CF8B",
+        amarilloVerdoso: "#CEF169",
+        violeta: "#CEC4F4",
+        texto: "#24424D",
+        blanco:"#FEFEFE"
+      },
+    },
   },
   plugins: [],
 };
