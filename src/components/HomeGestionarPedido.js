@@ -100,8 +100,8 @@ const HomeGestionarPedido = () => {
                         </svg>
                     </View>
                     <View className="flex justify-center">
-                        <Text className="font-robotoBold">Repartidores</Text>
-                        <Text className="font-roboto">2/10 Habilitados</Text>
+                        <Text className="font-robotoBold text-texto">Repartidores</Text>
+                        <Text className="font-roboto text-texto">2/10 Habilitados</Text>
                     </View>
                     <View className="flex justify-center">
                         <Pressable className="flex flex-row h-6 w-14 justify-center items-center border rounded-xl bg-texto">
@@ -135,8 +135,8 @@ const HomeGestionarPedido = () => {
                         </svg>
                     </View>
                     <View className="flex justify-center">
-                        <Text className="font-robotoBold">Paquetes</Text>
-                        <Text className="font-roboto">16/20 Habilitados</Text>
+                        <Text className="font-robotoBold text-texto">Paquetes</Text>
+                        <Text className="font-roboto text-texto">16/20 Habilitados</Text>
                     </View>
                     <View className="flex justify-center">
                         <Pressable className="flex flex-row h-6 w-14 justify-center items-center border rounded-xl bg-texto">

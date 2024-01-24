@@ -31,7 +31,7 @@ const Paquetes = () => {
         </Pressable>
       </View>
       <View className="bg-amarilloVerdoso flex-row flex justify-between mt-5 rounded-xl w-[300] h-[40]">
-        <Text className="mx-4 text-lg py-1 font-bold">PAQUETES</Text>
+        <Text className="mx-4 text-lg py-1 font-bold text-texto">PAQUETES</Text>
             <View className="flex justify-center">
                 <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -57,7 +57,7 @@ const Paquetes = () => {
                     <Text className="font-bold"> / 03</Text>
                 </View>
             </View>
-            <Text className="ml-6 py-2 font-semibold">58 Paquetes entregados</Text>
+            <Text className="ml-6 py-2 font-roboto text-texto">58 Paquetes entregados</Text>
             <View className="flex w-full pb-2 items-center">
                 <View className='h-[1] w-10/12 bg-gray-300'/>
             </View>
@@ -71,8 +71,8 @@ const Paquetes = () => {
                     </View>
                     <View className="flex justify-center">
                         <Text className="font-semibold text-texto">#0H167</Text>
-                        <Text className="text-texto">Av. Boca,</Text>
-                        <Text className="text-texto">CABA</Text>
+                        <Text className="text-texto font-robotoLight">Av. Boca,</Text>
+                        <Text className="text-texto font-robotoLight">CABA</Text>
                     </View>
                     <View className="flex flex-col items-end justify-center gap-1">
                         <Pressable className="flex flex-row h-6 w-14 justify-center items-center">
@@ -99,8 +99,8 @@ const Paquetes = () => {
                     </View>
                     <View className="flex justify-center">
                         <Text className="font-semibold text-texto">#0H167</Text>
-                        <Text className="text-texto">Av. Boca,</Text>
-                        <Text className="text-texto">CABA</Text>
+                        <Text className="text-texto font-robotoLight">Av. Boca,</Text>
+                        <Text className="text-texto font-robotoLight">CABA</Text>
                     </View>
                     <View className="flex flex-col items-end justify-center gap-1">
                         <Pressable className="flex flex-row h-6 w-14 justify-center items-center">
@@ -127,8 +127,8 @@ const Paquetes = () => {
                     </View>
                     <View className="flex justify-center">
                         <Text className="font-semibold text-texto">#0H167</Text>
-                        <Text className="text-texto">Av. Boca,</Text>
-                        <Text className="text-texto">CABA</Text>
+                        <Text className="text-texto font-robotoLight">Av. Boca,</Text>
+                        <Text className="text-texto font-robotoLight">CABA</Text>
                     </View>
                     <View className="flex flex-col items-end justify-center gap-1">
                         <Pressable className="flex flex-row h-6 w-14 justify-center items-center">
@@ -155,8 +155,8 @@ const Paquetes = () => {
                     </View>
                     <View className="flex justify-center">
                         <Text className="font-semibold text-texto">#0H167</Text>
-                        <Text className="text-texto">Av. Boca,</Text>
-                        <Text className="text-texto">CABA</Text>
+                        <Text className="text-texto font-robotoLight">Av. Boca,</Text>
+                        <Text className="text-texto font-robotoLight">CABA</Text>
                     </View>
                     <View className="flex flex-col items-end justify-center gap-1">
                         <Pressable className="flex flex-row h-6 w-14 justify-center items-center">
@@ -183,8 +183,8 @@ const Paquetes = () => {
                     </View>
                     <View className="flex justify-center">
                         <Text className="font-semibold text-texto">#0H167</Text>
-                        <Text className="text-texto">Av. Boca,</Text>
-                        <Text className="text-texto">CABA</Text>
+                        <Text className="text-texto font-robotoLight">Av. Boca,</Text>
+                        <Text className="text-texto font-robotoLight">CABA</Text>
                     </View>
                     <View className="flex flex-col items-end justify-center gap-1">
                         <Pressable className="flex flex-row h-6 w-14 justify-center items-center">

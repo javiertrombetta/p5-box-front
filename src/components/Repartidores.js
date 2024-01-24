@@ -79,21 +79,23 @@ const Repartidores = () => {
           </View>
           <View className="flex flex-col items-start justify-center gap-1">
             <Text className="text-left w-1/3 items-center flex font-robotoBold text-texto">
-              Javitro
+              Farid
             </Text>
-            <View className="h-[15] w-[96] flex flex-row items-center justify-around bg-gray-300 rounded-md">
-              <View>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="7"
-                  height="7"
-                  viewBox="0 0 7 7"
-                  fill="none"
-                >
-                  <circle cx="3.5" cy="3.5" r="3.5" fill="#626262" />
-                </svg>
+            <View className="h-[15] w-[96]">
+              <View className="h-[15] w-[68] flex flex-row items-center justify-around bg-gray-300 rounded-md">
+                <View>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="7"
+                    height="7"
+                    viewBox="0 0 7 7"
+                    fill="none"
+                  >
+                    <circle cx="3.5" cy="3.5" r="3.5" fill="#80CF8B" />
+                  </svg>
+                </View>
+                <Text style={{ fontSize: 10 }}>EN CURSO</Text>
               </View>
-              <Text style={{ fontSize: 10 }}>DESHABILITADO</Text>
             </View>
           </View>
 
@@ -125,7 +127,7 @@ const Repartidores = () => {
           </View>
           <View className="flex flex-col items-start justify-center gap-1">
             <Text className="text-left w-1/3 items-center flex font-robotoBold text-texto">
-              Javice
+              Luciana
             </Text>
             <View className="h-[15] w-[96]">
               <View className="h-[15] w-[68] flex flex-row items-center justify-around bg-gray-300 rounded-md">
@@ -174,9 +176,9 @@ const Repartidores = () => {
           </View>
           <View className="flex flex-col items-start justify-center gap-1">
             <Text className="text-left w-1/3 items-center flex font-robotoBold text-texto">
-              Javitro
+              Dario
             </Text>
-            <View className="h-[15] w-[96] flex flex-row items-center justify-start bg-gray-300 rounded-md">
+            <View className="h-[15] w-[96] flex flex-row items-center justify-start pl-1 bg-gray-300 rounded-md">
               <View>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -220,9 +222,9 @@ const Repartidores = () => {
           </View>
           <View className="flex flex-col items-start justify-center gap-1">
             <Text className="text-left w-1/3 items-center flex font-robotoBold text-texto">
-              Javitro
+              Santiago
             </Text>
-            <View className="h-[15] w-[96] flex flex-row items-center justify-start bg-gray-300 rounded-md">
+            <View className="h-[15] w-[96] flex flex-row items-center justify-start pl-1 bg-gray-300 rounded-md">
               <View>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
