@@ -5,8 +5,8 @@ import React from "react";
 const Paquetes = () => {
   return (
     <View className="bg-verde w-full h-full items-center flex-col flex py-2 px-4">
-      <View className="flex-row w-full justify-items-start flex justify-between py-2 px-6 ">
-        <Svg
+      <View className="flex-row w-[300] mt-[12] justify-items-start flex justify-between">
+        <svg
           xmlns="http://www.w3.org/2000/svg"
           width="81"
           height="30"
@@ -25,36 +25,32 @@ const Paquetes = () => {
             d="M79.4789 8.40002L69.9014 18.5909L80.6897 30H73.3452L66.2463 22.4681L59.1475 30H51.7859L62.5513 18.552L53.0138 8.40559H60.3182L66.2064 14.6581L72.1345 8.40559H79.4789V8.40002Z"
             fill="#24424D"
           />
-        </Svg>
+        </svg>
         <Pressable className="w-28 h-7 flex justify-center items-center align-middle border rounded-xl border-black text-black mt-1">
           <Text className="text-center text-xs">CERRAR SESIÓN</Text>
         </Pressable>
       </View>
-
-      <View className="bg-amarilloVerdoso flex-row flex justify-between py-2 mt-5 rounded-xl w-72">
+      <View className="bg-amarilloVerdoso flex-row flex justify-between mt-5 rounded-xl w-[300] h-[40]">
         <Text className="mx-4 text-lg py-1 font-bold">PAQUETES</Text>
-        <View className="py-2">
-        {/* Flecha svg */}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="50"
-          height="15"
-          viewBox="0 0 15 13"
-          fill="none"
-        >
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M14.0366 7.35815C14.5807 7.29356 15 6.88545 15 6.39162C15 5.85291 14.501 5.41619 13.8854 5.41619L3.90271 5.41619L7.6712 1.85182L7.78193 1.73048C8.11426 1.30686 8.07879 0.704673 7.67464 0.319076C7.23007 -0.10508 6.50774 -0.106542 6.06127 0.315812L0.335864 5.732L0.224835 5.85371C-0.108248 6.27866 -0.0712385 6.88289 0.335864 7.268L6.06127 12.6842L6.18946 12.7889C6.63678 13.1028 7.27048 13.0665 7.67464 12.6809L7.78482 12.5591C8.11525 12.1342 8.07708 11.5321 7.6712 11.1482L3.67578 7.36706L13.8854 7.36706L14.0366 7.35815Z"
-            fill="#24424D"
-          />
-        </svg>
+            <View className="flex justify-center">
+                <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="50"
+                height="15"
+                viewBox="0 0 15 13"
+                fill="none"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M14.0366 7.35815C14.5807 7.29356 15 6.88545 15 6.39162C15 5.85291 14.501 5.41619 13.8854 5.41619L3.90271 5.41619L7.6712 1.85182L7.78193 1.73048C8.11426 1.30686 8.07879 0.704673 7.67464 0.319076C7.23007 -0.10508 6.50774 -0.106542 6.06127 0.315812L0.335864 5.732L0.224835 5.85371C-0.108248 6.27866 -0.0712385 6.88289 0.335864 7.268L6.06127 12.6842L6.18946 12.7889C6.63678 13.1028 7.27048 13.0665 7.67464 12.6809L7.78482 12.5591C8.11525 12.1342 8.07708 11.5321 7.6712 11.1482L3.67578 7.36706L13.8854 7.36706L14.0366 7.35815Z"
+                        fill="#24424D"
+                    />
+                </svg>
+            </View>
         </View>
-      </View>
-      {/* contenedo personas*/}
-
-      <View className="w-72 h-[410] flex rounded-t-xl mt-4 bg-white">
-            <View className="w-72 h-10 flex flex-row rounded-t-xl items-center px-8 justify-between bg-violeta">
+        <View className="w-[300] h-[442] flex rounded-t-xl mt-4 bg-white">
+            <View className="w-[300] h-10 flex flex-row rounded-t-xl items-center px-4 justify-between bg-violeta">
                 <Text className="text-sm font-bold text-texto text-center">ENERO</Text>
                 <View className="flex flex-row items-center">
                     <Text>mie</Text>
@@ -205,8 +201,8 @@ const Paquetes = () => {
                 </View>
             </View>
         </View>
-        <View className='h-[1] w-72 bg-gray-300'/>
-        <View className="w-72 h-[50] flex justify-center items-center rounded-b-xl bg-white">
+        <View className='h-[0.5] w-[300] bg-gray-300'/>
+        <View className="w-[300] h-[47.5] flex justify-center items-center rounded-b-xl bg-white">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="12" viewBox="0 0 24 12" fill="none">
                 <path d="M2 2L12 10L22 2" stroke="#24424D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>

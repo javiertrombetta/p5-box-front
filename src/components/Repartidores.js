@@ -4,7 +4,7 @@ import React from "react";
 
 const Repartidores = () => {
   return (
-    <View className="bg-verde w-full h-full flex-col items-center justify-center flex py-2 px-4">
+    <View className="bg-verde w-full h-full flex-col items-center  flex py-2 px-4">
       <View className="w-[300] h-50 flex flex-row mt-3 justify-between align-middle items-center">
           <svg xmlns="http://www.w3.org/2000/svg" width="81" height="30" viewBox="0 0 81 30" fill="none">
               <path d="M23.7449 13.667C23.5154 12.9774 23.213 12.3692 22.8379 11.8425C22.4628 11.3158 22.0261 10.8652 21.5334 10.4959C21.0407 10.1267 20.52 9.82263 19.9769 9.58914C19.4338 9.35566 18.8851 9.1819 18.3364 9.0733C17.7877 8.96471 17.2614 8.90498 16.7687 8.90498H5.22937V0H0V22.876C0 23.7448 0.111978 24.5321 0.341533 25.2271C0.571088 25.9222 0.873427 26.5357 1.25415 27.0624C1.63488 27.5891 2.07719 28.0398 2.5699 28.4091C3.0682 28.7783 3.5833 29.0824 4.12639 29.3158C4.66948 29.5493 5.21817 29.7231 5.76687 29.8317C6.31556 29.9403 6.84185 30 7.33456 30H16.7631C17.6589 30 18.4652 29.8914 19.1762 29.6688C19.8873 29.4462 20.5144 29.1529 21.0575 28.7837C21.6006 28.4145 22.0653 27.9855 22.446 27.5077C22.8267 27.0244 23.1402 26.5249 23.381 25.9982C23.6218 25.4715 23.8009 24.9448 23.9129 24.4072C24.0249 23.8751 24.0865 23.3647 24.0865 22.8869V16.0235C24.0865 15.1548 23.9745 14.3729 23.7449 13.6833V13.667ZM18.8571 22.8706C18.8571 23.4842 18.6723 23.9783 18.3028 24.3529C17.9333 24.7276 17.4238 24.9176 16.7631 24.9176H7.33456C6.72988 24.9176 6.23158 24.733 5.82846 24.3638C5.42533 23.9946 5.22377 23.495 5.22377 22.8706V13.9765H16.7631C17.379 13.9765 17.8829 14.1557 18.2692 14.514C18.6555 14.8724 18.8515 15.3665 18.8515 16.0072V22.8706H18.8571Z" fill="#24424D"/>
@@ -15,9 +15,9 @@ const Repartidores = () => {
               <Text className="text-center text-xs">CERRAR SESION</Text>
           </Pressable>
       </View>
-      <View className="bg-amarilloVerdoso w-[300] flex-row flex justify-between py-2 mt-[28] mx-2 rounded-xl">
-        <Text className="mx-4 text-lg py-1 font-bold font-sairaBold text-texto">REPARTIDORES</Text>
-        <View className="py-2">
+      <View className="bg-amarilloVerdoso w-[300] h-[40] flex-row flex justify-between mt-[28] mx-2 rounded-xl">
+        <Text className="mx-4 text-lg flex justify-center items-center py-1 font-sairaBold text-texto">REPARTIDORES</Text>
+        <View className="py-2 flex justify-center items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="50"
@@ -34,138 +34,180 @@ const Repartidores = () => {
           </svg>
         </View>
       </View>
-      <View className="bg-violeta flex-row flex w-[300] h-[35] justify-between items-center mt-[10] rounded-t-xl">
-        <Text className="text-sm mx-5 font-robotoBold text-texto flex align-middle">ENERO</Text>
-        <Text className="mx-4 text-sm">Mie /03</Text>
-      </View>
-      <View className=" bg-blanco h-[455] rounded-b-xl py-2 mx-2 ">
-        <View className="flex-row flex justify-between my-3">
-          <View className="w-1/3 items-center flex">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="71"
-              height="71"
-              viewBox="0 0 71 71"
-              fill="none"
-            >
-              <path
-                d="M3 35.5C3 17.5507 17.5507 3 35.5 3C53.4493 3.00001 68 17.5508 68 35.5C68 53.4493 53.4493 68 35.5 68C17.5507 68 2.99999 53.4492 3 35.5Z"
-                stroke="#EBECEF"
-                stroke-width="6"
-              />
-            </svg>
-          </View>
-          <Text className="text-left w-1/3 items-center flex">Javi</Text>
-          <View className="w-1/3 items-center flex">
-            <Image
-              className={"w-10 h-10 rounded-full mt-4 mr-3"}
-              source={{
-                uri: "https://images.ecestaticos.com/RdK_LRX7lZcsXjxn5MU3tpzYnEo=/0x0:991x684/992x685/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fd63%2Faf3%2F56a%2Fd63af356aa9a1edf14110f781ae9296f.jpg",
-              }}
-            />
-          </View>
-        </View>
-        <View className="w-[300] h-[0.5] bg-gray-300" />
-        <View className="flex-row flex justify-between my-3">
-          <View className="w-1/3 items-center flex">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="71"
-              height="71"
-              viewBox="0 0 71 71"
-              fill="none"
-            >
-              <path
-                d="M3 35.5C3 17.5507 17.5507 3 35.5 3C53.4493 3.00001 68 17.5508 68 35.5C68 53.4493 53.4493 68 35.5 68C17.5507 68 2.99999 53.4492 3 35.5Z"
-                stroke="#EBECEF"
-                stroke-width="6"
-              />
-            </svg>
-          </View>
-          <Text className="text-left w-1/3 items-center flex">Javi</Text>
-          <View className="w-1/3 items-center flex">
-            <Image
-              className={"w-10 h-10 rounded-full mt-4 mr-3"}
-              source={{
-                uri: "https://images.ecestaticos.com/RdK_LRX7lZcsXjxn5MU3tpzYnEo=/0x0:991x684/992x685/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fd63%2Faf3%2F56a%2Fd63af356aa9a1edf14110f781ae9296f.jpg",
-              }}
-            />
-          </View>
-        </View>
-        <View className="w-[300] h-[0.5] bg-gray-300" />
-        <View className="flex-row flex justify-between my-3">
-          {/* 4-persona */}
-          <View className="w-1/3 items-center flex">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="71"
-              height="71"
-              viewBox="0 0 71 71"
-              fill="none"
-            >
-              <path
-                d="M3 35.5C3 17.5507 17.5507 3 35.5 3C53.4493 3.00001 68 17.5508 68 35.5C68 53.4493 53.4493 68 35.5 68C17.5507 68 2.99999 53.4492 3 35.5Z"
-                stroke="#EBECEF"
-                stroke-width="6"
-              />
-            </svg>
-          </View>
-          <Text className="text-left w-1/3 items-center flex">Javi</Text>
-          <View className="w-1/3 items-center flex">
-            <Image
-              className={"w-10 h-10 rounded-full mt-4 mr-3"}
-              source={{
-                uri: "https://images.ecestaticos.com/RdK_LRX7lZcsXjxn5MU3tpzYnEo=/0x0:991x684/992x685/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fd63%2Faf3%2F56a%2Fd63af356aa9a1edf14110f781ae9296f.jpg",
-              }}
-            />
-          </View>
-        </View>
-        <View className="w-[300] h-[0.5] bg-gray-300" />
-        <View className="flex-row flex justify-between my-3">
-          <View className="w-1/3 items-center flex">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="71"
-              height="71"
-              viewBox="0 0 71 71"
-              fill="none"
-            >
-              <path
-                d="M3 35.5C3 17.5507 17.5507 3 35.5 3C53.4493 3.00001 68 17.5508 68 35.5C68 53.4493 53.4493 68 35.5 68C17.5507 68 2.99999 53.4492 3 35.5Z"
-                stroke="#EBECEF"
-                stroke-width="6"
-              />
-            </svg>
-          </View>
-          <Text className="text-center w-1/3 items-center flex">Javi</Text>
-          <View className="w-1/3 items-center flex">
-            <Image
-              className={"w-10 h-10 rounded-full mt-4 mr-3"}
-              source={{
-                uri: "https://images.ecestaticos.com/RdK_LRX7lZcsXjxn5MU3tpzYnEo=/0x0:991x684/992x685/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fd63%2Faf3%2F56a%2Fd63af356aa9a1edf14110f781ae9296f.jpg",
-              }}
-            />
-          </View>
-        </View>
-        <View className="w-full h-[0.5] bg-gray-300" />
-        <View className="flex items-center mb-6">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="70"
-            viewBox="0 0 24 12"
-            fill="none"
-          >
-            <path
-              d="M2 2L12 10L22 2"
-              stroke="#24424D"
-              stroke-width="3"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
+      <View className="bg-violeta flex-row flex w-[300] h-[35] justify-between items-center px-4 mt-[10] rounded-t-xl">
+        <Text className="text-sm font-robotoBold text-texto flex align-middle">ENERO</Text>
+        <View className="flex flex-row items-center">
+            <Text className="font-roboto">mie</Text>
+            <Text className="font-robotoBold"> / 03</Text>
         </View>
       </View>
+      <View className="bg-blanco flex justify-between h-[407] mx-2 ">
+        <View className="flex-row flex justify-between my-3">
+          <View className="w-1/3 items-center flex">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="71"
+              height="71"
+              viewBox="0 0 71 71"
+              fill="none"
+            >
+              <path
+                d="M3 35.5C3 17.5507 17.5507 3 35.5 3C53.4493 3.00001 68 17.5508 68 35.5C68 53.4493 53.4493 68 35.5 68C17.5507 68 2.99999 53.4492 3 35.5Z"
+                stroke="#EBECEF"
+                stroke-width="6"
+              />
+            </svg>
+          </View>
+          <View className="flex flex-col items-start justify-center gap-1">
+            <Text className="text-left w-1/3 items-center flex font-robotoBold">Javitro</Text>
+            <View className="h-[15] w-[68] flex flex-row items-center justify-around bg-gray-300 rounded-md">
+              <View>
+                <svg xmlns="http://www.w3.org/2000/svg" width="7" height="7" viewBox="0 0 7 7" fill="none">
+                  <circle cx="3.5" cy="3.5" r="3.5" fill="#626262"/>
+                </svg>
+              </View>
+              <Text style={{fontSize:10}}>
+                EN CURSO
+              </Text>
+            </View>
+          </View>
+            
+          <View className="w-1/3 items-center flex">
+            <Image
+              className={"w-10 h-10 rounded-full mt-4 mr-3"}
+              source={{
+                uri: "https://images.ecestaticos.com/RdK_LRX7lZcsXjxn5MU3tpzYnEo=/0x0:991x684/992x685/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fd63%2Faf3%2F56a%2Fd63af356aa9a1edf14110f781ae9296f.jpg",
+              }}
+            />
+          </View>
+        </View>
+        <View className="w-[300] h-[0.5] bg-gray-300" />
+        <View className="flex-row flex justify-between my-3">
+          <View className="w-1/3 items-center flex">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="71"
+              height="71"
+              viewBox="0 0 71 71"
+              fill="none"
+            >
+              <path
+                d="M3 35.5C3 17.5507 17.5507 3 35.5 3C53.4493 3.00001 68 17.5508 68 35.5C68 53.4493 53.4493 68 35.5 68C17.5507 68 2.99999 53.4492 3 35.5Z"
+                stroke="#EBECEF"
+                stroke-width="6"
+              />
+            </svg>
+          </View>
+          <View className="flex flex-col items-start justify-center gap-1">
+            <Text className="text-left w-1/3 items-center flex font-robotoBold">Javice</Text>
+            <View className="h-[15] w-[68] flex flex-row items-center justify-around bg-gray-300 rounded-md">
+              <View>
+                <svg xmlns="http://www.w3.org/2000/svg" width="7" height="7" viewBox="0 0 7 7" fill="none">
+                  <circle cx="3.5" cy="3.5" r="3.5" fill="#80CF8B"/>
+                </svg>
+              </View>
+              <Text style={{fontSize:10}}>
+                EN CURSO
+              </Text>
+            </View>
+          </View>
+            
+          <View className="w-1/3 items-center flex">
+            <Image
+              className={"w-10 h-10 rounded-full mt-4 mr-3"}
+              source={{
+                uri: "https://images.ecestaticos.com/RdK_LRX7lZcsXjxn5MU3tpzYnEo=/0x0:991x684/992x685/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fd63%2Faf3%2F56a%2Fd63af356aa9a1edf14110f781ae9296f.jpg",
+              }}
+            />
+          </View>
+        </View>
+        <View className="w-[300] h-[0.5] bg-gray-300" />
+        <View className="flex-row flex justify-between my-3">
+          <View className="w-1/3 items-center flex">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="71"
+              height="71"
+              viewBox="0 0 71 71"
+              fill="none"
+            >
+              <path
+                d="M3 35.5C3 17.5507 17.5507 3 35.5 3C53.4493 3.00001 68 17.5508 68 35.5C68 53.4493 53.4493 68 35.5 68C17.5507 68 2.99999 53.4492 3 35.5Z"
+                stroke="#EBECEF"
+                stroke-width="6"
+              />
+            </svg>
+          </View>
+          <View className="flex flex-col items-start justify-center gap-1">
+            <Text className="text-left w-1/3 items-center flex font-robotoBold">Lucas</Text>
+            <View className="h-[15] w-[68] flex flex-row items-center justify-around bg-gray-300 rounded-md">
+              <View>
+                <svg xmlns="http://www.w3.org/2000/svg" width="7" height="7" viewBox="0 0 7 7" fill="none">
+                  <circle cx="3.5" cy="3.5" r="3.5" fill="#80CF8B"/>
+                </svg>
+              </View>
+              <Text style={{fontSize:10}}>
+                EN CURSO
+              </Text>
+            </View>
+          </View>
+            
+          <View className="w-1/3 items-center flex">
+            <Image
+              className={"w-10 h-10 rounded-full mt-4 mr-3"}
+              source={{
+                uri: "https://images.ecestaticos.com/RdK_LRX7lZcsXjxn5MU3tpzYnEo=/0x0:991x684/992x685/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fd63%2Faf3%2F56a%2Fd63af356aa9a1edf14110f781ae9296f.jpg",
+              }}
+            />
+          </View>
+        </View>
+        <View className="w-[300] h-[0.5] bg-gray-300" />
+        <View className="flex-row flex justify-between my-3">
+          <View className="w-1/3 items-center flex">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="71"
+              height="71"
+              viewBox="0 0 71 71"
+              fill="none"
+            >
+              <path
+                d="M3 35.5C3 17.5507 17.5507 3 35.5 3C53.4493 3.00001 68 17.5508 68 35.5C68 53.4493 53.4493 68 35.5 68C17.5507 68 2.99999 53.4492 3 35.5Z"
+                stroke="#EBECEF"
+                stroke-width="6"
+              />
+            </svg>
+          </View>
+          <View className="flex flex-col items-start justify-center gap-1">
+            <Text className="text-left w-1/3 items-center flex font-robotoBold">Boris</Text>
+            <View className="h-[15] w-[68] flex flex-row items-center justify-around bg-gray-300 rounded-md">
+              <View>
+                <svg xmlns="http://www.w3.org/2000/svg" width="7" height="7" viewBox="0 0 7 7" fill="none">
+                  <circle cx="3.5" cy="3.5" r="3.5" fill="#80CF8B"/>
+                </svg>
+              </View>
+              <Text style={{fontSize:10}}>
+                EN CURSO
+              </Text>
+            </View>
+          </View>
+            
+          <View className="w-1/3 items-center flex">
+            <Image
+              className={"w-10 h-10 rounded-full mt-4 mr-3"}
+              source={{
+                uri: "https://images.ecestaticos.com/RdK_LRX7lZcsXjxn5MU3tpzYnEo=/0x0:991x684/992x685/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fd63%2Faf3%2F56a%2Fd63af356aa9a1edf14110f781ae9296f.jpg",
+              }}
+            />
+          </View>
+        </View>
+      </View>
+      <View className="w-[300] h-[0.5] bg-gray-300" />
+      <View className="w-[300] h-[47.5] flex justify-center items-center rounded-b-xl bg-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="12" viewBox="0 0 24 12" fill="none">
+                <path d="M2 2L12 10L22 2" stroke="#24424D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </View>
     </View>
   );
 };
