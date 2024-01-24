@@ -15,32 +15,65 @@ const HomeGestionarPedido = () => {
                 <Text className="text-center text-xs">CERRAR SESION</Text>
             </Pressable>
         </View>
-        <View className="w-72 h-10 flex rounded-xl justify-center mt-6 bg-amarilloVerdoso">
+        <View className="w-[300] h-10 flex rounded-xl justify-center mt-[28] bg-amarilloVerdoso">
             <Text className="text-center text-lg font-extrabold text-texto">GESTIONAR PEDIDOS</Text>
         </View>
-        <View className="w-72 h-24 flex flex-row rounded-xl items-center justify-around align-middle mt-4 bg-white">
-            <View className="w-1/3 px-2">
-                <Image className="w-20 h-20 rounded-xl" source={{uri:'https://cdn.conmebol.com/wp-content/uploads/2023/11/000_APW2000052520938-1024x879.jpg'}}/>
+        <View className="w-[300] h-24 flex flex-row rounded-xl items-center justify-around align-middle mt-[10] bg-white">
+            <View className="w-1/3 flex items-center justify-center">
+                <Image className="w-[60] h-[60] rounded-xl" source={{uri:'https://cdn.conmebol.com/wp-content/uploads/2023/11/000_APW2000052520938-1024x879.jpg'}}/>
             </View>
             <View className="w-2/3">
                 <Text className="text-start text-sm font-medium text-texto">¡Hola Admin!</Text>
                 <Text className="text-start text-sm font-extralight text-texto">Estos son los pedidos del dia</Text>
             </View>
         </View>
-        <View className="w-72 h-10 flex justify-center mt-8">
-            <View className="w-72 h-8 flex rounded-t-xl justify-center bg-gray-300">
+        <View className="w-[300] h-[84] flex justify-center mt-[10]">
+            <View className="w-[300] h-[30] flex rounded-t-xl justify-center bg-violeta">
                 <Text className="text-sm ml-5 font-bold text-texto">ENERO</Text>
             </View>
-            <View className="w-72 h-10 flex rounded-b-xl justify-center bg-white"/>
+            <View className="w-[300] h-[54] flex flex-row rounded-b-xl items-center justify-evenly bg-white">
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="20" viewBox="0 0 19 20" fill="none">
+                    <path d="M6.02937 10.7924C5.50936 10.3921 5.50936 9.6079 6.02937 9.20759L10.14 6.04322C10.7976 5.53703 11.75 6.00579 11.75 6.83563L11.75 13.1644C11.75 13.9942 10.7976 14.463 10.14 13.9568L6.02937 10.7924Z" stroke="#24424D" stroke-linejoin="round"/>
+                    <rect x="0.5" y="0.5" width="18" height="19" rx="4.5" stroke="#24424D"/>
+                </svg>
+                <View>
+                    <Text className="font-light text-xs flex items-center">lun</Text>
+                    <Text className="font-bold">01</Text>
+                </View>
+                <View>
+                    <Text className="font-light text-xs flex items-center">mar</Text>
+                    <Text className="font-bold">02</Text>
+                </View>
+                <View className="rounded-md bg-amarilloVerdoso w-[34] h-[34] flex items-center">
+                    <Text className="font-light text-xs">mie</Text>
+                    <Text className="font-bold">03</Text>
+                </View>
+                <View>
+                    <Text className="font-light text-xs flex items-center">jue</Text>
+                    <Text className="font-bold">04</Text>
+                </View>
+                <View>
+                    <Text className="font-light text-xs flex items-center">vie</Text>
+                    <Text className="font-bold">05</Text>
+                </View>
+                <svg xmlns="http://www.w3.org/2000/svg" width="19" height="20" viewBox="0 0 19 20" fill="none">
+                    <path d="M12.9706 10.7924C13.4906 10.3921 13.4906 9.6079 12.9706 9.20759L8.85999 6.04322C8.20243 5.53703 7.25 6.00579 7.25 6.83563L7.25 13.1644C7.25 13.9942 8.20243 14.463 8.85999 13.9568L12.9706 10.7924Z" stroke="#24424D" stroke-linejoin="round"/>
+                    <rect x="-0.5" y="0.5" width="18" height="19" rx="4.5" transform="matrix(-1 0 0 1 18 0)" stroke="#24424D"/>
+                </svg>
+            </View>
         </View>
-        <View className="w-72 h-60 flex rounded-xl mt-8 bg-white">
-            <View className="w-72 h-10 flex flex-row rounded-xl items-center justify-between bg-amarilloVerdoso">
+        <View className="w-[300] h-[248] flex rounded-xl mt-[10] bg-white">
+            <View className="w-[300] h-[43] flex flex-row rounded-xl items-center justify-between bg-amarilloVerdoso">
                 <Text className="text-sm ml-5 font-bold text-texto">DETALLES</Text>
-                <Pressable className="mr-5">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
-                        <path d="M0.34362 0.33213C0.758879 -0.0716676 1.40739 -0.107106 1.8636 0.224929L1.99427 0.335563L6.9986 5.24423L12.0057 0.335563C12.4192 -0.069958 13.0676 -0.108094 13.5252 0.222041L13.6564 0.33213C14.0716 0.735928 14.1107 1.36908 13.7726 1.816L13.6599 1.94407L7.82708 7.66444C7.41234 8.07118 6.76163 8.10816 6.30399 7.77537L6.17292 7.66444L0.340105 1.94407C-0.114738 1.498 -0.113164 0.776307 0.34362 0.33213Z" fill="#24424D"/>
-                    </svg>
-                </Pressable>
+                <View className="flex flex-row items-center justify-center gap-2">
+                    <Text>03/01/23</Text>
+                    <Pressable className="mr-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
+                            <path d="M0.34362 0.33213C0.758879 -0.0716676 1.40739 -0.107106 1.8636 0.224929L1.99427 0.335563L6.9986 5.24423L12.0057 0.335563C12.4192 -0.069958 13.0676 -0.108094 13.5252 0.222041L13.6564 0.33213C14.0716 0.735928 14.1107 1.36908 13.7726 1.816L13.6599 1.94407L7.82708 7.66444C7.41234 8.07118 6.76163 8.10816 6.30399 7.77537L6.17292 7.66444L0.340105 1.94407C-0.114738 1.498 -0.113164 0.776307 0.34362 0.33213Z" fill="#24424D"/>
+                        </svg>
+                    </Pressable>
+                </View>
+                
             </View>
 
             <View className="flex flex-col h-48 justify-evenly align-middle">
@@ -114,7 +147,7 @@ const HomeGestionarPedido = () => {
             </View>
             
         </View>
-        <Pressable className="flex flex-row h-7 w-64 mt-4 justify-center items-center align-middle border rounded-xl bg-texto">
+        <Pressable className="flex flex-row h-7 w-64 mt-[15] justify-center items-center align-middle border rounded-xl bg-texto">
             <Text className="text-center mr-2 text-amarilloVerdoso text-xs">NUEVO PAQUETE</Text>
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <path d="M13 7.00005L7 7.00005M7 7.00005L1 7.00005M7 7.00005L7 1M7 7.00005L7 13" stroke="#CEF169" strokeLinecap="round"/>

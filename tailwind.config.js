@@ -10,6 +10,9 @@ module.exports = {
     "./src/navigation/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      'display': ['Saira']
+    },
     extend: {
       colors: {
         verde: "#80CF8B",

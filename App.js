@@ -17,7 +17,7 @@ export default function App() {
       {/* <Login /> */}
       {/* <HomeGestionarPedido/> */}
       {/* <PerfilRepartidor/> */}
-      {/* <Repartidores /> */}
+      <Repartidores />
       {/* <Paquetes/> */}
       <StatusBar style="auto" />
     </View>
