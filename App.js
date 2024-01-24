@@ -26,10 +26,10 @@ export default function App() {
     <View className="w-full h-full">
       {/* <Login /> */}
       {/* <HomeGestionarPedido/> */}
-      <Repartidores />
-      {/* <PerfilRepartidor/> */}
+      {/* <Repartidores /> */}
       {/* <Paquetes/> */}
-      <AddPackage />
+      {/* <AddPackage /> */}
+      <PerfilRepartidor/>
       <StatusBar style="auto" />
     </View>
   );
