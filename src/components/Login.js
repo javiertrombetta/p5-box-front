@@ -34,7 +34,10 @@ const Login = () => {
           </Text>
         </Pressable>
         <Pressable className="top-[225] justify-center items-center align-middle">
-          <Text className="font-roboto" style={{ textDecorationLine: "underline" }}>
+          <Text
+            className="font-roboto"
+            style={{ textDecorationLine: "underline" }}
+          >
             Olvidé mi contraseña
           </Text>
         </Pressable>
