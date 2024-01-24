@@ -28,8 +28,8 @@ const PerfilRepartidor = () => {
                 <Image className="w-[60] h-[60] rounded-xl" source={{uri:'https://cdn.conmebol.com/wp-content/uploads/2023/11/000_APW2000052520938-1024x879.jpg'}}/>
             </View>
             <View className="w-1/3">
-                <Text className="text-start text-sm font-medium text-texto">Palermo</Text>
-                <Text className="w-[67] h-[15] text-center font-semibold text-texto rounded-sm bg-verde" style={{fontSize:"10px"}}>HABILITADO</Text>
+                <Text className="text-start text-sm font-robotoBold text-texto">Palermo</Text>
+                <Text className="w-[72] h-[15] text-center flex justify-center items-center font-semibold text-texto rounded-md bg-verde" style={{fontSize:"10px"}}> HABILITADO </Text>
             </View>
             <View className="w-1/3 flex items-end px-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="35" height="19" viewBox="0 0 35 19" fill="none">
@@ -60,7 +60,7 @@ const PerfilRepartidor = () => {
                     </svg>
                 </Pressable>
             </View>
-            <Text className="ml-6 py-2 font-semibold">58 Paquetes entregados</Text>
+            <Text className="ml-6 py-2 font-roboto text-texto">58 Paquetes entregados</Text>
             <View className="flex w-full pb-1 items-center">
                 <View className='h-[1] w-10/12 bg-gray-300'/>
             </View>
@@ -73,9 +73,9 @@ const PerfilRepartidor = () => {
                         </svg>
                     </View>
                     <View className="flex justify-center">
-                        <Text className="font-semibold">#0H167</Text>
-                        <Text>Av. Boca,</Text>
-                        <Text>CABA</Text>
+                        <Text className="font-semibold text-texto">#0H167</Text>
+                        <Text className="text-texto font-robotoLight">Av. Boca,</Text>
+                        <Text className="text-texto font-robotoLight">CABA</Text>
                     </View>
                     <View className="flex flex-col items-end justify-center gap-1">
                         <View className="w-[88] h-[15] flex flex-row justify-evenly items-center rounded-md bg-gray-200">
@@ -109,9 +109,9 @@ const PerfilRepartidor = () => {
                         </svg>
                     </View>
                     <View className="flex justify-center">
-                        <Text className="font-semibold">#0H167</Text>
-                        <Text>Av. Boca,</Text>
-                        <Text>CABA</Text>
+                        <Text className="font-semibold text-texto">#0H167</Text>
+                        <Text className="text-texto font-robotoLight">Av. Boca,</Text>
+                        <Text className="text-texto font-robotoLight">CABA</Text>
                     </View>
                     <View className="flex flex-col items-end justify-center gap-1">
                         <View className="w-[88] h-[15] flex flex-row justify-evenly items-center rounded-md bg-gray-200">
@@ -145,9 +145,9 @@ const PerfilRepartidor = () => {
                         </svg>
                     </View>
                     <View className="flex justify-center">
-                        <Text className="font-semibold">#0H167</Text>
-                        <Text>Av. Boca,</Text>
-                        <Text>CABA</Text>
+                        <Text className="font-semibold text-texto">#0H167</Text>
+                        <Text className="text-texto font-robotoLight">Av. Boca,</Text>
+                        <Text className="text-texto font-robotoLight">CABA</Text>
                     </View>
                     <View className="flex flex-col items-end justify-center gap-1">
                         <View className="w-[88] h-[15] flex flex-row justify-evenly items-center rounded-md bg-gray-200">

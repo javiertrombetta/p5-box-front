@@ -29,7 +29,7 @@ export default function App() {
       {/* <Repartidores /> */}
       {/* <Paquetes/> */}
       {/* <AddPackage /> */}
-      {/* <PerfilRepartidor/> */}
+      <PerfilRepartidor/>
       <StatusBar style="auto" />
     </View>
   );
