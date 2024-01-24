@@ -12,10 +12,11 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        verde: {
-          500: '#80CF8B',
-        },
-        morado: '#A786DF',
+        verde: "#80CF8B",
+        amarilloVerdoso: "#CEF169",
+        violeta: "#CEC4F4",
+        texto: "#24424D",
+        blanco:"#FEFEFE"
       },
       fontFamily: {
         sans: ['Roboto', 'sans-serif'],
