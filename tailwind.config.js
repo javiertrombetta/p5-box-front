@@ -12,8 +12,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        verde: "#80CF8B;",
+        verde: {
+          500: '#80CF8B',
+        },
+        morado: '#A786DF',
       },
+      fontFamily: {
+        sans: ['Roboto', 'sans-serif'],
+        secondary: ['Saira', 'sans-serif'],
+      },     
     },
   },
   plugins: [],

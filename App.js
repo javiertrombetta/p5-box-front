@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { Text, View } from "react-native";
 
 import { NativeWindStyleSheet } from "nativewind";
-import Repartidores from "./src/components/Repartidores";
+import Packages from "./src/components/Packages";
 
 NativeWindStyleSheet.setOutput({
   default: "native",
@@ -11,7 +11,7 @@ NativeWindStyleSheet.setOutput({
 export default function App() {
   return (
     <View className="w-full h-screen">
-      <Repartidores />
+      <Packages />
       <StatusBar style="auto" />
     </View>
   );
