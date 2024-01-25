@@ -1,8 +1,8 @@
 import { View, Text, Pressable, Image, TextInput } from "react-native";
 import React, { useState } from "react";
-import ArrowLeft from "../../assets/arrow-left.png";
-import Box from "../../assets/box.png";
-import ArrowHeadDown from "../../assets/arrow-head-down.png";
+import ArrowLeft from "../assets/arrow-left.png";
+import Box from "../assets/box.png";
+import ArrowHeadDown from "../assets/arrow-head-down.png";
 
 const AddPackage = () => {
   const [text, setText] = useState("");

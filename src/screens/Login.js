@@ -1,10 +1,10 @@
 import { View, Text, Image, TextInput, Pressable } from "react-native";
 import React, { useState } from "react";
-import backgroundI from "../../assets/fondoLogin.jpg";
-import box from "../../assets/box.png";
-import vecLogo from "../../assets/vec-logo.png";
-import bgLogo from "../../assets/bg-logo.png";
-import closeEye from "../../assets/Eye.png";
+import backgroundI from "../assets/fondoLogin.jpg";
+import box from "../assets/box.png";
+import vecLogo from "../assets/vec-logo.png";
+import bgLogo from "../assets/bg-logo.png";
+import closeEye from "../assets/Eye.png";
 
 const Login = () => {
   const [text, setText] = useState("");
