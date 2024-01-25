@@ -79,7 +79,7 @@ const HomeGestionarPedido = () => {
             <View className="flex flex-col h-48 justify-evenly align-middle">
                 <View className="flex flex-row justify-around">
                     <View>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 73 71" fill="none">
+                        {/* <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70" viewBox="0 0 73 71" fill="none">
                             <path d="M3 35.5C3 17.5507 17.5507 3 35.5 3C53.4493 3.00001 68 17.5508 68 35.5C68 53.4493 53.4493 68 35.5 68C17.5507 68 2.99999 53.4492 3 35.5Z" stroke="#EBECEF" strokeWidth="6"/>
                             <path d="M34 3C46.4066 3 57.3728 8.92881 64 18" stroke="#CEC4F4" strokeOpacity="0.5" strokeWidth="6"/>
                             <g filter="url(#filter0_d_46_657)">
@@ -97,7 +97,7 @@ const HomeGestionarPedido = () => {
                                 <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_46_657" result="shape"/>
                                 </filter>
                             </defs>
-                        </svg>
+                        </svg> */}
                     </View>
                     <View className="flex justify-center">
                         <Text className="font-robotoBold">Repartidores</Text>

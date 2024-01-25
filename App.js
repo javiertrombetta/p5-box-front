@@ -15,16 +15,16 @@ NativeWindStyleSheet.setOutput({
 
 export default function App() {
   const [loaded] = useFonts({
-    SairaRegular: require("./assets/fonts/Saira-Regular.ttf"),
-    SairaBold: require("./assets/fonts/Saira-Bold.ttf"),
-    RobotoRegular: require("./assets/fonts/Roboto-Regular.ttf"),    
-    RobotoLight: require("./assets/fonts/Roboto-Light.ttf"),
-    RobotoBold: require("./assets/fonts/Roboto-Bold.ttf"),
+    SairaRegular: require("./src/assets/fonts/Saira-Regular.ttf"),
+    SairaBold: require("./src/assets/fonts/Saira-Bold.ttf"),
+    RobotoRegular: require("./src/assets/fonts/Roboto-Regular.ttf"),    
+    RobotoLight: require("./src/assets/fonts/Roboto-Light.ttf"),
+    RobotoBold: require("./src/assets/fonts/Roboto-Bold.ttf"),
   });
   return (
     <View className="w-full h-full">
       {/* <Login /> */}
-      {/* <HomeGestionarPedido/> */}
+      <HomeGestionarPedido/>
       {/* <Repartidores /> */}
       {/* <Paquetes/> */}
       {/* <AddPackage /> */}
