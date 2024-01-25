@@ -7,6 +7,7 @@ import circulo from "../assets/circuloUno.png";
 import desahabilitado from "../assets/desahabilitado.png";
 import habilitado from "../assets/habilitado.png";
 import downarrow from "../assets/arrow-head-down.png";
+import CircleProgress from "./CircleProgress";
 
 const Repartidores = () => {
   return (
@@ -40,8 +41,9 @@ const Repartidores = () => {
       <View className="bg-blanco flex justify-between h-[407] w-[300] mx-2">
         <View className="flex-row flex justify-between my-3">
           {/* reemplace circulo */}
+          
           <View className="w-1/3 items-center flex">
-            <Image source={circulo} />
+            <CircleProgress value={30}/>
           </View>
           <View className="flex flex-col items-start justify-center gap-1">
             <Text className="h-[15]  text-left items-center flex font-robotoBold text-texto">
@@ -68,7 +70,7 @@ const Repartidores = () => {
         <View className="w-[300] h-[0.5] bg-gray-300" />
         <View className="flex-row flex justify-between my-3">
           <View className="w-1/3 items-center flex">
-            <Image source={circulo} />
+            <CircleProgress value={50}/>
           </View>
           <View className="flex flex-col items-start justify-center gap-1">
             <Text className="h-[15] w-[50] text-left  items-center flex font-robotoBold text-texto">
@@ -99,7 +101,7 @@ const Repartidores = () => {
         {/* tercer people */}
         <View className="flex-row flex justify-between my-3">
           <View className="w-1/3 items-center flex">
-            <Image source={circulo} />
+            <CircleProgress value={80}/>
           </View>
           <View className="flex flex-col items-start justify-center gap-1">
             <Text className="text-left h[15]  items-center flex font-robotoBold text-texto">
@@ -126,7 +128,7 @@ const Repartidores = () => {
         <View className="w-[300] h-[0.5] bg-gray-300" />
         <View className="flex-row flex justify-between my-3">
           <View className="w-1/3 items-center flex">
-            <Image source={circulo} />
+            <CircleProgress value={10}/>
           </View>
           <View className="flex flex-col items-start justify-center gap-1">
             <Text className="text-left h-[15] items-center flex font-robotoBold text-texto">
