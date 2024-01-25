@@ -7,7 +7,7 @@ import circulo from "../assets/circuloUno.png";
 import desahabilitado from "../assets/desahabilitado.png";
 import habilitado from "../assets/habilitado.png";
 import downarrow from "../assets/arrow-head-down.png";
-import CircleProgress from "./CircleProgress";
+import CircleProgress from "../components/CircleProgress";
 
 const Repartidores = () => {
   return (
