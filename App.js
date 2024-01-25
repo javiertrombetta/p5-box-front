@@ -8,6 +8,7 @@ import Login from "./src/screens/Login";
 import Paquetes from "./src/screens/Paquetes";
 import AddPackage from "./src/screens/AddPackage";
 import { useFonts } from "expo-font";
+import CircleProgress from "./src/screens/CircleProgress";
 
 NativeWindStyleSheet.setOutput({
   default: "native",
