@@ -1,17 +1,26 @@
 {
   "compilerOptions": {
     "target": "es2016",
-    "module": "amd",
+    "jsx": "react-native",
+    "types": ["nativewind/types"],
+    "module": "commonjs",
+    "moduleResolution": "node",
     "sourceMap": true,
-    "outFile": "./App.jsx",
-    "removeComments": false,
+    "removeComments": true,  
+    "isolatedModules": true,
+    "declaration": true,
+    "noEmit": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
-    "skipLibCheck": true
-  },
+    "skipLibCheck": true,   
+  },  
+  "include": [
+    "src/**/*", 
+    "App.tsx",     
+  ],
   "exclude": [
     "node_modules"
   ],
