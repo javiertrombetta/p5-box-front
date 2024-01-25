@@ -3,7 +3,11 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import CircularProgress from 'react-native-circular-progress-indicator';
 
-const CircleProgress = ({value}) => {
+type CircleProgressProps = {
+  value: number;
+}
+
+const CircleProgress = ({value}:CircleProgressProps ) => {
   const texto = '#24424D'
   const violeta = '#CEC4F4'
 
@@ -17,9 +21,7 @@ const CircleProgress = ({value}) => {
         inActiveStrokeOpacity={0.2}
         activeStrokeWidth={8}
         inActiveStrokeWidth={8}
-        titleStyle={10}
         duration={1000}
-        className="w-[70] h-[70]"
       />
       <StatusBar style="auto" />
     </View>
