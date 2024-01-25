@@ -3,7 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { Text, View } from "react-native";
 import { NativeWindStyleSheet } from "nativewind";
 import { useFonts } from "expo-font";
-import CircleProgress from "./src/screens/CircleProgress";
+import CircleProgress from "./src/components/CircleProgress";
 
 import Login from "./src/screens/Login";
 import HomeGestionarPedido from "./src/screens/HomeGestionarPedido";
@@ -29,10 +29,10 @@ export default function App() {
     <View className="w-full h-full">
       {/* <Login /> */}
       {/* <HomeGestionarPedido/> */}
-      {/* <Repartidores /> */}
+      <Repartidores />
       {/* <Paquetes/> */}
       {/* <AddPackage /> */}
-      <PerfilRepartidor/>
+      {/* <PerfilRepartidor/> */}
       <StatusBar style="auto" />
     </View>
   );
