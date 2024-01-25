@@ -2,6 +2,7 @@ import React from 'react';
 import { StatusBar } from "expo-status-bar";
 import { Text, View } from "react-native";
 import { NativeWindStyleSheet } from "nativewind";
+import AppLoading from 'expo-app-loading';
 import { useFonts } from "expo-font";
 import CircleProgress from "./src/components/CircleProgress";
 
@@ -25,6 +26,11 @@ export default function App() {
     RobotoLight: require("./src/assets/fonts/Roboto-Light.ttf"),
     RobotoBold: require("./src/assets/fonts/Roboto-Bold.ttf"),
   });
+
+  if (!loaded) {
+    return <AppLoading />;
+  }
+  
   return (
     <View className="w-full h-full">
       {/* <Login /> */}
