@@ -24,8 +24,8 @@ export default function App() {
   return (
     <View className="w-full h-full">
       {/* <Login /> */}
-      <HomeGestionarPedido/>
-      {/* <Repartidores /> */}
+      {/* <HomeGestionarPedido/> */}
+      <Repartidores />
       {/* <Paquetes/> */}
       {/* <AddPackage /> */}
       {/* <PerfilRepartidor/> */}
