@@ -1,13 +1,15 @@
+import React from 'react';
 import { StatusBar } from "expo-status-bar";
 import { Text, View } from "react-native";
 import { NativeWindStyleSheet } from "nativewind";
+import { useFonts } from "expo-font";
+
+import Login from "./src/screens/Login";
 import HomeGestionarPedido from "./src/screens/HomeGestionarPedido";
 import PerfilRepartidor from "./src/screens/PerfilRepartidor";
 import Repartidores from "./src/screens/Repartidores";
-import Login from "./src/screens/Login";
 import Paquetes from "./src/screens/Paquetes";
 import AddPackage from "./src/screens/AddPackage";
-import { useFonts } from "expo-font";
 
 NativeWindStyleSheet.setOutput({
   default: "native",
@@ -24,11 +26,11 @@ export default function App() {
   return (
     <View className="w-full h-full">
       {/* <Login /> */}
-      <HomeGestionarPedido/>
+      {/* <HomeGestionarPedido/> */}
       {/* <Repartidores /> */}
       {/* <Paquetes/> */}
       {/* <AddPackage /> */}
-      {/* <PerfilRepartidor/> */}
+      <PerfilRepartidor/>
       <StatusBar style="auto" />
     </View>
   );

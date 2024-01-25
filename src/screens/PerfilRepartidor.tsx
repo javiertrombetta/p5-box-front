@@ -29,7 +29,10 @@ const PerfilRepartidor = () => {
             </View>
             <View className="w-1/3">
                 <Text className="text-start text-sm font-medium text-texto">Palermo</Text>
-                <Text className="w-[67] h-[15] text-center font-semibold text-texto rounded-sm bg-verde" style={{fontSize:"10px"}}>HABILITADO</Text>
+                <View>
+                    
+                </View>
+                {/* <Text className="w-[67] h-[15] text-center font-roboto text-texto rounded-sm bg-verde" style={{fontSize:"10px"}}>HABILITADO</Text> */}
             </View>
             <View className="w-1/3 flex items-end px-2">
                 <svg xmlns="http://www.w3.org/2000/svg" width="35" height="19" viewBox="0 0 35 19" fill="none">
