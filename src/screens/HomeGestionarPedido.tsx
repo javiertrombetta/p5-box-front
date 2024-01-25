@@ -1,9 +1,10 @@
 import { View, Text, Pressable, Image, StyleSheet } from 'react-native'
-import CircleProgress from './CircleProgress'
+import CircleProgress from '../components/CircleProgress'
 import Svg from "react-native-svg"
 import React from 'react'
 
 const HomeGestionarPedido = () => {
+    
   return (
     <View className="w-full bg-verde h-full flex flex-col items-center">
         <View className="w-[300] h-50 flex flex-row mt-3 justify-between items-center">
@@ -80,7 +81,7 @@ const HomeGestionarPedido = () => {
             <View className="flex flex-col h-48 justify-evenly align-middle">
                 <View className="flex flex-row justify-around">
                     <View className="flex justify-center">
-                        <CircleProgress value={30}/>
+                        <CircleProgress value={10} />
                     </View>
                     <View className="flex justify-center">
                         <Text className="font-robotoBold">Repartidores</Text>
@@ -96,7 +97,7 @@ const HomeGestionarPedido = () => {
                     <View className='h-[1] w-[89%] bg-gray-300'/>
                 </View>
                 <View className="flex flex-row justify-around">
-                    <View>
+                    <View className="flex justify-center">
                         <CircleProgress value={80}/>
                     </View>
                     <View className="flex justify-center">
