@@ -3,6 +3,7 @@ import { StatusBar } from "expo-status-bar";
 import { Text, View } from "react-native";
 import { NativeWindStyleSheet } from "nativewind";
 import { useFonts } from "expo-font";
+import CircleProgress from "./src/screens/CircleProgress";
 
 import Login from "./src/screens/Login";
 import HomeGestionarPedido from "./src/screens/HomeGestionarPedido";
@@ -10,6 +11,7 @@ import PerfilRepartidor from "./src/screens/PerfilRepartidor";
 import Repartidores from "./src/screens/Repartidores";
 import Paquetes from "./src/screens/Paquetes";
 import AddPackage from "./src/screens/AddPackage";
+
 
 NativeWindStyleSheet.setOutput({
   default: "native",
