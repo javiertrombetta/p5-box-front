@@ -22,9 +22,9 @@ export default function App() {
   const [loaded] = useFonts({
     SairaRegular: require("./src/assets/fonts/Saira-Regular.ttf"),
     SairaBold: require("./src/assets/fonts/Saira-Bold.ttf"),
-    RobotoRegular: require("./src/assets/fonts/Roboto-Regular.ttf"),    
-    RobotoLight: require("./src/assets/fonts/Roboto-Light.ttf"),
     RobotoBold: require("./src/assets/fonts/Roboto-Bold.ttf"),
+    RobotoMedium: require("./src/assets/fonts/Roboto-Medium.ttf"), 
+    RobotoRegular: require("./src/assets/fonts/Roboto-Regular.ttf"), 
   });
 
   if (!loaded) {
