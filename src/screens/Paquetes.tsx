@@ -25,8 +25,8 @@ const Paquetes = () => {
             <View className="w-[300] h-10 flex flex-row rounded-t-xl items-center px-4 justify-between bg-violeta">
                 <Text className="text-sm font-robotoBold text-texto text-center">ENERO</Text>
                 <View className="flex flex-row items-center">
-                    <Text className="font-roboto">mie</Text>
-                    <Text className="font-robotoBold"> / 03</Text>
+                    <Text className="font-roboto text-texto">mie</Text>
+                    <Text className="font-robotoBold text-texto"> / 03</Text>
                 </View>
             </View>
             <Text className="px-4 py-2 text-texto font-robotoMedium">58 Paquetes entregados</Text>
