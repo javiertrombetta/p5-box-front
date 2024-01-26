@@ -34,10 +34,10 @@ export default function App() {
     <View className="w-full h-full">
       {/* <Login /> */}
       {/* <HomeGestionarPedido/> */}
-      <Repartidores />
+      {/* <Repartidores /> */}
       {/* <Paquetes/> */}
       {/* <AddPackage /> */}
-      {/* <PerfilRepartidor/> */}
+      <PerfilRepartidor/>
       <StatusBar style="auto" />
     </View>
   );
