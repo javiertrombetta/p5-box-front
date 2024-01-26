@@ -1,13 +1,13 @@
-import { View, Text, Button, Pressable, Image } from "react-native";
-import Svg from "react-native-svg";
-import React from "react";
-import box from "../assets/box.png";
-import leftArrow from "../assets/arrow-left.png";
-import circulo from "../assets/circuloUno.png";
-import desahabilitado from "../assets/desahabilitado.png";
-import habilitado from "../assets/habilitado.png";
-import downarrow from "../assets/arrow-head-down.png";
-import CircleProgress from "../components/CircleProgress";
+import { View, Text, Button, Pressable, Image } from 'react-native';
+import Svg from 'react-native-svg';
+import React from 'react';
+import box from '../assets/box.png';
+import leftArrow from '../assets/arrow-left.png';
+import circulo from '../assets/circuloUno.png';
+import desahabilitado from '../assets/desahabilitado.png';
+import habilitado from '../assets/habilitado.png';
+import downarrow from '../assets/arrow-head-down.png';
+import CircleProgress from '../components/CircleProgress';
 
 const Repartidores = () => {
   return (
@@ -30,9 +30,7 @@ const Repartidores = () => {
         </View>
       </View>
       <View className="bg-violeta flex-row flex w-[300] h-[35] justify-between items-center px-4 mt-[10] rounded-t-xl">
-        <Text className="text-sm font-robotoBold text-texto flex align-middle">
-          ENERO
-        </Text>
+        <Text className="text-sm font-robotoBold text-texto flex align-middle">ENERO</Text>
         <View className="flex flex-row items-center">
           <Text className="font-roboto">mie</Text>
           <Text className="font-robotoBold"> / 03</Text>
@@ -60,9 +58,9 @@ const Repartidores = () => {
 
           <View className="w-1/3 items-center flex">
             <Image
-              className={"w-10 h-10 rounded-full mt-4 mr-3"}
+              className={'w-10 h-10 rounded-full mt-4 mr-3'}
               source={{
-                uri: "https://images.ecestaticos.com/RdK_LRX7lZcsXjxn5MU3tpzYnEo=/0x0:991x684/992x685/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fd63%2Faf3%2F56a%2Fd63af356aa9a1edf14110f781ae9296f.jpg",
+                uri: 'https://images.ecestaticos.com/RdK_LRX7lZcsXjxn5MU3tpzYnEo=/0x0:991x684/992x685/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fd63%2Faf3%2F56a%2Fd63af356aa9a1edf14110f781ae9296f.jpg',
               }}
             />
           </View>
@@ -89,9 +87,9 @@ const Repartidores = () => {
 
           <View className="w-1/3 items-center flex">
             <Image
-              className={"w-10 h-10 rounded-full mt-4 mr-3"}
+              className={'w-10 h-10 rounded-full mt-4 mr-3'}
               source={{
-                uri: "https://images.ecestaticos.com/RdK_LRX7lZcsXjxn5MU3tpzYnEo=/0x0:991x684/992x685/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fd63%2Faf3%2F56a%2Fd63af356aa9a1edf14110f781ae9296f.jpg",
+                uri: 'https://images.ecestaticos.com/RdK_LRX7lZcsXjxn5MU3tpzYnEo=/0x0:991x684/992x685/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fd63%2Faf3%2F56a%2Fd63af356aa9a1edf14110f781ae9296f.jpg',
               }}
             />
           </View>
@@ -117,9 +115,9 @@ const Repartidores = () => {
 
           <View className="w-1/3 items-center flex">
             <Image
-              className={"w-10 h-10 rounded-full mt-4 mr-3"}
+              className={'w-10 h-10 rounded-full mt-4 mr-3'}
               source={{
-                uri: "https://images.ecestaticos.com/RdK_LRX7lZcsXjxn5MU3tpzYnEo=/0x0:991x684/992x685/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fd63%2Faf3%2F56a%2Fd63af356aa9a1edf14110f781ae9296f.jpg",
+                uri: 'https://images.ecestaticos.com/RdK_LRX7lZcsXjxn5MU3tpzYnEo=/0x0:991x684/992x685/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fd63%2Faf3%2F56a%2Fd63af356aa9a1edf14110f781ae9296f.jpg',
               }}
             />
           </View>
@@ -144,9 +142,9 @@ const Repartidores = () => {
 
           <View className="w-1/3 items-center flex">
             <Image
-              className={"w-10 h-10 rounded-full mt-4 mr-3"}
+              className={'w-10 h-10 rounded-full mt-4 mr-3'}
               source={{
-                uri: "https://images.ecestaticos.com/RdK_LRX7lZcsXjxn5MU3tpzYnEo=/0x0:991x684/992x685/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fd63%2Faf3%2F56a%2Fd63af356aa9a1edf14110f781ae9296f.jpg",
+                uri: 'https://images.ecestaticos.com/RdK_LRX7lZcsXjxn5MU3tpzYnEo=/0x0:991x684/992x685/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fd63%2Faf3%2F56a%2Fd63af356aa9a1edf14110f781ae9296f.jpg',
               }}
             />
           </View>
