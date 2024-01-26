@@ -3,7 +3,8 @@ import CircleProgress from '../components/CircleProgress'
 import box from "../assets/box.png";
 import boxRight from "../assets/boxRight.png";
 import boxLeft from "../assets/boxLeft.png";
-import Svg from "react-native-svg"
+import vectorSuma from "../assets/vectorSuma.png";
+import arrowDown from "../assets/arrow-head-down.png"
 import React from 'react'
 
 const HomeGestionarPedido = () => {
@@ -34,23 +35,23 @@ const HomeGestionarPedido = () => {
             </View>
             <View className="w-[300] h-[54] flex flex-row rounded-b-xl items-center justify-evenly bg-white">
                 <Image className='w-[19] h-[20]' source={boxLeft}/>
-                <View className="rounded-md w-[34] h-[34] flex items-center">
+                <View className="rounded-md w-[34] h-[34] flex items-center justify-center">
                     <Text className="font-saira text-xs flex text-end">lun</Text>
                     <Text className="font-sairaBold flex items-start justify-start text-start">01</Text>
                 </View>
-                <View className="rounded-md w-[34] h-[34] flex items-center">
+                <View className="rounded-md w-[34] h-[34] flex items-center justify-center">
                     <Text className="font-saira text-xs flex text-end">mar</Text>
                     <Text className="font-sairaBold flex items-start justify-start text-start">02</Text>
                 </View>
-                <View className="rounded-md bg-amarilloVerdoso w-[34] h-[34] flex items-center">
+                <View className="rounded-md bg-amarilloVerdoso w-[38] h-[38] flex justify-center items-center">
                     <Text className="font-saira text-xs flex text-end">mie</Text>
                     <Text className="font-sairaBold flex items-start justify-start text-start">03</Text>
                 </View>
-                <View className="rounded-md w-[34] h-[34] flex items-center">
+                <View className="rounded-md w-[34] h-[34] flex items-center justify-center">
                     <Text className="font-saira text-xs flex text-end opacity-50">jue</Text>
                     <Text className="font-sairaBold flex items-start justify-start text-start opacity-50">04</Text>
                 </View>
-                <View className="rounded-md w-[34] h-[34] flex items-center">
+                <View className="rounded-md w-[34] h-[34] flex items-center justify-center">
                     <Text className="font-saira text-xs flex text-end opacity-50">vie</Text>
                     <Text className="font-sairaBold flex items-start justify-start text-start opacity-50">05</Text>
                 </View>
@@ -63,14 +64,10 @@ const HomeGestionarPedido = () => {
                 <View className="flex flex-row items-center justify-center gap-2">
                     <Text className="font-saira text-texto">03/01/23</Text>
                     <Pressable className="mr-5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="8" viewBox="0 0 14 8" fill="none">
-                            <path d="M0.34362 0.33213C0.758879 -0.0716676 1.40739 -0.107106 1.8636 0.224929L1.99427 0.335563L6.9986 5.24423L12.0057 0.335563C12.4192 -0.069958 13.0676 -0.108094 13.5252 0.222041L13.6564 0.33213C14.0716 0.735928 14.1107 1.36908 13.7726 1.816L13.6599 1.94407L7.82708 7.66444C7.41234 8.07118 6.76163 8.10816 6.30399 7.77537L6.17292 7.66444L0.340105 1.94407C-0.114738 1.498 -0.113164 0.776307 0.34362 0.33213Z" fill="#24424D"/>
-                        </svg>
+                        <Image className="h-[8] w-[14]" source={arrowDown} />
                     </Pressable>
                 </View>
-                
             </View>
-
             <View className="flex flex-col h-48 justify-evenly align-middle">
                 <View className="flex flex-row justify-around">
                     <View className="flex justify-center">
@@ -104,13 +101,10 @@ const HomeGestionarPedido = () => {
                     </View>
                 </View>
             </View>
-            
         </View>
         <Pressable className="flex flex-row h-7 w-64 mt-[15] justify-center items-center align-middle border rounded-xl bg-texto">
             <Text className="text-center mr-2 text-amarilloVerdoso text-xs">NUEVO PAQUETE</Text>
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M13 7.00005L7 7.00005M7 7.00005L1 7.00005M7 7.00005L7 1M7 7.00005L7 13" stroke="#CEF169" strokeLinecap="round"/>
-            </svg>
+            <Image className="h-[12] w-[12]" source={vectorSuma}/>
         </Pressable>
     </View>
   )
