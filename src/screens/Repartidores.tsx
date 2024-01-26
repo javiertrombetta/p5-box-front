@@ -41,7 +41,6 @@ const Repartidores = () => {
       <View className="bg-blanco flex justify-between h-[407] w-[300] mx-2">
         <View className="flex-row flex justify-between my-3">
           {/* reemplace circulo */}
-
           <View className="w-1/3 items-center flex">
             <CircleProgress value={30} />
           </View>
@@ -57,7 +56,6 @@ const Repartidores = () => {
               <Text style={{ fontSize: 10 }}>DESHABILITADO</Text>
             </View>
           </View>
-
           <View className="w-1/3 items-center flex">
             <Image
               className={"w-10 h-10 rounded-full mt-4 mr-3"}
