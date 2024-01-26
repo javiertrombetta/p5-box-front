@@ -34,9 +34,9 @@ export default function App() {
   return (
     <View className="w-full h-full">
       {/* <Login /> */}
-      <HomeGestionarPedido/>
+      {/* <HomeGestionarPedido/> */}
       {/* <Repartidores /> */}
-      {/* <Paquetes/> */}
+      <Paquetes/>
       {/* <AddPackage /> */}
       {/* <PerfilRepartidor/> */}
       <StatusBar style="auto" />
