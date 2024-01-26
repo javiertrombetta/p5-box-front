@@ -9,7 +9,7 @@ module.exports = {
       'saira': ['SairaRegular'],
       'sairaBold': ['SairaBold'],
       'roboto': ['RobotoRegular'],
-      'robotoLight': ['RobotoLight'],
+      'robotoMedium': ['RobotoMedium'],      
       'robotoBold': ['RobotoBold'],
     },
     extend: {
