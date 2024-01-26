@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { Text, View } from "react-native";
 import { NativeWindStyleSheet } from "nativewind";
-import AppLoading from 'expo-app-loading';
+import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 import CircleProgress from "./src/components/CircleProgress";
 
@@ -13,7 +13,6 @@ import Repartidores from "./src/screens/Repartidores";
 import Paquetes from "./src/screens/Paquetes";
 import AddPackage from "./src/screens/AddPackage";
 
-
 NativeWindStyleSheet.setOutput({
   default: "native",
 });
@@ -23,20 +22,20 @@ export default function App() {
     SairaRegular: require("./src/assets/fonts/Saira-Regular.ttf"),
     SairaBold: require("./src/assets/fonts/Saira-Bold.ttf"),
     RobotoBold: require("./src/assets/fonts/Roboto-Bold.ttf"),
-    RobotoMedium: require("./src/assets/fonts/Roboto-Medium.ttf"), 
-    RobotoRegular: require("./src/assets/fonts/Roboto-Regular.ttf"), 
+    RobotoMedium: require("./src/assets/fonts/Roboto-Medium.ttf"),
+    RobotoRegular: require("./src/assets/fonts/Roboto-Regular.ttf"),
   });
 
   if (!loaded) {
     return <AppLoading />;
   }
-  
+
   return (
     <View className="w-full h-full">
       {/* <Login /> */}
       {/* <HomeGestionarPedido/> */}
-      {/* <Repartidores /> */}
-      <Paquetes/>
+      <Repartidores />
+      {/* <Paquetes/> */}
       {/* <AddPackage /> */}
       {/* <PerfilRepartidor/> */}
       <StatusBar style="auto" />
