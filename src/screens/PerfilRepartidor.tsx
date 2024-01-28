@@ -18,12 +18,12 @@ const HScale = height / 640;
 const PerfilRepartidor = () => {
 	return (
 		<View
-			style={{ paddingHorizontal: 32 * WScale, paddingTop: 8 * HScale }}
+			style={{ paddingHorizontal: 32 * WScale, paddingTop: 6 * HScale }}
 			className="w-full bg-verde h-full flex flex-col items-center"
 		>
 			<View
-				style={{ marginTop: 12 * HScale }}
-				className="w-full h-50 flex flex-row mt-3 justify-between items-center"
+				style={{ marginTop: 6 * HScale }}
+				className="w-full flex flex-row justify-between items-center"
 			>
 				<Image
 					source={box}
