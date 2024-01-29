@@ -14,6 +14,7 @@ import Paquetes from './src/screens/Paquetes';
 import AddPackage from './src/screens/AddPackage';
 import ObtenerPaquetes from './src/screens/ObtenerPaquetes';
 import HomeIniciarJornada from './src/screens/HomeIniciarJornada';
+import RepartoEnCurso from './src/screens/RepartoEnCurso';
 
 NativeWindStyleSheet.setOutput({
     default: 'native',
@@ -33,21 +34,21 @@ export default function App() {
     if (!loaded) {
         return <AppLoading />;
     }
+  
+	return (
+		<View className="w-full h-full">
+			{/* <Login /> */}
+			{/* <HomeGestionarPedido /> */}
+			<RepartoEnCurso />
+			{/* <Repartidores /> */}
+			{/* <Paquetes/> */}
+			{/* <AddPackage /> */}
+			{/* <PerfilRepartidor /> */}
+			{/* Screens Repartidor */}
+			{/* <ObtenerPaquetes /> */}
+			{/* <HomeIniciarJornada /> */}
+			<StatusBar style="auto" />
+		</View>
+	);
 
-    return (
-        <View className="w-full h-full">
-            {/* <Login /> /}
-            {/ <HomeGestionarPedido /> /}
-            {/ <Repartidores /> /}
-            {/ <Paquetes /> /}
-            {/ <AddPackage /> /}
-            <PerfilRepartidor />
-
-            {/ Screens Repartidor /}
-
-            {/ <ObtenerPaquetes /> /}
-            {/ <HomeIniciarJornada /> */}
-            <StatusBar style="auto" />
-        </View>
-    );
 }
