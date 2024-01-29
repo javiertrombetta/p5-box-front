@@ -30,16 +30,15 @@ export default function App() {
 		return <AppLoading />;
 	}
 
-
-  return (
-    <View className="w-full h-full">
-      {/* <Login /> */}
-      {/* <HomeGestionarPedido/> */}
-      {/* <Repartidores /> */}
-      {/* <Paquetes/> */}
-      {/* <AddPackage /> */}
-      <PerfilRepartidor/>
-      <StatusBar style="auto" />
-    </View>
-  );
-
+	return (
+		<View className="w-full h-full">
+			{/* <Login /> */}
+			<HomeGestionarPedido />
+			{/* <Repartidores /> */}
+			{/* <Paquetes/> */}
+			{/* <AddPackage /> */}
+			{/* <PerfilRepartidor /> */}
+			<StatusBar style="auto" />
+		</View>
+	);
+}
