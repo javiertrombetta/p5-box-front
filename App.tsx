@@ -6,6 +6,7 @@ import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 import CircleProgress from './src/components/CircleProgress';
 
+import LoginAdmin from './src/screens/LoginAdmin';
 import Login from './src/screens/Login';
 import HomeGestionarPedido from './src/screens/HomeGestionarPedido';
 import PerfilRepartidor from './src/screens/PerfilRepartidor';
@@ -34,6 +35,7 @@ export default function App() {
 
 	return (
 		<View className="w-full h-full">
+			<LoginAdmin />
 			{/* <Login /> */}
 			{/* <HomeGestionarPedido/> */}
 			{/* <Repartidores /> */}
@@ -44,7 +46,7 @@ export default function App() {
 			{/* Screens Repartidor */}
 
 			{/* <ObtenerPaquetes /> */}
-			<HomeIniciarJornada />
+			{/* <HomeIniciarJornada /> */}
 			<StatusBar style="auto" />
 		</View>
 	);
