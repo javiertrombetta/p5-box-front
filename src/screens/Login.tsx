@@ -1,52 +1,61 @@
-import { View, Text, Image, TextInput, Pressable } from "react-native";
+import { View, Text, Image, TextInput, Pressable, Dimensions } from "react-native";
 import React, { useState } from "react";
 import backgroundI from "../assets/fondoLogin.jpg";
-import box from "../assets/box.png";
-import vecLogo from "../assets/vec-logo.png";
-import bgLogo from "../assets/bg-logo.png";
+import logo from "../assets/logo.png";
 import closeEye from "../assets/Eye.png";
+
+const { width, height } = Dimensions.get('window');
+const WScale = width / 360;
+const HScale = height / 640;
+
+const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 const Login = () => {
   const [text, setText] = useState("");
 
   return (
     <View className="flex flex-col w-full h-full justify-center items-center">
-      <Image source={backgroundI} />
-      <View className="absolute flex top-[205] left[30] w-[300] h-[275] rounded-2xl bg-verde ">
+      <Image source={backgroundI} className="w-full h-full" />
+      <View style={{ top: 185 * HScale, left: 30 * WScale, width: 300 * WScale, height: 305 * HScale }} className="absolute flex rounded-2xl bg-verde">
         <TextInput
-          className=" text-texto font-roboto absolute top-[66] left-[15] h-[24] w-[270] "
+          style={{ top: 66 * HScale, left: 15 * WScale, height: 24 * HScale, width: 270 * WScale, fontSize: scaledSize(12) }}
+          className="text-texto font-roboto absolute"
           placeholder="Email@contraseña.com"
           onChangeText={(newText) => setText(newText)}
           defaultValue={text}
         />
         <TextInput
-          className=" text-texto font-roboto absolute top-[111] left-[15] h-[24] w-[270] "
+          style={{ top: 111 * HScale, left: 15 * WScale, height: 24 * HScale, width: 270 * WScale, fontSize: scaledSize(14) }}
+          className="text-texto font-roboto absolute"
           placeholder="**********"
           onChangeText={(newText) => setText(newText)}
           defaultValue={text}
         />
-        <Image className="absolute top-[108] left-[255] " source={closeEye} />
-        <View className="absolute top-[90] left-[15] w-[270] h-[1] bg-texto"></View>
-        <View className="absolute top-[135] left-[15] w-[270] h-[1] bg-texto"></View>
-        <Pressable className="absolute left-[15] top-[160] flex flex-row h-[30] w-[270] mt-4 justify-center items-center align-middle border rounded-xl bg-texto">
-          <Text className="text-center mr-2 font-roboto text-amarilloVerdoso text-xs">
+        <Image style={{ top: 108 * HScale, left: 255 * WScale, width: scaledSize(20), height: scaledSize(20)  }} className="absolute text-texto" source={closeEye} />
+        <View style={{ top: 90 * HScale, left: 15 * WScale, width: 270 * WScale, height: 1 * HScale }} className="absolute bg-texto"></View>
+        <View style={{ top: 135 * HScale, left: 15 * WScale, width: 270 * WScale, height: 1 * HScale }} className="absolute bg-texto"></View>
+        <Pressable style={{ top: 175 * HScale, left: 15 * WScale, height: 30 * HScale, width: 270 * WScale }} className="absolute flex flex-row justify-center items-center align-middle border-none rounded-xl bg-texto">
+          <Text style={{ marginRight: 8 * WScale, fontSize: scaledSize(12) }} className="text-center font-roboto text-amarilloVerdoso text-xs">
             INGRESAR
           </Text>
         </Pressable>
-        <Pressable className="top-[225] justify-center items-center align-middle">
+        <Pressable style={{ top: 215 * HScale, left: 15 * WScale, height: 30 * HScale, width: 270 * WScale }} className="absolute flex flex-row justify-center items-center align-middle border rounded-xl">
+          <Text style={{ marginRight: 8 * WScale, fontSize: scaledSize(12) }} className="text-center font-roboto text-texto text-xs">
+            CREAR CUENTA
+          </Text>
+        </Pressable>
+        <Pressable style={{ top: 260 * HScale }} className=" justify-center items-center align-middle">
           <Text
-            className="font-roboto"
-            style={{ textDecorationLine: "underline" }}
+            className="font-roboto text-texto"
+            style={{ textDecorationLine: "underline", fontSize: scaledSize(12) }}
           >
             Olvidé mi contraseña
           </Text>
         </Pressable>
       </View>
-      <View className="absolute top-[170] left-[30] rounded-t-2xl rounded-r-2xl w-[204] h-[69] bg-amarilloVerdoso">
-        <Image className="absolute top-[10] right-[10] " source={box} />
-        <Image className="absolute top-[10] left-[10] " source={bgLogo} />
-        <Image className="absolute top-[15] left-[17] " source={vecLogo} />
-      </View>
+      <View style={{ top: 150 * HScale, left: 30 * WScale, width: 204 * WScale, height: 69 * HScale }} className="absolute rounded-t-2xl rounded-r-2xl bg-amarilloVerdoso flex-row justify-center items-center">
+        <Image style={{ width: scaledSize(184), height: scaledSize(49)}} resizeMode="contain" source={logo} />          
+      </View>     
     </View>
   );
 };
