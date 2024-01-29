@@ -7,9 +7,11 @@ module.exports = {
   theme: {
     fontFamily: {
       'saira': ['SairaRegular'],
+      'sairaMedium': ['SairaMedium'],
+      'sairaSemiBold': ['SairaSemiBold'],
       'sairaBold': ['SairaBold'],
       'roboto': ['RobotoRegular'],
-      'robotoMedium': ['RobotoMedium'],      
+      'robotoMedium': ['RobotoMedium'],
       'robotoBold': ['RobotoBold'],
     },
     extend: {
