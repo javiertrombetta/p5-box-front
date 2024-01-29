@@ -193,6 +193,7 @@ const PerfilRepartidor = () => {
 								<Text className="text-xs text-texto">CABA</Text>
 							</View>
 						</View>
+
 						<View className="flex flex-col items-end justify-end gap-3">
 							<View
 								style={{ width: 88 * WScale, height: 15 * HScale }}

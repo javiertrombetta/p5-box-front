@@ -35,14 +35,12 @@ export default function App() {
 	return (
 		<View className="w-full h-full">
 			{/* <Login /> */}
-			{/* <HomeGestionarPedido/> */}
+			<HomeGestionarPedido />
 			{/* <Repartidores /> */}
-			{/* <Paquetes /> */}
+			{/* <Paquetes/> */}
 			{/* <AddPackage /> */}
 			{/* <PerfilRepartidor /> */}
-
 			{/* Screens Repartidor */}
-
 			{/* <ObtenerPaquetes /> */}
 			<HomeIniciarJornada />
 			<StatusBar style="auto" />
