@@ -3,7 +3,7 @@ import React from 'react';
 import box from '../assets/box.png';
 import leftArrow from '../assets/arrow-left.png';
 import circulo from '../assets/circuloUno.png';
-import desahabilitado from '../assets/desahabilitado.png';
+import deshabilitado from '../assets/deshabilitado.png';
 import habilitado from '../assets/habilitado.png';
 import downarrow from '../assets/arrow-head-down.png';
 import boton from '../assets/Group 37375.png';
@@ -49,7 +49,9 @@ const PerfilRepartidor = () => {
 			<View className="w-[300] h-12 flex justify-center rounded-xl mt-[10] bg-amarilloVerdoso">
 				<View className="w-[300] h-12 flex flex-row rounded-t-xl items-center justify-between">
 					<View>
-						<Text className="text-sm ml-5 h-3 font-sairaBold text-texto">REPARTOS PENDIENTESsss</Text>
+						<Text className="text-sm ml-5 h-3 font-sairaBold text-texto">
+							REPARTOS PENDIENTESsss
+						</Text>
 						<Text className="text-sm ml-5 h-3 mb-2 font-saira text-texto">sin repartos</Text>
 					</View>
 					<Pressable className="mr-5">
@@ -81,7 +83,7 @@ const PerfilRepartidor = () => {
 						<View className="flex flex-col items-end justify-center gap-1">
 							<View className="w-[88] h-[15] flex flex-row justify-evenly items-center rounded-md bg-gray-200">
 								<View className="flex flex-row items-center">
-									<Image source={desahabilitado} />
+									<Image source={deshabilitado} />
 								</View>
 								<Text style={{ fontSize: 10.5 }}>ENTREGADO</Text>
 							</View>
@@ -105,7 +107,7 @@ const PerfilRepartidor = () => {
 						<View className="flex flex-col items-end justify-center gap-1">
 							<View className="w-[88] h-[15] flex flex-row justify-evenly items-center rounded-md bg-gray-200">
 								<View className="flex flex-row items-center">
-									<Image source={desahabilitado} />
+									<Image source={deshabilitado} />
 								</View>
 								<Text style={{ fontSize: 10.5 }}>ENTREGADO</Text>
 							</View>
@@ -130,7 +132,7 @@ const PerfilRepartidor = () => {
 						<View className="flex flex-col items-end justify-center gap-1">
 							<View className="w-[88] h-[15] flex flex-row justify-evenly items-center rounded-md bg-gray-200">
 								<View className="flex flex-row items-center">
-									<Image source={desahabilitado} />
+									<Image source={deshabilitado} />
 								</View>
 								<Text style={{ fontSize: 10.5 }}>ENTREGADO</Text>
 							</View>
