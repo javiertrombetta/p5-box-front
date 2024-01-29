@@ -12,6 +12,8 @@ import PerfilRepartidor from './src/screens/PerfilRepartidor';
 import Repartidores from './src/screens/Repartidores';
 import Paquetes from './src/screens/Paquetes';
 import AddPackage from './src/screens/AddPackage';
+import ObtenerPaquetes from './src/screens/ObtenerPaquetes';
+import HomeIniciarJornada from './src/screens/HomeIniciarJornada';
 
 NativeWindStyleSheet.setOutput({
 	default: 'native',
@@ -38,6 +40,9 @@ export default function App() {
 			{/* <Paquetes/> */}
 			{/* <AddPackage /> */}
 			{/* <PerfilRepartidor /> */}
+			{/* Screens Repartidor */}
+			{/* <ObtenerPaquetes /> */}
+			<HomeIniciarJornada />
 			<StatusBar style="auto" />
 		</View>
 	);
