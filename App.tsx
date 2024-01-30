@@ -15,6 +15,7 @@ import AddPackage from './src/screens/AddPackage';
 import ObtenerPaquetes from './src/screens/ObtenerPaquetes';
 import HomeIniciarJornada from './src/screens/HomeIniciarJornada';
 import RepartoEnCurso from './src/screens/RepartoEnCurso';
+import CreateAccount from './src/screens/CreateAccount';
 
 NativeWindStyleSheet.setOutput({
 	default: 'native',
@@ -38,7 +39,8 @@ export default function App() {
 	return (
 		<View className="w-full h-full">
 			{/* <Login /> */}
-			<HomeGestionarPedido />
+			{/* <CreateAccount /> */}
+			{/* <HomeGestionarPedido /> */}
 			{/* <RepartoEnCurso /> */}
 			{/* <Repartidores /> */}
 			{/* <Paquetes/> */}
