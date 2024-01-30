@@ -31,8 +31,8 @@ const LoginAdmin = () => {
           onChangeText={(newText) => setText(newText)}
           defaultValue={text}
         />
-        <Image style={{ top: 108 * HScale, left: 255 * WScale, width: scaledSize(20), height: scaledSize(20)  }} className="absolute" source={closeEye} />
-        <View style={{ top: 93 * HScale, left: 15 * WScale, width: 270 * WScale, height: 1 * HScale }} className="absolute bg-texto"></View>
+        <Image style={{ top: 108 * HScale, left: 255 * WScale, width: scaledSize(20), height: scaledSize(20) }} className="absolute" source={closeEye} />
+        <View style={{ top: 94 * HScale, left: 15 * WScale, width: 270 * WScale, height: 1 * HScale }} className="absolute bg-texto"></View>
         <View style={{ top: 135 * HScale, left: 15 * WScale, width: 270 * WScale, height: 1 * HScale }} className="absolute bg-texto"></View>
         <Pressable style={{ top: 175 * HScale, left: 15 * WScale, height: 30 * HScale, width: 270 * WScale }} className="absolute flex flex-row justify-center items-center align-middle border rounded-xl bg-texto">
           <Text style={{ marginRight: 8 * WScale, fontSize: scaledSize(12) }} className="text-center font-roboto text-amarilloVerdoso text-xs">
