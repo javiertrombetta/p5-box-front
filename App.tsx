@@ -44,7 +44,7 @@ export default function App() {
 			{/* <RepartoEnCurso /> */}
 			{/* <Repartidores /> */}
 			{/* <Paquetes/> */}
-			{/* <AddPackage /> */}
+			<AddPackage />
 			{/* <PerfilRepartidor /> */}
 			{/* Screens Repartidor */}
 			{/* <ObtenerPaquetes /> */}
