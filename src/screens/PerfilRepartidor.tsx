@@ -1,4 +1,5 @@
 import { View, Text, Pressable, Image, StyleSheet, Dimensions } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import box from '../assets/box.png';
 import leftArrow from '../assets/arrow-left.png';
@@ -284,20 +285,20 @@ const PerfilRepartidor = () => {
 					</View>
 				</View>
 			</View>
-			<View
-				style={{
-					height: 1,
-					// shadowColor: '#FFF',
-					// shadowOffset: {
-					// 	width: 0,
-					// 	height: 0,
-					// },
-					// shadowOpacity: 0.5,
-					// shadowRadius: 5,
-					// elevation: 50,
-				}}
-				className="w-full bg-gray-300"
-			/>
+			<View style={{ position: 'relative', height: 1}} className="w-full bg-gray-300">
+				<LinearGradient
+					colors={['rgba(255, 255, 255, 0.0)', 'rgba(255, 255, 255, 1)']}
+					style={{
+						position: 'absolute',
+						left: 0,
+						right: 0,
+						height: 50 * HScale,
+						top: -50 * HScale,
+					}}
+					start={{ x: 0.5, y: 0.0 }}
+					end={{ x: 0.5, y: 1.0 }}
+				/>
+			</View>
 			<View
 				style={{ height: 48 * HScale }}
 				className="w-full flex justify-center items-center rounded-b-xl bg-blanco z-10"
