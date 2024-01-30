@@ -43,12 +43,12 @@ export default function App() {
 			{/* <HomeGestionarPedido /> */}
 			{/* <RepartoEnCurso /> */}
 			{/* <Repartidores /> */}
-			{/* <Paquetes/> */}
+			{/* <Paquetes /> */}
 			{/* <AddPackage /> */}
 			{/* <PerfilRepartidor /> */}
 			{/* Screens Repartidor */}
 			{/* <ObtenerPaquetes /> */}
-			{/* <HomeIniciarJornada /> */}
+			<HomeIniciarJornada />
 			<StatusBar style="auto" />
 		</View>
 	);
