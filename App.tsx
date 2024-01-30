@@ -39,11 +39,11 @@ export default function App() {
 		<View className="w-full h-full">
 			{/* <Login /> */}
 			{/* <HomeGestionarPedido /> */}
-			<RepartoEnCurso />
+			{/* <RepartoEnCurso /> */}
 			{/* <Repartidores /> */}
 			{/* <Paquetes/> */}
 			{/* <AddPackage /> */}
-			{/* <PerfilRepartidor /> */}
+			<PerfilRepartidor />
 			{/* Screens Repartidor */}
 			{/* <ObtenerPaquetes /> */}
 			{/* <HomeIniciarJornada /> */}
