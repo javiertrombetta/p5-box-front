@@ -17,10 +17,12 @@ const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
 const HScale = height / 640;
 
+const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+
 function RepartoEnCurso() {
 	return (
 		<View
-			style={{ paddingHorizontal: 32 * WScale, paddingTop: 6 * HScale }}
+			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
 			className="w-full bg-verde h-full flex flex-col items-center"
 		>
 			<View
@@ -29,28 +31,25 @@ function RepartoEnCurso() {
 			>
 				<Image
 					source={box}
-					style={{ height: 30 * HScale, width: 80.69 * WScale }}
+					style={{ height: scaledSize(30), width: scaledSize(80.69) }}
 					resizeMode="contain"
 				/>
 				<Pressable
 					style={{ width: 109 * WScale, height: 26 * HScale, marginTop: 8 * HScale }} //w-[109] h-[26]
 					className="flex justify-center items-center align-middle border rounded-xl border-texto text-texto"
 				>
-					<Text className="text-center text-xs text-texto">CERRAR SESION</Text>
+					<Text style={{ fontSize: scaledSize(12) }} className="text-center">
+						CERRAR SESION
+					</Text>
 				</Pressable>
 			</View>
 			<View
-				style={{
-					height: 40 * HScale,
-					width: 300 * WScale,
-					paddingHorizontal: 16 * WScale,
-					marginTop: 28 * HScale,
-				}} // h-[40] mt-[28] px-4
-				className="bg-amarilloVerdoso w-full flex-row flex justify-between rounded-2xl"
+				style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
+				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
 			>
 				<Text
-					style={{ paddingVertical: 4 * HScale }}
-					className="text-lg flex justify-center items-center font-sairaBold text-texto"
+					style={{ paddingVertical: 4 * HScale, fontSize: scaledSize(18) }} // py-1
+					className="flex justify-center items-center font-sairaBold text-texto"
 				>
 					REPARTO EN CURSO
 				</Text>
@@ -82,17 +81,35 @@ function RepartoEnCurso() {
 							}}
 							className="bg-violeta object-cover justify-center items-start rounded-2xl"
 						>
-							<View className="flex flex-row gap-1">
-								<Text className="font-robotoBold text-texto">Destino:</Text>
-								<Text className="text-texto">Amenabar 2100, CABA</Text>
+							<View style={{ gap: 4 * WScale }} className="flex flex-row">
+								<Text
+									style={{ fontSize: scaledSize(12) }}
+									className="font-robotoBold text-texto text-center"
+								>
+									Destino:
+								</Text>
+								<Text
+									style={{ fontSize: scaledSize(12) }}
+									className="font-roboto text-texto text-center"
+								>
+									Amenabar 2100, CABA
+								</Text>
 							</View>
-							<View className="flex flex-row gap-1">
-								<Text className="font-robotoBold text-texto">Número de paquete:</Text>
-								<Text className="text-texto">#0A235</Text>
+							<View style={{ gap: 4 * WScale }} className="flex flex-row">
+								<Text style={{ fontSize: scaledSize(12) }} className="font-robotoBold text-texto">
+									Número de paquete:
+								</Text>
+								<Text style={{ fontSize: scaledSize(12) }} className="font-roboto text-texto">
+									#0A235
+								</Text>
 							</View>
-							<View className="flex flex-row gap-1">
-								<Text className="font-robotoBold text-texto">Recibe:</Text>
-								<Text className="text-texto">David Rodriguez</Text>
+							<View style={{ gap: 4 * WScale }} className="flex flex-row">
+								<Text style={{ fontSize: scaledSize(12) }} className="font-robotoBold text-texto">
+									Recibe:
+								</Text>
+								<Text style={{ fontSize: scaledSize(12) }} className="font-roboto text-texto">
+									David Rodriguez
+								</Text>
 							</View>
 						</View>
 					</View>
@@ -111,11 +128,13 @@ function RepartoEnCurso() {
 				style={{
 					width: 270 * WScale,
 					height: 30 * HScale,
-					marginTop: 8 * HScale,
+					marginTop: 10 * HScale,
 				}} //w-[109] h-[26]
 				className="flex justify-center items-center align-middle border rounded-xl border-texto text-texto"
 			>
-				<Text className="text-center text-xs">CANCELAR ENTREGA</Text>
+				<Text style={{ fontSize: scaledSize(12) }} className="text-center text-texto">
+					CANCELAR ENTREGA
+				</Text>
 			</Pressable>
 		</View>
 	);
