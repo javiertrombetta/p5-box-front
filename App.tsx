@@ -6,17 +6,20 @@ import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 import CircleProgress from './src/components/CircleProgress';
 
-import Login from './src/screens/Login';
+{/* Importacionres Back-Office */}
 import LoginAdmin from './src/screens/Login';
 import HomeGestionarPedido from './src/screens/HomeGestionarPedido';
-import PerfilRepartidor from './src/screens/PerfilRepartidor';
 import Repartidores from './src/screens/Repartidores';
 import Paquetes from './src/screens/Paquetes';
 import AddPackage from './src/screens/AddPackage';
-import ObtenerPaquetes from './src/screens/ObtenerPaquetes';
-import HomeIniciarJornada from './src/screens/HomeIniciarJornada';
-import RepartoEnCurso from './src/screens/RepartoEnCurso';
+import PerfilRepartidor from './src/screens/PerfilRepartidor';
+
+{/* Importacionres Repartidor */}
+import Login from './src/screens/Login';
 import CreateAccount from './src/screens/CreateAccount';
+import HomeIniciarJornada from './src/screens/HomeIniciarJornada';
+import ObtenerPaquetes from './src/screens/ObtenerPaquetes';
+import RepartoEnCurso from './src/screens/RepartoEnCurso';
 
 NativeWindStyleSheet.setOutput({
 	default: 'native',
@@ -39,18 +42,22 @@ export default function App() {
 
 	return (
 		<View className="w-full h-full">
-			{/* <Login /> */}
+
+			{/* Screens Back-Office */}
 			{/* <LoginAdmin /> */}
-			{/* <CreateAccount /> */}
-			{/* <HomeGestionarPedido /> */}
-			{/* <RepartoEnCurso /> */}
+			{/* <HomeGestionarPedido /> */}				
 			{/* <Repartidores /> */}
 			{/* <Paquetes/> */}
-			<AddPackage />
+			{/* <AddPackage /> */}
 			{/* <PerfilRepartidor /> */}
+
 			{/* Screens Repartidor */}
-			{/* <ObtenerPaquetes /> */}
+			{/* <Login /> */}
+			{/* <CreateAccount /> */}			
 			{/* <HomeIniciarJornada /> */}
+			{/* <ObtenerPaquetes /> */}
+			{/* <RepartoEnCurso /> */}
+
 			<StatusBar style="auto" />
 		</View>
 	);
