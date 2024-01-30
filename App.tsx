@@ -37,13 +37,13 @@ export default function App() {
 
 	return (
 		<View className="w-full h-full">
-			{/* <Login /> */
-			{/* <HomeGestionarPedido /> */}
+			{/* <Login /> */}
+			<HomeGestionarPedido />
 			{/* <RepartoEnCurso /> */}
 			{/* <Repartidores /> */}
 			{/* <Paquetes/> */}
 			{/* <AddPackage /> */}
-			<PerfilRepartidor />
+			{/* <PerfilRepartidor /> */}
 			{/* Screens Repartidor */}
 			{/* <ObtenerPaquetes /> */}
 			{/* <HomeIniciarJornada /> */}
