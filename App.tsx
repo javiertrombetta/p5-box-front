@@ -17,29 +17,29 @@ import HomeIniciarJornada from './src/screens/HomeIniciarJornada';
 import RepartoEnCurso from './src/screens/RepartoEnCurso';
 
 NativeWindStyleSheet.setOutput({
-    default: 'native',
+	default: 'native',
 });
 
 export default function App() {
-    const [loaded] = useFonts({
-        SairaRegular: require('./src/assets/fonts/Saira-Regular.ttf'),
-        SairaMedium: require('./src/assets/fonts/Saira-Medium.ttf'),
-        SairaSemiBold: require('./src/assets/fonts/Saira-SemiBold.ttf'),
-        SairaBold: require('./src/assets/fonts/Saira-Bold.ttf'),
-        RobotoBold: require('./src/assets/fonts/Roboto-Bold.ttf'),
-        RobotoMedium: require('./src/assets/fonts/Roboto-Medium.ttf'),
-        RobotoRegular: require('./src/assets/fonts/Roboto-Regular.ttf'),
-    });
+	const [loaded] = useFonts({
+		SairaRegular: require('./src/assets/fonts/Saira-Regular.ttf'),
+		SairaMedium: require('./src/assets/fonts/Saira-Medium.ttf'),
+		SairaSemiBold: require('./src/assets/fonts/Saira-SemiBold.ttf'),
+		SairaBold: require('./src/assets/fonts/Saira-Bold.ttf'),
+		RobotoBold: require('./src/assets/fonts/Roboto-Bold.ttf'),
+		RobotoMedium: require('./src/assets/fonts/Roboto-Medium.ttf'),
+		RobotoRegular: require('./src/assets/fonts/Roboto-Regular.ttf'),
+	});
 
-    if (!loaded) {
-        return <AppLoading />;
-    }
-  
+	if (!loaded) {
+		return <AppLoading />;
+	}
+
 	return (
 		<View className="w-full h-full">
 			{/* <Login /> */}
-			{/* <HomeGestionarPedido /> */}
-			<RepartoEnCurso />
+			<HomeGestionarPedido />
+			{/* <RepartoEnCurso /> */}
 			{/* <Repartidores /> */}
 			{/* <Paquetes/> */}
 			{/* <AddPackage /> */}
@@ -50,5 +50,4 @@ export default function App() {
 			<StatusBar style="auto" />
 		</View>
 	);
-
 }
