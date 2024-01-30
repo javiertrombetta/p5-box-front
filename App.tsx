@@ -47,11 +47,12 @@ export default function App() {
 			{/* <LoginAdmin /> */}
 			{/* <HomeGestionarPedido /> */}				
 			{/* <Repartidores /> */}
-			{/* <Paquetes/> */}
+			{/* <Paquetes /> */}
 			{/* <AddPackage /> */}
 			{/* <PerfilRepartidor /> */}
 
 			{/* Screens Repartidor */}
+      
 			{/* <Login /> */}
 			{/* <CreateAccount /> */}			
 			{/* <HomeIniciarJornada /> */}
