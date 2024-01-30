@@ -44,7 +44,7 @@ function RepartoEnCurso() {
 				</Pressable>
 			</View>
 			<View
-				style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
+				style={{ height: 40 * HScale, paddingHorizontal: 20 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
 				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
 			>
 				<Text
@@ -57,7 +57,7 @@ function RepartoEnCurso() {
 					style={{ width: 13 * WScale, height: 40 * HScale, paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
 					className="flex justify-center items-center"
 				>
-					<Image source={leftArrow} />
+					<Image source={leftArrow} style={{ width: scaledSize(16), height: scaledSize(12), paddingVertical: 8 * HScale }} resizeMode='contain' />
 				</View>
 			</View>
 			{/* caja!!! */}
