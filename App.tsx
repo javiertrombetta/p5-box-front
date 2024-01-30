@@ -7,6 +7,7 @@ import { useFonts } from 'expo-font';
 import CircleProgress from './src/components/CircleProgress';
 
 import Login from './src/screens/Login';
+import LoginAdmin from './src/screens/Login';
 import HomeGestionarPedido from './src/screens/HomeGestionarPedido';
 import PerfilRepartidor from './src/screens/PerfilRepartidor';
 import Repartidores from './src/screens/Repartidores';
@@ -39,6 +40,7 @@ export default function App() {
 	return (
 		<View className="w-full h-full">
 			{/* <Login /> */}
+			{/* <LoginAdmin /> */}
 			{/* <CreateAccount /> */}
 			{/* <HomeGestionarPedido /> */}
 			{/* <RepartoEnCurso /> */}
