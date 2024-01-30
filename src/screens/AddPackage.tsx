@@ -8,6 +8,8 @@ const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
 const HScale = height / 640;
 
+const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+
 const AddPackage = () => {
 	const [text, setText] = useState('');
 	return (
@@ -28,7 +30,9 @@ const AddPackage = () => {
 					style={{ width: 109 * WScale, height: 26 * HScale, marginTop: 8 * HScale }} //w-[109] h-[26]
 					className="flex justify-center items-center align-middle border rounded-xl border-texto text-texto"
 				>
-					<Text className="text-center text-xs">CERRAR SESION</Text>
+					<Text style={{ fontSize: scaledSize(12) }} className="text-center">
+						CERRAR SESION
+					</Text>
 				</Pressable>
 			</View>
 			<View
@@ -36,8 +40,8 @@ const AddPackage = () => {
 				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
 			>
 				<Text
-					style={{ paddingVertical: 4 * HScale }} // py-1
-					className="text-lg flex justify-center items-center font-sairaBold text-texto"
+					style={{ fontSize: scaledSize(18), paddingVertical: 4 * HScale }} // py-1
+					className="flex justify-center items-center font-sairaBold text-texto"
 				>
 					AGREGAR PAQUETES
 				</Text>
@@ -109,8 +113,8 @@ const AddPackage = () => {
 				className=" flex flex-row justify-center items-center align-middle border rounded-xl bg-texto"
 			>
 				<Text
-					style={{ marginRight: 8 * WScale }}
-					className="text-center text-amarilloVerdoso text-xs font-roboto"
+					style={{ fontSize: scaledSize(12), marginRight: 8 * WScale }}
+					className="text-center text-amarilloVerdoso font-roboto"
 				>
 					AGREGAR
 				</Text>
