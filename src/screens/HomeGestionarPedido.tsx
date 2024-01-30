@@ -178,21 +178,21 @@ const HomeGestionarPedido = () => {
 					style={{ height: 192 * HScale }}
 					className="flex flex-col  justify-evenly align-middle"
 				>
-					<View className="flex flex-row justify-around">
+					<View className="flex flex-row justify-around items-center">
 						<View className="flex justify-center">
-							<CircleProgress value={10} />
+							<CircleProgress value={20} />
 						</View>
 						<View
-							style={{ height: 40 * HScale, marginRight: 35 * WScale, marginVertical: 15 * HScale }}
+							style={{ height: 40 * HScale, marginRight: 35 * WScale}}
 							className="flex justify-center align-middle"
 						>
 							<Text className="font-robotoBold">Repartidores</Text>
-							<Text style={{ marginTop: 5 }} className="font-roboto">
+							<Text style={{ marginTop: 1 }} className="font-roboto">
 								2/10 Habilitados
 							</Text>
 							<Image
 								source={personas}
-								style={{ height: scaledSize(25), width: scaledSize(45), marginTop: 5 * HScale }}
+								style={{ height: scaledSize(25), width: scaledSize(45), marginTop: 1 * HScale }}
 							/>
 						</View>
 						<View className="flex justify-center">
@@ -200,7 +200,7 @@ const HomeGestionarPedido = () => {
 								style={{ height: 26 * HScale, width: 56 * WScale }}
 								className="flex flex-row justify-center items-center border rounded-xl bg-texto"
 							>
-								<Text className="text-center text-amarilloVerdoso text-xs">VER</Text>
+								<Text style={{ fontSize: scaledSize(12) }} className="text-center text-amarilloVerdoso">VER</Text>
 							</Pressable>
 						</View>
 					</View>
@@ -216,12 +216,12 @@ const HomeGestionarPedido = () => {
 							className="flex justify-center"
 						>
 							<Text className="font-robotoBold">Paquetes</Text>
-							<Text style={{ marginTop: 5 }} className="font-roboto">
+							<Text style={{ marginTop: 1 }} className="font-roboto">
 								16/20 Habilitados
 							</Text>
 							<Image
 								source={personas}
-								style={{ height: scaledSize(25), width: scaledSize(45), marginTop: 5 * HScale }}
+								style={{ height: scaledSize(25), width: scaledSize(45), marginTop: 1 * HScale }}
 							/>
 						</View>
 						<View className="flex justify-center">

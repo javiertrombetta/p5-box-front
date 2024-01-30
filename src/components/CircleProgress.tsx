@@ -14,7 +14,7 @@ const CircleProgress = ({value}:CircleProgressProps ) => {
   return (
     <View style={styles.container}>
       <CircularProgress
-        radius={35}
+        radius={36}
         value={value}
         progressValueColor={texto}
         activeStrokeColor={violeta}
