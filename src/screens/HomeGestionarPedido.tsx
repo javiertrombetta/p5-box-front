@@ -5,6 +5,7 @@ import boxRight from '../assets/boxRight.png';
 import boxLeft from '../assets/boxLeft.png';
 import vectorSuma from '../assets/vectorSuma.png';
 import arrowDown from '../assets/arrow-head-down.png';
+import personas from '../assets/Group 37396.png';
 import React from 'react';
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -12,29 +13,29 @@ const HScale = height / 640;
 
 const HomeGestionarPedido = () => {
 	return (
-		<View
-			style={{ paddingHorizontal: 32 * WScale, paddingTop: 6 * HScale }}
-			className="w-full bg-verde h-full flex flex-col items-center"
-		>
-			<View
-				style={{ marginTop: 6 * HScale }}
-				className="w-full flex flex-row justify-between items-center"
-			>
-				<Image
-					source={box}
-					style={{ height: 30 * HScale, width: 80.69 * WScale }}
-					resizeMode="contain"
-				/>
-				<Pressable
-					style={{ width: 109 * WScale, height: 26 * HScale, marginTop: 8 * HScale }} //w-[109] h-[26]
-					className="flex justify-center items-center align-middle border rounded-xl border-texto text-texto"
-				>
-					<Text className="text-center text-xs">CERRAR SESION</Text>
-				</Pressable>
-			</View>
+        <View
+            style={{ paddingHorizontal: 32 * WScale, paddingTop: 6 * HScale }}
+            className="w-full bg-verde h-full flex flex-col items-center"
+        >
+            <View
+                style={{ marginTop: 6 * HScale }}
+                className="w-full flex flex-row justify-between items-center"
+            >
+                <Image
+                    source={box}
+                    style={{ height: 30 * HScale, width: 80.69 * WScale }}
+                    resizeMode="contain"
+                />
+                <Pressable
+                    style={{ width: 109 * WScale, height: 26 * HScale, marginTop: 8 * HScale }} //w-[109] h-[26]
+                    className="flex justify-center items-center align-middle border rounded-xl border-texto text-texto"
+                >
+                    <Text className="text-center text-xs">CERRAR SESION</Text>
+                </Pressable>
+            </View>
 			<View
 				style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale, marginTop: 28 * HScale }}
-				className="bg-amarilloVerdoso w-full flex-row justify-center flex rounded-xl"
+				className="bg-amarilloVerdoso w-full flex-row items-center justify-center flex rounded-xl"
 			>
 				<Text
 					style={{ paddingVertical: 4 * HScale }}
@@ -78,7 +79,7 @@ const HomeGestionarPedido = () => {
 					style={{ height: 54 * HScale }}
 					className="w-full flex flex-row rounded-b-xl items-center justify-evenly bg-white"
 				>
-					<Image style={{ width: 19 * WScale, height: 20 * HScale }} source={boxLeft} />
+					<Image style={{ width: 19 * WScale, height: 21 * HScale }} source={boxLeft} />
 					<View
 						style={{ width: 34 * WScale, height: 34 * HScale }}
 						className="rounded-md flex items-center justify-center"
@@ -118,7 +119,7 @@ const HomeGestionarPedido = () => {
 							05
 						</Text>
 					</View>
-					<Image style={{ width: 19 * WScale, height: 20 * HScale }} source={boxRight} />
+					<Image style={{ width: 19 * WScale, height: 21 * HScale }} source={boxRight} />
 				</View>
 			</View>
 			{/* style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
@@ -148,11 +149,17 @@ const HomeGestionarPedido = () => {
 						<View className="flex justify-center">
 							<CircleProgress value={10} />
 						</View>
-						<View style={{ height: 40 * HScale }} className="flex justify-center">
-							<Text className="font-robotoBold">Repartidores</Text>
+						<View
+							style={{ height: 40 * HScale, marginRight: 35 * WScale,marginVertical: 15 * HScale}}
+							className="flex justify-center align-middle"
+						>
+							<Text className="font-robotoBold">
+								Repartidores
+							</Text>
 							<Text style={{ marginTop: 5 }} className="font-roboto">
 								2/10 Habilitados
 							</Text>
+							<Image source={personas} style={{marginTop:5* HScale}} />
 						</View>
 						<View className="flex justify-center">
 							<Pressable
@@ -168,13 +175,17 @@ const HomeGestionarPedido = () => {
 					</View>
 					<View className="flex flex-row justify-around">
 						<View className="flex justify-center">
-							<CircleProgress value={80} />
+							<CircleProgress value={80}/>
 						</View>
-						<View style={{ height: 40 * HScale }} className="flex justify-center">
+						<View
+							style={{ height: 40 * HScale, marginRight: 25 * WScale,marginVertical: 15 * HScale }}
+							className="flex justify-center"
+						>
 							<Text className="font-robotoBold">Paquetes</Text>
-							<Text style={{ marginTop: 10 }} className="font-roboto">
+							<Text style={{ marginTop: 5 }} className="font-roboto">
 								16/20 Habilitados
 							</Text>
+							<Image source={personas} style={{marginTop:5* HScale}}/>
 						</View>
 						<View className="flex justify-center">
 							<Pressable
