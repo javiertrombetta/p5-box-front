@@ -1,17 +1,23 @@
-import { View, Text, Pressable, Image, StyleSheet, Dimensions } from 'react-native';
 import React from 'react';
-import Box from '../assets/LogoBox.svg';
-import LeftArrow from '../assets/ArrowLeft.svg';
-import circulo from '../assets/circuloUno.png';
-import Entregado from '../assets/Entregado.svg';
-import habilitado from '../assets/habilitado.png';
+import { View, Text, Pressable, Image, StyleSheet, Dimensions, Platform } from 'react-native';
+
+import box from '../assets/box.png';
+import leftArrow from '../assets/arrow-left.png';
+import entregado from '../assets/entregado.png';
 import downarrow from '../assets/arrow-head-down.png';
-import boton from '../assets/Group 37375.png';
-import rightarrow from '../assets/arrow-right.png';
 import boxlist from '../assets/BoxList.png';
 import tachito from '../assets/trash.png';
 import enCurso from '../assets/EllipseGreen.png';
 import pendiente from '../assets/EllipseOrange.png';
+
+import LogoBox from '../assets/LogoBox.svg';
+import ArrowLeft from '../assets/ArrowLeft.svg';
+import Entregado from '../assets/Entregado.svg';
+import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
+import Box from '../assets/Box.svg';
+import Trash from '../assets/Trash.svg';
+import EllipseGreen from '../assets/EllipseGreen.svg';
+import EllipseOrange from '../assets/EllipseOrange.svg';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -20,6 +26,9 @@ const HScale = height / 640;
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 const HomeIniciarJornada = () => {
+
+	const isWeb = Platform.OS === 'web';
+
 	return (
 		<View
 			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
@@ -29,17 +38,26 @@ const HomeIniciarJornada = () => {
 				style={{ marginTop: 6 * HScale }}
 				className="w-full flex flex-row justify-between items-center"
 			>
-				{/* <Image
-					source={box}
-					style={{ height: scaledSize(30), width: scaledSize(80.69) }}
-					resizeMode="contain"
-				/> */}
-				<Box height={30 * HScale} width={80.69 * WScale} />
+				{isWeb ? (
+					<Image
+						source={box}
+						style={{ height: scaledSize(30), width: scaledSize(80.69) }}
+						resizeMode="contain"
+					/>
+				) : (
+					<LogoBox height={30 * HScale} width={80.69 * WScale} />
+				)}
 				<Pressable
-					style={{ width: 109 * WScale, height: 26 * HScale, marginTop: 8 * HScale }} //w-[109] h-[26]
-					className="flex justify-center items-center align-middle border rounded-xl border-texto text-texto"
+					style={{
+						width: 109 * WScale,
+						height: 26 * HScale,
+						marginTop: 6 * HScale,
+						borderRadius: 8,
+						borderWidth: 0.5,
+					}} //w-[109] h-[26]
+					className="flex justify-center items-center align-middle border border-texto text-texto"
 				>
-					<Text style={{ fontSize: scaledSize(12) }} className="text-center">
+					<Text style={{ fontSize: scaledSize(12) }} className="text-center text-texto">
 						CERRAR SESION
 					</Text>
 				</Pressable>
@@ -59,10 +77,10 @@ const HomeIniciarJornada = () => {
 						REPARTOS PENDIENTES
 					</Text>
 					<View
-						style={{ width: 13 * WScale, height: 15 * HScale, paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
+						style={{ paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
 						className="flex justify-center items-center"
 					>
-						<LeftArrow />
+						<ArrowLeft width={13 * WScale} height={15 * HScale} />
 					</View>
 				</View>
 				<View
@@ -74,16 +92,22 @@ const HomeIniciarJornada = () => {
 							style={{ width: scaledSize(45), height: scaledSize(45) }}
 							className="rounded-xl bg-violeta flex items-center justify-center"
 						>
-							<Image source={boxlist} />
+							{isWeb ? <Image source={boxlist} /> : <Box width={scaledSize(40)} />}
 						</View>
 						<View className="flex justify-center">
-							<Text style={{ fontSize: scaledSize(12) }} className="font-semibold text-texto">
+							<Text
+								style={{ fontSize: scaledSize(12), marginBottom: -4 * HScale }}
+								className="font-semibold text-texto"
+							>
 								#0H167
 							</Text>
 							<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
 								Av. Arriba,
 							</Text>
-							<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
+							<Text
+								style={{ fontSize: scaledSize(12), marginTop: -4 * HScale }}
+								className="text-texto"
+							>
 								CABA
 							</Text>
 						</View>
@@ -94,16 +118,26 @@ const HomeIniciarJornada = () => {
 							className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
 						>
 							<View className="flex flex-row justify-center">
-								<Image source={enCurso} className="flex items-center" />
+								{isWeb ? (
+									<Image source={enCurso} className="flex items-center" />
+								) : (
+									<EllipseGreen />
+								)}
 							</View>
-							<Text style={{ fontSize: 10.5 }}>EN CURSO</Text>
+							<Text className="font-robotoMedium text-texto" style={{ fontSize: scaledSize(10) }}>
+								EN CURSO
+							</Text>
 						</View>
 						<View style={{ paddingRight: 16 * WScale }}>
 							<Pressable
 								style={{ height: scaledSize(24), width: scaledSize(56) }}
 								className="flex flex-row justify-end items-center"
 							>
-								<Image resizeMode="stretch" source={tachito} />
+								{isWeb ? (
+									<Image resizeMode="stretch" source={tachito} />
+								) : (
+									<Trash width={35 * WScale} />
+								)}
 							</Pressable>
 						</View>
 					</View>
@@ -120,16 +154,22 @@ const HomeIniciarJornada = () => {
 							style={{ width: scaledSize(45), height: scaledSize(45) }}
 							className="rounded-xl bg-violeta flex items-center justify-center"
 						>
-							<Image source={boxlist} />
+							{isWeb ? <Image source={boxlist} /> : <Box width={scaledSize(40)} />}
 						</View>
 						<View className="flex justify-center">
-							<Text style={{ fontSize: scaledSize(12) }} className="font-semibold text-texto">
+							<Text
+								style={{ fontSize: scaledSize(12), marginBottom: -4 * HScale }}
+								className="font-semibold text-texto"
+							>
 								#0H167
 							</Text>
 							<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
 								Av. Arriba,
 							</Text>
-							<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
+							<Text
+								style={{ fontSize: scaledSize(12), marginTop: -4 * HScale }}
+								className="text-texto"
+							>
 								CABA
 							</Text>
 						</View>
@@ -140,20 +180,27 @@ const HomeIniciarJornada = () => {
 							className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
 						>
 							<View className="flex flex-row justify-center">
-								<Image source={pendiente} className="flex items-center" />
+								{isWeb ? (
+									<Image source={pendiente} className="flex items-center" />
+								) : (
+									<EllipseOrange />
+								)}
 							</View>
-							<Text style={{ fontSize: 10.5 }}>PENDIENTE</Text>
+							<Text className="font-robotoMedium text-texto" style={{ fontSize: scaledSize(10) }}>
+								PENDIENTE
+							</Text>
 						</View>
 						<View style={{ paddingRight: 16 * WScale }}>
 							<Pressable
 								style={{
 									height: scaledSize(20),
 									width: scaledSize(62),
-									borderRadius: 5,
+									borderRadius: 4,
+									borderWidth: 0.5,
 								}}
 								className="flex flex-row justify-center items-center border border-texto"
 							>
-								<Text style={{ fontSize: scaledSize(12) }} className="text-center">
+								<Text style={{ fontSize: scaledSize(12) }} className="text-center font-roboto">
 									INICIAR
 								</Text>
 							</Pressable>
@@ -163,14 +210,16 @@ const HomeIniciarJornada = () => {
 			</View>
 
 			<View
-				style={{ height: 283 * HScale, marginTop: 10 * HScale }}
+				style={{ height: 293 * HScale, marginTop: 10 * HScale }}
 				className="w-full justify-start flex rounded-xl bg-white"
 			>
 				<View
 					style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale }}
 					className="w-full flex flex-row rounded-xl items-center justify-between bg-amarilloVerdoso"
 				>
-					<Text className="text-sm font-sairaBold text-texto">HISTORIAL DE REPARTOS</Text>
+					<Text style={{ fontSize: scaledSize(14) }} className="font-sairaBold text-texto">
+						HISTORIAL DE REPARTOS
+					</Text>
 					<Pressable>
 						<Image source={downarrow} />
 					</Pressable>
@@ -181,7 +230,7 @@ const HomeIniciarJornada = () => {
 						paddingHorizontal: 16 * WScale,
 						fontSize: scaledSize(12),
 					}}
-					className="font-semibold"
+					className="font-robotoMedium text-texto"
 				>
 					58 Paquetes entregados
 				</Text>
@@ -204,16 +253,19 @@ const HomeIniciarJornada = () => {
 								style={{ width: scaledSize(45), height: scaledSize(45) }}
 								className="rounded-xl bg-violeta flex items-center justify-center"
 							>
-								<Image source={boxlist} />
+								{isWeb ? <Image source={boxlist} /> : <Box width={scaledSize(40)} />}
 							</View>
 							<View className="flex justify-center">
-								<Text style={{ fontSize: scaledSize(12) }} className="font-semibold text-texto">
+								<Text
+									style={{ fontSize: scaledSize(12), marginBottom: -4 }}
+									className="font-semibold text-texto"
+								>
 									#0H167
 								</Text>
 								<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
 									Av. Arriba,
 								</Text>
-								<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
+								<Text style={{ fontSize: scaledSize(12), marginTop: -4 }} className="text-texto">
 									CABA
 								</Text>
 							</View>
@@ -230,7 +282,9 @@ const HomeIniciarJornada = () => {
 										className="flex items-center"
 									/>
 								</View>
-								<Text style={{ fontSize: 10.5 }}>ENTREGADO</Text>
+								<Text className="font-robotoMedium text-texto" style={{ fontSize: scaledSize(10) }}>
+									ENTREGADO
+								</Text>
 							</View>
 							<View style={{ paddingRight: 16 * WScale }}>
 								<View
@@ -254,16 +308,22 @@ const HomeIniciarJornada = () => {
 								style={{ width: scaledSize(45), height: scaledSize(45) }}
 								className="rounded-xl bg-violeta flex items-center justify-center"
 							>
-								<Image source={boxlist} />
+								{isWeb ? <Image source={boxlist} /> : <Box width={scaledSize(40)} />}
 							</View>
 							<View className="flex justify-center">
-								<Text style={{ fontSize: scaledSize(12) }} className="font-semibold text-texto">
+								<Text
+									style={{ fontSize: scaledSize(12), marginBottom: -4 * HScale }}
+									className="font-semibold text-texto"
+								>
 									#0H167
 								</Text>
 								<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
 									Av. Arriba,
 								</Text>
-								<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
+								<Text
+									style={{ fontSize: scaledSize(12), marginTop: -4 * HScale }}
+									className="text-texto"
+								>
 									CABA
 								</Text>
 							</View>
@@ -280,7 +340,9 @@ const HomeIniciarJornada = () => {
 										className="flex items-center"
 									/>
 								</View>
-								<Text style={{ fontSize: 10.5 }}>ENTREGADO</Text>
+								<Text className="font-robotoMedium text-texto" style={{ fontSize: scaledSize(10) }}>
+									ENTREGADO
+								</Text>
 							</View>
 							<View style={{ paddingRight: 16 * WScale }}>
 								<View
@@ -304,16 +366,22 @@ const HomeIniciarJornada = () => {
 								style={{ width: scaledSize(45), height: scaledSize(45) }}
 								className="rounded-xl bg-violeta flex items-center justify-center"
 							>
-								<Image source={boxlist} />
+								{isWeb ? <Image source={boxlist} /> : <Box width={scaledSize(40)} />}
 							</View>
 							<View className="flex justify-center">
-								<Text style={{ fontSize: scaledSize(12) }} className="font-semibold text-texto">
+								<Text
+									style={{ fontSize: scaledSize(12), marginBottom: -4 * HScale }}
+									className="font-semibold text-texto"
+								>
 									#0H167
 								</Text>
 								<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
 									Av. Arriba,
 								</Text>
-								<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
+								<Text
+									style={{ fontSize: scaledSize(12), marginTop: -4 * HScale }}
+									className="text-texto"
+								>
 									CABA
 								</Text>
 							</View>
@@ -330,7 +398,9 @@ const HomeIniciarJornada = () => {
 										className="flex items-center"
 									/>
 								</View>
-								<Text style={{ fontSize: 10.5 }}>ENTREGADO</Text>
+								<Text className="font-robotoMedium text-texto" style={{ fontSize: scaledSize(10) }}>
+									ENTREGADO
+								</Text>
 							</View>
 							<View style={{ paddingRight: 16 * WScale }}>
 								<View
@@ -346,8 +416,8 @@ const HomeIniciarJornada = () => {
 			</View>
 			<View style={{ marginTop: 29 * HScale }} className="flex justify-center items-center">
 				<Pressable
-					style={{ height: 28 * HScale, width: 270 * WScale }}
-					className=" flex flex-row justify-center items-center align-middle border rounded-xl bg-texto"
+					style={{ height: 28 * HScale, width: 270 * WScale, borderRadius: 8 }}
+					className=" flex flex-row justify-center items-center align-middle bg-texto"
 				>
 					<Text
 						style={{ marginRight: 8 * WScale, fontSize: scaledSize(12) }}
