@@ -1,12 +1,13 @@
-import { View, Text, Button, Pressable, Image, Dimensions } from 'react-native';
+import { View, Text, Button, Pressable, Image, Dimensions, Platform } from 'react-native';
 import React, { useEffect } from 'react';
 import box from '../assets/box.png';
 import leftArrow from '../assets/arrow-left.png';
-import deshabilitado from '../assets/deshabilitado.png';
+import entregado from '../assets/entregado.png';
 import habilitado from '../assets/habilitado.png';
 import downarrow from '../assets/arrow-head-down.png';
 import CircleProgress from '../components/CircleProgress';
 
+const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
 const HScale = height / 640;
@@ -15,7 +16,7 @@ const Repartidores = () => {
 	return (
 		<View
 			className="bg-verde w-full h-full flex-col items-center  flex"
-			style={{ paddingHorizontal: 32 * WScale, paddingVertical: 8 * HScale }}
+			style={{ paddingHorizontal: 30 * WScale, paddingVertical: 8 * HScale }}
 		>
 			<View
 				className="w-full flex flex-row justify-between align-middle items-center"
@@ -31,22 +32,28 @@ const Repartidores = () => {
 					style={{ width: 109 * WScale, height: 26 * HScale, marginTop: 8 * HScale }} //w-[109] h-[26]
 					className="flex justify-center items-center align-middle border rounded-xl border-texto text-texto"
 				>
-					<Text className="text-center text-xs">CERRAR SESION</Text>
+					<Text style={{ fontSize: scaledSize(12) }} className="text-center">
+						CERRAR SESION
+					</Text>
 				</Pressable>
 			</View>
 			<View
-				style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
-				className="bg-amarilloVerdoso w-full flex-row flex justify-between rounded-xl"
+				style={{
+					height: 40 * HScale,
+					paddingHorizontal: 16 * WScale,
+					marginTop: 28 * HScale,
+				}}
+				className="bg-amarilloVerdoso w-full flex-row items-center justify-between flex rounded-xl"
 			>
 				<Text
-					style={{ paddingVertical: 4 * HScale }} // py-1
-					className="text-lg flex justify-center items-center font-sairaBold text-texto"
+					style={{ paddingVertical: 4 * HScale, fontSize: scaledSize(18) }}
+					className=" flex justify-center items-center font-sairaBold text-texto"
 				>
 					REPARTIDORES
 				</Text>
 				<View
 					style={{ width: 13 * WScale, height: 40 * HScale, paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
-					className="flex justify-center items-center"
+					className="flex justify-center items-center "
 				>
 					<Image source={leftArrow} />
 				</View>
@@ -55,10 +62,19 @@ const Repartidores = () => {
 				style={{ height: 35 * HScale, paddingHorizontal: 16 * WScale, marginTop: 10 * HScale }} // px-4 mt-[10] h-[35]
 				className="bg-violeta flex-row flex w-full justify-between items-center rounded-t-xl"
 			>
-				<Text className="text-sm font-robotoBold text-texto flex align-middle">ENERO</Text>
-				<View className="flex flex-row items-center">
-					<Text className="font-roboto">mie</Text>
-					<Text className="font-robotoBold"> / 03</Text>
+				<Text
+					style={{ fontSize: scaledSize(14) }}
+					className=" font-robotoBold text-texto flex align-middle"
+				>
+					ENERO
+				</Text>
+				<View className="flex flex-row items-center gap-1">
+					<Text style={{ fontSize: scaledSize(14) }} className="font-roboto">
+						mie
+					</Text>
+					<Text style={{ fontSize: scaledSize(14) }} className="font-robotoBold">
+						/ 03
+					</Text>
 				</View>
 			</View>
 			<View
@@ -74,30 +90,29 @@ const Repartidores = () => {
 						className="flex flex-row justify-center items-center"
 					>
 						<View className="w-1/3 items-center flex">
-							<CircleProgress value={36} />
+							<CircleProgress value={52} />
 						</View>
 						<View
 							style={{ gap: 4 * HScale }} // gap-1
 							className="flex flex-col items-start justify-center"
 						>
 							<Text
-								style={{ height: 15 * HScale }} // h-[15]
+								style={{ height: 15 * HScale, fontSize: scaledSize(14) }} // h-[15]
 								className="text-left items-center flex font-robotoBold text-texto"
 							>
 								Javier Trombetta
 							</Text>
 							<View
-								style={{ height: 15 * HScale, width: 78 * WScale }} // w-[78] h-[15]
+								style={{ height: 15 * HScale, width: 68 * WScale }} // w-[78] h-[15]
 								className="flex flex-row items-center justify-evenly bg-gray-300 rounded-md"
 							>
-								<View>
-									<Image source={deshabilitado} />
+								<View className="flex items-center justify-center align-middle ">
+									<Image source={habilitado} />
 								</View>
-								<View
-									style={{ marginBottom: 1 * HScale }}
-									className="flex items-center justify-center mb-[1]"
-								>
-									<Text style={{ fontSize: 10 }}>ENTREGADO</Text>
+								<View className="flex items-center justify-center align-middle ">
+									<Text className="text-texto font-robotoBold" style={{ fontSize: scaledSize(10) }}>
+										EN CURSO
+									</Text>
 								</View>
 							</View>
 						</View>
@@ -132,14 +147,14 @@ const Repartidores = () => {
 						className="flex flex-row justify-center items-center"
 					>
 						<View className="w-1/3 items-center flex">
-							<CircleProgress value={36} />
+							<CircleProgress value={100} />
 						</View>
 						<View
 							style={{ gap: 4 * HScale }} // gap-1
 							className="flex flex-col items-start justify-center"
 						>
 							<Text
-								style={{ height: 15 * HScale }} // h-[15]
+								style={{ height: 15 * HScale, fontSize: scaledSize(14) }} // h-[15]
 								className="text-left items-center flex font-robotoBold text-texto"
 							>
 								Boris Manzano
@@ -149,13 +164,12 @@ const Repartidores = () => {
 								className="flex flex-row items-center justify-evenly bg-gray-300 rounded-md"
 							>
 								<View>
-									<Image source={deshabilitado} />
+									<Image source={entregado} />
 								</View>
-								<View
-									style={{ marginBottom: 1 * HScale }}
-									className="flex items-center justify-center mb-[1]"
-								>
-									<Text style={{ fontSize: 10 }}>ENTREGADO</Text>
+								<View className="flex items-center justify-center ">
+									<Text className="text-texto font-robotoBold" style={{ fontSize: scaledSize(10) }}>
+										ENTREGADO
+									</Text>
 								</View>
 							</View>
 						</View>
@@ -190,30 +204,29 @@ const Repartidores = () => {
 						className="flex flex-row justify-center items-center"
 					>
 						<View className="w-1/3 items-center flex">
-							<CircleProgress value={36} />
+							<CircleProgress value={80} />
 						</View>
 						<View
 							style={{ gap: 4 * HScale }} // gap-1
 							className="flex flex-col items-start justify-center"
 						>
 							<Text
-								style={{ height: 15 * HScale }} // h-[15]
+								style={{ height: 15 * HScale, fontSize: scaledSize(14) }} // h-[15]
 								className="text-left items-center flex font-robotoBold text-texto"
 							>
 								Javier Colodro
 							</Text>
 							<View
-								style={{ height: 15 * HScale, width: 78 * WScale }} // w-[78] h-[15]
+								style={{ height: 15 * HScale, width: 68 * WScale }} // w-[78] h-[15]
 								className="flex flex-row items-center justify-evenly bg-gray-300 rounded-md"
 							>
 								<View>
-									<Image source={deshabilitado} />
+									<Image source={habilitado} />
 								</View>
-								<View
-									style={{ marginBottom: 1 * HScale }}
-									className="flex items-center justify-center mb-[1]"
-								>
-									<Text style={{ fontSize: 10 }}>ENTREGADO</Text>
+								<View className="flex items-center justify-center ">
+									<Text className="text-texto font-robotoBold" style={{ fontSize: scaledSize(10) }}>
+										EN CURSO
+									</Text>
 								</View>
 							</View>
 						</View>
@@ -248,14 +261,14 @@ const Repartidores = () => {
 						className="flex flex-row justify-center items-center"
 					>
 						<View className="w-1/3 items-center flex">
-							<CircleProgress value={36} />
+							<CircleProgress value={100} />
 						</View>
 						<View
 							style={{ gap: 4 * HScale }} // gap-1
 							className="flex flex-col items-start justify-center"
 						>
 							<Text
-								style={{ height: 15 * HScale }} // h-[15]
+								style={{ height: 15 * HScale, fontSize: scaledSize(14) }} // h-[15]
 								className="text-left items-center flex font-robotoBold text-texto"
 							>
 								Lucas Glave
@@ -265,13 +278,12 @@ const Repartidores = () => {
 								className="flex flex-row items-center justify-evenly bg-gray-300 rounded-md"
 							>
 								<View>
-									<Image source={deshabilitado} />
+									<Image source={entregado} />
 								</View>
-								<View
-									style={{ marginBottom: 1 * HScale }}
-									className="flex items-center justify-center mb-[1]"
-								>
-									<Text style={{ fontSize: 10 }}>DESHABILITADO</Text>
+								<View className="flex items-center justify-center ">
+									<Text className="text-texto font-robotoBold" style={{ fontSize: scaledSize(10) }}>
+										DESHABILITADO
+									</Text>
 								</View>
 							</View>
 						</View>
