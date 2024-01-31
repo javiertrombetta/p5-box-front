@@ -8,10 +8,10 @@ import {
 	StyleSheet,
 	Dimensions,
 } from 'react-native';
-import box from '../assets/box.png';
-
-import leftArrow from '../assets/arrow-left.png';
+import ArrowLeft from '../assets/ArrowLeft.svg';
+import LogoBox from '../assets/LogoBox.svg';
 import buenos from '../assets/buenos.png';
+
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -29,11 +29,12 @@ function RepartoEnCurso() {
 				style={{ marginTop: 6 * HScale }}
 				className="w-full flex flex-row justify-between items-center"
 			>
-				<Image
+				<LogoBox height={30 * HScale} width={80.69 * WScale} />
+				{/* <Image
 					source={box}
 					style={{ height: scaledSize(30), width: scaledSize(80.69) }}
 					resizeMode="contain"
-				/>
+				/> */}
 				<Pressable
 					style={{ width: 109 * WScale, height: 26 * HScale, marginTop: 8 * HScale }} //w-[109] h-[26]
 					className="flex justify-center items-center align-middle border rounded-xl border-texto text-texto"
@@ -57,7 +58,8 @@ function RepartoEnCurso() {
 					style={{ width: 13 * WScale, height: 40 * HScale, paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
 					className="flex justify-center items-center"
 				>
-					<Image source={leftArrow} style={{ width: scaledSize(16), height: scaledSize(12), paddingVertical: 8 * HScale }} resizeMode='contain' />
+					{/* <Image style={{ paddingVertical: 8 * HScale }} /> */}
+					<ArrowLeft height={13 * HScale} width={15 * WScale} />
 				</View>
 			</View>
 			{/* caja!!! */}
