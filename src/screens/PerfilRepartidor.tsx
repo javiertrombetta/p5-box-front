@@ -1,7 +1,7 @@
 import { View, Text, Pressable, Image, StyleSheet, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
-import Box from '../assets/Box.svg';
+import Box from '../assets/LogoBox.svg';
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 import ArrowRight from '../assets/Arrow-right.svg';
