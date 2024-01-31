@@ -25,7 +25,7 @@ const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 const HomeGestionarPedido = () => {
 	return (
 		<View
-			style={{ paddingHorizontal: 32 * WScale, paddingTop: 6 * HScale }}
+			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
 			className="w-full bg-verde h-full flex flex-col items-center"
 		>
 			<View
@@ -57,7 +57,7 @@ const HomeGestionarPedido = () => {
 				className="bg-amarilloVerdoso w-full flex-row items-center justify-center flex rounded-xl"
 			>
 				<Text
-					style={{fontSize: scaledSize(18) }}
+					style={{ fontSize: scaledSize(18) }}
 					className="text-lg flex justify-center items-center font-sairaBold text-texto"
 				>
 					GESTIONAR PEDIDOS
@@ -199,10 +199,13 @@ const HomeGestionarPedido = () => {
 				className="w-full flex rounded-xl bg-white"
 			>
 				<View
-					style={{ height: 43 * HScale }}
+					style={{ height: 40 * HScale }}
 					className="w-full  flex flex-row rounded-xl items-center justify-between bg-amarilloVerdoso"
 				>
-					<Text style={{ fontSize: scaledSize(14) }} className="ml-5 font-sairaBold text-texto">
+					<Text
+						style={{ fontSize: scaledSize(14), marginLeft: 20 * WScale }}
+						className="font-sairaBold text-texto"
+					>
 						DETALLES
 					</Text>
 					<View className="flex flex-row items-center justify-center gap-2">
@@ -217,40 +220,43 @@ const HomeGestionarPedido = () => {
 				</View>
 				<View
 					style={{ height: 192 * HScale }}
-					className="flex flex-col  justify-evenly align-middle"
+					className="flex flex-col justify-evenly align-middle"
 				>
-					<View style={{ height: 125 }} className="flex flex-row justify-evenly px-4 items-center">
-						<View className="flex justify-center">
-							<CircleProgress value={20} radius={scaledSize(38)} />
-						</View>
-						<View
-							style={{ height: 40 * HScale, marginRight: 35 * WScale }}
-							className="flex justify-center align-middle"
-						>
-							<Text
-								style={{ paddingLeft: 15, fontSize: scaledSize(14) }}
-								className="font-robotoBold"
+					<View
+						style={{ height: 100 * HScale, paddingHorizontal: 16 * WScale }}
+						className="flex flex-row justify-between items-center"
+					>
+						<View className="flex justify-start items-center flex-row">
+							<View className="flex justify-center">
+								<CircleProgress value={20} radius={scaledSize(38)} />
+							</View>
+							<View
+								style={{ height: 40 * HScale, paddingLeft: 15 * WScale }}
+								className="flex justify-center align-middle"
 							>
-								Repartidores
-							</Text>
-							<Text
-								style={{ paddingLeft: 15, fontSize: scaledSize(12), marginTop: 1 }}
-								className="font-roboto"
-							>
-								2/10 Habilitados
-							</Text>
-							{/* <Image
-								source={personas}
-								style={{ height: scaledSize(25), width: scaledSize(45), marginTop: 1 * HScale }}
-							/> */}
-							<IconsPeople
+								<Text style={{ fontSize: scaledSize(14) }} className="font-robotoBold">
+									Repartidores
+								</Text>
+								<Text style={{ fontSize: scaledSize(12), marginTop: 1 }} className="font-roboto">
+									2/10 Habilitados
+								</Text>
+								<Image
+									source={personas}
+									style={{
+										height: scaledSize(25),
+										width: scaledSize(45),
+										marginTop: 1 * HScale,
+									}}
+								/>
+								{/* <IconsPeople
 								height={scaledSize(25)}
 								width={scaledSize(45)}
 								marginTop={10 * HScale}
 								left={15 * HScale}
-							/>
+							/> */}
+							</View>
 						</View>
-						<View className="flex justify-center">
+						<View className="flex justify-end">
 							<Pressable
 								style={{ height: 26 * HScale, width: 56 * WScale, borderRadius: 8 }}
 								className="flex flex-row justify-center items-center border bg-texto"
@@ -265,29 +271,46 @@ const HomeGestionarPedido = () => {
 						</View>
 					</View>
 					<View className="flex w-full items-center">
-						<View style={{ height: 1 * HScale }} className="w-[89%] bg-gray-300" />
+						<View style={{ height: 1 }} className="w-[89%] bg-gray-300" />
 					</View>
-					<View className="flex flex-row justify-around">
-						<View className="flex justify-center">
-							<CircleProgress value={80} />
+					<View
+						style={{ height: 100 * HScale, paddingHorizontal: 16 * WScale }}
+						className="flex flex-row justify-between items-center"
+					>
+						<View className="flex justify-start items-center flex-row">
+							<View className="flex justify-center">
+								<CircleProgress value={80} radius={scaledSize(38)} />
+							</View>
+							<View
+								style={{ height: 40 * HScale, paddingLeft: 15 * WScale }}
+								className="flex justify-center align-middle"
+							>
+								<Text style={{ fontSize: scaledSize(14) }} className="font-robotoBold">
+									Repartidores
+								</Text>
+								<Text style={{ fontSize: scaledSize(12), marginTop: 1 }} className="font-roboto">
+									16/20 Habilitados
+								</Text>
+								<Image
+									source={personas}
+									style={{
+										height: scaledSize(25),
+										width: scaledSize(45),
+										marginTop: 1 * HScale,
+									}}
+								/>
+								{/* <IconsPeople
+								height={scaledSize(25)}
+								width={scaledSize(45)}
+								marginTop={10 * HScale}
+								left={15 * HScale}
+							/> */}
+							</View>
 						</View>
-						<View
-							style={{ height: 40 * HScale, marginRight: 25 * WScale, marginVertical: 15 * HScale }}
-							className="flex justify-center"
-						>
-							<Text className="font-robotoBold">Paquetes</Text>
-							<Text style={{ marginTop: 1 }} className="font-roboto">
-								16/20 Habilitados
-							</Text>
-							<Image
-								source={personas}
-								style={{ height: scaledSize(25), width: scaledSize(45), marginTop: 1 * HScale }}
-							/>
-						</View>
-						<View className="flex justify-center">
+						<View className="flex justify-end">
 							<Pressable
-								style={{ height: 26 * HScale, width: 56 * WScale }}
-								className="flex flex-row justify-center items-center border rounded-xl bg-texto"
+								style={{ height: 26 * HScale, width: 56 * WScale, borderRadius: 8 }}
+								className="flex flex-row justify-center items-center border bg-texto"
 							>
 								<Text
 									style={{ fontSize: scaledSize(12) }}
@@ -301,7 +324,12 @@ const HomeGestionarPedido = () => {
 				</View>
 			</View>
 			<Pressable
-				style={{ height: 30 * HScale, width: 265 * WScale, marginTop: 15, borderRadius: 8 }}
+				style={{
+					height: 30 * HScale,
+					width: 265 * WScale,
+					marginTop: 15 * HScale,
+					borderRadius: 8,
+				}}
 				className="flex flex-row justify-center items-center align-middle border bg-texto"
 			>
 				<Text
@@ -311,7 +339,7 @@ const HomeGestionarPedido = () => {
 					NUEVO PAQUETE
 				</Text>
 				{/* <Image style={{ height: 12 * HScale, width: 12 * WScale }} source={vectorSuma} /> */}
-				<Sum height={ 12 * HScale } width={12 * WScale} />
+				<Sum height={12 * HScale} width={12 * WScale} />
 			</Pressable>
 		</View>
 	);
