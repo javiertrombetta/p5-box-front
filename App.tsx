@@ -6,7 +6,9 @@ import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 import CircleProgress from './src/components/CircleProgress';
 
-{/* Importacionres Back-Office */}
+{
+	/* Importacionres Back-Office */
+}
 import LoginAdmin from './src/screens/Login';
 import HomeGestionarPedido from './src/screens/HomeGestionarPedido';
 import Repartidores from './src/screens/Repartidores';
@@ -14,7 +16,9 @@ import Paquetes from './src/screens/Paquetes';
 import AddPackage from './src/screens/AddPackage';
 import PerfilRepartidor from './src/screens/PerfilRepartidor';
 
-{/* Importacionres Repartidor */}
+{
+	/* Importacionres Repartidor */
+}
 import Login from './src/screens/Login';
 import CreateAccount from './src/screens/CreateAccount';
 import HomeIniciarJornada from './src/screens/HomeIniciarJornada';
@@ -33,7 +37,7 @@ export default function App() {
 		SairaBold: require('./src/assets/fonts/Saira-Bold.ttf'),
 		RobotoRegular: require('./src/assets/fonts/Roboto-Regular.ttf'),
 		RobotoMedium: require('./src/assets/fonts/Roboto-Medium.ttf'),
-		RobotoBold: require('./src/assets/fonts/Roboto-Bold.ttf'),	
+		RobotoBold: require('./src/assets/fonts/Roboto-Bold.ttf'),
 	});
 
 	if (!loaded) {
@@ -42,19 +46,18 @@ export default function App() {
 
 	return (
 		<View className="w-full h-full">
-
 			{/* Screens Back-Office */}
 			{/* <LoginAdmin /> */}
-			{/* <HomeGestionarPedido /> */}				
+			{/* <HomeGestionarPedido /> */}
 			{/* <Repartidores /> */}
 			{/* <Paquetes /> */}
 			{/* <AddPackage /> */}
 			{/* <PerfilRepartidor /> */}
 
 			{/* Screens Repartidor */}
-      
+
 			{/* <Login /> */}
-			{/* <CreateAccount /> */}			
+			{/* <CreateAccount /> */}
 			{/* <HomeIniciarJornada /> */}
 			{/* <ObtenerPaquetes /> */}
 			{/* <RepartoEnCurso /> */}
