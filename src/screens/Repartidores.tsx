@@ -6,6 +6,9 @@ import entregado from '../assets/entregado.png';
 import habilitado from '../assets/habilitado.png';
 import downarrow from '../assets/arrow-head-down.png';
 import CircleProgress from '../components/CircleProgress';
+import GreenCircle from '../assets/GreenCircle.svg';
+import GrayCircle from '../assets/GrayCircle.svg';
+import BlackCircle from '../assets/BlackCircle.svg';
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 const { width, height } = Dimensions.get('window');
@@ -68,7 +71,7 @@ const Repartidores = () => {
 				>
 					ENERO
 				</Text>
-				<View className="flex flex-row items-center gap-1">
+				<View style={{ gap: 1 * WScale }} className="flex flex-row items-center">
 					<Text style={{ fontSize: scaledSize(14) }} className="font-roboto">
 						mie
 					</Text>
@@ -82,14 +85,18 @@ const Repartidores = () => {
 				className="bg-blanco flex justify-evenly w-full"
 			>
 				<View
-					style={{ marginVertical: 12 * HScale, paddingTop: 2, paddingHorizontal: 16 * WScale }} // my-3 px-4
+					style={{
+						marginVertical: 12 * HScale,
+						paddingTop: 2 * HScale,
+						paddingHorizontal: 16 * WScale,
+					}} // my-3 px-4
 					className="flex-row flex justify-between items-center"
 				>
 					<View
 						style={{ gap: 12 * WScale }} // gap-3
 						className="flex flex-row justify-center items-center"
 					>
-						<View className="w-1/3 items-center flex">
+						<View style={{ width: 71 * WScale }} className="items-center flex">
 							<CircleProgress value={52} />
 						</View>
 						<View
@@ -107,7 +114,7 @@ const Repartidores = () => {
 								className="flex flex-row items-center justify-evenly bg-gray-300 rounded-md"
 							>
 								<View className="flex items-center justify-center align-middle ">
-									<Image source={habilitado} />
+									<GreenCircle height={7 * HScale} width={7 * WScale} />
 								</View>
 								<View className="flex items-center justify-center align-middle ">
 									<Text className="text-texto font-robotoBold" style={{ fontSize: scaledSize(10) }}>
@@ -129,7 +136,7 @@ const Repartidores = () => {
 						}}
 					>
 						<Image //w-10 h-10
-							style={{ width: '100%', height: '100%' }}
+							style={{ width: 40 * WScale, height: '100%' }}
 							resizeMode="cover"
 							source={{
 								uri: 'https://media.licdn.com/dms/image/C4D03AQHrxjH4W8NPaQ/profile-displayphoto-shrink_100_100/0/1595166426988?e=1711584000&v=beta&t=JvYqCohzV0C4YBalxd1OrjXzkdphr-fEAlf1R_yaB2I',
@@ -146,7 +153,7 @@ const Repartidores = () => {
 						style={{ gap: 12 * WScale }} // gap-3
 						className="flex flex-row justify-center items-center"
 					>
-						<View className="w-1/3 items-center flex">
+						<View style={{ width: 71 * WScale }} className="items-center flex">
 							<CircleProgress value={100} />
 						</View>
 						<View
@@ -164,7 +171,7 @@ const Repartidores = () => {
 								className="flex flex-row items-center justify-evenly bg-gray-300 rounded-md"
 							>
 								<View>
-									<Image source={entregado} />
+									<BlackCircle height={7 * HScale} width={7 * WScale} />
 								</View>
 								<View className="flex items-center justify-center ">
 									<Text className="text-texto font-robotoBold" style={{ fontSize: scaledSize(10) }}>
@@ -186,7 +193,7 @@ const Repartidores = () => {
 						}}
 					>
 						<Image //w-10 h-10
-							style={{ width: '100%', height: '100%' }}
+							style={{ width: 40 * WScale, height: '100%' }}
 							resizeMode="cover"
 							source={{
 								uri: 'https://cdn.discordapp.com/attachments/1153431672264597585/1197245225677107240/imagen_cv.jpg?ex=65c3cb01&is=65b15601&hm=1ef0e9a4d50b227820aedff86a7fc4f32298be71609da5b8caed50a49d4ef5d3&',
@@ -203,7 +210,7 @@ const Repartidores = () => {
 						style={{ gap: 12 * WScale }} // gap-3
 						className="flex flex-row justify-center items-center"
 					>
-						<View className="w-1/3 items-center flex">
+						<View style={{ width: 71 * WScale }} className=" items-center flex">
 							<CircleProgress value={80} />
 						</View>
 						<View
@@ -221,7 +228,7 @@ const Repartidores = () => {
 								className="flex flex-row items-center justify-evenly bg-gray-300 rounded-md"
 							>
 								<View>
-									<Image source={habilitado} />
+									<GreenCircle height={7 * HScale} width={7 * WScale} />
 								</View>
 								<View className="flex items-center justify-center ">
 									<Text className="text-texto font-robotoBold" style={{ fontSize: scaledSize(10) }}>
@@ -243,7 +250,7 @@ const Repartidores = () => {
 						}}
 					>
 						<Image //w-10 h-10
-							style={{ width: '100%', height: '100%' }}
+							style={{ width: 40 * WScale, height: '100%' }}
 							resizeMode="cover"
 							source={{
 								uri: 'https://media.licdn.com/dms/image/C4D03AQGdOefz2XaJIA/profile-displayphoto-shrink_100_100/0/1612753310949?e=1711584000&v=beta&t=HW9EJnZysnYHEbMwD2B_XZgzcvt6RI5owIDOtCBwWUc',
@@ -260,7 +267,7 @@ const Repartidores = () => {
 						style={{ gap: 12 * WScale }} // gap-3
 						className="flex flex-row justify-center items-center"
 					>
-						<View className="w-1/3 items-center flex">
+						<View style={{ width: 71 * WScale }} className=" items-center flex">
 							<CircleProgress value={100} />
 						</View>
 						<View
@@ -278,7 +285,7 @@ const Repartidores = () => {
 								className="flex flex-row items-center justify-evenly bg-gray-300 rounded-md"
 							>
 								<View>
-									<Image source={entregado} />
+									<GrayCircle height={7 * HScale} width={7 * WScale} />
 								</View>
 								<View className="flex items-center justify-center ">
 									<Text className="text-texto font-robotoBold" style={{ fontSize: scaledSize(10) }}>
@@ -300,7 +307,7 @@ const Repartidores = () => {
 						}}
 					>
 						<Image //w-10 h-10
-							style={{ width: '100%', height: '100%' }}
+							style={{ width: 40 * WScale, height: '100%' }}
 							resizeMode="cover"
 							source={{
 								uri: 'https://media.licdn.com/dms/image/D4D03AQHbMGou_Pxf1w/profile-displayphoto-shrink_200_200/0/1679951269315?e=1711584000&v=beta&t=tmxoWJKRET9g3XGq5W_-y1HScfPezAPCwXJwrbheKFw',
@@ -310,7 +317,10 @@ const Repartidores = () => {
 				</View>
 			</View>
 			<View className="w-full h-[0.5] bg-gray-300" />
-			<View className="w-full h-[47.5] flex justify-center items-center rounded-b-xl bg-white">
+			<View
+				style={{ height: 47.5 * HScale }}
+				className="w-full flex justify-center items-center rounded-b-xl bg-white"
+			>
 				<Image className="" source={downarrow} />
 			</View>
 		</View>
