@@ -1,14 +1,15 @@
 import { View, Text, Pressable, Image, StyleSheet, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
-import box from '../assets/box.png';
-import leftArrow from '../assets/arrow-left.png';
-import deshabilitado from '../assets/deshabilitado.png';
-import downarrow from '../assets/arrow-head-down.png';
-import boton from '../assets/Group 37375.png';
-import rightarrow from '../assets/arrow-right.png';
-import boxlist from '../assets/BoxList.png';
-import tachito from '../assets/trash.png';
+import Box from '../assets/Box.svg';
+import ArrowLeft from '../assets/ArrowLeft.svg';
+import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
+import ArrowRight from '../assets/Arrow-right.svg';
+import Paquetes from '../assets/Paquetes.svg';
+import Entregado from '../assets/Entregado.svg';
+import Tachito from '../assets/Tachito.svg';
+import BotonActivado from '../assets/BotonActivado.svg';
+import SmallDownArrow from '../assets/SmallFlechaAbajo.svg';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -26,11 +27,12 @@ const PerfilRepartidor = () => {
 				style={{ marginTop: 6 * HScale }}
 				className="w-full flex flex-row justify-between items-center"
 			>
-				<Image
+				{/* <Image
 					source={box}
 					style={{ height: scaledSize(30), width: scaledSize(80.69) }}
 					resizeMode="contain"
-				/>
+				/> */}
+				<Box height={30 * HScale} width={80.69 * WScale} />
 				<Pressable
 					style={{ width: 109 * WScale, height: 26 * HScale, marginTop: 8 * HScale }} //w-[109] h-[26]
 					className="flex justify-center items-center align-middle border rounded-xl border-texto text-texto"
@@ -51,10 +53,12 @@ const PerfilRepartidor = () => {
 					GESTIONAR PEDIDOS
 				</Text>
 				<View
-					style={{ width: 13 * WScale, height: 15 * HScale, paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
+					style={{ paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
 					className="flex justify-center items-center"
 				>
-					<Image source={leftArrow} />
+					{/* style={{ width: 13 * WScale, height: 15 * HScale, */}
+					{/* <Image source={leftArrow} /> */}
+					<ArrowLeft height={15 * HScale} width={13 * WScale} />
 				</View>
 			</View>
 			<View
@@ -93,8 +97,9 @@ const PerfilRepartidor = () => {
 						</Text>
 					</View>
 				</View>
-				<View style={{ width: scaledSize(35), height: scaledSize(21) }} className="flex items-end">
-					<Image source={boton} />
+				<View className="flex items-end">
+					<BotonActivado width={35 * WScale} hieght={21 * HScale} />
+					{/* <Image source={boton} /> */}
 				</View>
 			</View>
 			<View
@@ -117,7 +122,8 @@ const PerfilRepartidor = () => {
 						</Text>
 					</View>
 					<Pressable style={{ width: scaledSize(8), height: scaledSize(12) }}>
-						<Image source={rightarrow} />
+						<ArrowRight height={14 * HScale} width={8 * WScale} />
+						{/* <Image source={rightarrow} /> */}
 					</Pressable>
 				</View>
 			</View>
@@ -133,7 +139,8 @@ const PerfilRepartidor = () => {
 						HISTORIAL DE REPARTOS
 					</Text>
 					<Pressable>
-						<Image source={downarrow} />
+						<SmallDownArrow height={8 * HScale} width={14 * WScale} />
+						{/* <Image source={downarrow} /> */}
 					</Pressable>
 				</View>
 				<View
@@ -169,7 +176,8 @@ const PerfilRepartidor = () => {
 								style={{ width: scaledSize(45), height: scaledSize(45) }}
 								className="rounded-xl bg-violeta flex items-center justify-center"
 							>
-								<Image source={boxlist} />
+								{/* <Image source={boxlist} /> */}
+								<Paquetes height={36 * HScale} width={36 * WScale} />
 							</View>
 							<View className="flex justify-center">
 								<Text
@@ -198,7 +206,8 @@ const PerfilRepartidor = () => {
 								className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
 							>
 								<View className="flex flex-row justify-center">
-									<Image source={deshabilitado} className="flex items-center" />
+									<Entregado />
+									{/* <Image source={deshabilitado} className="flex items-center" /> */}
 								</View>
 								<Text style={{ fontSize: 10.5 * WScale }}>ENTREGADO</Text>
 							</View>
@@ -206,7 +215,8 @@ const PerfilRepartidor = () => {
 								style={{ height: 24 * HScale, width: 56 * WScale }}
 								className="flex flex-row justify-start items-center"
 							>
-								<Image source={tachito} />
+								<Tachito height={20 * HScale} width={31 * HScale} />
+								{/* <Image source={tachito} /> */}
 							</Pressable>
 						</View>
 					</View>
@@ -222,7 +232,7 @@ const PerfilRepartidor = () => {
 								style={{ width: scaledSize(45), height: scaledSize(45) }}
 								className="rounded-xl bg-violeta flex items-center justify-center"
 							>
-								<Image source={boxlist} />
+								<Paquetes height={36 * HScale} width={36 * WScale} />
 							</View>
 							<View className="flex justify-center">
 								<Text
@@ -251,7 +261,8 @@ const PerfilRepartidor = () => {
 								className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
 							>
 								<View className="flex flex-row justify-center">
-									<Image source={deshabilitado} className="flex items-center" />
+									<Entregado />
+									{/* <Image source={deshabilitado} className="flex items-center" /> */}
 								</View>
 								<Text style={{ fontSize: 10.5 * WScale }}>ENTREGADO</Text>
 							</View>
@@ -259,7 +270,8 @@ const PerfilRepartidor = () => {
 								style={{ height: 24 * HScale, width: 56 * WScale }}
 								className="flex flex-row justify-start items-center"
 							>
-								<Image source={tachito} />
+								<Tachito height={20 * HScale} width={31 * HScale} />
+								{/* <Image source={tachito} /> */}
 							</Pressable>
 						</View>
 					</View>
@@ -275,7 +287,7 @@ const PerfilRepartidor = () => {
 								style={{ width: scaledSize(45), height: scaledSize(45) }}
 								className="rounded-xl bg-violeta flex items-center justify-center"
 							>
-								<Image source={boxlist} />
+								<Paquetes height={36 * HScale} width={36 * WScale} />
 							</View>
 							<View className="flex justify-center">
 								<Text
@@ -304,7 +316,8 @@ const PerfilRepartidor = () => {
 								className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
 							>
 								<View className="flex flex-row justify-center">
-									<Image source={deshabilitado} className="flex items-center" />
+									<Entregado />
+									{/* <Image source={deshabilitado} className="flex items-center" /> */}
 								</View>
 								<Text style={{ fontSize: 10.5 * WScale }}>ENTREGADO</Text>
 							</View>
@@ -312,7 +325,7 @@ const PerfilRepartidor = () => {
 								style={{ height: 24 * HScale, width: 56 * WScale }}
 								className="flex flex-row justify-start items-center"
 							>
-								<Image source={tachito} />
+								<Tachito height={20 * HScale} width={31 * HScale} />
 							</Pressable>
 						</View>
 					</View>
@@ -336,7 +349,7 @@ const PerfilRepartidor = () => {
 				style={{ height: 48 * HScale }}
 				className="w-full flex justify-center items-center rounded-b-xl bg-blanco z-10"
 			>
-				<Image source={downarrow} />
+				<ArrowHeadDown height={12 * HScale} width={24 * WScale} />
 			</View>
 		</View>
 	);
