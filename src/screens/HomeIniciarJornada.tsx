@@ -228,12 +228,12 @@ const HomeIniciarJornada = () => {
 								<Text style={{ fontSize: 10.5 }}>ENTREGADO</Text>
 							</View>
 							<View style={{ paddingRight: 16 * WScale }}>
-								<Pressable
+								<View
 									style={{ height: scaledSize(24), width: scaledSize(56) }}
 									className="flex flex-row justify-end items-center"
 								>
-									<Image resizeMode="stretch" source={tachito} />
-								</Pressable>
+									{/* <Image resizeMode="stretch" source={tachito} /> */}
+								</View>
 							</View>
 						</View>
 					</View>
@@ -274,12 +274,12 @@ const HomeIniciarJornada = () => {
 								<Text style={{ fontSize: 10.5 }}>ENTREGADO</Text>
 							</View>
 							<View style={{ paddingRight: 16 * WScale }}>
-								<Pressable
+								<View
 									style={{ height: scaledSize(24), width: scaledSize(56) }}
 									className="flex flex-row justify-end items-center"
 								>
-									<Image resizeMode="stretch" source={tachito} />
-								</Pressable>
+									{/* <Image resizeMode="stretch" source={tachito} /> */}
+								</View>
 							</View>
 						</View>
 					</View>
@@ -320,12 +320,12 @@ const HomeIniciarJornada = () => {
 								<Text style={{ fontSize: 10.5 }}>ENTREGADO</Text>
 							</View>
 							<View style={{ paddingRight: 16 * WScale }}>
-								<Pressable
+								<View
 									style={{ height: scaledSize(24), width: scaledSize(56) }}
 									className="flex flex-row justify-end items-center"
 								>
-									<Image resizeMode="stretch" source={tachito} />
-								</Pressable>
+									{/* <Image resizeMode="stretch" source={tachito} /> */}
+								</View>
 							</View>
 						</View>
 					</View>
