@@ -59,7 +59,7 @@ function RepartoEnCurso() {
 					className="flex justify-center items-center"
 				>
 					{/* <Image style={{ paddingVertical: 8 * HScale }} /> */}
-					<ArrowLeft height={13 * HScale} width={15 * WScale} />
+					<ArrowLeft width={scaledSize(14)} />
 				</View>
 			</View>
 			{/* caja!!! */}
@@ -119,10 +119,18 @@ function RepartoEnCurso() {
 			</View>
 
 			<Pressable
-				style={{ height: 30 * HScale, width: 270 * WScale, marginTop: 24 * HScale }}
-				className="flex text flex-row justify-center items-center align-middle border rounded-xl bg-texto"
+				style={{
+					height: 30 * HScale,
+					width: 270 * WScale,
+					marginTop: 24 * HScale,
+					borderRadius: 8,
+				}}
+				className="flex text flex-row justify-center items-center align-middle bg-texto"
 			>
-				<Text className="flex justify-center text-center align-middle items-center text-amarilloVerdoso text-xs">
+				<Text
+					style={{ fontSize: scaledSize(12) }}
+					className="flex justify-center text-center align-middle items-center text-amarilloVerdoso font-roboto"
+				>
 					FINALIZAR
 				</Text>
 			</Pressable>
@@ -131,10 +139,11 @@ function RepartoEnCurso() {
 					width: 270 * WScale,
 					height: 30 * HScale,
 					marginTop: 10 * HScale,
+					borderRadius: 8
 				}} //w-[109] h-[26]
-				className="flex justify-center items-center align-middle border rounded-xl border-texto text-texto"
+				className="flex justify-center items-center align-middle border border-texto text-texto"
 			>
-				<Text style={{ fontSize: scaledSize(12) }} className="text-center text-texto">
+				<Text style={{ fontSize: scaledSize(12) }} className="text-center text-texto font-roboto">
 					CANCELAR ENTREGA
 				</Text>
 			</Pressable>

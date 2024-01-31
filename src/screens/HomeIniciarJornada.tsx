@@ -221,7 +221,7 @@ const HomeIniciarJornada = () => {
 						HISTORIAL DE REPARTOS
 					</Text>
 					<Pressable>
-						<Image source={downarrow} />
+						{isWeb ? <Image source={downarrow} /> : <ArrowHeadDown width={scaledSize(14)}/>}
 					</Pressable>
 				</View>
 				<Text
@@ -414,7 +414,7 @@ const HomeIniciarJornada = () => {
 					</View>
 				</View>
 			</View>
-			<View style={{ marginTop: 29 * HScale }} className="flex justify-center items-center">
+			<View style={{ marginTop: 24 * HScale }} className="flex justify-center items-center">
 				<Pressable
 					style={{ height: 28 * HScale, width: 270 * WScale, borderRadius: 8 }}
 					className=" flex flex-row justify-center items-center align-middle bg-texto"

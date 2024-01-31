@@ -63,7 +63,7 @@ const Login = () => {
 					source={closeEye}
 				/> : <Eye top={108 * HScale} left={255 * WScale} width={scaledSize(20)} height={scaledSize(20)} /> }
 				<View
-					style={{ top: 90 * HScale, left: 15 * WScale, width: 270 * WScale, height: 1 * HScale }}
+					style={{ top: 93 * HScale, left: 15 * WScale, width: 270 * WScale, height: 1 * HScale }}
 					className="absolute bg-texto"
 				></View>
 				<View
@@ -82,12 +82,12 @@ const Login = () => {
 					</Text>
 				</Pressable>
 				<Pressable
-					style={{ top: 215 * HScale, left: 15 * WScale, height: 30 * HScale, width: 270 * WScale, borderRadius: 5, borderWidth:0.5}}
-					className="absolute flex flex-row justify-center items-center align-middle"
+					style={{ top: 215 * HScale, left: 15 * WScale, height: 30 * HScale, width: 270 * WScale, borderRadius: 7, borderWidth:0.5}}
+					className="absolute flex flex-row justify-center items-center align-middle border-texto"
 				>
 					<Text
-						style={{ marginRight: 8 * WScale, fontSize: scaledSize(12) }}
-						className="text-center font-roboto text-texto text-xs"
+						style={{ marginRight: 8 * WScale, fontSize: scaledSize(12)}}
+						className="text-center font-roboto text-texto "
 					>
 						CREAR CUENTA
 					</Text>

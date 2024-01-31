@@ -89,7 +89,7 @@ const AddPackage = () => {
 					onChangeText={(newText) => setText(newText)}
 					defaultValue={text}
 				/>
-				<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
+				<View style={{ width: 260 * WScale, height: 1 }} className="bg-gray-400"></View>
 
 				<TextInput
 					style={{
@@ -103,7 +103,7 @@ const AddPackage = () => {
 					onChangeText={(newText) => setText(newText)}
 					defaultValue={text}
 				/>
-				<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
+				<View style={{ width: 260 * WScale, height: 1 }} className="bg-gray-400"></View>
 
 				<TextInput
 					style={{
@@ -117,7 +117,7 @@ const AddPackage = () => {
 					onChangeText={(newText) => setText(newText)}
 					defaultValue={text}
 				/>
-				<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
+				<View style={{ width: 260 * WScale, height: 1 }} className="bg-gray-400"></View>
 
 				<TextInput
 					style={{
@@ -133,15 +133,15 @@ const AddPackage = () => {
 				/>
 				<View
 					style={{ width: 270 * WScale, height: 35 * HScale }}
-					className="flex flex-row items-center border border-texto rounded justify-between "
+					className="flex flex-row items-center border border-gray-400 rounded justify-between "
 				>
-					<Text style={{ left: 15 * WScale }} className="text-center text-texto font-roboto">
+					<Text style={{ left: 15 * WScale }} className="text-center font-roboto text-gray-500">
 						00/00/00
 					</Text>
 					<Pressable style={{ right: 10 * WScale }} className="relative">
 						<View
 							style={{ width: 26 * WScale, height: 18 * HScale }}
-							className="justify-center items-center border border-texto rounded"
+							className="justify-center items-center border rounded border-texto"
 						>
 							{isWeb ? <Image source={ArrowHeadDown} /> : <ArrowHeadDown width={16 * WScale} />}
 						</View>
@@ -149,7 +149,12 @@ const AddPackage = () => {
 				</View>
 			</View>
 			<Pressable
-				style={{ height: 28 * HScale, width: 270 * WScale, marginTop: 16 * HScale, borderRadius:8 }}
+				style={{
+					height: 28 * HScale,
+					width: 270 * WScale,
+					marginTop: 16 * HScale,
+					borderRadius: 8,
+				}}
 				className=" flex flex-row justify-center items-center align-middle border bg-texto"
 			>
 				<Text

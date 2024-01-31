@@ -65,7 +65,7 @@ const ObtenerPaquetes = () => {
 					className="flex justify-center items-center"
 				>
 					{/* <Image source={arrowLeft} /> */}
-					<ArrowLeft height={15 * HScale} width={13 * WScale} />
+					<ArrowLeft width={scaledSize(14)} />
 				</View>
 			</View>
 			<View
