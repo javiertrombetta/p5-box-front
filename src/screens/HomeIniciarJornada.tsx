@@ -1,9 +1,9 @@
 import { View, Text, Pressable, Image, StyleSheet, Dimensions } from 'react-native';
 import React from 'react';
-import box from '../assets/box.png';
-import leftArrow from '../assets/arrow-left.png';
+import Box from '../assets/LogoBox.svg';
+import LeftArrow from '../assets/ArrowLeft.svg';
 import circulo from '../assets/circuloUno.png';
-import deshabilitado from '../assets/deshabilitado.png';
+import Entregado from '../assets/Entregado.svg';
 import habilitado from '../assets/habilitado.png';
 import downarrow from '../assets/arrow-head-down.png';
 import boton from '../assets/Group 37375.png';
@@ -29,11 +29,12 @@ const HomeIniciarJornada = () => {
 				style={{ marginTop: 6 * HScale }}
 				className="w-full flex flex-row justify-between items-center"
 			>
-				<Image
+				{/* <Image
 					source={box}
 					style={{ height: scaledSize(30), width: scaledSize(80.69) }}
 					resizeMode="contain"
-				/>
+				/> */}
+				<Box height={30 * HScale} width={80.69 * WScale} />
 				<Pressable
 					style={{ width: 109 * WScale, height: 26 * HScale, marginTop: 8 * HScale }} //w-[109] h-[26]
 					className="flex justify-center items-center align-middle border rounded-xl border-texto text-texto"
@@ -61,7 +62,7 @@ const HomeIniciarJornada = () => {
 						style={{ width: 13 * WScale, height: 15 * HScale, paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
 						className="flex justify-center items-center"
 					>
-						<Image source={leftArrow} />
+						<LeftArrow />
 					</View>
 				</View>
 				<View
@@ -223,7 +224,11 @@ const HomeIniciarJornada = () => {
 								className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
 							>
 								<View className="flex flex-row justify-center">
-									<Image source={deshabilitado} className="flex items-center" />
+									<Entregado
+										height={scaledSize(7)}
+										width={scaledSize(7)}
+										className="flex items-center"
+									/>
 								</View>
 								<Text style={{ fontSize: 10.5 }}>ENTREGADO</Text>
 							</View>
@@ -269,7 +274,11 @@ const HomeIniciarJornada = () => {
 								className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
 							>
 								<View className="flex flex-row justify-center">
-									<Image source={deshabilitado} className="flex items-center" />
+									<Entregado
+										height={scaledSize(7)}
+										width={scaledSize(7)}
+										className="flex items-center"
+									/>
 								</View>
 								<Text style={{ fontSize: 10.5 }}>ENTREGADO</Text>
 							</View>
@@ -315,7 +324,11 @@ const HomeIniciarJornada = () => {
 								className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
 							>
 								<View className="flex flex-row justify-center">
-									<Image source={deshabilitado} className="flex items-center" />
+									<Entregado
+										height={scaledSize(7)}
+										width={scaledSize(7)}
+										className="flex items-center"
+									/>
 								</View>
 								<Text style={{ fontSize: 10.5 }}>ENTREGADO</Text>
 							</View>
