@@ -58,7 +58,7 @@ export default function App() {
 
 			{/* <Login /> */}
 			{/* <CreateAccount /> */}
-			<HomeIniciarJornada />
+			{/* <HomeIniciarJornada /> */}
 			{/* <ObtenerPaquetes /> */}
 			{/* <RepartoEnCurso /> */}
 

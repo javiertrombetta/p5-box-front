@@ -62,7 +62,7 @@ const CreateAccount = () => {
 					style={{ paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
 					className="flex justify-center items-center"
 				>
-					{isWeb ? <Image source={leftArrow} /> : <ArrowLeft />}
+					{isWeb ? <Image source={leftArrow} /> : <ArrowLeft width={scaledSize(14)}/>}
 				</View>
 			</View>
 			<View

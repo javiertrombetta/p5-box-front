@@ -85,7 +85,7 @@ const PerfilRepartidor = () => {
 						</Text>
 						<Text
 							style={{
-								fontSize: scaledSize(10),
+								fontSize: scaledSize(8),
 								paddingHorizontal: 1 * WScale,
 								paddingVertical: 2 * HScale,
 								width: 68 * WScale,
@@ -115,8 +115,8 @@ const PerfilRepartidor = () => {
 							REPARTOS PENDIENTES
 						</Text>
 						<Text
-							style={{ fontSize: scaledSize(12) }}
-							className="mt-[-5] text-texto font-sairaMedium"
+							style={{ fontSize: scaledSize(12), marginTop: scaledSize(-8) }}
+							className="text-texto font-sairaMedium"
 						>
 							sin repartos
 						</Text>
@@ -209,7 +209,7 @@ const PerfilRepartidor = () => {
 									<Entregado />
 									{/* <Image source={deshabilitado} className="flex items-center" /> */}
 								</View>
-								<Text style={{ fontSize: 10.5 * WScale }}>ENTREGADO</Text>
+								<Text style={{ fontSize: scaledSize(10) }}>ENTREGADO</Text>
 							</View>
 							<Pressable
 								style={{ height: 24 * HScale, width: 56 * WScale }}
@@ -264,7 +264,7 @@ const PerfilRepartidor = () => {
 									<Entregado />
 									{/* <Image source={deshabilitado} className="flex items-center" /> */}
 								</View>
-								<Text style={{ fontSize: 10.5 * WScale }}>ENTREGADO</Text>
+								<Text style={{ fontSize: scaledSize(10) }}>ENTREGADO</Text>
 							</View>
 							<Pressable
 								style={{ height: 24 * HScale, width: 56 * WScale }}
@@ -319,7 +319,7 @@ const PerfilRepartidor = () => {
 									<Entregado />
 									{/* <Image source={deshabilitado} className="flex items-center" /> */}
 								</View>
-								<Text style={{ fontSize: 10.5 * WScale }}>ENTREGADO</Text>
+								<Text style={{ fontSize: scaledSize(10) }}>ENTREGADO</Text>
 							</View>
 							<Pressable
 								style={{ height: 24 * HScale, width: 56 * WScale }}
