@@ -17,10 +17,12 @@ const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
 const HScale = height / 640;
 
+const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+
 const HomeIniciarJornada = () => {
 	return (
 		<View
-			style={{ paddingHorizontal: 32 * WScale, paddingTop: 6 * HScale }}
+			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
 			className="w-full bg-verde h-full flex flex-col items-center"
 		>
 			<View
@@ -29,14 +31,16 @@ const HomeIniciarJornada = () => {
 			>
 				<Image
 					source={box}
-					style={{ height: 30 * HScale, width: 80.69 * WScale }}
+					style={{ height: scaledSize(30), width: scaledSize(80.69) }}
 					resizeMode="contain"
 				/>
 				<Pressable
 					style={{ width: 109 * WScale, height: 26 * HScale, marginTop: 8 * HScale }} //w-[109] h-[26]
 					className="flex justify-center items-center align-middle border rounded-xl border-texto text-texto"
 				>
-					<Text className="text-center text-xs">CERRAR SESION</Text>
+					<Text style={{ fontSize: scaledSize(12) }} className="text-center">
+						CERRAR SESION
+					</Text>
 				</Pressable>
 			</View>
 			<View
@@ -48,8 +52,8 @@ const HomeIniciarJornada = () => {
 					className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
 				>
 					<Text
-						style={{ paddingVertical: 4 * HScale }} // py-1
-						className="text-lg flex justify-center items-center font-sairaBold text-texto"
+						style={{ paddingVertical: 4 * HScale, fontSize: scaledSize(14) }} // py-1
+						className="flex justify-center items-center font-sairaBold text-texto"
 					>
 						REPARTOS PENDIENTES
 					</Text>
@@ -61,25 +65,31 @@ const HomeIniciarJornada = () => {
 					</View>
 				</View>
 				<View
-					style={{ paddingVertical: 8 * HScale, paddingLeft: 16 * WScale }}
+					style={{ height: 70 * HScale, paddingLeft: 16 * WScale }}
 					className="flex flex-row justify-between items-center w-full"
 				>
 					<View style={{ gap: 12 * WScale }} className="flex flex-row  justify-start items-center">
 						<View
-							style={{ width: 45 * WScale, height: 45 * HScale }}
+							style={{ width: scaledSize(45), height: scaledSize(45) }}
 							className="rounded-xl bg-violeta flex items-center justify-center"
 						>
 							<Image source={boxlist} />
 						</View>
 						<View className="flex justify-center">
-							<Text className="font-semibold text-xs text-texto">#0H167</Text>
-							<Text className="text-xs text-texto">Av. Arriba,</Text>
-							<Text className="text-xs text-texto">CABA</Text>
+							<Text style={{ fontSize: scaledSize(12) }} className="font-semibold text-texto">
+								#0H167
+							</Text>
+							<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
+								Av. Arriba,
+							</Text>
+							<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
+								CABA
+							</Text>
 						</View>
 					</View>
 					<View style={{ gap: 12 * HScale }} className="flex flex-col items-end justify-end">
 						<View
-							style={{ width: 88 * WScale, height: 15 * HScale }}
+							style={{ minWidth: 78 * WScale, height: 15 * HScale }}
 							className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
 						>
 							<View className="flex flex-row justify-center">
@@ -87,40 +97,45 @@ const HomeIniciarJornada = () => {
 							</View>
 							<Text style={{ fontSize: 10.5 }}>EN CURSO</Text>
 						</View>
-						<Pressable
-							style={{ height: 24 * HScale, width: 56 * WScale }}
-							className="flex flex-row justify-start items-center"
-						>
-							<Image source={tachito} />
-						</Pressable>
+						<View style={{ paddingRight: 16 * WScale }}>
+							<Pressable
+								style={{ height: scaledSize(24), width: scaledSize(56) }}
+								className="flex flex-row justify-end items-center"
+							>
+								<Image resizeMode="stretch" source={tachito} />
+							</Pressable>
+						</View>
 					</View>
 				</View>
-				<View
-					style={{ paddingVertical: 4 * HScale, paddingHorizontal: 16 * WScale }}
-					className="flex w-full items-center"
-				>
-					<View style={{ height: 1 * HScale }} className="w-full bg-gray-300" />
+				<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
+					<View style={{ height: 1 }} className="w-full bg-gray-300" />
 				</View>
 				<View
-					style={{ paddingVertical: 8 * HScale, paddingLeft: 16 * WScale }}
+					style={{ height: 70 * HScale, paddingLeft: 16 * WScale }}
 					className="flex flex-row justify-between items-center w-full"
 				>
 					<View style={{ gap: 12 * WScale }} className="flex flex-row  justify-start items-center">
 						<View
-							style={{ width: 45 * WScale, height: 45 * HScale }}
+							style={{ width: scaledSize(45), height: scaledSize(45) }}
 							className="rounded-xl bg-violeta flex items-center justify-center"
 						>
 							<Image source={boxlist} />
 						</View>
 						<View className="flex justify-center">
-							<Text className="font-semibold text-xs text-texto">#0H167</Text>
-							<Text className="text-xs text-texto">Av. Arriba,</Text>
-							<Text className="text-xs text-texto">CABA</Text>
+							<Text style={{ fontSize: scaledSize(12) }} className="font-semibold text-texto">
+								#0H167
+							</Text>
+							<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
+								Av. Arriba,
+							</Text>
+							<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
+								CABA
+							</Text>
 						</View>
 					</View>
 					<View style={{ gap: 12 * HScale }} className="flex flex-col items-end justify-end">
 						<View
-							style={{ width: 88 * WScale, height: 15 * HScale }}
+							style={{ width: 83 * WScale, height: 15 * HScale }}
 							className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
 						>
 							<View className="flex flex-row justify-center">
@@ -128,12 +143,20 @@ const HomeIniciarJornada = () => {
 							</View>
 							<Text style={{ fontSize: 10.5 }}>PENDIENTE</Text>
 						</View>
-						<Pressable
-							style={{ height: 24 * HScale, width: 56 * WScale }}
-							className="flex flex-row justify-start items-center"
-						>
-							<Image source={tachito} />
-						</Pressable>
+						<View style={{ paddingRight: 16 * WScale }}>
+							<Pressable
+								style={{
+									height: scaledSize(20),
+									width: scaledSize(62),
+									borderRadius: 5,
+								}}
+								className="flex flex-row justify-center items-center border border-texto"
+							>
+								<Text style={{ fontSize: scaledSize(12) }} className="text-center">
+									INICIAR
+								</Text>
+							</Pressable>
+						</View>
 					</View>
 				</View>
 			</View>
@@ -152,23 +175,24 @@ const HomeIniciarJornada = () => {
 					</Pressable>
 				</View>
 				<Text
-					style={{ paddingVertical: 8 * HScale, paddingHorizontal: 16 * WScale }}
-					className="text-xs font-semibold"
+					style={{
+						paddingVertical: 8 * HScale,
+						paddingHorizontal: 16 * WScale,
+						fontSize: scaledSize(12),
+					}}
+					className="font-semibold"
 				>
 					58 Paquetes entregados
 				</Text>
-				<View
-					style={{ paddingBottom: 4 * HScale, paddingHorizontal: 16 * WScale }}
-					className="flex w-full items-center"
-				>
-					<View style={{ height: 1 * HScale }} className="w-full bg-gray-300" />
+				<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
+					<View style={{ height: 1 }} className="w-full bg-gray-300" />
 				</View>
 				<View
-					style={{ height: 192 * HScale, paddingLeft: 16 * WScale }}
+					style={{ height: 210 * HScale, paddingLeft: 16 * WScale }}
 					className="flex flex-col justify-around items-center"
 				>
 					<View
-						style={{ paddingVertical: 8 * HScale }}
+						style={{ height: 70 * HScale }}
 						className="flex flex-row justify-between items-center w-full"
 					>
 						<View
@@ -176,15 +200,21 @@ const HomeIniciarJornada = () => {
 							className="flex flex-row  justify-start items-center"
 						>
 							<View
-								style={{ width: 45 * WScale, height: 45 * HScale }}
+								style={{ width: scaledSize(45), height: scaledSize(45) }}
 								className="rounded-xl bg-violeta flex items-center justify-center"
 							>
 								<Image source={boxlist} />
 							</View>
 							<View className="flex justify-center">
-								<Text className="font-semibold text-xs text-texto">#0H167</Text>
-								<Text className="text-xs text-texto">Av. Arriba,</Text>
-								<Text className="text-xs text-texto">CABA</Text>
+								<Text style={{ fontSize: scaledSize(12) }} className="font-semibold text-texto">
+									#0H167
+								</Text>
+								<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
+									Av. Arriba,
+								</Text>
+								<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
+									CABA
+								</Text>
 							</View>
 						</View>
 						<View style={{ gap: 12 * HScale }} className="flex flex-col items-end justify-end">
@@ -197,32 +227,40 @@ const HomeIniciarJornada = () => {
 								</View>
 								<Text style={{ fontSize: 10.5 }}>ENTREGADO</Text>
 							</View>
-							<Pressable
-								style={{ height: 24 * HScale, width: 56 * WScale }}
-								className="flex flex-row justify-start items-center"
-							>
-								<Image source={tachito} />
-							</Pressable>
+							<View style={{ paddingRight: 16 * WScale }}>
+								<View
+									style={{ height: scaledSize(24), width: scaledSize(56) }}
+									className="flex flex-row justify-end items-center"
+								>
+									{/* <Image resizeMode="stretch" source={tachito} /> */}
+								</View>
+							</View>
 						</View>
 					</View>
-					<View
-						style={{ paddingVertical: 4 * HScale, paddingRight: 16 * WScale }}
-						className="flex w-full items-center"
-					>
-						<View style={{ height: 1 * HScale }} className="w-full bg-gray-300" />
+					<View style={{ paddingRight: 16 * WScale }} className="flex w-full items-center">
+						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View className="flex flex-row justify-between py-2 items-center w-full">
+					<View
+						style={{ height: 70 * HScale }}
+						className="flex flex-row justify-between items-center w-full"
+					>
 						<View style={{ gap: 12 * WScale }} className="flex flex-row justify-start items-center">
 							<View
-								style={{ width: 45 * WScale, height: 45 * HScale }}
+								style={{ width: scaledSize(45), height: scaledSize(45) }}
 								className="rounded-xl bg-violeta flex items-center justify-center"
 							>
 								<Image source={boxlist} />
 							</View>
 							<View className="flex justify-center">
-								<Text className="font-semibold text-xs text-texto">#0H167</Text>
-								<Text className="text-xs text-texto">Av. Medio,</Text>
-								<Text className="text-xs text-texto">CABA</Text>
+								<Text style={{ fontSize: scaledSize(12) }} className="font-semibold text-texto">
+									#0H167
+								</Text>
+								<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
+									Av. Arriba,
+								</Text>
+								<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
+									CABA
+								</Text>
 							</View>
 						</View>
 						<View className="flex flex-col items-end justify-end gap-3">
@@ -235,35 +273,40 @@ const HomeIniciarJornada = () => {
 								</View>
 								<Text style={{ fontSize: 10.5 }}>ENTREGADO</Text>
 							</View>
-							<Pressable
-								style={{ height: 24 * HScale, width: 56 * WScale }}
-								className="flex flex-row justify-start items-center"
-							>
-								<Image source={tachito} />
-							</Pressable>
+							<View style={{ paddingRight: 16 * WScale }}>
+								<View
+									style={{ height: scaledSize(24), width: scaledSize(56) }}
+									className="flex flex-row justify-end items-center"
+								>
+									{/* <Image resizeMode="stretch" source={tachito} /> */}
+								</View>
+							</View>
 						</View>
 					</View>
-					<View
-						style={{ paddingVertical: 4 * HScale, paddingRight: 16 * WScale }}
-						className="flex w-full items-center"
-					>
-						<View style={{ height: 1 * HScale }} className="w-full bg-gray-300" />
+					<View style={{ paddingRight: 16 * WScale }} className="flex w-full items-center">
+						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
 					<View
-						style={{ paddingTop: 8 * HScale }}
+						style={{ height: 70 * HScale }}
 						className="flex flex-row justify-between items-center w-full"
 					>
 						<View style={{ gap: 12 * WScale }} className="flex flex-row justify-start items-center">
 							<View
-								style={{ width: 45 * WScale, height: 45 * HScale }}
+								style={{ width: scaledSize(45), height: scaledSize(45) }}
 								className="rounded-xl bg-violeta flex items-center justify-center"
 							>
 								<Image source={boxlist} />
 							</View>
 							<View className="flex justify-center">
-								<Text className="font-semibold text-xs text-texto">#0H167</Text>
-								<Text className="text-xs text-texto">Av. Abajo,</Text>
-								<Text className="text-xs text-texto">CABA</Text>
+								<Text style={{ fontSize: scaledSize(12) }} className="font-semibold text-texto">
+									#0H167
+								</Text>
+								<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
+									Av. Arriba,
+								</Text>
+								<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
+									CABA
+								</Text>
 							</View>
 						</View>
 						<View style={{ gap: 12 * HScale }} className="flex flex-col items-end justify-end">
@@ -276,24 +319,26 @@ const HomeIniciarJornada = () => {
 								</View>
 								<Text style={{ fontSize: 10.5 }}>ENTREGADO</Text>
 							</View>
-							<Pressable
-								style={{ height: 24 * HScale, width: 56 * WScale }}
-								className="flex flex-row justify-start items-center"
-							>
-								<Image source={tachito} />
-							</Pressable>
+							<View style={{ paddingRight: 16 * WScale }}>
+								<View
+									style={{ height: scaledSize(24), width: scaledSize(56) }}
+									className="flex flex-row justify-end items-center"
+								>
+									{/* <Image resizeMode="stretch" source={tachito} /> */}
+								</View>
+							</View>
 						</View>
 					</View>
 				</View>
 			</View>
-			<View style={{ marginTop: 10 * HScale }} className="flex justify-center items-center">
+			<View style={{ marginTop: 29 * HScale }} className="flex justify-center items-center">
 				<Pressable
 					style={{ height: 28 * HScale, width: 270 * WScale }}
 					className=" flex flex-row justify-center items-center align-middle border rounded-xl bg-texto"
 				>
 					<Text
-						style={{ marginRight: 8 * WScale }}
-						className="text-center text-amarilloVerdoso text-xs font-roboto"
+						style={{ marginRight: 8 * WScale, fontSize: scaledSize(12) }}
+						className="text-center text-amarilloVerdoso font-roboto"
 					>
 						OBTENER PAQUETES
 					</Text>

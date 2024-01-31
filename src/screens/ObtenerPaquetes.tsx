@@ -9,6 +9,8 @@ const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
 const HScale = height / 640;
 
+const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+
 const ObtenerPaquetes = () => {
 	// const [isEnabled, setIsEnabled] = useState(false);
 	// const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
@@ -28,19 +30,19 @@ const ObtenerPaquetes = () => {
 					resizeMode="contain"
 				/>
 				<Pressable
-					style={{ width: 109 * WScale, height: 26 * HScale, marginTop: 8 * HScale }} //w-[109] h-[26]
-					className="flex justify-center items-center align-middle border rounded-xl border-texto text-texto"
+					style={{ width: 109 * WScale, height: 26 * HScale, marginTop: 8 * HScale, borderRadius: 8 }} //w-[109] h-[26]
+					className="flex justify-center items-center align-middle border border-texto text-texto"
 				>
-					<Text className="text-center text-xs">CERRAR SESION</Text>
+					<Text className="text-center" style={{ fontSize: scaledSize(12) }}>CERRAR SESION</Text>
 				</Pressable>
 			</View>
 			<View
-				style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
+				style={{ height: 40 * HScale, paddingHorizontal: 20 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
 				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
 			>
 				<Text
-					style={{ paddingVertical: 4 * HScale }} // py-1
-					className="text-lg flex justify-center items-center font-sairaBold text-texto"
+					style={{ fontSize: scaledSize(18) }} // py-1
+					className="flex justify-center items-center font-sairaBold text-texto"
 				>
 					OBTENER PAQUETES
 				</Text>
@@ -59,8 +61,8 @@ const ObtenerPaquetes = () => {
 					style={{ height: 35 * HScale, paddingHorizontal: 16 * WScale }}
 					className="w-full flex flex-row rounded-t-xl items-center justify-center bg-violeta"
 				>
-					<Text className="text-xs font-roboto text-texto text-center">
-						¿Cuantos paquetes repartiras hoy?
+					<Text className="font-robotoMedium text-texto text-center" style={{ fontSize: scaledSize(12) }}>
+						¿Cuántos paquetes repartirás hoy?
 					</Text>
 				</View>
 				<View
@@ -86,7 +88,7 @@ const ObtenerPaquetes = () => {
 							/>
 						</View>
 						<View>
-							<Text>Amenabar 2356, CABA</Text>
+							<Text className="flex justify-center items-center font-roboto text-texto" style={{ fontSize: scaledSize(12) }}>Amenabar 2356, CABA</Text>
 						</View>
 					</View>
 
@@ -109,7 +111,7 @@ const ObtenerPaquetes = () => {
 							/>
 						</View>
 						<View>
-							<Text>Av Carabobo y Rivadavia, CABA</Text>
+							<Text style={{ fontSize: scaledSize(12) }}>Av Carabobo y Rivadavia, CABA</Text>
 						</View>
 					</View>
 
@@ -255,12 +257,12 @@ const ObtenerPaquetes = () => {
 				<Image source={downArrow} />
 			</View>
 			<Pressable
-				style={{ height: 28 * HScale, width: 270 * WScale, marginTop: 16 * HScale }}
-				className=" flex flex-row justify-center items-center align-middle border rounded-xl bg-texto"
+				style={{ height: 28 * HScale, width: 270 * WScale, marginTop: 16 * HScale, borderRadius: 8  }}
+				className=" flex flex-row justify-center items-center align-middle border bg-texto"
 			>
 				<Text
 					style={{ marginRight: 8 * WScale }}
-					className="text-center text-amarilloVerdoso text-xs font-roboto"
+					className="text-center text-amarilloVerdoso font-roboto"
 				>
 					INICIAR JORNADA
 				</Text>
