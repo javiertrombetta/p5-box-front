@@ -6,7 +6,7 @@ import arrowLeft from '../assets/arrow-left.png';
 import downArrow from '../assets/arrow-head-down.png';
 import buttonTrue from '../assets/buttonTrue.png';
 
-import Box from '../assets/Box.svg';
+import LogoBox from '../assets/LogoBox.svg';
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 import ButtonTrue from '../assets/ButtonTrue.svg';
@@ -35,7 +35,7 @@ const ObtenerPaquetes = () => {
 					style={{ height: 30 * HScale, width: 80.69 * WScale }}
 					resizeMode="contain"
 				/> */}
-				<Box height={30 * HScale} width={80.69 * WScale} />
+				<LogoBox height={30 * HScale} width={80.69 * WScale} />
 				<Pressable
 					style={{
 						width: 109 * WScale,
@@ -61,7 +61,7 @@ const ObtenerPaquetes = () => {
 					OBTENER PAQUETES
 				</Text>
 				<View
-					style={{paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
+					style={{ paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
 					className="flex justify-center items-center"
 				>
 					{/* <Image source={arrowLeft} /> */}

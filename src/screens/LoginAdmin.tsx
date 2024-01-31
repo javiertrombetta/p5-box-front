@@ -1,4 +1,4 @@
-import { View, Text, Image, TextInput, Pressable, Dimensions } from 'react-native';
+import { View, Text, Image, TextInput, Pressable, Dimensions, Platform } from 'react-native';
 import React, { useState } from 'react';
 
 import backgroundI from '../assets/fondoLogin.jpg';
@@ -6,7 +6,7 @@ import logo from '../assets/logo.png';
 import closeEye from '../assets/Eye.png';
 
 import BackgroundImage from '../assets/FondoLogin.svg';
-import Logo from '../assets/Logo.svg';
+import LogoFull from '../assets/LogoFull.svg';
 import CloseEye from '../assets/Eye.svg';
 
 const { width, height } = Dimensions.get('window');
@@ -17,11 +17,11 @@ const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 const LoginAdmin = () => {
 	const [text, setText] = useState('');
+	const isWeb = Platform.OS === 'web';
 
 	return (
 		<View className="flex flex-col w-full h-full justify-center items-center bg-texto">
-			{/* <Image source={backgroundI} className="w-full h-full" /> */}
-			<BackgroundImage />
+			{isWeb ? <Image source={backgroundI} className="w-full h-full" /> : <BackgroundImage />}
 			<View
 				style={{ top: 205 * HScale, left: 30 * WScale, width: 300 * WScale, height: 275 * HScale }}
 				className="absolute flex rounded-2xl bg-verde"
@@ -52,17 +52,25 @@ const LoginAdmin = () => {
 					onChangeText={(newText) => setText(newText)}
 					defaultValue={text}
 				/>
-				{/* <Image
-					style={{
-						top: 108 * HScale,
-						left: 255 * WScale,
-						width: scaledSize(20),
-						height: scaledSize(20),
-					}}
-					className="absolute"
-					source={closeEye}
-				/> */}
-				<CloseEye top={108 * HScale} left={255 * WScale} height={20 * HScale} width={20 * WScale} />
+				{isWeb ? (
+					<Image
+						style={{
+							top: 108 * HScale,
+							left: 255 * WScale,
+							width: scaledSize(20),
+							height: scaledSize(20),
+						}}
+						className="absolute"
+						source={closeEye}
+					/>
+				) : (
+					<CloseEye
+						top={108 * HScale}
+						left={255 * WScale}
+						height={20 * HScale}
+						width={20 * WScale}
+					/>
+				)}
 				<View
 					style={{ top: 94 * HScale, left: 15 * WScale, width: 270 * WScale, height: 1 * HScale }}
 					className="absolute bg-texto"
@@ -79,11 +87,11 @@ const LoginAdmin = () => {
 						width: 270 * WScale,
 						borderRadius: 8,
 					}}
-					className="absolute flex flex-row justify-center items-center align-middle border bg-texto"
+					className="absolute flex flex-row justify-center items-center align-middle bg-texto"
 				>
 					<Text
 						style={{ marginRight: 8 * WScale, fontSize: scaledSize(12) }}
-						className="text-center font-roboto text-amarilloVerdoso text-xs"
+						className="text-center font-roboto text-amarilloVerdoso"
 					>
 						INGRESAR
 					</Text>
@@ -104,12 +112,15 @@ const LoginAdmin = () => {
 				style={{ top: 170 * HScale, left: 30 * WScale, width: 204 * WScale, height: 69 * HScale }}
 				className="absolute rounded-t-2xl rounded-r-2xl bg-amarilloVerdoso flex-row justify-center items-center"
 			>
-				{/* <Image
-					style={{ width: scaledSize(184), height: scaledSize(49) }}
-					resizeMode="contain"
-					source={logo}
-				/> */}
-				<Logo height={49 * HScale} width={184 * WScale} />
+				{isWeb ? (
+					<Image
+						style={{ width: scaledSize(184), height: scaledSize(49) }}
+						resizeMode="contain"
+						source={logo}
+					/>
+				) : (
+					<LogoFull height={49 * HScale} width={184 * WScale} />
+				)}
 			</View>
 		</View>
 	);
