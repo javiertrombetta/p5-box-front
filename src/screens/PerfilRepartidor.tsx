@@ -80,14 +80,20 @@ const PerfilRepartidor = () => {
 							Palermo
 						</Text>
 						<Text
-							style={{ fontSize: scaledSize(10), width: 67 * WScale, height: 15 * HScale }}
+							style={{
+								fontSize: scaledSize(10),
+								paddingHorizontal: 1 * WScale,
+								paddingVertical: 2 * HScale,
+								width: 68 * WScale,
+								height: 16 * HScale,
+							}}
 							className="flex items-center justify-center text-center font-robotoMedium text-texto rounded-md bg-verde"
 						>
 							HABILITADO
 						</Text>
 					</View>
 				</View>
-				<View style={{ width: scaledSize(35), height: scaledSize(19) }} className="flex items-end">
+				<View style={{ width: scaledSize(35), height: scaledSize(21) }} className="flex items-end">
 					<Image source={boton} />
 				</View>
 			</View>
@@ -166,13 +172,22 @@ const PerfilRepartidor = () => {
 								<Image source={boxlist} />
 							</View>
 							<View className="flex justify-center">
-								<Text style={{ fontSize: scaledSize(12) }} className="font-robotoBold text-texto">
-									#0H167
+								<Text
+									style={{ fontSize: scaledSize(12), marginBottom: -2 * HScale }}
+									className="font-robotoBold text-texto"
+								>
+									#0B438
 								</Text>
-								<Text style={{ fontSize: scaledSize(12) }} className="text-texto font-roboto">
-									Av. Abajo,
+								<Text
+									style={{ fontSize: scaledSize(12), marginTop: -1.5 * HScale }}
+									className="text-texto font-roboto"
+								>
+									Castillo 1356
 								</Text>
-								<Text style={{ fontSize: scaledSize(12) }} className="text-texto font-roboto">
+								<Text
+									style={{ fontSize: scaledSize(12), marginTop: -2 * HScale }}
+									className="text-texto font-roboto"
+								>
 									CABA
 								</Text>
 							</View>
@@ -210,13 +225,22 @@ const PerfilRepartidor = () => {
 								<Image source={boxlist} />
 							</View>
 							<View className="flex justify-center">
-								<Text style={{ fontSize: scaledSize(12) }} className="font-robotoBold text-texto">
+								<Text
+									style={{ fontSize: scaledSize(12), marginBottom: -2 * HScale }}
+									className="font-robotoBold text-texto"
+								>
 									#0H167
 								</Text>
-								<Text style={{ fontSize: scaledSize(12) }} className="text-texto font-roboto">
-									Av. Abajo,
+								<Text
+									style={{ fontSize: scaledSize(12), marginTop: -1.5 * HScale }}
+									className="text-texto font-roboto"
+								>
+									Av.Rivadavia
 								</Text>
-								<Text style={{ fontSize: scaledSize(12) }} className="text-texto font-roboto">
+								<Text
+									style={{ fontSize: scaledSize(12), marginTop: -2 * HScale }}
+									className="text-texto font-roboto"
+								>
 									CABA
 								</Text>
 							</View>
@@ -254,13 +278,22 @@ const PerfilRepartidor = () => {
 								<Image source={boxlist} />
 							</View>
 							<View className="flex justify-center">
-								<Text style={{ fontSize: scaledSize(12) }} className="font-robotoBold text-texto">
-									#0H167
+								<Text
+									style={{ fontSize: scaledSize(12), marginBottom: -2 * HScale }}
+									className="font-robotoBold text-texto"
+								>
+									#0A903
 								</Text>
-								<Text style={{ fontSize: scaledSize(12) }} className="text-texto font-roboto">
-									Av. Abajodsadasasd,
+								<Text
+									style={{ fontSize: scaledSize(12), marginTop: -1.5 * HScale }}
+									className="text-texto font-roboto"
+								>
+									Las Heras 5678
 								</Text>
-								<Text style={{ fontSize: scaledSize(12) }} className="text-texto font-roboto">
+								<Text
+									style={{ fontSize: scaledSize(12), marginTop: -2 * HScale }}
+									className="text-texto font-roboto"
+								>
 									CABA
 								</Text>
 							</View>
@@ -285,7 +318,7 @@ const PerfilRepartidor = () => {
 					</View>
 				</View>
 			</View>
-			<View style={{ position: 'relative', height: 1}} className="w-full bg-gray-300">
+			<View style={{ position: 'relative', height: 1 }} className="w-full bg-gray-300">
 				<LinearGradient
 					colors={['rgba(255, 255, 255, 0.0)', 'rgba(255, 255, 255, 1)']}
 					style={{
