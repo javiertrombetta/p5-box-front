@@ -60,7 +60,7 @@ export default function App() {
 			<CreateAccount />
 			{/* <HomeIniciarJornada /> */}
 			{/* <ObtenerPaquetes /> */}
-			<RepartoEnCurso />
+			{/* <RepartoEnCurso /> */}
 
 			<StatusBar style="auto" />
 		</View>
