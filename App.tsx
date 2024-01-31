@@ -9,7 +9,7 @@ import CircleProgress from './src/components/CircleProgress';
 {
 	/* Importacionres Back-Office */
 }
-import LoginAdmin from './src/screens/Login';
+import LoginAdmin from './src/screens/LoginAdmin';
 import HomeGestionarPedido from './src/screens/HomeGestionarPedido';
 import Repartidores from './src/screens/Repartidores';
 import Paquetes from './src/screens/Paquetes';
@@ -47,12 +47,12 @@ export default function App() {
 	return (
 		<View className="w-full h-full">
 			{/* Screens Back-Office */}
-			{/* <LoginAdmin /> */}
+			<LoginAdmin />
 			{/* <HomeGestionarPedido /> */}
 			{/* <Repartidores /> */}
 			{/* <Paquetes /> */}
 			{/* <AddPackage /> */}
-			<PerfilRepartidor />
+			{/* <PerfilRepartidor /> */}
 
 			{/* Screens Repartidor */}
 
