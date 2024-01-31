@@ -52,7 +52,7 @@ export default function App() {
 			{/* <Repartidores /> */}
 			{/* <Paquetes /> */}
 			{/* <AddPackage /> */}
-			{/* <PerfilRepartidor /> */}
+			<PerfilRepartidor />
 
 			{/* Screens Repartidor */}
 
