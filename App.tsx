@@ -47,7 +47,7 @@ export default function App() {
 	return (
 		<View className="w-full h-full">
 			{/* Screens Back-Office */}
-			<LoginAdmin />
+			{/* <LoginAdmin /> */}
 			{/* <HomeGestionarPedido /> */}
 			{/* <Repartidores /> */}
 			{/* <Paquetes /> */}
@@ -57,7 +57,7 @@ export default function App() {
 			{/* Screens Repartidor */}
 
 			{/* <Login /> */}
-			{/* <CreateAccount /> */}
+			<CreateAccount />
 			{/* <HomeIniciarJornada /> */}
 			{/* <ObtenerPaquetes /> */}
 			{/* <RepartoEnCurso /> */}
