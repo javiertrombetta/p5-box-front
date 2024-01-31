@@ -1,10 +1,17 @@
-import { View, Text, Dimensions, Image, TextInput, Pressable } from 'react-native';
 import React, { useState } from 'react';
+import { View, Text, Dimensions, Image, TextInput, Pressable, Platform } from 'react-native';
+
 import box from '../assets/box.png';
 import leftArrow from '../assets/arrow-left.png';
 import closeEye from '../assets/Eye.png';
 import profilePic from '../assets/profile-pic.png';
 import openEye from '../assets/close-eye.png';
+
+import LogoBox from '../assets/LogoBox.svg';
+import ArrowLeft from '../assets/ArrowLeft.svg';
+import Eye from '../assets/Eye.svg';
+import ProfilePic from '../assets/ProfilePic.svg';
+import OpenEye from '../assets/OpenEye.svg';
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 const { width, height } = Dimensions.get('window');
@@ -12,18 +19,35 @@ const WScale = width / 360;
 const HScale = height / 640;
 
 const CreateAccount = () => {
+
 	const [text, setText] = useState('');
+	const isWeb = Platform.OS === 'web';
+
 	return (
 		<View
 			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
 			className="w-full bg-verde h-full flex flex-col items-center"
 		>
-			<Image
-				className="right-[110] top-[6]"
-				source={box}
-				style={{ height: 30 * HScale, width: 80.69 * WScale, right: 110 * WScale, top: 6 * HScale }}
-				resizeMode="contain"
-			/>
+			{isWeb ? (
+				<Image
+					className="right-[110] top-[6]"
+					source={box}
+					style={{
+						height: 30 * HScale,
+						width: 80.69 * WScale,
+						right: 110 * WScale,
+						top: 6 * HScale,
+					}}
+					resizeMode="contain"
+				/>
+			) : (
+				<LogoBox
+					height={30 * HScale}
+					width={80.69 * WScale}
+					right={110 * WScale}
+					top={6 * HScale}
+				/>
+			)}
 			<View
 				style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
 				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
@@ -35,21 +59,21 @@ const CreateAccount = () => {
 					CREÁ TU CUENTA
 				</Text>
 				<View
-					style={{ width: 13 * WScale, height: 15 * HScale, paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
+					style={{ paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
 					className="flex justify-center items-center"
 				>
-					<Image source={leftArrow} />
+					{isWeb ? <Image source={leftArrow} /> : <ArrowLeft />}
 				</View>
 			</View>
 			<View
-				style={{ height: 505 * HScale, marginTop: 10 * HScale }}
+				style={{ height: 510 * HScale, marginTop: 10 * HScale }}
 				className="w-full items-center rounded-xl bg-blanco"
 			>
 				<Pressable
-					className="justify-center items-center bg-gris rounded-[30px]"
+					className="justify-center items-center bg-gris rounded-[18px]"
 					style={{ width: scaledSize(96), height: scaledSize(95), top: 20 * HScale }}
 				>
-					<Image source={profilePic} />
+					{isWeb ? <Image source={profilePic} /> : <ProfilePic width={30 * WScale} />}
 				</Pressable>
 
 				<TextInput
@@ -92,7 +116,7 @@ const CreateAccount = () => {
 					onChangeText={(newText) => setText(newText)}
 					defaultValue={text}
 				/>
-				<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
+				<View style={{ width: 260 * WScale, height: 0.5 }} className="bg-texto"></View>
 
 				<View>
 					<View className="flex flex-row">
@@ -110,16 +134,25 @@ const CreateAccount = () => {
 						/>
 
 						<Pressable className="relative">
-							<Image
-								style={{
-									top: 20 * HScale,
-									right: 5 * WScale,
-									width: scaledSize(20),
-									height: scaledSize(20),
-								}}
-								className=" text-texto"
-								source={closeEye}
-							/>
+							{isWeb ? (
+								<Image
+									style={{
+										top: 20 * HScale,
+										right: 5 * WScale,
+										width: scaledSize(20),
+										height: scaledSize(20),
+									}}
+									className=" text-texto"
+									source={closeEye}
+								/>
+							) : (
+								<Eye
+									top={20 * HScale}
+									right={5 * WScale}
+									width={scaledSize(20)}
+									height={scaledSize(20)}
+								/>
+							)}
 						</Pressable>
 					</View>
 					<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
@@ -141,23 +174,32 @@ const CreateAccount = () => {
 						/>
 
 						<Pressable className="relative">
-							<Image
-								style={{
-									top: 20 * HScale,
-									right: 5 * WScale,
-									width: scaledSize(20),
-									height: scaledSize(20),
-								}}
-								className=" text-texto"
-								source={openEye}
-							/>
+							{isWeb ? (
+								<Image
+									style={{
+										top: 20 * HScale,
+										right: 5 * WScale,
+										width: scaledSize(20),
+										height: scaledSize(20),
+									}}
+									className=" text-texto"
+									source={openEye}
+								/>
+							) : (
+								<OpenEye
+									top={20 * HScale}
+									right={5 * WScale}
+									width={scaledSize(20)}
+									height={scaledSize(20)}
+								/>
+							)}
 						</Pressable>
 					</View>
 					<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
 				</View>
 				<Pressable
-					style={{ height: 28 * HScale, width: 270 * WScale, marginTop: 50 * HScale }}
-					className=" flex flex-row justify-center items-center align-middle border rounded-xl bg-texto"
+					style={{ height: 28 * HScale, width: 270 * WScale, marginTop: 50 * HScale, borderRadius: 8 }}
+					className=" flex flex-row justify-center items-center align-middle border bg-texto"
 				>
 					<Text
 						style={{ fontSize: scaledSize(12) }}
@@ -172,8 +214,9 @@ const CreateAccount = () => {
 						width: 270 * WScale,
 						height: 30 * HScale,
 						marginTop: 10 * HScale,
+						borderRadius: 8
 					}} //w-[109] h-[26]
-					className="flex justify-center items-center align-middle border rounded-xl border-texto text-texto"
+					className="flex justify-center items-center align-middle border border-texto text-texto"
 				>
 					<Text style={{ fontSize: scaledSize(12) }} className="text-center text-texto font-roboto">
 						INICIAR SESIÓN
