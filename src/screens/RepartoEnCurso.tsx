@@ -12,6 +12,7 @@ import ArrowLeft from '../assets/ArrowLeft.svg';
 import LogoBox from '../assets/LogoBox.svg';
 import buenos from '../assets/buenos.png';
 import Header from '../components/Header';
+import Button from '../components/Button';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -100,35 +101,24 @@ function RepartoEnCurso() {
 				</ImageBackground>
 			</View>
 
-			<Pressable
+			<View
 				style={{
 					height: 30 * HScale,
 					width: 270 * WScale,
 					marginTop: 24 * HScale,
-					borderRadius: 8,
 				}}
-				className="flex text flex-row justify-center items-center align-middle bg-texto"
 			>
-				<Text
-					style={{ fontSize: scaledSize(12) }}
-					className="flex justify-center text-center align-middle items-center text-amarilloVerdoso font-roboto"
-				>
-					FINALIZAR
-				</Text>
-			</Pressable>
-			<Pressable
+				<Button content="FINALIZAR" spec="texto" svg={false} />
+			</View>
+			<View
 				style={{
-					width: 270 * WScale,
 					height: 30 * HScale,
+					width: 270 * WScale,
 					marginTop: 10 * HScale,
-					borderRadius: 8,
-				}} //w-[109] h-[26]
-				className="flex justify-center items-center align-middle border border-texto text-texto"
+				}}
 			>
-				<Text style={{ fontSize: scaledSize(12) }} className="text-center text-texto font-roboto">
-					CANCELAR ENTREGA
-				</Text>
-			</Pressable>
+				<Button content="CANCELAR ENTREGA" spec="blanco" svg={false} />
+			</View>
 		</View>
 	);
 }

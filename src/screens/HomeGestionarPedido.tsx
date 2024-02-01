@@ -16,6 +16,7 @@ import Sum from '../assets/Sum.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 import IconsPeople from '../assets/IconsPeople.svg';
 import Header from '../components/Header';
+import Button from '../components/Button';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -301,24 +302,15 @@ const HomeGestionarPedido = () => {
 					</View>
 				</View>
 			</View>
-			<Pressable
+			<View
 				style={{
 					height: 30 * HScale,
 					width: 265 * WScale,
 					marginTop: 15 * HScale,
-					borderRadius: 8,
 				}}
-				className="flex flex-row justify-center items-center align-middle border bg-texto"
 			>
-				<Text
-					style={{ fontSize: scaledSize(12) }}
-					className="text-center mr-2 text-amarilloVerdoso"
-				>
-					NUEVO PAQUETE
-				</Text>
-				{/* <Image style={{ height: 12 * HScale, width: 12 * WScale }} source={vectorSuma} /> */}
-				<Sum height={12 * HScale} width={12 * WScale} />
-			</Pressable>
+				<Button spec="texto" content="NUEVO PAQUETE" svg={true} />
+			</View>
 		</View>
 	);
 };
