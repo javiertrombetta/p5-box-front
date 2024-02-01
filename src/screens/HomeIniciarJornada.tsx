@@ -18,6 +18,7 @@ import Box from '../assets/Box.svg';
 import Trash from '../assets/Trash.svg';
 import EllipseGreen from '../assets/EllipseGreen.svg';
 import EllipseOrange from '../assets/EllipseOrange.svg';
+import Header from '../components/Header';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -26,7 +27,6 @@ const HScale = height / 640;
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 const HomeIniciarJornada = () => {
-
 	const isWeb = Platform.OS === 'web';
 
 	return (
@@ -34,34 +34,7 @@ const HomeIniciarJornada = () => {
 			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
 			className="w-full bg-verde h-full flex flex-col items-center"
 		>
-			<View
-				style={{ marginTop: 6 * HScale }}
-				className="w-full flex flex-row justify-between items-center"
-			>
-				{isWeb ? (
-					<Image
-						source={box}
-						style={{ height: scaledSize(30), width: scaledSize(80.69) }}
-						resizeMode="contain"
-					/>
-				) : (
-					<LogoBox height={30 * HScale} width={80.69 * WScale} />
-				)}
-				<Pressable
-					style={{
-						width: 109 * WScale,
-						height: 26 * HScale,
-						marginTop: 6 * HScale,
-						borderRadius: 8,
-						borderWidth: 0.5,
-					}} //w-[109] h-[26]
-					className="flex justify-center items-center align-middle border border-texto text-texto"
-				>
-					<Text style={{ fontSize: scaledSize(12) }} className="text-center text-texto">
-						CERRAR SESION
-					</Text>
-				</Pressable>
-			</View>
+			<Header />
 			<View
 				style={{ height: 188 * HScale, marginTop: 28 * HScale }} // h-24 mt-[10]
 				className="w-full flex flex-col rounded-xl items-start justify-start align-middle bg-white"
@@ -221,7 +194,7 @@ const HomeIniciarJornada = () => {
 						HISTORIAL DE REPARTOS
 					</Text>
 					<Pressable>
-						{isWeb ? <Image source={downarrow} /> : <ArrowHeadDown width={scaledSize(14)}/>}
+						{isWeb ? <Image source={downarrow} /> : <ArrowHeadDown width={scaledSize(14)} />}
 					</Pressable>
 				</View>
 				<Text
