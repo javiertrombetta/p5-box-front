@@ -12,6 +12,7 @@ import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 import GreenCircle from '../assets/GreenCircle.svg';
 import GrayCircle from '../assets/GrayCircle.svg';
 import BlackCircle from '../assets/BlackCircle.svg';
+import Header from '../components/Header';
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 const { width, height } = Dimensions.get('window');
@@ -19,33 +20,14 @@ const WScale = width / 360;
 const HScale = height / 640;
 
 const Repartidores = () => {
-
 	const isWeb = Platform.OS === 'web';
 
 	return (
 		<View
 			className="bg-verde w-full h-full flex-col items-center  flex"
-			style={{ paddingHorizontal: 30 * WScale, paddingVertical: 8 * HScale }}
+			style={{ paddingHorizontal: 30 * WScale, paddingVertical: 6 * HScale }}
 		>
-			<View
-				className="w-full flex flex-row justify-between align-middle items-center"
-				style={{ marginTop: 12 * HScale }}
-			>
-				{/* <Image source={box} style={{ height: 30, width: 80.69 }} /> */}
-				{isWeb ? <Image
-					source={box}
-					style={{ height: 30 * HScale, width: 80.69 * WScale }}
-					resizeMode="contain"
-				/> : <LogoBox height={ 30 * HScale} width={80.69 * WScale} />}
-				<Pressable
-					style={{ width: 109 * WScale, height: 26 * HScale, marginTop: 6 * HScale, borderRadius: 8, borderWidth: 0.5 }} //w-[109] h-[26]
-					className="flex justify-center items-center align-middle border border-texto text-texto"
-				>
-					<Text style={{ fontSize: scaledSize(12) }} className="text-center font-roboto text-texto">
-						CERRAR SESION
-					</Text>
-				</Pressable>
-			</View>
+			<Header />
 			<View
 				style={{
 					height: 40 * HScale,
@@ -64,7 +46,11 @@ const Repartidores = () => {
 					style={{ width: 13 * WScale, height: 40 * HScale, paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
 					className="flex justify-center items-center "
 				>
-					{isWeb ? <Image source={leftArrow} /> : <ArrowLeft width= {13 * WScale} height= {40 * HScale} />}
+					{isWeb ? (
+						<Image source={leftArrow} />
+					) : (
+						<ArrowLeft width={13 * WScale} height={40 * HScale} />
+					)}
 				</View>
 			</View>
 			<View
@@ -110,7 +96,7 @@ const Repartidores = () => {
 							className="flex flex-col items-start justify-center"
 						>
 							<Text
-								style={{fontSize: scaledSize(14) }} // h-[15]
+								style={{ fontSize: scaledSize(14) }} // h-[15]
 								className="text-left items-center flex font-robotoBold text-texto"
 							>
 								Javier Trombetta
@@ -274,7 +260,7 @@ const Repartidores = () => {
 						className="flex flex-row justify-center items-center"
 					>
 						<View style={{ width: 71 * WScale }} className=" items-center flex">
-							<CircleProgress value={100} radius={scaledSize(38)} />
+							<CircleProgress value={0} radius={scaledSize(38)} />
 						</View>
 						<View
 							style={{ gap: 4 * HScale }} // gap-1
@@ -327,7 +313,11 @@ const Repartidores = () => {
 				style={{ height: 47.5 * HScale }}
 				className="w-full flex justify-center items-center rounded-b-xl bg-white"
 			>
-				{isWeb ? <Image className="" source={downarrow} /> : <ArrowHeadDown width={scaledSize(20)}/>}
+				{isWeb ? (
+					<Image className="" source={downarrow} />
+				) : (
+					<ArrowHeadDown width={scaledSize(20)} />
+				)}
 			</View>
 		</View>
 	);
