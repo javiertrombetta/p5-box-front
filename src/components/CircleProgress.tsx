@@ -1,21 +1,31 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import CircularProgress from 'react-native-circular-progress-indicator';
 
-type CircleProgressProps = {
+interface CircleProgressProps {
 	value: number;
-	radius?: number;
-};
+	radius: number;
+	progressValueColor?: string;
+	activeStrokeColor?: string;
+	valueSuffix?: string;
+	inActiveStrokeOpacity?: number;
+	activeStrokeWidth?: number;
+	inActiveStrokeWidth?: number;
+	duration?: number;
+}
 
-const CircleProgress = ({ value, radius }: CircleProgressProps) => {
-	const texto = '#24424D';
-	const violeta = '#CEC4F4';
-	const valueSuffix = '%';
-	const inActiveStrokeOpacity = 0.2;
-	const activeStrokeWidth = 8;
-	const inActiveStrokeWidth = 8;
-	const duration = 1000;
+const CircleProgress = ({
+	value,
+	radius,
+	progressValueColor = '#24424D',
+	activeStrokeColor = '#CEC4F4',
+	valueSuffix = '%',
+	inActiveStrokeOpacity = 0.2,
+	activeStrokeWidth = 8,
+	inActiveStrokeWidth = 8,
+	duration = 1000,
+}: CircleProgressProps) => {
 	const isWeb = Platform.OS === 'web';
 
 	return (
@@ -24,8 +34,8 @@ const CircleProgress = ({ value, radius }: CircleProgressProps) => {
 				<CircularProgress
 					radius={radius}
 					value={value}
-					progressValueColor={texto}
-					activeStrokeColor={violeta}
+					progressValueColor={progressValueColor}
+					activeStrokeColor={activeStrokeColor}
 					inActiveStrokeOpacity={inActiveStrokeOpacity}
 					activeStrokeWidth={activeStrokeWidth}
 					inActiveStrokeWidth={inActiveStrokeWidth}
@@ -35,8 +45,8 @@ const CircleProgress = ({ value, radius }: CircleProgressProps) => {
 				<CircularProgress
 					radius={radius}
 					value={value}
-					progressValueColor={texto}
-					activeStrokeColor={violeta}
+					progressValueColor={progressValueColor}
+					activeStrokeColor={activeStrokeColor}
 					valueSuffix={valueSuffix}
 					inActiveStrokeOpacity={inActiveStrokeOpacity}
 					activeStrokeWidth={activeStrokeWidth}
