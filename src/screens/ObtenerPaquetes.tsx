@@ -10,6 +10,7 @@ import LogoBox from '../assets/LogoBox.svg';
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 import ButtonTrue from '../assets/ButtonTrue.svg';
+import Header from '../components/Header';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -23,33 +24,10 @@ const ObtenerPaquetes = () => {
 
 	return (
 		<View
-			style={{ paddingHorizontal: 32 * WScale, paddingTop: 6 * HScale }}
-			className="w-full bg-verde h-full flex flex-col items-center"
+			className="bg-verde w-full h-full flex-col items-center  flex"
+			style={{ paddingHorizontal: 30 * WScale, paddingVertical: 6 * HScale }}
 		>
-			<View
-				style={{ marginTop: 6 * HScale }}
-				className="w-full flex flex-row justify-between items-center"
-			>
-				{/* <Image
-					source={box}
-					style={{ height: 30 * HScale, width: 80.69 * WScale }}
-					resizeMode="contain"
-				/> */}
-				<LogoBox height={30 * HScale} width={80.69 * WScale} />
-				<Pressable
-					style={{
-						width: 109 * WScale,
-						height: 26 * HScale,
-						marginTop: 4 * HScale,
-						borderRadius: 8,
-					}} //w-[109] h-[26]
-					className="flex justify-center items-center align-middle border border-texto text-texto"
-				>
-					<Text className="text-center" style={{ fontSize: scaledSize(12) }}>
-						CERRAR SESION
-					</Text>
-				</Pressable>
-			</View>
+			<Header />
 			<View
 				style={{ height: 40 * HScale, paddingHorizontal: 20 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
 				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
