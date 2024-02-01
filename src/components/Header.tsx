@@ -2,6 +2,7 @@ import { View, Text, Pressable, Dimensions, Platform, Image } from 'react-native
 import React from 'react';
 import LogoBox from '../assets/LogoBox.svg';
 import box from '../assets/box.png';
+import Button from './Button';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -25,20 +26,15 @@ const Header = () => {
 			) : (
 				<LogoBox height={30 * HScale} width={80.69 * WScale} />
 			)}
-			<Pressable
+			<View
 				style={{
 					width: 109 * WScale,
 					height: 26 * HScale,
 					marginTop: 6 * HScale,
-					borderRadius: 8,
-					borderWidth: 0.5,
 				}}
-				className="flex justify-center items-center align-middle border border-texto text-texto"
 			>
-				<Text style={{ fontSize: scaledSize(12) }} className="text-center text-texto">
-					CERRAR SESION
-				</Text>
-			</Pressable>
+				<Button content="CERRAR SESION" spec="blanco" svg={false} />
+			</View>
 		</View>
 	);
 };
