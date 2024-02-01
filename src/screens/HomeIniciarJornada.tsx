@@ -19,6 +19,7 @@ import Trash from '../assets/Trash.svg';
 import EllipseGreen from '../assets/EllipseGreen.svg';
 import EllipseOrange from '../assets/EllipseOrange.svg';
 import Header from '../components/Header';
+import Button from '../components/Button';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -164,19 +165,14 @@ const HomeIniciarJornada = () => {
 							</Text>
 						</View>
 						<View style={{ paddingRight: 16 * WScale }}>
-							<Pressable
+							<View
 								style={{
 									height: scaledSize(20),
 									width: scaledSize(62),
-									borderRadius: 4,
-									borderWidth: 0.5,
 								}}
-								className="flex flex-row justify-center items-center border border-texto"
 							>
-								<Text style={{ fontSize: scaledSize(12) }} className="text-center font-roboto">
-									INICIAR
-								</Text>
-							</Pressable>
+								<Button content="INICIAR" spec="blanco" svg={false} borderR={true} />
+							</View>
 						</View>
 					</View>
 				</View>
@@ -388,17 +384,12 @@ const HomeIniciarJornada = () => {
 				</View>
 			</View>
 			<View style={{ marginTop: 24 * HScale }} className="flex justify-center items-center">
-				<Pressable
-					style={{ height: 28 * HScale, width: 270 * WScale, borderRadius: 8 }}
-					className=" flex flex-row justify-center items-center align-middle bg-texto"
+				<View
+					style={{ height: 28 * HScale, width: 270 * WScale }}
+					// className=" flex flex-row justify-center items-center align-middle bg-texto"
 				>
-					<Text
-						style={{ marginRight: 8 * WScale, fontSize: scaledSize(12) }}
-						className="text-center text-amarilloVerdoso font-roboto"
-					>
-						OBTENER PAQUETES
-					</Text>
-				</Pressable>
+					<Button content="OBTENER PAQUETES" spec="texto" svg={false} />
+				</View>
 			</View>
 		</View>
 	);

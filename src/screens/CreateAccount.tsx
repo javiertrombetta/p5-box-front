@@ -12,6 +12,7 @@ import ArrowLeft from '../assets/ArrowLeft.svg';
 import Eye from '../assets/Eye.svg';
 import ProfilePic from '../assets/ProfilePic.svg';
 import OpenEye from '../assets/OpenEye.svg';
+import Button from '../components/Button';
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 const { width, height } = Dimensions.get('window');
@@ -196,47 +197,30 @@ const CreateAccount = () => {
 					</View>
 					<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
 				</View>
-				<Pressable
-					style={{
-						height: 28 * HScale,
-						width: 270 * WScale,
-						marginTop: 50 * HScale,
-						borderRadius: 8,
-					}}
-					className=" flex flex-row justify-center items-center align-middle border bg-texto"
-				>
-					<Text
-						style={{ fontSize: scaledSize(12) }}
-						className="text-center text-amarilloVerdoso font-roboto"
-					>
-						CREAR
-					</Text>
-				</Pressable>
-
-				<Pressable
+				<View style={{ height: 28 * HScale, width: 270 * WScale, marginTop: 50 * HScale }}>
+					<Button spec="texto" content="CREAR" svg={false} />
+				</View>
+				<View
 					style={{
 						width: 270 * WScale,
 						height: 30 * HScale,
 						marginTop: 10 * HScale,
-						borderRadius: 8,
-					}} //w-[109] h-[26]
-					className="flex justify-center items-center align-middle border border-texto text-texto"
+					}}
+					// className="flex justify-center items-center align-middle border border-texto text-texto"
 				>
-					<Text style={{ fontSize: scaledSize(12) }} className="text-center text-texto font-roboto">
-						INICIAR SESIÓN
-					</Text>
-				</Pressable>
-				<Pressable
+					<Button spec="blanco" content="INICIAR SESION" svg={false} />
+				</View>
+				<View
 					style={{ top: 15 * HScale }}
-					className=" justify-center items-center align-middle"
+					className="justify-center underline items-center align-middle"
 				>
-					<Text
+					{/* <Text
 						className="font-roboto text-texto"
 						style={{ textDecorationLine: 'underline', fontSize: scaledSize(12) }}
-					>
-						¿Ya tenés una cuenta?
-					</Text>
-				</Pressable>
+					> */}
+					<Button spec="transp" content="¿Ya tenés una cuenta?" svg={false} />
+					{/* </Text> */}
+				</View>
 			</View>
 		</View>
 	);
