@@ -15,6 +15,7 @@ import ArrowLeftBox from '../assets/ArrowLeftBox.svg';
 import Sum from '../assets/Sum.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 import IconsPeople from '../assets/IconsPeople.svg';
+import Header from '../components/Header';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -28,30 +29,7 @@ const HomeGestionarPedido = () => {
 			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
 			className="w-full bg-verde h-full flex flex-col items-center"
 		>
-			<View
-				style={{ marginTop: 6 * HScale }}
-				className="w-full flex flex-row justify-between items-center"
-			>
-				{/* <Image
-					source={box}
-					style={{ height: 30 * HScale, width: 80.69 * WScale }}
-					resizeMode="contain"
-				/> */}
-				<LogoBox height={30 * HScale} width={80.69 * WScale} />
-				<Pressable
-					style={{
-						width: 109 * WScale,
-						height: 26 * HScale,
-						marginTop: 8 * HScale,
-						borderRadius: 8,
-					}} //w-[109] h-[26]
-					className="flex justify-center items-center align-middle border border-texto text-texto"
-				>
-					<Text style={{ fontSize: scaledSize(12) }} className="text-center font-roboto">
-						CERRAR SESION
-					</Text>
-				</Pressable>
-			</View>
+			<Header />
 			<View
 				style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale, marginTop: 28 * HScale }}
 				className="bg-amarilloVerdoso w-full flex-row items-center justify-center flex rounded-xl"

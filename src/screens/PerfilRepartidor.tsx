@@ -10,6 +10,7 @@ import Entregado from '../assets/Entregado.svg';
 import Tachito from '../assets/Tachito.svg';
 import BotonActivado from '../assets/BotonActivado.svg';
 import SmallDownArrow from '../assets/SmallFlechaAbajo.svg';
+import Header from '../components/Header';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -20,28 +21,10 @@ const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 const PerfilRepartidor = () => {
 	return (
 		<View
-			style={{ paddingHorizontal: 32 * WScale, paddingTop: 6 * HScale }}
+			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
 			className="w-full bg-verde h-full flex flex-col items-center"
 		>
-			<View
-				style={{ marginTop: 6 * HScale }}
-				className="w-full flex flex-row justify-between items-center"
-			>
-				{/* <Image
-					source={box}
-					style={{ height: scaledSize(30), width: scaledSize(80.69) }}
-					resizeMode="contain"
-				/> */}
-				<Box height={30 * HScale} width={80.69 * WScale} />
-				<Pressable
-					style={{ width: 109 * WScale, height: 26 * HScale, marginTop: 8 * HScale }} //w-[109] h-[26]
-					className="flex justify-center items-center align-middle border rounded-xl border-texto text-texto"
-				>
-					<Text style={{ fontSize: scaledSize(12) }} className="text-center">
-						CERRAR SESION
-					</Text>
-				</Pressable>
-			</View>
+			<Header />
 			<View
 				style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
 				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"

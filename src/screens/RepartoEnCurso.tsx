@@ -11,7 +11,7 @@ import {
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import LogoBox from '../assets/LogoBox.svg';
 import buenos from '../assets/buenos.png';
-
+import Header from '../components/Header';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -25,25 +25,7 @@ function RepartoEnCurso() {
 			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
 			className="w-full bg-verde h-full flex flex-col items-center"
 		>
-			<View
-				style={{ marginTop: 6 * HScale }}
-				className="w-full flex flex-row justify-between items-center"
-			>
-				<LogoBox height={30 * HScale} width={80.69 * WScale} />
-				{/* <Image
-					source={box}
-					style={{ height: scaledSize(30), width: scaledSize(80.69) }}
-					resizeMode="contain"
-				/> */}
-				<Pressable
-					style={{ width: 109 * WScale, height: 26 * HScale, marginTop: 8 * HScale }} //w-[109] h-[26]
-					className="flex justify-center items-center align-middle border rounded-xl border-texto text-texto"
-				>
-					<Text style={{ fontSize: scaledSize(12) }} className="text-center">
-						CERRAR SESION
-					</Text>
-				</Pressable>
-			</View>
+			<Header />
 			<View
 				style={{ height: 40 * HScale, paddingHorizontal: 20 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
 				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
@@ -139,7 +121,7 @@ function RepartoEnCurso() {
 					width: 270 * WScale,
 					height: 30 * HScale,
 					marginTop: 10 * HScale,
-					borderRadius: 8
+					borderRadius: 8,
 				}} //w-[109] h-[26]
 				className="flex justify-center items-center align-middle border border-texto text-texto"
 			>

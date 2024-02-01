@@ -12,6 +12,7 @@ import Box from '../assets/Box.svg';
 import TrashIcon from '../assets/Trash.svg';
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
+import Header from '../components/Header';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -23,36 +24,10 @@ const Paquetes = () => {
 	const isWeb = Platform.OS === 'web';
 	return (
 		<View
-			style={{ paddingHorizontal: 30 * WScale }}
-			className="w-full bg-verde h-full flex flex-col items-center"
+			className="bg-verde w-full h-full flex-col items-center  flex"
+			style={{ paddingHorizontal: 30 * WScale, paddingVertical: 6 * HScale }}
 		>
-			<View
-				style={{ marginTop: 8 * HScale }}
-				className="w-full flex flex-row justify-between items-center"
-			>
-				{isWeb ? (
-					<Image
-						source={box}
-						style={{ height: 30 * HScale, width: 80.69 * WScale }}
-						resizeMode="contain"
-					/>
-				) : (
-					<LogoBox height={30 * HScale} width={80.69 * WScale} />
-				)}
-				<Pressable
-					style={{
-						width: 109 * WScale,
-						height: 26 * HScale,
-						marginTop: 5 * HScale,
-						borderRadius: 8,
-					}} //w-[109] h-[26]
-					className="flex justify-center items-center align-middle border border-texto text-texto"
-				>
-					<Text className="text-center text-xs" style={{ fontSize: scaledSize(12) }}>
-						CERRAR SESION
-					</Text>
-				</Pressable>
-			</View>
+			<Header />
 			<View
 				style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale, marginTop: 26 * HScale }} // h-[40] mt-[28] px-4
 				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
@@ -268,10 +243,7 @@ const Paquetes = () => {
 								>
 									#0B438
 								</Text>
-								<Text
-									className="text-texto font-roboto"
-									style={{ fontSize: scaledSize(12)}}
-								>
+								<Text className="text-texto font-roboto" style={{ fontSize: scaledSize(12) }}>
 									Av. Castillo 1356,
 								</Text>
 								<Text
@@ -331,10 +303,7 @@ const Paquetes = () => {
 								>
 									#0B438
 								</Text>
-								<Text
-									className="text-texto font-roboto"
-									style={{ fontSize: scaledSize(12)}}
-								>
+								<Text className="text-texto font-roboto" style={{ fontSize: scaledSize(12) }}>
 									Av. Castillo 1356,
 								</Text>
 								<Text
@@ -394,10 +363,7 @@ const Paquetes = () => {
 								>
 									#0B438
 								</Text>
-								<Text
-									className="text-texto font-roboto"
-									style={{ fontSize: scaledSize(12)}}
-								>
+								<Text className="text-texto font-roboto" style={{ fontSize: scaledSize(12) }}>
 									Av. Castillo 1356,
 								</Text>
 								<Text

@@ -19,7 +19,6 @@ const WScale = width / 360;
 const HScale = height / 640;
 
 const CreateAccount = () => {
-
 	const [text, setText] = useState('');
 	const isWeb = Platform.OS === 'web';
 
@@ -62,7 +61,7 @@ const CreateAccount = () => {
 					style={{ paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
 					className="flex justify-center items-center"
 				>
-					{isWeb ? <Image source={leftArrow} /> : <ArrowLeft width={scaledSize(14)}/>}
+					{isWeb ? <Image source={leftArrow} /> : <ArrowLeft width={scaledSize(14)} />}
 				</View>
 			</View>
 			<View
@@ -198,7 +197,12 @@ const CreateAccount = () => {
 					<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
 				</View>
 				<Pressable
-					style={{ height: 28 * HScale, width: 270 * WScale, marginTop: 50 * HScale, borderRadius: 8 }}
+					style={{
+						height: 28 * HScale,
+						width: 270 * WScale,
+						marginTop: 50 * HScale,
+						borderRadius: 8,
+					}}
 					className=" flex flex-row justify-center items-center align-middle border bg-texto"
 				>
 					<Text
@@ -214,7 +218,7 @@ const CreateAccount = () => {
 						width: 270 * WScale,
 						height: 30 * HScale,
 						marginTop: 10 * HScale,
-						borderRadius: 8
+						borderRadius: 8,
 					}} //w-[109] h-[26]
 					className="flex justify-center items-center align-middle border border-texto text-texto"
 				>
