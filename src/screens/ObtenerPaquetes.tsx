@@ -1,4 +1,4 @@
-import { View, Text, Button, Pressable, Image, Dimensions, Switch } from 'react-native';
+import { View, Text, Pressable, Image, Dimensions, Switch } from 'react-native';
 import React, { useState } from 'react';
 
 import box from '../assets/box.png';
@@ -10,7 +10,9 @@ import LogoBox from '../assets/LogoBox.svg';
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 import ButtonTrue from '../assets/ButtonTrue.svg';
+
 import Header from '../components/Header';
+import Button from '../components/Button';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -296,22 +298,15 @@ const ObtenerPaquetes = () => {
 				{/* <Image source={downArrow} /> */}
 				<ArrowHeadDown height={19 * HScale} width={24 * WScale} />
 			</View>
-			<Pressable
+			<View
 				style={{
 					height: 30 * HScale,
 					width: 270 * WScale,
 					marginTop: 10 * HScale,
-					borderRadius: 7,
 				}}
-				className=" flex flex-row justify-center items-center align-middle border bg-texto"
 			>
-				<Text
-					style={{ fontSize: scaledSize(12), marginRight: 8 * WScale }}
-					className="text-center text-amarilloVerdoso font-roboto"
-				>
-					INICIAR JORNADA
-				</Text>
-			</Pressable>
+				<Button content="INICIAR JORNADA" spec="texto" svg={false} />
+			</View>
 		</View>
 	);
 };

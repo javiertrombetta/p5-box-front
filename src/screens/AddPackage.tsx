@@ -8,7 +8,9 @@ import arrowHeadDown from '../assets/arrow-head-down.png';
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import LogoBox from '../assets/LogoBox.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
+
 import Header from '../components/Header';
+import Button from '../components/Button';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -118,27 +120,20 @@ const AddPackage = () => {
 							style={{ width: 26 * WScale, height: 18 * HScale }}
 							className="justify-center items-center border rounded border-texto"
 						>
-							{isWeb ? <Image source={ArrowHeadDown} /> : <ArrowHeadDown width={16 * WScale} />}
+							{isWeb ? <Image source={arrowHeadDown} /> : <ArrowHeadDown width={16 * WScale} />}
 						</View>
 					</Pressable>
 				</View>
 			</View>
-			<Pressable
+			<View
 				style={{
 					height: 28 * HScale,
 					width: 270 * WScale,
 					marginTop: 16 * HScale,
-					borderRadius: 8,
 				}}
-				className=" flex flex-row justify-center items-center align-middle border bg-texto"
 			>
-				<Text
-					style={{ fontSize: scaledSize(12), marginRight: 8 * WScale }}
-					className="text-center text-amarilloVerdoso font-roboto"
-				>
-					AGREGAR
-				</Text>
-			</Pressable>
+				<Button spec="texto" content="AGREGAR" svg={false} />
+			</View>
 		</View>
 	);
 };
