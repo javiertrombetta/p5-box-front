@@ -7,7 +7,7 @@ import { useFonts } from 'expo-font';
 import CircleProgress from './src/components/CircleProgress';
 
 {
-	/* Importacionres Back-Office */
+	/* Importaciones Back-Office */
 }
 import LoginAdmin from './src/screens/LoginAdmin';
 import HomeGestionarPedido from './src/screens/HomeGestionarPedido';
@@ -17,7 +17,7 @@ import AddPackage from './src/screens/AddPackage';
 import PerfilRepartidor from './src/screens/PerfilRepartidor';
 
 {
-	/* Importacionres Repartidor */
+	/* Importaciones Repartidor */
 }
 import Login from './src/screens/Login';
 import CreateAccount from './src/screens/CreateAccount';
@@ -57,10 +57,10 @@ export default function App() {
 			{/* Screens Repartidor */}
 
 			{/* <Login /> */}
-			<CreateAccount />
+			{/* <CreateAccount /> */}
 			{/* <HomeIniciarJornada /> */}
 			{/* <ObtenerPaquetes /> */}
-			{/* <RepartoEnCurso /> */}
+			<RepartoEnCurso />
 
 			<StatusBar style="auto" />
 		</View>
