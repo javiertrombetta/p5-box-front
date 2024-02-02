@@ -305,7 +305,7 @@ const ObtenerPaquetes = () => {
 					marginTop: 10 * HScale,
 				}}
 			>
-				<Button content="INICIAR JORNADA" spec="texto" svg={false} />
+				<Button content="INICIAR JORNADA" spec="texto" />
 			</View>
 		</View>
 	);

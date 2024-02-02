@@ -171,7 +171,7 @@ const HomeIniciarJornada = () => {
 									width: scaledSize(62),
 								}}
 							>
-								<Button content="INICIAR" spec="blanco" svg={false} borderR={true} />
+								<Button content="INICIAR" spec="blanco" borderR={true} />
 							</View>
 						</View>
 					</View>
@@ -388,7 +388,7 @@ const HomeIniciarJornada = () => {
 					style={{ height: 28 * HScale, width: 270 * WScale }}
 					// className=" flex flex-row justify-center items-center align-middle bg-texto"
 				>
-					<Button content="OBTENER PAQUETES" spec="texto" svg={false} />
+					<Button content="OBTENER PAQUETES" spec="texto" />
 				</View>
 			</View>
 		</View>
