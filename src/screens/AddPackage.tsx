@@ -132,7 +132,7 @@ const AddPackage = () => {
 					marginTop: 16 * HScale,
 				}}
 			>
-				<Button spec="texto" content="AGREGAR" svg={false} />
+				<Button spec="texto" content="AGREGAR" />
 			</View>
 		</View>
 	);

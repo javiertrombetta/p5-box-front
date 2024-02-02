@@ -13,7 +13,7 @@ const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 interface ButtonProps {
 	spec: string;
 	content: string;
-	svg: boolean;
+	svg?: boolean;
 	borderR?: boolean;
 }
 

@@ -108,7 +108,7 @@ function RepartoEnCurso() {
 					marginTop: 24 * HScale,
 				}}
 			>
-				<Button content="FINALIZAR" spec="texto" svg={false} />
+				<Button content="FINALIZAR" spec="texto" />
 			</View>
 			<View
 				style={{
@@ -117,7 +117,7 @@ function RepartoEnCurso() {
 					marginTop: 10 * HScale,
 				}}
 			>
-				<Button content="CANCELAR ENTREGA" spec="blanco" svg={false} />
+				<Button content="CANCELAR ENTREGA" spec="blanco" />
 			</View>
 		</View>
 	);
