@@ -33,7 +33,7 @@ const Header = () => {
 					marginTop: 6 * HScale,
 				}}
 			>
-				<Button content="CERRAR SESION" spec="blanco" svg={false} />
+				<Button content="CERRAR SESION" spec="blanco" />
 			</View>
 		</View>
 	);

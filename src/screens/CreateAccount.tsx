@@ -198,7 +198,7 @@ const CreateAccount = () => {
 					<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
 				</View>
 				<View style={{ height: 28 * HScale, width: 270 * WScale, marginTop: 50 * HScale }}>
-					<Button spec="texto" content="CREAR" svg={false} />
+					<Button spec="texto" content="CREAR" />
 				</View>
 				<View
 					style={{
@@ -208,7 +208,7 @@ const CreateAccount = () => {
 					}}
 					// className="flex justify-center items-center align-middle border border-texto text-texto"
 				>
-					<Button spec="blanco" content="INICIAR SESION" svg={false} />
+					<Button spec="blanco" content="INICIAR SESION" />
 				</View>
 				<View
 					style={{ top: 15 * HScale }}
@@ -218,7 +218,7 @@ const CreateAccount = () => {
 						className="font-roboto text-texto"
 						style={{ textDecorationLine: 'underline', fontSize: scaledSize(12) }}
 					> */}
-					<Button spec="transp" content="¿Ya tenés una cuenta?" svg={false} />
+					<Button spec="transp" content="¿Ya tenés una cuenta?" />
 					{/* </Text> */}
 				</View>
 			</View>
