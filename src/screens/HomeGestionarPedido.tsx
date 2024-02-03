@@ -17,6 +17,7 @@ import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 import IconsPeople from '../assets/IconsPeople.svg';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import List from '../components/List';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -174,7 +175,7 @@ const HomeGestionarPedido = () => {
 				className="bg-amarilloVerdoso w-full flex-row flex justify-between rounded-xl" */}
 			{/* className="w-full h-[43] flex flex-row rounded-xl items-center justify-between bg-amarilloVerdoso"> */}
 			<View
-				style={{ height: 248 * HScale, width: 300 * WScale, marginTop: 10 * HScale }}
+				style={{ height: 248 * HScale, marginTop: 10 * HScale }}
 				className="w-full flex rounded-xl bg-white"
 			>
 				<View
@@ -201,104 +202,30 @@ const HomeGestionarPedido = () => {
 					style={{ height: 192 * HScale }}
 					className="flex flex-col justify-evenly align-middle"
 				>
-					<View
-						style={{ height: 100 * HScale, paddingHorizontal: 16 * WScale }}
-						className="flex flex-row justify-between items-center"
-					>
-						<View className="flex justify-start items-center flex-row">
-							<View className="flex justify-center">
-								<CircleProgress value={20} radius={scaledSize(38)} />
-							</View>
-							<View
-								style={{ height: 40 * HScale, paddingLeft: 15 * WScale }}
-								className="flex justify-center align-middle"
-							>
-								<Text style={{ fontSize: scaledSize(14) }} className="font-robotoBold">
-									Repartidores
-								</Text>
-								<Text style={{ fontSize: scaledSize(12), marginTop: 1 }} className="font-roboto">
-									2/10 Habilitados
-								</Text>
-								<Image
-									source={personas}
-									style={{
-										height: scaledSize(25),
-										width: scaledSize(45),
-										marginTop: 1 * HScale,
-									}}
-								/>
-								{/* <IconsPeople
-								height={scaledSize(25)}
-								width={scaledSize(45)}
-								marginTop={10 * HScale}
-								left={15 * HScale}
-							/> */}
-							</View>
-						</View>
-						<View className="flex justify-end">
-							<Pressable
-								style={{ height: 26 * HScale, width: 56 * WScale, borderRadius: 8 }}
-								className="flex flex-row justify-center items-center border bg-texto"
-							>
-								<Text
-									style={{ fontSize: scaledSize(12) }}
-									className="text-center text-amarilloVerdoso"
-								>
-									VER
-								</Text>
-							</Pressable>
-						</View>
+					<View style={{ height: 100 * HScale }}>
+						<List
+							column1="circleProgress"
+							circleValue={20}
+							column2="stringsImg"
+							content2String="Repartidores, 2/10 Habilitados"
+							content2Image="Personas-45-25"
+							column3="buttonVer"
+							content3=""
+						/>
 					</View>
 					<View className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-[89%] bg-gray-300" />
 					</View>
-					<View
-						style={{ height: 100 * HScale, paddingHorizontal: 16 * WScale }}
-						className="flex flex-row justify-between items-center"
-					>
-						<View className="flex justify-start items-center flex-row">
-							<View className="flex justify-center">
-								<CircleProgress value={80} radius={scaledSize(38)} />
-							</View>
-							<View
-								style={{ height: 40 * HScale, paddingLeft: 15 * WScale }}
-								className="flex justify-center align-middle"
-							>
-								<Text style={{ fontSize: scaledSize(14) }} className="font-robotoBold">
-									Repartidores
-								</Text>
-								<Text style={{ fontSize: scaledSize(12), marginTop: 1 }} className="font-roboto">
-									16/20 Habilitados
-								</Text>
-								<Image
-									source={personas}
-									style={{
-										height: scaledSize(25),
-										width: scaledSize(45),
-										marginTop: 1 * HScale,
-									}}
-								/>
-								{/* <IconsPeople
-								height={scaledSize(25)}
-								width={scaledSize(45)}
-								marginTop={10 * HScale}
-								left={15 * HScale}
-							/> */}
-							</View>
-						</View>
-						<View className="flex justify-end">
-							<Pressable
-								style={{ height: 26 * HScale, width: 56 * WScale, borderRadius: 8 }}
-								className="flex flex-row justify-center items-center border bg-texto"
-							>
-								<Text
-									style={{ fontSize: scaledSize(12) }}
-									className="text-center text-amarilloVerdoso"
-								>
-									VER
-								</Text>
-							</Pressable>
-						</View>
+					<View style={{ height: 100 * HScale }}>
+						<List
+							column1="circleProgress"
+							circleValue={80}
+							column2="stringsImg"
+							content2String="Paquetes, 16/20 Repartidos"
+							content2Image="Personas-45-25"
+							column3="buttonVer"
+							content3=""
+						/>
 					</View>
 				</View>
 			</View>

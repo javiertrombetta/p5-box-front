@@ -14,7 +14,7 @@ interface ButtonProps {
 	spec: string;
 	content: string;
 	svg?: boolean;
-	borderR?: boolean;
+	borderR?: number;
 }
 
 const texto = '#24424D';
@@ -35,7 +35,7 @@ const Button = ({ spec, content, svg, borderR }: ButtonProps) => {
 				},
 				borderR
 					? {
-							borderRadius: 4,
+							borderRadius: borderR,
 					  }
 					: {
 							borderRadius: 8,
