@@ -265,7 +265,7 @@ const PerfilRepartidor = () => {
 						style={{ height: 70 * HScale }}
 						className="flex flex-row justify-between items-center w-full"
 					>
-						<View style={{ gap: 12 * WScale }} className="flex flex-row justify-start items-center">
+						{/* <View style={{ gap: 12 * WScale }} className="flex flex-row justify-start items-center">
 							<View
 								style={{ width: scaledSize(45), height: scaledSize(45) }}
 								className="rounded-xl bg-violeta flex items-center justify-center"
@@ -300,7 +300,7 @@ const PerfilRepartidor = () => {
 							>
 								<View className="flex flex-row justify-center">
 									<Entregado />
-									{/* <Image source={deshabilitado} className="flex items-center" /> */}
+									<Image source={deshabilitado} className="flex items-center" />
 								</View>
 								<Text style={{ fontSize: scaledSize(10) }}>ENTREGADO</Text>
 							</View>
@@ -310,7 +310,7 @@ const PerfilRepartidor = () => {
 							>
 								<Tachito height={20 * HScale} width={31 * HScale} />
 							</Pressable>
-						</View>
+						</View> */}
 					</View>
 				</View>
 			</View>

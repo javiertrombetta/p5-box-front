@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, Dimensions, Image, TextInput, Pressable, Platform } from 'react-native';
+import { launchImageLibrary, ImageLibraryOptions } from 'react-native-image-picker';
 
 import box from '../assets/box.png';
 import leftArrow from '../assets/arrow-left.png';
@@ -22,7 +23,26 @@ const HScale = height / 640;
 const CreateAccount = () => {
 	const [text, setText] = useState('');
 	const isWeb = Platform.OS === 'web';
+	const [selectPhoto, setSelectPhoto] = useState<string | undefined>();
+	const pickImage = () => {
+		const options: ImageLibraryOptions = {
+			mediaType: 'photo',
+			includeBase64: false,
+		};
 
+		launchImageLibrary(options, (response) => {
+			if (response.didCancel) {
+				console.log('El usuario canceló la selección');
+			} else if (response.errorCode) {
+				console.error('Error al seleccionar la imagen', response.errorMessage);
+			} else if (response.assets && response.assets.length > 0) {
+				const uri = response.assets[0].uri;
+				if (uri) {
+					setSelectPhoto(uri);
+				}
+			}
+		});
+	};
 	return (
 		<View
 			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
@@ -69,12 +89,31 @@ const CreateAccount = () => {
 				style={{ height: 510 * HScale, marginTop: 10 * HScale }}
 				className="w-full items-center rounded-xl bg-blanco"
 			>
-				<Pressable
-					className="justify-center items-center bg-gris rounded-[18px]"
-					style={{ width: scaledSize(96), height: scaledSize(95), top: 20 * HScale }}
-				>
-					{isWeb ? <Image source={profilePic} /> : <ProfilePic width={30 * WScale} />}
-				</Pressable>
+				{/* aca loco */}
+				{selectPhoto ? (
+					<Pressable
+						onPress={pickImage}
+						className="justify-center items-center bg-gris rounded-[18px]"
+						style={{ width: scaledSize(96), height: scaledSize(95), top: 20 * HScale }}
+					>
+						<Image
+							source={{ uri: selectPhoto }}
+							style={{
+								width: scaledSize(96),
+								height: scaledSize(95),
+								borderRadius: 18,
+							}}
+						/>
+					</Pressable>
+				) : (
+					<Pressable
+						onPress={pickImage}
+						className="justify-center items-center bg-gris rounded-[18px]"
+						style={{ width: scaledSize(96), height: scaledSize(95), top: 20 * HScale }}
+					>
+						{isWeb ? <Image source={profilePic} /> : <ProfilePic width={30 * WScale} />}
+					</Pressable>
+				)}
 
 				<TextInput
 					style={{

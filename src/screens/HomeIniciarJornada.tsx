@@ -171,7 +171,7 @@ const HomeIniciarJornada = () => {
 									width: scaledSize(62),
 								}}
 							>
-								<Button content="INICIAR" spec="blanco" borderR={true} />
+								<Button content="INICIAR" spec="blanco" borderR={4} />
 							</View>
 						</View>
 					</View>
