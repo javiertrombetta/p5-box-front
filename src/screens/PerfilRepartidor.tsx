@@ -11,6 +11,7 @@ import Tachito from '../assets/Tachito.svg';
 import BotonActivado from '../assets/BotonActivado.svg';
 import SmallDownArrow from '../assets/SmallFlechaAbajo.svg';
 import Header from '../components/Header';
+import Title from '../components/Title';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -26,10 +27,10 @@ const PerfilRepartidor = () => {
 		>
 			<Header />
 			<View
-				style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
-				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
+				style={{ height: 40 * HScale, marginTop: 28 * HScale, width: '100%' }} // h-[40] mt-[28] px-4
 			>
-				<Text
+				<Title content={'GESTIONAR PEDIDOS'} arrow={'left'} />
+				{/* <Text
 					style={{ paddingVertical: 4 * HScale, fontSize: scaledSize(18) }} // py-1
 					className="flex justify-center items-center font-sairaBold text-texto"
 				>
@@ -40,9 +41,9 @@ const PerfilRepartidor = () => {
 					className="flex justify-center items-center"
 				>
 					{/* style={{ width: 13 * WScale, height: 15 * HScale, */}
-					{/* <Image source={leftArrow} /> */}
-					<ArrowLeft height={15 * HScale} width={13 * WScale} />
-				</View>
+				{/* <Image source={leftArrow} /> */}
+				{/* <ArrowLeft height={15 * HScale} width={13 * WScale} />
+				</View>  */}
 			</View>
 			<View
 				style={{ height: 90 * HScale, marginTop: 10 * HScale, paddingHorizontal: 16 * WScale }} // h-24 mt-[10]
@@ -85,15 +86,13 @@ const PerfilRepartidor = () => {
 					{/* <Image source={boton} /> */}
 				</View>
 			</View>
-			<View
-				style={{ height: 48 * HScale, marginTop: 10 * HScale }}
-				className="w-full flex justify-center rounded-xl bg-amarilloVerdoso"
-			>
-				<View
-					style={{ paddingHorizontal: 16 * WScale, height: 48 * HScale }}
+			<View style={{ height: 48 * HScale, marginTop: 10 * HScale, width: '100%' }}>
+				<Title content={'REPARTOS PENDIENTES'} details={'sin repartos'} arrow={'right'} />
+				{/* <View
+					style={{ height: 48 * HScale }}
 					className="w-full flex flex-row rounded-t-xl items-center justify-between"
-				>
-					<View className="flex flex-col items-start justify-center">
+				> */}
+				{/* <View className="flex flex-col items-start justify-center">
 						<Text style={{ fontSize: scaledSize(14) }} className="font-sairaBold text-texto">
 							REPARTOS PENDIENTES
 						</Text>
@@ -107,24 +106,22 @@ const PerfilRepartidor = () => {
 					<Pressable style={{ width: scaledSize(8), height: scaledSize(12) }}>
 						<ArrowRight height={14 * HScale} width={8 * WScale} />
 						{/* <Image source={rightarrow} /> */}
-					</Pressable>
-				</View>
+				{/* </Pressable> */}
+				{/* </View> */}
 			</View>
 			<View
 				style={{ height: 282 * HScale, marginTop: 10 * HScale }}
 				className="w-full justify-start flex rounded-t-xl bg-white"
 			>
-				<View
-					style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale }}
-					className="w-full flex flex-row rounded-xl items-center justify-between bg-amarilloVerdoso"
-				>
-					<Text style={{ fontSize: scaledSize(14) }} className="font-sairaBold text-texto">
+				<View style={{ height: 40 * HScale, width: '100%' }}>
+					<Title content={'HISTORIAL DE REPARTOS'} arrow={'down'} />
+					{/* <Text style={{ fontSize: scaledSize(14) }} className="font-sairaBold text-texto">
 						HISTORIAL DE REPARTOS
 					</Text>
 					<Pressable>
 						<SmallDownArrow height={8 * HScale} width={14 * WScale} />
 						{/* <Image source={downarrow} /> */}
-					</Pressable>
+					{/* </Pressable>  */}
 				</View>
 				<View
 					style={{

@@ -52,12 +52,12 @@ export default function App() {
 			{/* <Repartidores /> */}
 			{/* <Paquetes /> */}
 			{/* <AddPackage /> */}
-			{/* <PerfilRepartidor /> */}
+			<PerfilRepartidor />
 
 			{/* Screens Repartidor */}
 
 			{/* <Login /> */}
-			<CreateAccount />
+			{/* <CreateAccount /> */}
 			{/* <HomeIniciarJornada /> */}
 			{/* <ObtenerPaquetes /> */}
 			{/* <RepartoEnCurso /> */}
