@@ -12,6 +12,7 @@ import ArrowLeft from '../assets/ArrowLeft.svg';
 import Eye from '../assets/Eye.svg';
 import ProfilePic from '../assets/ProfilePic.svg';
 import OpenEye from '../assets/OpenEye.svg';
+import Title from '../components/Title';
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 const { width, height } = Dimensions.get('window');
@@ -48,21 +49,13 @@ const CreateAccount = () => {
 				/>
 			)}
 			<View
-				style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
-				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
+				style={{
+					height: 40 * HScale,
+					marginTop: 28 * HScale,
+					width: '100%',
+				}} // h-[40] mt-[28] px-4
 			>
-				<Text
-					style={{ paddingVertical: 4 * HScale, fontSize: scaledSize(18) }} // py-1
-					className=" flex justify-center items-center font-sairaBold text-texto"
-				>
-					CREÁ TU CUENTA
-				</Text>
-				<View
-					style={{ paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
-					className="flex justify-center items-center"
-				>
-					{isWeb ? <Image source={leftArrow} /> : <ArrowLeft width={scaledSize(14)} />}
-				</View>
+				<Title content={'CREÁ TU CUENTA'} arrow={'left'} />
 			</View>
 			<View
 				style={{ height: 510 * HScale, marginTop: 10 * HScale }}
