@@ -17,6 +17,7 @@ import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 import IconsPeople from '../assets/IconsPeople.svg';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import Title from '../components/Title';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -31,7 +32,7 @@ const HomeGestionarPedido = () => {
 			className="w-full bg-verde h-full flex flex-col items-center"
 		>
 			<Header />
-			<View
+			{/* <View
 				style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale, marginTop: 28 * HScale }}
 				className="bg-amarilloVerdoso w-full flex-row items-center justify-center flex rounded-xl"
 			>
@@ -41,7 +42,11 @@ const HomeGestionarPedido = () => {
 				>
 					GESTIONAR PEDIDOS
 				</Text>
+			</View> */}
+			<View style={{ height: 40 * HScale, marginTop: 28 * HScale, width: '100%' }}>
+				<Title content={'GESTIONAR PEDIDOS'} />
 			</View>
+
 			<View
 				style={{ height: 96 * HScale, marginTop: 10 * HScale }}
 				className="w-full flex flex-row rounded-xl items-center justify-around align-middle bg-white"
@@ -177,11 +182,9 @@ const HomeGestionarPedido = () => {
 				style={{ height: 248 * HScale, width: 300 * WScale, marginTop: 10 * HScale }}
 				className="w-full flex rounded-xl bg-white"
 			>
-				<View
-					style={{ height: 40 * HScale }}
-					className="w-full  flex flex-row rounded-xl items-center justify-between bg-amarilloVerdoso"
-				>
-					<Text
+				<View style={{ height: 40 * HScale, width: '100%' }}>
+					<Title content={'DETALLES'} arrow={'down'} date={true} />
+					{/* <Text
 						style={{ fontSize: scaledSize(14), marginLeft: 20 * WScale }}
 						className="font-sairaBold text-texto"
 					>
@@ -193,9 +196,9 @@ const HomeGestionarPedido = () => {
 						</Text>
 						<Pressable style={{ marginRight: 20 }}>
 							{/* <Image style={{ height: 8 * HScale, width: 14 * WScale }} source={arrowDown} /> */}
-							<ArrowHeadDown height={8 * HScale} width={14 * WScale} />
+					{/* <ArrowHeadDown height={8 * HScale} width={14 * WScale} />
 						</Pressable>
-					</View>
+					</View> */}
 				</View>
 				<View
 					style={{ height: 192 * HScale }}
