@@ -76,7 +76,7 @@ const CreateAccount = () => {
 					width: '100%',
 				}} // h-[40] mt-[28] px-4
 			>
-				<Title content={'CREÁ TU CUENTA'} arrow={'left'} />
+				<Title content={'CREÁ TU CUENTA'} arrow={'left'} size={18} />
 			</View>
 			<View
 				style={{ height: 510 * HScale, marginTop: 10 * HScale }}

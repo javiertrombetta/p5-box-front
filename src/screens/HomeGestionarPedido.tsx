@@ -34,7 +34,7 @@ const HomeGestionarPedido = () => {
 		>
 			<Header />
 			<View style={{ height: 40 * HScale, marginTop: 28 * HScale, width: '100%' }}>
-				<Title content={'GESTIONAR PEDIDOS'} />
+				<Title content={'GESTIONAR PEDIDOS'} size={18} />
 			</View>
 
 			<View
@@ -69,15 +69,16 @@ const HomeGestionarPedido = () => {
 			{/* 	<View className="w-full h-[30] flex rounded-t-xl justify-center bg-violeta"> */}
 			<View style={{ height: 84 * HScale, marginTop: 10 }} className="w-full flex justify-center">
 				<View
-					style={{ height: 30 * HScale, paddingHorizontal: 16 * WScale }} // px-4 mt-[10] h-[35]
-					className="bg-violeta flex-row flex w-full justify-between items-center rounded-t-xl"
+					style={{ height: 30 * HScale }} // px-4 mt-[10] h-[35]
+					// className="bg-violeta flex-row flex w-full justify-between items-center rounded-t-xl"
 				>
-					<Text
+					<Title content={'ENERO'} color={'v'} size={14} />
+					{/* <Text
 						style={{ fontSize: scaledSize(14) }}
 						className="font-robotoBold text-texto flex align-middle"
 					>
 						ENERO
-					</Text>
+					</Text> */}
 				</View>
 				<View
 					style={{ height: 54 * HScale }}
@@ -169,7 +170,22 @@ const HomeGestionarPedido = () => {
 				className="w-full flex rounded-xl bg-white"
 			>
 				<View style={{ height: 40 * HScale, width: '100%' }}>
-					<Title content={'DETALLES'} arrow={'down'} date={true} />
+					<Title content={'DETALLES'} arrow={'down'} date={true} size={14} />
+					{/* <Text
+						style={{ fontSize: scaledSize(14), marginLeft: 20 * WScale }}
+						className="font-sairaBold text-texto"
+					>
+						DETALLES
+					</Text>
+					<View className="flex flex-row items-center justify-center gap-2">
+						<Text style={{ fontSize: scaledSize(12) }} className="font-saira text-texto">
+							03/01/23
+						</Text>
+						<Pressable style={{ marginRight: 20 }}>
+							{/* <Image style={{ height: 8 * HScale, width: 14 * WScale }} source={arrowDown} /> */}
+					{/* <ArrowHeadDown height={8 * HScale} width={14 * WScale} />
+						</Pressable>
+					</View> */}
 				</View>
 				<View
 					style={{ height: 192 * HScale }}

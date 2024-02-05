@@ -1,6 +1,7 @@
 import { View, Text, Dimensions, Platform, Image, Pressable } from 'react-native';
 import React from 'react';
 import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
 
 import leftArrow from '../assets/arrow-left.png';
 import downArrow from '../assets/arrow-head-down.png';
@@ -20,23 +21,30 @@ interface titleProps {
 	arrow?: string;
 	details?: string;
 	date?: boolean;
+	color?: string;
+	size: number;
 }
 
-const Title = ({ content, arrow, details, date }: titleProps) => {
+const Title = ({ content, arrow, details, date, color, size }: titleProps) => {
 	const currentDate: Date = new Date();
 	const formattedDate: string = format(currentDate, 'dd/MM/yy');
+	const dayOfWeek = format(currentDate, 'EEE');
+	const dayOfMonth = format(currentDate, 'dd');
+
 	const isWeb = Platform.OS === 'web';
 
 	return (
 		<View
 			style={{ paddingHorizontal: 16 * WScale }}
 			className={
-				(arrow ? 'justify-between' : 'justify-center') +
-				' bg-amarilloVerdoso h-full w-full flex-row flex items-center  rounded-xl'
+				color === 'v'
+					? 'bg-violeta flex-row flex h-full w-full justify-between items-center rounded-t-xl'
+					: (arrow ? 'justify-between' : 'justify-center') +
+					  ' bg-amarilloVerdoso h-full w-full flex-row flex items-center  rounded-xl'
 			}
 		>
 			<View className={details ? 'items-start' : 'items-center' + ' flex flex-row justify-between'}>
-				<Text style={{ fontSize: scaledSize(14) }} className="font-sairaBold text-texto">
+				<Text style={{ fontSize: scaledSize(size) }} className="font-sairaBold text-texto">
 					{content}
 				</Text>
 
@@ -49,7 +57,16 @@ const Title = ({ content, arrow, details, date }: titleProps) => {
 			</View>
 
 			<View className=" flex items-center flex-row justify-between">
-				{date ? (
+				{date === true && color === 'v' ? (
+					<View className=" flex items-center flex-row justify-between">
+						<Text style={{ fontSize: scaledSize(14) }} className="font-roboto text-texto">
+							{dayOfWeek.toLocaleLowerCase() + ' '}
+						</Text>
+						<Text style={{ fontSize: scaledSize(14) }} className="font-robotoBold text-texto">
+							/ {dayOfMonth}
+						</Text>
+					</View>
+				) : date ? (
 					<Text
 						style={{ fontSize: scaledSize(14), paddingRight: 8 * WScale }}
 						className="font-saira text-texto"
