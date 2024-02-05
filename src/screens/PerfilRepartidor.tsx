@@ -11,6 +11,7 @@ import Tachito from '../assets/Tachito.svg';
 import BotonActivado from '../assets/BotonActivado.svg';
 import SmallDownArrow from '../assets/SmallFlechaAbajo.svg';
 import Header from '../components/Header';
+import List from '../components/List';
 import Title from '../components/Title';
 
 const { width, height } = Dimensions.get('window');
@@ -30,20 +31,6 @@ const PerfilRepartidor = () => {
 				style={{ height: 40 * HScale, marginTop: 28 * HScale, width: '100%' }} // h-[40] mt-[28] px-4
 			>
 				<Title content={'GESTIONAR PEDIDOS'} arrow={'left'} />
-				{/* <Text
-					style={{ paddingVertical: 4 * HScale, fontSize: scaledSize(18) }} // py-1
-					className="flex justify-center items-center font-sairaBold text-texto"
-				>
-					GESTIONAR PEDIDOS
-				</Text>
-				<View
-					style={{ paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
-					className="flex justify-center items-center"
-				>
-					{/* style={{ width: 13 * WScale, height: 15 * HScale, */}
-				{/* <Image source={leftArrow} /> */}
-				{/* <ArrowLeft height={15 * HScale} width={13 * WScale} />
-				</View>  */}
 			</View>
 			<View
 				style={{ height: 90 * HScale, marginTop: 10 * HScale, paddingHorizontal: 16 * WScale }} // h-24 mt-[10]
@@ -88,26 +75,6 @@ const PerfilRepartidor = () => {
 			</View>
 			<View style={{ height: 48 * HScale, marginTop: 10 * HScale, width: '100%' }}>
 				<Title content={'REPARTOS PENDIENTES'} details={'sin repartos'} arrow={'right'} />
-				{/* <View
-					style={{ height: 48 * HScale }}
-					className="w-full flex flex-row rounded-t-xl items-center justify-between"
-				> */}
-				{/* <View className="flex flex-col items-start justify-center">
-						<Text style={{ fontSize: scaledSize(14) }} className="font-sairaBold text-texto">
-							REPARTOS PENDIENTES
-						</Text>
-						<Text
-							style={{ fontSize: scaledSize(12), marginTop: scaledSize(-8) }}
-							className="text-texto font-sairaMedium"
-						>
-							sin repartos
-						</Text>
-					</View>
-					<Pressable style={{ width: scaledSize(8), height: scaledSize(12) }}>
-						<ArrowRight height={14 * HScale} width={8 * WScale} />
-						{/* <Image source={rightarrow} /> */}
-				{/* </Pressable> */}
-				{/* </View> */}
 			</View>
 			<View
 				style={{ height: 282 * HScale, marginTop: 10 * HScale }}
@@ -115,13 +82,6 @@ const PerfilRepartidor = () => {
 			>
 				<View style={{ height: 40 * HScale, width: '100%' }}>
 					<Title content={'HISTORIAL DE REPARTOS'} arrow={'down'} />
-					{/* <Text style={{ fontSize: scaledSize(14) }} className="font-sairaBold text-texto">
-						HISTORIAL DE REPARTOS
-					</Text>
-					<Pressable>
-						<SmallDownArrow height={8 * HScale} width={14 * WScale} />
-						{/* <Image source={downarrow} /> */}
-					{/* </Pressable>  */}
 				</View>
 				<View
 					style={{
@@ -151,54 +111,8 @@ const PerfilRepartidor = () => {
 						style={{ height: 70 * HScale }}
 						className="flex flex-row justify-between items-center w-full"
 					>
-						<View style={{ gap: 12 * WScale }} className="flex flex-row justify-start items-center">
-							<View
-								style={{ width: scaledSize(45), height: scaledSize(45) }}
-								className="rounded-xl bg-violeta flex items-center justify-center"
-							>
-								{/* <Image source={boxlist} /> */}
-								<Paquetes height={36 * HScale} width={36 * WScale} />
-							</View>
-							<View className="flex justify-center">
-								<Text
-									style={{ fontSize: scaledSize(12), marginBottom: -2 * HScale }}
-									className="font-robotoBold text-texto"
-								>
-									#0B438
-								</Text>
-								<Text
-									style={{ fontSize: scaledSize(12), marginTop: -1.5 * HScale }}
-									className="text-texto font-roboto"
-								>
-									Castillo 1356
-								</Text>
-								<Text
-									style={{ fontSize: scaledSize(12), marginTop: -2 * HScale }}
-									className="text-texto font-roboto"
-								>
-									CABA
-								</Text>
-							</View>
-						</View>
-						<View style={{ gap: 12 * HScale }} className="flex flex-col items-end justify-end">
-							<View
-								style={{ width: 88 * WScale, height: 15 * HScale }}
-								className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
-							>
-								<View className="flex flex-row justify-center">
-									<Entregado />
-									{/* <Image source={deshabilitado} className="flex items-center" /> */}
-								</View>
-								<Text style={{ fontSize: scaledSize(10) }}>ENTREGADO</Text>
-							</View>
-							<Pressable
-								style={{ height: 24 * HScale, width: 56 * WScale }}
-								className="flex flex-row justify-start items-center"
-							>
-								<Tachito height={20 * HScale} width={31 * HScale} />
-								{/* <Image source={tachito} /> */}
-							</Pressable>
-						</View>
+						<List column1='svg' column2='strings' content2String='#0A903, Las Heras 5678, CABA' column3='svgStringButton' content3='entregadoTrash'/>
+
 					</View>
 					<View style={{ paddingRight: 16 * WScale }} className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
@@ -207,53 +121,7 @@ const PerfilRepartidor = () => {
 						style={{ height: 70 * HScale }}
 						className="flex flex-row justify-between items-center w-full"
 					>
-						<View style={{ gap: 12 * WScale }} className="flex flex-row justify-start items-center">
-							<View
-								style={{ width: scaledSize(45), height: scaledSize(45) }}
-								className="rounded-xl bg-violeta flex items-center justify-center"
-							>
-								<Paquetes height={36 * HScale} width={36 * WScale} />
-							</View>
-							<View className="flex justify-center">
-								<Text
-									style={{ fontSize: scaledSize(12), marginBottom: -2 * HScale }}
-									className="font-robotoBold text-texto"
-								>
-									#0H167
-								</Text>
-								<Text
-									style={{ fontSize: scaledSize(12), marginTop: -1.5 * HScale }}
-									className="text-texto font-roboto"
-								>
-									Av.Rivadavia
-								</Text>
-								<Text
-									style={{ fontSize: scaledSize(12), marginTop: -2 * HScale }}
-									className="text-texto font-roboto"
-								>
-									CABA
-								</Text>
-							</View>
-						</View>
-						<View style={{ gap: 12 * HScale }} className="flex flex-col items-end justify-end">
-							<View
-								style={{ width: 88 * WScale, height: 15 * HScale }}
-								className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
-							>
-								<View className="flex flex-row justify-center">
-									<Entregado />
-									{/* <Image source={deshabilitado} className="flex items-center" /> */}
-								</View>
-								<Text style={{ fontSize: scaledSize(10) }}>ENTREGADO</Text>
-							</View>
-							<Pressable
-								style={{ height: 24 * HScale, width: 56 * WScale }}
-								className="flex flex-row justify-start items-center"
-							>
-								<Tachito height={20 * HScale} width={31 * HScale} />
-								{/* <Image source={tachito} /> */}
-							</Pressable>
-						</View>
+						<List column1='svg' column2='strings' content2String='#0A903, Las Heras 5678, CABA' column3='svgStringButton' content3='entregadoTrash'/>
 					</View>
 					<View style={{ paddingRight: 16 * WScale }} className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
@@ -262,52 +130,7 @@ const PerfilRepartidor = () => {
 						style={{ height: 70 * HScale }}
 						className="flex flex-row justify-between items-center w-full"
 					>
-						<View style={{ gap: 12 * WScale }} className="flex flex-row justify-start items-center">
-							<View
-								style={{ width: scaledSize(45), height: scaledSize(45) }}
-								className="rounded-xl bg-violeta flex items-center justify-center"
-							>
-								<Paquetes height={36 * HScale} width={36 * WScale} />
-							</View>
-							<View className="flex justify-center">
-								<Text
-									style={{ fontSize: scaledSize(12), marginBottom: -2 * HScale }}
-									className="font-robotoBold text-texto"
-								>
-									#0A903
-								</Text>
-								<Text
-									style={{ fontSize: scaledSize(12), marginTop: -1.5 * HScale }}
-									className="text-texto font-roboto"
-								>
-									Las Heras 5678
-								</Text>
-								<Text
-									style={{ fontSize: scaledSize(12), marginTop: -2 * HScale }}
-									className="text-texto font-roboto"
-								>
-									CABA
-								</Text>
-							</View>
-						</View>
-						<View style={{ gap: 12 * HScale }} className="flex flex-col items-end justify-end">
-							<View
-								style={{ width: 88 * WScale, height: 15 * HScale }}
-								className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
-							>
-								<View className="flex flex-row justify-center">
-									<Entregado />
-									{/* <Image source={deshabilitado} className="flex items-center" /> */}
-								</View>
-								<Text style={{ fontSize: scaledSize(10) }}>ENTREGADO</Text>
-							</View>
-							<Pressable
-								style={{ height: 24 * HScale, width: 56 * WScale }}
-								className="flex flex-row justify-start items-center"
-							>
-								<Tachito height={20 * HScale} width={31 * HScale} />
-							</Pressable>
-						</View>
+						<List column1='svg' column2='strings' content2String='#0A903, Las Heras 5678, CABA' column3='svgStringButton' content3='entregadoTrash'/>
 					</View>
 				</View>
 			</View>

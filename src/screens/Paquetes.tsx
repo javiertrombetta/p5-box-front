@@ -13,6 +13,7 @@ import TrashIcon from '../assets/Trash.svg';
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 import Header from '../components/Header';
+import List from '../components/List';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -91,305 +92,60 @@ const Paquetes = () => {
 					<View className="h-[1] w-full bg-gray-300" />
 				</View>
 				<View
-					style={{ height: 300 * HScale, paddingHorizontal: 16 * WScale }}
+					style={{ height: 300 * HScale }}
 					className="flex flex-col items-center justify-between"
 				>
-					<View
-						className="flex flex-row justify-between items-center w-full"
-						style={{ height: 70 * HScale }}
-					>
-						<View
-							style={{ width: 150 * WScale, gap: WScale * 12 }}
-							className="flex flex-row justify-start items-center" // gap-5 h-[75] w-[150] VER ESTO
-						>
-							<View
-								style={{ width: 45 * WScale, height: 45 * HScale }}
-								className="rounded-xl bg-violeta flex items-center justify-center"
-							>
-								{isWeb ? (
-									<Image
-										style={{ width: 36 * WScale, height: 36 * HScale }}
-										resizeMode="cover"
-										source={BoxList}
-									/>
-								) : (
-									<Box width={36 * WScale} height={36 * HScale} />
-								)}
-							</View>
-							<View className="flex justify-center w-full">
-								<Text
-									className="font-robotoMedium text-texto"
-									style={{ fontSize: scaledSize(12), marginBottom: -4 * HScale }}
-								>
-									#0B438
-								</Text>
-								<Text className="text-texto font-roboto" style={{ fontSize: scaledSize(12) }}>
-									Av. Castillo 1356,
-								</Text>
-								<Text
-									className="text-texto font-roboto"
-									style={{ fontSize: scaledSize(12), marginTop: -4 * HScale }}
-								>
-									CABA
-								</Text>
-							</View>
-						</View>
-						<View className="flex flex-col items-end justify-center">
-							<Pressable
-								style={{ height: 24 * HScale, width: 56 * WScale }}
-								className="flex flex-row justify-end items-center"
-							>
-								{isWeb ? (
-									<Image
-										resizeMode="stretch"
-										style={{ height: 20 * HScale, width: 32 * WScale }}
-										source={trash}
-									/>
-								) : (
-									<TrashIcon height={20 * HScale} width={32 * WScale} />
-								)}
-							</Pressable>
-						</View>
+					<View style={{ height: 70 * HScale, width: '100%', paddingHorizontal: 16 * WScale }}>
+						<List
+							column1="svg"
+							column2="strings"
+							content2String="#0G370, Heredia 785, CABA"
+							column3="svgTrash"
+						/>
 					</View>
-					<View className="flex w-full items-center">
+					<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View
-						className="flex flex-row justify-between items-center w-full"
-						style={{ height: 70 * HScale }}
-					>
-						<View
-							style={{ width: 150 * WScale, gap: WScale * 12 }}
-							className="flex flex-row justify-start items-center" // gap-5 h-[75] w-[150] VER ESTO
-						>
-							<View
-								style={{ width: 45 * WScale, height: 45 * HScale }}
-								className="rounded-xl bg-violeta flex items-center justify-center"
-							>
-								{isWeb ? (
-									<Image
-										style={{ width: 36 * WScale, height: 36 * HScale }}
-										resizeMode="cover"
-										source={BoxList}
-									/>
-								) : (
-									<Box width={36 * WScale} height={36 * HScale} />
-								)}
-							</View>
-							<View className="flex justify-center w-full">
-								<Text
-									className="font-robotoMedium text-texto"
-									style={{ fontSize: scaledSize(12), marginBottom: -4 * HScale }}
-								>
-									#0B438
-								</Text>
-								<Text className="text-texto font-roboto" style={{ fontSize: scaledSize(12) }}>
-									Av. Castillo 1356,
-								</Text>
-								<Text
-									className="text-texto font-roboto"
-									style={{ fontSize: scaledSize(12), marginTop: -4 * HScale }}
-								>
-									CABA
-								</Text>
-							</View>
-						</View>
-						<View className="flex flex-col items-end justify-center">
-							<Pressable
-								style={{ height: 24 * HScale, width: 56 * WScale }}
-								className="flex flex-row justify-end items-center"
-							>
-								{isWeb ? (
-									<Image
-										resizeMode="stretch"
-										style={{ height: 20 * HScale, width: 32 * WScale }}
-										source={trash}
-									/>
-								) : (
-									<TrashIcon height={20 * HScale} width={32 * WScale} />
-								)}
-							</Pressable>
-						</View>
+					<View style={{ height: 70 * HScale, width: '100%', paddingHorizontal: 16 * WScale }}>
+						<List
+							column1="svg"
+							column2="strings"
+							content2String="#0G370, Heredia 785, CABA"
+							column3="svgTrash"
+						/>
 					</View>
-					<View className="flex w-full items-center">
+					<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View
-						className="flex flex-row justify-between items-center w-full"
-						style={{ height: 70 * HScale }}
-					>
-						<View
-							style={{ width: 150 * WScale, gap: WScale * 12 }}
-							className="flex flex-row justify-start items-center" // gap-5 h-[75] w-[150] VER ESTO
-						>
-							<View
-								style={{ width: 45 * WScale, height: 45 * HScale }}
-								className="rounded-xl bg-violeta flex items-center justify-center"
-							>
-								{isWeb ? (
-									<Image
-										style={{ width: 36 * WScale, height: 36 * HScale }}
-										resizeMode="cover"
-										source={BoxList}
-									/>
-								) : (
-									<Box width={36 * WScale} height={36 * HScale} />
-								)}
-							</View>
-							<View className="flex justify-center w-full">
-								<Text
-									className="font-robotoMedium text-texto"
-									style={{ fontSize: scaledSize(12), marginBottom: -4 * HScale }}
-								>
-									#0B438
-								</Text>
-								<Text className="text-texto font-roboto" style={{ fontSize: scaledSize(12) }}>
-									Av. Castillo 1356,
-								</Text>
-								<Text
-									className="text-texto font-roboto"
-									style={{ fontSize: scaledSize(12), marginTop: -4 * HScale }}
-								>
-									CABA
-								</Text>
-							</View>
-						</View>
-						<View className="flex flex-col items-end justify-center">
-							<Pressable
-								style={{ height: 24 * HScale, width: 56 * WScale }}
-								className="flex flex-row justify-end items-center"
-							>
-								{isWeb ? (
-									<Image
-										resizeMode="stretch"
-										style={{ height: 20 * HScale, width: 32 * WScale }}
-										source={trash}
-									/>
-								) : (
-									<TrashIcon height={20 * HScale} width={32 * WScale} />
-								)}
-							</Pressable>
-						</View>
+					<View style={{ height: 70 * HScale, width: '100%', paddingHorizontal: 16 * WScale }}>
+						<List
+							column1="svg"
+							column2="strings"
+							content2String="#0G370, Heredia 785, CABA"
+							column3="svgTrash"
+						/>
 					</View>
-					<View className="flex w-full items-center">
+					<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View
-						className="flex flex-row justify-between items-center w-full"
-						style={{ height: 70 * HScale }}
-					>
-						<View
-							style={{ width: 150 * WScale, gap: WScale * 12 }}
-							className="flex flex-row justify-start items-center" // gap-5 h-[75] w-[150] VER ESTO
-						>
-							<View
-								style={{ width: 45 * WScale, height: 45 * HScale }}
-								className="rounded-xl bg-violeta flex items-center justify-center"
-							>
-								{isWeb ? (
-									<Image
-										style={{ width: 36 * WScale, height: 36 * HScale }}
-										resizeMode="cover"
-										source={BoxList}
-									/>
-								) : (
-									<Box width={36 * WScale} height={36 * HScale} />
-								)}
-							</View>
-							<View className="flex justify-center w-full">
-								<Text
-									className="font-robotoMedium text-texto"
-									style={{ fontSize: scaledSize(12), marginBottom: -4 * HScale }}
-								>
-									#0B438
-								</Text>
-								<Text className="text-texto font-roboto" style={{ fontSize: scaledSize(12) }}>
-									Av. Castillo 1356,
-								</Text>
-								<Text
-									className="text-texto font-roboto"
-									style={{ fontSize: scaledSize(12), marginTop: -4 * HScale }}
-								>
-									CABA
-								</Text>
-							</View>
-						</View>
-						<View className="flex flex-col items-end justify-center">
-							<Pressable
-								style={{ height: 24 * HScale, width: 56 * WScale }}
-								className="flex flex-row justify-end items-center"
-							>
-								{isWeb ? (
-									<Image
-										resizeMode="stretch"
-										style={{ height: 20 * HScale, width: 32 * WScale }}
-										source={trash}
-									/>
-								) : (
-									<TrashIcon height={20 * HScale} width={32 * WScale} />
-								)}
-							</Pressable>
-						</View>
+					<View style={{ height: 70 * HScale, width: '100%', paddingHorizontal: 16 * WScale }}>
+						<List
+							column1="svg"
+							column2="strings"
+							content2String="#0G370, Heredia 785, CABA"
+							column3="svgTrash"
+						/>
 					</View>
-					<View className="flex w-full items-center">
+					<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View
-						className="flex flex-row justify-between items-center w-full"
-						style={{ height: 70 * HScale }}
-					>
-						<View
-							style={{ width: 150 * WScale, gap: WScale * 12 }}
-							className="flex flex-row justify-start items-center" // gap-5 h-[75] w-[150] VER ESTO
-						>
-							<View
-								style={{ width: 45 * WScale, height: 45 * HScale }}
-								className="rounded-xl bg-violeta flex items-center justify-center"
-							>
-								{isWeb ? (
-									<Image
-										style={{ width: 36 * WScale, height: 36 * HScale }}
-										resizeMode="cover"
-										source={BoxList}
-									/>
-								) : (
-									<Box width={36 * WScale} height={36 * HScale} />
-								)}
-							</View>
-							<View className="flex justify-center w-full">
-								<Text
-									className="font-robotoMedium text-texto"
-									style={{ fontSize: scaledSize(12), marginBottom: -4 * HScale }}
-								>
-									#0B438
-								</Text>
-								<Text className="text-texto font-roboto" style={{ fontSize: scaledSize(12) }}>
-									Av. Castillo 1356,
-								</Text>
-								<Text
-									className="text-texto font-roboto"
-									style={{ fontSize: scaledSize(12), marginTop: -4 * HScale }}
-								>
-									CABA
-								</Text>
-							</View>
-						</View>
-						<View className="flex flex-col items-end justify-center">
-							<Pressable
-								style={{ height: 24 * HScale, width: 56 * WScale }}
-								className="flex flex-row justify-end items-center"
-							>
-								{isWeb ? (
-									<Image
-										resizeMode="stretch"
-										style={{ height: 20 * HScale, width: 32 * WScale }}
-										source={trash}
-									/>
-								) : (
-									<TrashIcon height={20 * HScale} width={32 * WScale} />
-								)}
-							</Pressable>
-						</View>
+					<View style={{ height: 70 * HScale, width: '100%', paddingHorizontal: 16 * WScale }}>
+						<List
+							column1="svg"
+							column2="strings"
+							content2String="#0G370, Heredia 785, CABA"
+							column3="svgTrash"
+						/>
 					</View>
 				</View>
 			</View>

@@ -20,6 +20,7 @@ import EllipseGreen from '../assets/EllipseGreen.svg';
 import EllipseOrange from '../assets/EllipseOrange.svg';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import List from '../components/List';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -51,7 +52,7 @@ const HomeIniciarJornada = () => {
 						REPARTOS PENDIENTES
 					</Text>
 					<View
-						style={{ paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
+						style={{ paddingVertical: 8 * HScale }}
 						className="flex justify-center items-center"
 					>
 						<ArrowLeft width={13 * WScale} height={15 * HScale} />
@@ -61,60 +62,7 @@ const HomeIniciarJornada = () => {
 					style={{ height: 70 * HScale, paddingLeft: 16 * WScale }}
 					className="flex flex-row justify-between items-center w-full"
 				>
-					<View style={{ gap: 12 * WScale }} className="flex flex-row  justify-start items-center">
-						<View
-							style={{ width: scaledSize(45), height: scaledSize(45) }}
-							className="rounded-xl bg-violeta flex items-center justify-center"
-						>
-							{isWeb ? <Image source={boxlist} /> : <Box width={scaledSize(40)} />}
-						</View>
-						<View className="flex justify-center">
-							<Text
-								style={{ fontSize: scaledSize(12), marginBottom: -4 * HScale }}
-								className="font-semibold text-texto"
-							>
-								#0H167
-							</Text>
-							<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
-								Av. Arriba,
-							</Text>
-							<Text
-								style={{ fontSize: scaledSize(12), marginTop: -4 * HScale }}
-								className="text-texto"
-							>
-								CABA
-							</Text>
-						</View>
-					</View>
-					<View style={{ gap: 12 * HScale }} className="flex flex-col items-end justify-end">
-						<View
-							style={{ minWidth: 78 * WScale, height: 15 * HScale }}
-							className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
-						>
-							<View className="flex flex-row justify-center">
-								{isWeb ? (
-									<Image source={enCurso} className="flex items-center" />
-								) : (
-									<EllipseGreen />
-								)}
-							</View>
-							<Text className="font-robotoMedium text-texto" style={{ fontSize: scaledSize(10) }}>
-								EN CURSO
-							</Text>
-						</View>
-						<View style={{ paddingRight: 16 * WScale }}>
-							<Pressable
-								style={{ height: scaledSize(24), width: scaledSize(56) }}
-								className="flex flex-row justify-end items-center"
-							>
-								{isWeb ? (
-									<Image resizeMode="stretch" source={tachito} />
-								) : (
-									<Trash width={35 * WScale} />
-								)}
-							</Pressable>
-						</View>
-					</View>
+						<List column1='svg' column2='strings' content2String='#0H167, Amenabar 2356, CABA' column3='svgStringButton' content3='enCursoTrash' />
 				</View>
 				<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
 					<View style={{ height: 1 }} className="w-full bg-gray-300" />
@@ -123,58 +71,7 @@ const HomeIniciarJornada = () => {
 					style={{ height: 70 * HScale, paddingLeft: 16 * WScale }}
 					className="flex flex-row justify-between items-center w-full"
 				>
-					<View style={{ gap: 12 * WScale }} className="flex flex-row  justify-start items-center">
-						<View
-							style={{ width: scaledSize(45), height: scaledSize(45) }}
-							className="rounded-xl bg-violeta flex items-center justify-center"
-						>
-							{isWeb ? <Image source={boxlist} /> : <Box width={scaledSize(40)} />}
-						</View>
-						<View className="flex justify-center">
-							<Text
-								style={{ fontSize: scaledSize(12), marginBottom: -4 * HScale }}
-								className="font-semibold text-texto"
-							>
-								#0H167
-							</Text>
-							<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
-								Av. Arriba,
-							</Text>
-							<Text
-								style={{ fontSize: scaledSize(12), marginTop: -4 * HScale }}
-								className="text-texto"
-							>
-								CABA
-							</Text>
-						</View>
-					</View>
-					<View style={{ gap: 12 * HScale }} className="flex flex-col items-end justify-end">
-						<View
-							style={{ width: 83 * WScale, height: 15 * HScale }}
-							className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
-						>
-							<View className="flex flex-row justify-center">
-								{isWeb ? (
-									<Image source={pendiente} className="flex items-center" />
-								) : (
-									<EllipseOrange />
-								)}
-							</View>
-							<Text className="font-robotoMedium text-texto" style={{ fontSize: scaledSize(10) }}>
-								PENDIENTE
-							</Text>
-						</View>
-						<View style={{ paddingRight: 16 * WScale }}>
-							<View
-								style={{
-									height: scaledSize(20),
-									width: scaledSize(62),
-								}}
-							>
-								<Button content="INICIAR" spec="blanco" borderR={true} />
-							</View>
-						</View>
-					</View>
+					<List column1='svg' column2='strings' content2String='#0H167, Amenabar 2356, CABA' column3='svgStringButton' content3='pendienteIniciar' />
 				</View>
 			</View>
 
@@ -330,7 +227,8 @@ const HomeIniciarJornada = () => {
 						style={{ height: 70 * HScale }}
 						className="flex flex-row justify-between items-center w-full"
 					>
-						<View style={{ gap: 12 * WScale }} className="flex flex-row justify-start items-center">
+						<List column1='svg' column2='strings' content2String='#0A903, Las Heras 5678, CABA' column3='svgStringButton' content3='entregado' />
+						{/* <View style={{ gap: 12 * WScale }} className="flex flex-row justify-start items-center">
 							<View
 								style={{ width: scaledSize(45), height: scaledSize(45) }}
 								className="rounded-xl bg-violeta flex items-center justify-center"
@@ -376,10 +274,10 @@ const HomeIniciarJornada = () => {
 									style={{ height: scaledSize(24), width: scaledSize(56) }}
 									className="flex flex-row justify-end items-center"
 								>
-									{/* <Image resizeMode="stretch" source={tachito} /> */}
+									{/* <Image resizeMode="stretch" source={tachito} /> 
 								</View>
 							</View>
-						</View>
+						</View> */}
 					</View>
 				</View>
 			</View>
