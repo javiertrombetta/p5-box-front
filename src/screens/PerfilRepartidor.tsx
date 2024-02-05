@@ -29,7 +29,7 @@ const PerfilRepartidor = () => {
 			<View
 				style={{ height: 40 * HScale, marginTop: 28 * HScale, width: '100%' }} // h-[40] mt-[28] px-4
 			>
-				<Title content={'GESTIONAR PEDIDOS'} arrow={'left'} />
+				<Title content={'GESTIONAR PEDIDOS'} arrow={'left'} size={18} />
 				{/* <Text
 					style={{ paddingVertical: 4 * HScale, fontSize: scaledSize(18) }} // py-1
 					className="flex justify-center items-center font-sairaBold text-texto"
@@ -87,7 +87,7 @@ const PerfilRepartidor = () => {
 				</View>
 			</View>
 			<View style={{ height: 48 * HScale, marginTop: 10 * HScale, width: '100%' }}>
-				<Title content={'REPARTOS PENDIENTES'} details={'sin repartos'} arrow={'right'} />
+				<Title content={'REPARTOS PENDIENTES'} details={'sin repartos'} arrow={'right'} size={14} />
 				{/* <View
 					style={{ height: 48 * HScale }}
 					className="w-full flex flex-row rounded-t-xl items-center justify-between"
@@ -114,7 +114,7 @@ const PerfilRepartidor = () => {
 				className="w-full justify-start flex rounded-t-xl bg-white"
 			>
 				<View style={{ height: 40 * HScale, width: '100%' }}>
-					<Title content={'HISTORIAL DE REPARTOS'} arrow={'down'} />
+					<Title content={'HISTORIAL DE REPARTOS'} arrow={'down'} size={14} />
 					{/* <Text style={{ fontSize: scaledSize(14) }} className="font-sairaBold text-texto">
 						HISTORIAL DE REPARTOS
 					</Text>

@@ -48,11 +48,11 @@ export default function App() {
 		<View className="w-full h-full">
 			{/* Screens Back-Office */}
 			{/* <LoginAdmin /> */}
-			{/* <HomeGestionarPedido /> */}
+			<HomeGestionarPedido />
 			{/* <Repartidores /> */}
 			{/* <Paquetes /> */}
 			{/* <AddPackage /> */}
-			<PerfilRepartidor />
+			{/* <PerfilRepartidor /> */}
 
 			{/* Screens Repartidor */}
 
@@ -60,7 +60,7 @@ export default function App() {
 			{/* <CreateAccount /> */}
 			{/* <HomeIniciarJornada /> */}
 			{/* <ObtenerPaquetes /> */}
-			<RepartoEnCurso />
+			{/* <RepartoEnCurso /> */}
 
 			<StatusBar style="auto" />
 		</View>
