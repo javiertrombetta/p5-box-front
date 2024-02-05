@@ -10,12 +10,18 @@ import vectorSuma from '../assets/vectorSuma.png';
 import arrowDown from '../assets/arrow-head-down.png';
 import personas from '../assets/Group 37396.png';
 import buttonTrue from '../assets/buttonTrue.png';
+import enCurso from '../assets/EllipseGreen.png';
+import pendiente from '../assets/EllipseOrange.png';
+
 
 import GreenCircle from '../assets/GreenCircle.svg';
 import GrayCircle from '../assets/GrayCircle.svg';
+import EllipseGreen from '../assets/EllipseGreen.svg';
+import EllipseOrange from '../assets/EllipseOrange.svg';
 import BlackCircle from '../assets/BlackCircle.svg';
 import TrashIcon from '../assets/Trash.svg';
 import Box from '../assets/Box.svg';
+import Entregado from '../assets/Entregado.svg';
 import ArrowRightBox from '../assets/ArrowRightBox.svg';
 import ArrowLeftBox from '../assets/ArrowLeftBox.svg';
 import Sum from '../assets/Sum.svg';
@@ -46,7 +52,7 @@ const List = ({ column1, circleValue, column2, content2String, column3, content3
 
 	return (
 		<View
-			style={{ height: '100%', paddingHorizontal: 16 * WScale }}
+			style={{ height: '100%', width: '100%' }}
 			className="flex flex-row justify-between items-center"
 		>
 			<View className="flex justify-start items-center flex-row">
@@ -67,7 +73,14 @@ const List = ({ column1, circleValue, column2, content2String, column3, content3
 							/>
 						</View>
 					)}
-					{column1 === 'svg' && !isWeb && <Box height={30 * HScale} width={80.69 * WScale} />}
+					{column1 === 'svg' && !isWeb && (
+						<View
+							style={{ width: scaledSize(45), height: scaledSize(45) }}
+							className="rounded-xl bg-violeta flex items-center justify-center"
+						>
+							<Box height={30 * HScale} width={80.69 * WScale} />
+						</View>
+						)}
 					{column1 === 'button' && isWeb && (
 						<Image
 							style={{ width: 19 * WScale, height: 19 * WScale }}
@@ -272,7 +285,123 @@ const List = ({ column1, circleValue, column2, content2String, column3, content3
 						)}
 					</Pressable>
 				)}
-				{/* agregar entregado/trash */}
+				{column3 === 'svgStringButton' && (
+					<View>
+						{content3 === 'entregadoTrash' && (
+						<View style={{ gap: 12 * HScale }} className="flex flex-col items-end justify-end">
+							<View
+							style={{ width: 88 * WScale, height: 15 * HScale }}
+							className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
+							>
+								<View className="flex flex-row justify-center">
+									<Entregado />
+								</View>
+								<Text style={{ fontSize: scaledSize(10) }}>ENTREGADO</Text>
+							</View>
+							<Pressable
+								style={{ height: 24 * HScale, width: 56 * WScale }}
+								className="flex flex-row justify-start items-center"
+							>
+								{isWeb ? (
+								<Image
+									resizeMode="stretch"
+									style={{ height: 20 * HScale, width: 32 * WScale }}
+									source={trash}
+								/>
+								) : (
+									<TrashIcon height={20 * HScale} width={32 * WScale} />
+								)}
+								</Pressable>
+							</View>
+						)}
+						{content3 === 'entregado' && (
+							<View style={{ gap: 12 * HScale }} className="flex flex-col items-end justify-end">
+								<View
+								style={{ width: 88 * WScale, height: 15 * HScale }}
+								className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
+								>
+									<View className="flex flex-row justify-center">
+										<Entregado />
+									</View>
+									<Text style={{ fontSize: scaledSize(10) }}>ENTREGADO</Text>
+								</View>
+								<View
+									style={{ height: 24 * HScale, width: 56 * WScale }}
+									className="flex flex-row justify-start items-center"
+								>
+								</View>
+							</View>
+						)}
+						{content3 === 'enCursoTrash' && (
+							<View style={{ gap: 12 * HScale }} className="flex flex-col items-end justify-end">
+								<View
+									style={{ minWidth: 78 * WScale, height: 15 * HScale }}
+									className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
+								>
+									<View className="flex flex-row justify-center">
+										{isWeb ? (
+											<Image source={enCurso} className="flex items-center" />
+										) : (
+											<EllipseGreen />
+										)}
+									</View>
+									<Text className="font-robotoMedium text-texto" style={{ fontSize: scaledSize(10) }}>
+										EN CURSO
+									</Text>
+								</View>
+								<View style={{ paddingRight: 16 * WScale }}>
+									<Pressable
+										style={{ height: scaledSize(24), width: scaledSize(56) }}
+										className="flex flex-row justify-end items-center"
+									>
+										{isWeb ? (
+											<Image
+											resizeMode="stretch"
+											style={{ height: 20 * HScale, width: 32 * WScale }}
+											source={trash}
+										/>
+										) : (
+											<TrashIcon height={20 * HScale} width={32 * WScale} />
+										)}
+									</Pressable>
+								</View>
+							</View>
+
+							
+						)}
+						{content3 === 'pendienteIniciar' && (
+							<View style={{ gap: 12 * HScale }} className="flex flex-col items-end justify-end">
+								<View
+									style={{ minWidth: 83 * WScale, height: 15 * HScale }}
+									className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
+								>
+									<View className="flex flex-row justify-center">
+										{isWeb ? (
+											<Image source={pendiente} className="flex items-center" />
+										) : (
+											<EllipseOrange />
+										)}
+									</View>
+									<Text className="font-robotoMedium text-texto" style={{ fontSize: scaledSize(10) }}>
+										PENDIENTE
+									</Text>
+								</View>
+								<View style={{ paddingRight: 16 * WScale }}>
+									<View
+										style={{
+											height: scaledSize(20),
+											width: scaledSize(62),
+										}}
+									>
+										<Button content="INICIAR" spec="blanco" borderR={4} />
+									</View>
+								</View>
+							</View>
+						)}
+						
+						
+					</View>
+				)}
 			</View>
 		</View>
 	);

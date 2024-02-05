@@ -95,7 +95,7 @@ const Paquetes = () => {
 					style={{ height: 300 * HScale }}
 					className="flex flex-col items-center justify-between"
 				>
-					<View className="" style={{ height: 70 * HScale, width: '100%' }}>
+					<View style={{ height: 70 * HScale, width: '100%', paddingHorizontal: 16 * WScale }}>
 						<List
 							column1="svg"
 							column2="strings"
@@ -106,7 +106,7 @@ const Paquetes = () => {
 					<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View className="" style={{ height: 70 * HScale, width: '100%' }}>
+					<View style={{ height: 70 * HScale, width: '100%', paddingHorizontal: 16 * WScale }}>
 						<List
 							column1="svg"
 							column2="strings"
@@ -117,7 +117,7 @@ const Paquetes = () => {
 					<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View className="" style={{ height: 70 * HScale, width: '100%' }}>
+					<View style={{ height: 70 * HScale, width: '100%', paddingHorizontal: 16 * WScale }}>
 						<List
 							column1="svg"
 							column2="strings"
@@ -128,7 +128,7 @@ const Paquetes = () => {
 					<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View className="" style={{ height: 70 * HScale, width: '100%' }}>
+					<View style={{ height: 70 * HScale, width: '100%', paddingHorizontal: 16 * WScale }}>
 						<List
 							column1="svg"
 							column2="strings"
@@ -139,12 +139,12 @@ const Paquetes = () => {
 					<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View className="" style={{ height: 70 * HScale, width: '100%' }}>
+					<View style={{ height: 70 * HScale, width: '100%', paddingHorizontal: 16 * WScale }}>
 						<List
 							column1="svg"
 							column2="strings"
 							content2String="#0G370, Heredia 785, CABA"
-							column3="button"
+							column3="svgTrash"
 						/>
 					</View>
 				</View>

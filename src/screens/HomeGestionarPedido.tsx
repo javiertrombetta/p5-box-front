@@ -167,13 +167,9 @@ const HomeGestionarPedido = () => {
 							05
 						</Text>
 					</View>
-					{/* <Image style={{ width: scaledSize(19), height: scaledSize(21) }} source={boxRight} /> */}
 					<ArrowRightBox height={scaledSize(21)} width={scaledSize(19)} />
 				</View>
 			</View>
-			{/* style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
-				className="bg-amarilloVerdoso w-full flex-row flex justify-between rounded-xl" */}
-			{/* className="w-full h-[43] flex flex-row rounded-xl items-center justify-between bg-amarilloVerdoso"> */}
 			<View
 				style={{ height: 248 * HScale, marginTop: 10 * HScale }}
 				className="w-full flex rounded-xl bg-white"
@@ -193,7 +189,6 @@ const HomeGestionarPedido = () => {
 							03/01/23
 						</Text>
 						<Pressable style={{ marginRight: 20 }}>
-							{/* <Image style={{ height: 8 * HScale, width: 14 * WScale }} source={arrowDown} /> */}
 							<ArrowHeadDown height={8 * HScale} width={14 * WScale} />
 						</Pressable>
 					</View>
@@ -202,13 +197,12 @@ const HomeGestionarPedido = () => {
 					style={{ height: 192 * HScale }}
 					className="flex flex-col justify-evenly align-middle"
 				>
-					<View style={{ height: 100 * HScale }}>
+					<View style={{ height: 100 * HScale, paddingHorizontal: 16 * WScale }}>
 						<List
 							column1="circleProgress"
 							circleValue={20}
 							column2="stringsImg"
 							content2String="Repartidores, 2/10 Habilitados"
-							content2Image="Personas-45-25"
 							column3="buttonVer"
 							content3=""
 						/>
@@ -216,13 +210,12 @@ const HomeGestionarPedido = () => {
 					<View className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-[89%] bg-gray-300" />
 					</View>
-					<View style={{ height: 100 * HScale }}>
+					<View style={{ height: 100 * HScale, paddingHorizontal: 16 * WScale }}>
 						<List
 							column1="circleProgress"
 							circleValue={80}
 							column2="stringsImg"
 							content2String="Paquetes, 16/20 Repartidos"
-							content2Image="Personas-45-25"
 							column3="buttonVer"
 							content3=""
 						/>
