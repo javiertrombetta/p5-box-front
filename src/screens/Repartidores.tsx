@@ -13,6 +13,7 @@ import GreenCircle from '../assets/GreenCircle.svg';
 import GrayCircle from '../assets/GrayCircle.svg';
 import BlackCircle from '../assets/BlackCircle.svg';
 import Header from '../components/Header';
+import List from '../components/List';
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 const { width, height } = Dimensions.get('window');
@@ -80,232 +81,50 @@ const Repartidores = () => {
 					style={{
 						marginVertical: 12 * HScale,
 						paddingTop: 2 * HScale,
-						paddingHorizontal: 16 * WScale,
-					}} // my-3 px-4
-					className="flex-row flex justify-between items-center"
+						paddingHorizontal: 16 * WScale
+					}}
 				>
-					<View
-						style={{ gap: 12 * WScale }} // gap-3
-						className="flex flex-row justify-center items-center"
-					>
-						<View style={{ width: 71 * WScale }} className="items-center flex">
-							<CircleProgress value={52} radius={scaledSize(38)} />
-						</View>
-						<View
-							style={{ gap: 4 * HScale }} // gap-1
-							className="flex flex-col items-start justify-center"
-						>
-							<Text
-								style={{ fontSize: scaledSize(14) }} // h-[15]
-								className="text-left items-center flex font-robotoBold text-texto"
-							>
-								Javier Trombetta
-							</Text>
-							<View
-								style={{ height: 15 * HScale, width: 68 * WScale }} // w-[78] h-[15]
-								className="flex flex-row items-center justify-evenly bg-gray-300 rounded-md"
-							>
-								<View className="flex items-center justify-center align-middle ">
-									<GreenCircle height={7 * HScale} width={7 * WScale} />
-								</View>
-								<View className="flex items-center justify-center align-middle ">
-									<Text className="text-texto font-robotoBold" style={{ fontSize: scaledSize(10) }}>
-										EN CURSO
-									</Text>
-								</View>
-							</View>
-						</View>
-					</View>
-					<View
-						style={{
-							width: 40 * WScale,
-							height: 40 * WScale,
-							borderRadius: (40 * WScale) / 2,
-							overflow: 'hidden',
-							display: 'flex',
-							alignItems: 'center',
-							justifyContent: 'center',
-						}}
-					>
-						<Image //w-10 h-10
-							style={{ width: 40 * WScale, height: '100%' }}
-							resizeMode="cover"
-							source={{
-								uri: 'https://media.licdn.com/dms/image/C4D03AQHrxjH4W8NPaQ/profile-displayphoto-shrink_100_100/0/1595166426988?e=1711584000&v=beta&t=JvYqCohzV0C4YBalxd1OrjXzkdphr-fEAlf1R_yaB2I',
-							}}
-						/>
-					</View>
+					<List
+						column1="circleProgress"
+						circleValue={52}
+						column2="stringsImg"
+						content2String="Javier Trombetta, green"
+						column3="img"
+						content3="https://media.licdn.com/dms/image/C4D03AQHrxjH4W8NPaQ/profile-displayphoto-shrink_100_100/0/1595166426988?e=1711584000&v=beta&t=JvYqCohzV0C4YBalxd1OrjXzkdphr-fEAlf1R_yaB2I"
+					/>
 				</View>
 				<View className="w-full h-[0.5] bg-gray-300" />
-				<View
-					style={{ marginVertical: 12 * HScale, paddingHorizontal: 16 * WScale }} // my-3 px-4
-					className="flex-row flex justify-between items-center"
-				>
-					<View
-						style={{ gap: 12 * WScale }} // gap-3
-						className="flex flex-row justify-center items-center"
-					>
-						<View style={{ width: 71 * WScale }} className="items-center flex">
-							<CircleProgress value={100} radius={scaledSize(38)} />
-						</View>
-						<View
-							style={{ gap: 4 * HScale }} // gap-1
-							className="flex flex-col items-start justify-center"
-						>
-							<Text
-								style={{ fontSize: scaledSize(14) }} // h-[15]
-								className="text-left items-center flex font-robotoBold text-texto"
-							>
-								Boris Manzano
-							</Text>
-							<View
-								style={{ height: 15 * HScale, width: 78 * WScale }} // w-[78] h-[15]
-								className="flex flex-row items-center justify-evenly bg-gray-300 rounded-md"
-							>
-								<View>
-									<BlackCircle height={7 * HScale} width={7 * WScale} />
-								</View>
-								<View className="flex items-center justify-center ">
-									<Text className="text-texto font-robotoBold" style={{ fontSize: scaledSize(10) }}>
-										ENTREGADO
-									</Text>
-								</View>
-							</View>
-						</View>
-					</View>
-					<View
-						style={{
-							width: 40 * WScale,
-							height: 40 * WScale,
-							borderRadius: (40 * WScale) / 2,
-							overflow: 'hidden',
-							display: 'flex',
-							alignItems: 'center',
-							justifyContent: 'center',
-						}}
-					>
-						<Image //w-10 h-10
-							style={{ width: 40 * WScale, height: '100%' }}
-							resizeMode="cover"
-							source={{
-								uri: 'https://cdn.discordapp.com/attachments/1153431672264597585/1197245225677107240/imagen_cv.jpg?ex=65c3cb01&is=65b15601&hm=1ef0e9a4d50b227820aedff86a7fc4f32298be71609da5b8caed50a49d4ef5d3&',
-							}}
-						/>
-					</View>
+				<View style={{ marginVertical: 12 * HScale, paddingHorizontal: 16 * WScale }}>
+					<List
+						column1="circleProgress"
+						circleValue={100}
+						column2="stringsImg"
+						content2String="Boris Manzano, black"
+						column3="img"
+						content3="https://cdn.discordapp.com/attachments/1153431672264597585/1197245225677107240/imagen_cv.jpg?ex=65c3cb01&is=65b15601&hm=1ef0e9a4d50b227820aedff86a7fc4f32298be71609da5b8caed50a49d4ef5d3&"
+					/>
 				</View>
 				<View className="w-full h-[0.7] bg-gray-300" />
-				<View
-					style={{ marginVertical: 12 * HScale, paddingHorizontal: 16 * WScale }} // my-3 px-4
-					className="flex-row flex justify-between items-center"
-				>
-					<View
-						style={{ gap: 12 * WScale }} // gap-3
-						className="flex flex-row justify-center items-center"
-					>
-						<View style={{ width: 71 * WScale }} className=" items-center flex">
-							<CircleProgress value={80} radius={scaledSize(38)} />
-						</View>
-						<View
-							style={{ gap: 4 * HScale }} // gap-1
-							className="flex flex-col items-start justify-center"
-						>
-							<Text
-								style={{ fontSize: scaledSize(14) }} // h-[15]
-								className="text-left items-center flex font-robotoBold text-texto"
-							>
-								Javier Colodro
-							</Text>
-							<View
-								style={{ height: 15 * HScale, width: 68 * WScale }} // w-[78] h-[15]
-								className="flex flex-row items-center justify-evenly bg-gray-300 rounded-md"
-							>
-								<View>
-									<GreenCircle height={7 * HScale} width={7 * WScale} />
-								</View>
-								<View className="flex items-center justify-center ">
-									<Text className="text-texto font-robotoBold" style={{ fontSize: scaledSize(10) }}>
-										EN CURSO
-									</Text>
-								</View>
-							</View>
-						</View>
-					</View>
-					<View
-						style={{
-							width: 40 * WScale,
-							height: 40 * WScale,
-							borderRadius: (40 * WScale) / 2,
-							overflow: 'hidden',
-							display: 'flex',
-							alignItems: 'center',
-							justifyContent: 'center',
-						}}
-					>
-						<Image //w-10 h-10
-							style={{ width: 40 * WScale, height: '100%' }}
-							resizeMode="cover"
-							source={{
-								uri: 'https://media.licdn.com/dms/image/C4D03AQGdOefz2XaJIA/profile-displayphoto-shrink_100_100/0/1612753310949?e=1711584000&v=beta&t=HW9EJnZysnYHEbMwD2B_XZgzcvt6RI5owIDOtCBwWUc',
-							}}
-						/>
-					</View>
+				<View style={{ marginVertical: 12 * HScale, paddingHorizontal: 16 * WScale }}>
+					<List
+						column1="circleProgress"
+						circleValue={80}
+						column2="stringsImg"
+						content2String="Javier Colodro, green"
+						column3="img"
+						content3="https://media.licdn.com/dms/image/C4D03AQGdOefz2XaJIA/profile-displayphoto-shrink_100_100/0/1612753310949?e=1711584000&v=beta&t=HW9EJnZysnYHEbMwD2B_XZgzcvt6RI5owIDOtCBwWUc"
+					/>
 				</View>
 				<View className="w-full h-[1] bg-gray-300" />
-				<View
-					style={{ marginVertical: 12 * HScale, paddingHorizontal: 16 * WScale }} // my-3 px-4
-					className="flex-row flex justify-between items-center"
-				>
-					<View
-						style={{ gap: 12 * WScale }} // gap-3
-						className="flex flex-row justify-center items-center"
-					>
-						<View style={{ width: 71 * WScale }} className=" items-center flex">
-							<CircleProgress value={0} radius={scaledSize(38)} />
-						</View>
-						<View
-							style={{ gap: 4 * HScale }} // gap-1
-							className="flex flex-col items-start justify-center"
-						>
-							<Text
-								style={{ fontSize: scaledSize(14) }} // h-[15]
-								className="text-left items-center flex font-robotoBold text-texto"
-							>
-								Lucas Glave
-							</Text>
-							<View
-								style={{ height: 15 * HScale, width: 96 * WScale }} // w-[78] h-[15]
-								className="flex flex-row items-center justify-evenly bg-gray-300 rounded-md"
-							>
-								<View>
-									<GrayCircle height={7 * HScale} width={7 * WScale} />
-								</View>
-								<View className="flex items-center justify-center ">
-									<Text className="text-texto font-robotoBold" style={{ fontSize: scaledSize(10) }}>
-										DESHABILITADO
-									</Text>
-								</View>
-							</View>
-						</View>
-					</View>
-					<View
-						style={{
-							width: 40 * WScale,
-							height: 40 * WScale,
-							borderRadius: (40 * WScale) / 2,
-							overflow: 'hidden',
-							display: 'flex',
-							alignItems: 'center',
-							justifyContent: 'center',
-						}}
-					>
-						<Image //w-10 h-10
-							style={{ width: 40 * WScale, height: '100%' }}
-							resizeMode="cover"
-							source={{
-								uri: 'https://media.licdn.com/dms/image/D4D03AQHbMGou_Pxf1w/profile-displayphoto-shrink_200_200/0/1679951269315?e=1711584000&v=beta&t=tmxoWJKRET9g3XGq5W_-y1HScfPezAPCwXJwrbheKFw',
-							}}
-						/>
-					</View>
+				<View style={{ marginVertical: 12 * HScale, paddingHorizontal: 16 * WScale }}>
+					<List
+						column1="circleProgress"
+						circleValue={0}
+						column2="stringsImg"
+						content2String="Lucas Glave, gray"
+						column3="img"
+						content3="https://media.licdn.com/dms/image/D4D03AQHbMGou_Pxf1w/profile-displayphoto-shrink_200_200/0/1679951269315?e=1711584000&v=beta&t=tmxoWJKRET9g3XGq5W_-y1HScfPezAPCwXJwrbheKFw"
+					/>
 				</View>
 			</View>
 			<View className="w-full h-[0.5] bg-gray-300" />
