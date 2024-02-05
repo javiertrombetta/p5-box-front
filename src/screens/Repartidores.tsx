@@ -81,6 +81,7 @@ const Repartidores = () => {
 					style={{
 						marginVertical: 12 * HScale,
 						paddingTop: 2 * HScale,
+						paddingHorizontal: 16 * WScale
 					}}
 				>
 					<List
@@ -93,7 +94,7 @@ const Repartidores = () => {
 					/>
 				</View>
 				<View className="w-full h-[0.5] bg-gray-300" />
-				<View style={{ marginVertical: 12 * HScale }}>
+				<View style={{ marginVertical: 12 * HScale, paddingHorizontal: 16 * WScale }}>
 					<List
 						column1="circleProgress"
 						circleValue={100}
@@ -104,7 +105,7 @@ const Repartidores = () => {
 					/>
 				</View>
 				<View className="w-full h-[0.7] bg-gray-300" />
-				<View style={{ marginVertical: 12 * HScale }}>
+				<View style={{ marginVertical: 12 * HScale, paddingHorizontal: 16 * WScale }}>
 					<List
 						column1="circleProgress"
 						circleValue={80}
@@ -115,7 +116,7 @@ const Repartidores = () => {
 					/>
 				</View>
 				<View className="w-full h-[1] bg-gray-300" />
-				<View style={{ marginVertical: 12 * HScale }}>
+				<View style={{ marginVertical: 12 * HScale, paddingHorizontal: 16 * WScale }}>
 					<List
 						column1="circleProgress"
 						circleValue={0}
@@ -125,63 +126,6 @@ const Repartidores = () => {
 						content3="https://media.licdn.com/dms/image/D4D03AQHbMGou_Pxf1w/profile-displayphoto-shrink_200_200/0/1679951269315?e=1711584000&v=beta&t=tmxoWJKRET9g3XGq5W_-y1HScfPezAPCwXJwrbheKFw"
 					/>
 				</View>
-
-				{/* <View
-					style={{ marginVertical: 12 * HScale, paddingHorizontal: 16 * WScale }} // my-3 px-4
-					className="flex-row flex justify-between items-center"
-				>
-					<View
-						style={{ gap: 12 * WScale }} // gap-3
-						className="flex flex-row justify-center items-center"
-					>
-						<View style={{ width: 71 * WScale }} className=" items-center flex">
-							<CircleProgress value={0} radius={scaledSize(38)} />
-						</View>
-						<View
-							style={{ gap: 4 * HScale }} // gap-1
-							className="flex flex-col items-start justify-center"
-						>
-							<Text
-								style={{ fontSize: scaledSize(14) }} // h-[15]
-								className="text-left items-center flex font-robotoBold text-texto"
-							>
-								Lucas Glave
-							</Text>
-							<View
-								style={{ height: 15 * HScale, width: 96 * WScale }} // w-[78] h-[15]
-								className="flex flex-row items-center justify-evenly bg-gray-300 rounded-md"
-							>
-								<View>
-									<GrayCircle height={7 * HScale} width={7 * WScale} />
-								</View>
-								<View className="flex items-center justify-center ">
-									<Text className="text-texto font-robotoBold" style={{ fontSize: scaledSize(10) }}>
-										DESHABILITADO
-									</Text>
-								</View>
-							</View>
-						</View>
-					</View>
-					<View
-						style={{
-							width: 40 * WScale,
-							height: 40 * WScale,
-							borderRadius: (40 * WScale) / 2,
-							overflow: 'hidden',
-							display: 'flex',
-							alignItems: 'center',
-							justifyContent: 'center',
-						}}
-					>
-						<Image //w-10 h-10
-							style={{ width: 40 * WScale, height: '100%' }}
-							resizeMode="cover"
-							source={{
-								uri: 'https://media.licdn.com/dms/image/D4D03AQHbMGou_Pxf1w/profile-displayphoto-shrink_200_200/0/1679951269315?e=1711584000&v=beta&t=tmxoWJKRET9g3XGq5W_-y1HScfPezAPCwXJwrbheKFw',
-							}}
-						/>
-					</View>
-				</View> */}
 			</View>
 			<View className="w-full h-[0.5] bg-gray-300" />
 			<View
