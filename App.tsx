@@ -1,33 +1,54 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { Text, View } from 'react-native';
+// import { StatusBar } from 'expo-status-bar';
+// import { Text, View } from 'react-native';
 import { NativeWindStyleSheet } from 'nativewind';
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
-import CircleProgress from './src/components/CircleProgress';
+import { Stack } from 'expo-router';
+import { Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 {
 	/* Importaciones Back-Office */
 }
-import LoginAdmin from './src/screens/LoginAdmin';
-import HomeGestionarPedido from './src/screens/HomeGestionarPedido';
+// import LoginAdmin from './src/screens/LoginAdmin';
+// import HomeGestionarPedido from './src/screens/HomeGestionarPedido';
 import Repartidores from './src/screens/Repartidores';
-import Paquetes from './src/screens/Paquetes';
-import AddPackage from './src/screens/AddPackage';
-import PerfilRepartidor from './src/screens/PerfilRepartidor';
+import HomeGestionarPedido from './src/screens/HomeGestionarPedido';
+// import Paquetes from './src/screens/Paquetes';
+// import AddPackage from './src/screens/AddPackage';
+// import PerfilRepartidor from './src/screens/PerfilRepartidor';
 
 {
 	/* Importaciones Repartidor */
 }
-import Login from './src/screens/Login';
-import CreateAccount from './src/screens/CreateAccount';
-import HomeIniciarJornada from './src/screens/HomeIniciarJornada';
-import ObtenerPaquetes from './src/screens/ObtenerPaquetes';
-import RepartoEnCurso from './src/screens/RepartoEnCurso';
+// import Login from './src/screens/Login';
+// import CreateAccount from './src/screens/CreateAccount';
+// import HomeIniciarJornada from './src/screens/HomeIniciarJornada';
+// import ObtenerPaquetes from './src/screens/ObtenerPaquetes';
+// import RepartoEnCurso from './src/screens/RepartoEnCurso';
 
 NativeWindStyleSheet.setOutput({
 	default: 'native',
 });
+
+// const Stack = createNativeStackNavigator();
+// type RootStackNavigatorParamsList = {
+// 	LoginAdmin: undefined;
+// 	HomeGestionarPedido: undefined;
+// 	Repartidores: undefined;
+// 	Paquetes: undefined;
+// 	AddPackage: undefined;
+// 	PerfilRepartidor: undefined;
+// 	Login: undefined;
+// 	CreateAccount: undefined;
+// 	HomeIniciarJornada: undefined;
+// 	ObtenerPaquetes: undefined;
+// 	RepartoEnCurso: undefined;
+//   };
+
+//   const Stack = createStackNavigator<RootStackNavigatorParamsList>();
 
 export default function App() {
 	const [loaded] = useFonts({
@@ -43,26 +64,21 @@ export default function App() {
 	if (!loaded) {
 		return <AppLoading />;
 	}
-
+	const Stack = createNativeStackNavigator();
 	return (
-		<View className="w-full h-full">
-			{/* Screens Back-Office */}
-			{/* <LoginAdmin /> */}
-			{/* <HomeGestionarPedido /> */}
-			{/* <Repartidores /> */}
-			{/* <Paquetes /> */}
-			{/* <AddPackage /> */}
-			<PerfilRepartidor />
-
-			{/* Screens Repartidor */}
-
-			{/* <Login /> */}
-			<CreateAccount />
-			{/* <HomeIniciarJornada /> */}
-			{/* <ObtenerPaquetes /> */}
-			{/* <RepartoEnCurso /> */}
-
-			<StatusBar style="auto" />
-		</View>
+		<NavigationContainer>
+				<Stack.Navigator>
+					<Stack.Screen
+						name="Repartidores"
+						component={Repartidores}
+						options={{ headerShown: false }}
+					/>
+					<Stack.Screen
+						name="HomeGestionarPedido"
+						component={HomeGestionarPedido}
+						options={{ headerShown: false }}
+					/>
+				</Stack.Navigator>
+		</NavigationContainer>
 	);
 }
