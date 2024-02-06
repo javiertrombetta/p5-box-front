@@ -33,23 +33,6 @@ NativeWindStyleSheet.setOutput({
 	default: 'native',
 });
 
-// const Stack = createNativeStackNavigator();
-// type RootStackNavigatorParamsList = {
-// 	LoginAdmin: undefined;
-// 	HomeGestionarPedido: undefined;
-// 	Repartidores: undefined;
-// 	Paquetes: undefined;
-// 	AddPackage: undefined;
-// 	PerfilRepartidor: undefined;
-// 	Login: undefined;
-// 	CreateAccount: undefined;
-// 	HomeIniciarJornada: undefined;
-// 	ObtenerPaquetes: undefined;
-// 	RepartoEnCurso: undefined;
-//   };
-
-//   const Stack = createStackNavigator<RootStackNavigatorParamsList>();
-
 export default function App() {
 	const [loaded] = useFonts({
 		SairaRegular: require('./src/assets/fonts/Saira-Regular.ttf'),
