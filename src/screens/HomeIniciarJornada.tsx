@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text, Pressable, Image, StyleSheet, Dimensions, Platform } from 'react-native';
+import Header from '../components/Header';
+import { useNavigation } from '@react-navigation/native'
 
 import box from '../assets/box.png';
 import leftArrow from '../assets/arrow-left.png';
@@ -18,7 +20,6 @@ import Box from '../assets/Box.svg';
 import Trash from '../assets/Trash.svg';
 import EllipseGreen from '../assets/EllipseGreen.svg';
 import EllipseOrange from '../assets/EllipseOrange.svg';
-import Header from '../components/Header';
 import Button from '../components/Button';
 import List from '../components/List';
 
@@ -30,13 +31,13 @@ const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 const HomeIniciarJornada = () => {
 	const isWeb = Platform.OS === 'web';
-
+	// const navigation = useNavigation()
 	return (
 		<View
 			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
 			className="w-full bg-verde h-full flex flex-col items-center"
 		>
-			<Header />
+			{/* <Header/> */}
 			<View
 				style={{ height: 188 * HScale, marginTop: 28 * HScale }} // h-24 mt-[10]
 				className="w-full flex flex-col rounded-xl items-start justify-start align-middle bg-white"
@@ -157,7 +158,6 @@ const HomeIniciarJornada = () => {
 									style={{ height: scaledSize(24), width: scaledSize(56) }}
 									className="flex flex-row justify-end items-center"
 								>
-									{/* <Image resizeMode="stretch" source={tachito} /> */}
 								</View>
 							</View>
 						</View>
@@ -215,7 +215,6 @@ const HomeIniciarJornada = () => {
 									style={{ height: scaledSize(24), width: scaledSize(56) }}
 									className="flex flex-row justify-end items-center"
 								>
-									{/* <Image resizeMode="stretch" source={tachito} /> */}
 								</View>
 							</View>
 						</View>
@@ -228,63 +227,13 @@ const HomeIniciarJornada = () => {
 						className="flex flex-row justify-between items-center w-full"
 					>
 						<List column1='svg' column2='strings' content2String='#0A903, Las Heras 5678, CABA' column3='svgStringButton' content3='entregado' />
-						{/* <View style={{ gap: 12 * WScale }} className="flex flex-row justify-start items-center">
-							<View
-								style={{ width: scaledSize(45), height: scaledSize(45) }}
-								className="rounded-xl bg-violeta flex items-center justify-center"
-							>
-								{isWeb ? <Image source={boxlist} /> : <Box width={scaledSize(40)} />}
-							</View>
-							<View className="flex justify-center">
-								<Text
-									style={{ fontSize: scaledSize(12), marginBottom: -4 * HScale }}
-									className="font-semibold text-texto"
-								>
-									#0H167
-								</Text>
-								<Text style={{ fontSize: scaledSize(12) }} className="text-texto">
-									Av. Arriba,
-								</Text>
-								<Text
-									style={{ fontSize: scaledSize(12), marginTop: -4 * HScale }}
-									className="text-texto"
-								>
-									CABA
-								</Text>
-							</View>
-						</View>
-						<View style={{ gap: 12 * HScale }} className="flex flex-col items-end justify-end">
-							<View
-								style={{ width: 88 * WScale, height: 15 * HScale }}
-								className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
-							>
-								<View className="flex flex-row justify-center">
-									<Entregado
-										height={scaledSize(7)}
-										width={scaledSize(7)}
-										className="flex items-center"
-									/>
-								</View>
-								<Text className="font-robotoMedium text-texto" style={{ fontSize: scaledSize(10) }}>
-									ENTREGADO
-								</Text>
-							</View>
-							<View style={{ paddingRight: 16 * WScale }}>
-								<View
-									style={{ height: scaledSize(24), width: scaledSize(56) }}
-									className="flex flex-row justify-end items-center"
-								>
-									{/* <Image resizeMode="stretch" source={tachito} /> 
-								</View>
-							</View>
-						</View> */}
+						
 					</View>
 				</View>
 			</View>
 			<View style={{ marginTop: 24 * HScale }} className="flex justify-center items-center">
 				<View
 					style={{ height: 28 * HScale, width: 270 * WScale }}
-					// className=" flex flex-row justify-center items-center align-middle bg-texto"
 				>
 					<Button content="OBTENER PAQUETES" spec="texto" />
 				</View>

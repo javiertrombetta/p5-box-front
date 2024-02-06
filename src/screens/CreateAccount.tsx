@@ -14,6 +14,7 @@ import Eye from '../assets/Eye.svg';
 import ProfilePic from '../assets/ProfilePic.svg';
 import OpenEye from '../assets/OpenEye.svg';
 import Button from '../components/Button';
+import Card from '../components/Card';
 import Title from '../components/Title';
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
@@ -78,10 +79,12 @@ const CreateAccount = () => {
 			>
 				<Title content={'CREÁ TU CUENTA'} arrow={'left'} size={18} />
 			</View>
-			<View
+			{/* <View
 				style={{ height: 510 * HScale, marginTop: 10 * HScale }}
 				className="w-full items-center rounded-xl bg-blanco"
-			>
+			> */}
+				<Card header='none' height={510} dropdown='false'>
+					
 				{/* aca loco */}
 				{selectPhoto ? (
 					<Pressable
@@ -246,14 +249,11 @@ const CreateAccount = () => {
 					style={{ top: 15 * HScale }}
 					className="justify-center underline items-center align-middle"
 				>
-					{/* <Text
-						className="font-roboto text-texto"
-						style={{ textDecorationLine: 'underline', fontSize: scaledSize(12) }}
-					> */}
 					<Button spec="transp" content="¿Ya tenés una cuenta?" />
-					{/* </Text> */}
 				</View>
-			</View>
+				</Card>
+
+			{/* </View> */}
 		</View>
 	);
 };
