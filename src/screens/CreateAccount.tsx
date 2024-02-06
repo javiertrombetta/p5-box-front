@@ -90,7 +90,7 @@ const CreateAccount = () => {
 				style={{ height: 510 * HScale, marginTop: 10 * HScale }}
 				className="w-full items-center rounded-xl bg-blanco"
 			> */}
-				<Card height={510} dropdown='false'>
+				<Card header='none' height={510} dropdown='false'>
 					
 				{/* aca loco */}
 				{selectPhoto ? (
