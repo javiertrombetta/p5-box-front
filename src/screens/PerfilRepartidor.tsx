@@ -30,7 +30,21 @@ const PerfilRepartidor = () => {
 			<View
 				style={{ height: 40 * HScale, marginTop: 28 * HScale, width: '100%' }} // h-[40] mt-[28] px-4
 			>
-				<Title content={'GESTIONAR PEDIDOS'} arrow={'left'} />
+				<Title content={'GESTIONAR PEDIDOS'} arrow={'left'} size={18} />
+				{/* <Text
+					style={{ paddingVertical: 4 * HScale, fontSize: scaledSize(18) }} // py-1
+					className="flex justify-center items-center font-sairaBold text-texto"
+				>
+					GESTIONAR PEDIDOS
+				</Text>
+				<View
+					style={{ paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
+					className="flex justify-center items-center"
+				>
+					{/* style={{ width: 13 * WScale, height: 15 * HScale, */}
+				{/* <Image source={leftArrow} /> */}
+				{/* <ArrowLeft height={15 * HScale} width={13 * WScale} />
+				</View>  */}
 			</View>
 			<View
 				style={{ height: 90 * HScale, marginTop: 10 * HScale, paddingHorizontal: 16 * WScale }} // h-24 mt-[10]
@@ -74,14 +88,41 @@ const PerfilRepartidor = () => {
 				</View>
 			</View>
 			<View style={{ height: 48 * HScale, marginTop: 10 * HScale, width: '100%' }}>
-				<Title content={'REPARTOS PENDIENTES'} details={'sin repartos'} arrow={'right'} />
+				<Title content={'REPARTOS PENDIENTES'} details={'sin repartos'} arrow={'right'} size={14} />
+				{/* <View
+					style={{ height: 48 * HScale }}
+					className="w-full flex flex-row rounded-t-xl items-center justify-between"
+				> */}
+				{/* <View className="flex flex-col items-start justify-center">
+						<Text style={{ fontSize: scaledSize(14) }} className="font-sairaBold text-texto">
+							REPARTOS PENDIENTES
+						</Text>
+						<Text
+							style={{ fontSize: scaledSize(12), marginTop: scaledSize(-8) }}
+							className="text-texto font-sairaMedium"
+						>
+							sin repartos
+						</Text>
+					</View>
+					<Pressable style={{ width: scaledSize(8), height: scaledSize(12) }}>
+						<ArrowRight height={14 * HScale} width={8 * WScale} />
+						{/* <Image source={rightarrow} /> */}
+				{/* </Pressable> */}
+				{/* </View> */}
 			</View>
 			<View
 				style={{ height: 282 * HScale, marginTop: 10 * HScale }}
 				className="w-full justify-start flex rounded-t-xl bg-white"
 			>
 				<View style={{ height: 40 * HScale, width: '100%' }}>
-					<Title content={'HISTORIAL DE REPARTOS'} arrow={'down'} />
+					<Title content={'HISTORIAL DE REPARTOS'} arrow={'down'} size={14} />
+					{/* <Text style={{ fontSize: scaledSize(14) }} className="font-sairaBold text-texto">
+						HISTORIAL DE REPARTOS
+					</Text>
+					<Pressable>
+						<SmallDownArrow height={8 * HScale} width={14 * WScale} />
+						{/* <Image source={downarrow} /> */}
+					{/* </Pressable>  */}
 				</View>
 				<View
 					style={{
@@ -111,8 +152,13 @@ const PerfilRepartidor = () => {
 						style={{ height: 70 * HScale }}
 						className="flex flex-row justify-between items-center w-full"
 					>
-						<List column1='svg' column2='strings' content2String='#0A903, Las Heras 5678, CABA' column3='svgStringButton' content3='entregadoTrash'/>
-
+						<List
+							column1="svg"
+							column2="strings"
+							content2String="#0A903, Las Heras 5678, CABA"
+							column3="svgStringButton"
+							content3="entregadoTrash"
+						/>
 					</View>
 					<View style={{ paddingRight: 16 * WScale }} className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
@@ -121,7 +167,13 @@ const PerfilRepartidor = () => {
 						style={{ height: 70 * HScale }}
 						className="flex flex-row justify-between items-center w-full"
 					>
-						<List column1='svg' column2='strings' content2String='#0A903, Las Heras 5678, CABA' column3='svgStringButton' content3='entregadoTrash'/>
+						<List
+							column1="svg"
+							column2="strings"
+							content2String="#0A903, Las Heras 5678, CABA"
+							column3="svgStringButton"
+							content3="entregadoTrash"
+						/>
 					</View>
 					<View style={{ paddingRight: 16 * WScale }} className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
@@ -130,7 +182,13 @@ const PerfilRepartidor = () => {
 						style={{ height: 70 * HScale }}
 						className="flex flex-row justify-between items-center w-full"
 					>
-						<List column1='svg' column2='strings' content2String='#0A903, Las Heras 5678, CABA' column3='svgStringButton' content3='entregadoTrash'/>
+						<List
+							column1="svg"
+							column2="strings"
+							content2String="#0A903, Las Heras 5678, CABA"
+							column3="svgStringButton"
+							content3="entregadoTrash"
+						/>
 					</View>
 				</View>
 			</View>
