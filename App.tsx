@@ -48,7 +48,7 @@ export default function App() {
 		<View className="w-full h-full">
 			{/* Screens Back-Office */}
 			{/* <LoginAdmin /> */}
-			<HomeGestionarPedido />
+			{/* <HomeGestionarPedido /> */}
 			{/* <Repartidores /> */}
 			{/* <Paquetes /> */}
 			{/* <AddPackage /> */}
