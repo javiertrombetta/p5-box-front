@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Pressable, Image, TextInput, Dimensions, Platform } from 'react-native';
+import { View, Text, Pressable, Image, TextInput, Dimensions, Platform, SafeAreaView } from 'react-native';
 
 import leftArrow from '../assets/arrow-left.png';
 import box from '../assets/box.png';
@@ -23,11 +23,12 @@ const AddPackage = () => {
 	const isWeb = Platform.OS === 'web';
 
 	return (
+		<SafeAreaView>
 		<View
 			className="bg-verde w-full h-full flex-col items-center  flex"
 			style={{ paddingHorizontal: 30 * WScale, paddingVertical: 6 * HScale }}
 		>
-			<Header />
+			{/* <Header /> */}
 			<View
 				style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
 				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
@@ -135,6 +136,7 @@ const AddPackage = () => {
 				<Button spec="texto" content="AGREGAR" />
 			</View>
 		</View>
+		</SafeAreaView>
 	);
 };
 
