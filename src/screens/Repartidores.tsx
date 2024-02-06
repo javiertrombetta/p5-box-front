@@ -1,5 +1,7 @@
 import { View, Text, Button, Pressable, Image, Dimensions, Platform } from 'react-native';
 import React, { useEffect } from 'react';
+import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack';
+
 
 import box from '../assets/box.png';
 import leftArrow from '../assets/arrow-left.png';
@@ -20,7 +22,14 @@ const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
 const HScale = height / 640;
 
-const Repartidores = () => {
+type RootStackParamList = {
+	HomeGestionarPedido: undefined;
+	Repartidores: undefined;
+  };
+  
+type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'HomeGestionarPedido'>;
+
+const Repartidores = ({ navigation }: { navigation: HomeScreenNavigationProp }) => {
 	const isWeb = Platform.OS === 'web';
 
 	return (
@@ -28,7 +37,7 @@ const Repartidores = () => {
 			className="bg-verde w-full h-full flex-col items-center  flex"
 			style={{ paddingHorizontal: 30 * WScale, paddingVertical: 6 * HScale }}
 		>
-			<Header />
+			<Header navigation={navigation}/>
 			<View
 				style={{
 					height: 40 * HScale,
