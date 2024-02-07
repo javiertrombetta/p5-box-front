@@ -25,7 +25,7 @@ const Navigation = () => {
 	const Stack = createNativeStackNavigator();
 
 	return (
-		<Stack.Navigator initialRouteName="HomeIniciarJornada">
+		<Stack.Navigator initialRouteName="CreateAccount">
 			<Stack.Screen name="Repartidores" component={Repartidores} options={{ headerShown: false }} />
 			<Stack.Screen
 				name="HomeGestionarPedido"
