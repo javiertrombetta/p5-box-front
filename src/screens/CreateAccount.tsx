@@ -83,8 +83,7 @@ const CreateAccount = () => {
 				style={{ height: 510 * HScale, marginTop: 10 * HScale }}
 				className="w-full items-center rounded-xl bg-blanco"
 			> */}
-				<Card header='none' height={510} dropdown='false'>
-					
+			<Card header="none" height={510} dropdown="false">
 				{/* aca loco */}
 				{selectPhoto ? (
 					<Pressable
@@ -233,7 +232,7 @@ const CreateAccount = () => {
 					<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
 				</View>
 				<View style={{ height: 28 * HScale, width: 270 * WScale, marginTop: 50 * HScale }}>
-					<Button spec="texto" content="CREAR" />
+					<Button spec="texto" content="CREAR" navigate="" />
 				</View>
 				<View
 					style={{
@@ -243,15 +242,15 @@ const CreateAccount = () => {
 					}}
 					// className="flex justify-center items-center align-middle border border-texto text-texto"
 				>
-					<Button spec="blanco" content="INICIAR SESION" />
+					<Button spec="blanco" content="INICIAR SESION" navigate="" />
 				</View>
 				<View
 					style={{ top: 15 * HScale }}
 					className="justify-center underline items-center align-middle"
 				>
-					<Button spec="transp" content="¿Ya tenés una cuenta?" />
+					<Button spec="transp" content="¿Ya tenés una cuenta?" navigate="" />
 				</View>
-				</Card>
+			</Card>
 
 			{/* </View> */}
 		</View>

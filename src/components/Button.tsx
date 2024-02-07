@@ -24,10 +24,10 @@ const blanco = '#FEFEFE';
 const amarilloVerdoso = '#CEF169';
 
 const Button = ({ spec, content, svg, borderR, navigate }: ButtonProps) => {
-	const navigation = useNavigation()
+	const navigation = useNavigation();
 	const handlePress = () => {
-		navigation.navigate(`${navigate}`)
-	}
+		navigation.navigate(`${navigate}`);
+	};
 	return (
 		<Pressable
 			onPress={handlePress}
