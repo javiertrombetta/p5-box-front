@@ -13,6 +13,8 @@ import ButtonTrue from '../assets/ButtonTrue.svg';
 
 import Header from '../components/Header';
 import Button from '../components/Button';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -20,16 +22,24 @@ const HScale = height / 640;
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
-const ObtenerPaquetes = () => {
-	// const [isEnabled, setIsEnabled] = useState(false);
-	// const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+type RootStackParamList = {
+	HomeIniciarJornada: undefined;
+	ObtenerPaquetes: undefined;
+};
 
+type ProfileScreenNavigationProp<T extends keyof RootStackParamList> = NativeStackNavigationProp<
+  RootStackParamList,
+  T
+>;
+
+const ObtenerPaquetes = () => {
+	const navigation = useNavigation<ProfileScreenNavigationProp<'HomeIniciarJornada'>>();
 	return (
 		<View
 			className="bg-verde w-full h-full flex-col items-center  flex"
 			style={{ paddingHorizontal: 30 * WScale, paddingVertical: 6 * HScale }}
 		>
-			{/* <Header /> */}
+			<Header navigation={navigation}/>
 			<View
 				style={{ height: 40 * HScale, paddingHorizontal: 20 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
 				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
@@ -305,7 +315,7 @@ const ObtenerPaquetes = () => {
 					marginTop: 10 * HScale,
 				}}
 			>
-				<Button content="INICIAR JORNADA" spec="texto" />
+				<Button content="INICIAR JORNADA" spec="texto" navigate='HomeIniciarJornada'/>
 			</View>
 		</View>
 	);
