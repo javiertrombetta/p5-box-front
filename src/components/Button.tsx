@@ -3,6 +3,7 @@ import React from 'react';
 import { BackgroundImage } from 'react-native-elements/dist/config';
 import { color } from 'react-native-elements/dist/helpers';
 import Sum from '../assets/Sum.svg';
+import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -13,6 +14,7 @@ const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 interface ButtonProps {
 	spec: string;
 	content: string;
+	navigate: string;
 	svg?: boolean;
 	borderR?: number;
 }
@@ -21,9 +23,14 @@ const texto = '#24424D';
 const blanco = '#FEFEFE';
 const amarilloVerdoso = '#CEF169';
 
-const Button = ({ spec, content, svg, borderR }: ButtonProps) => {
+const Button = ({ spec, content, svg, borderR, navigate }: ButtonProps) => {
+	const navigation = useNavigation()
+	const handlePress = () => {
+		navigation.navigate(`${navigate}`)
+	}
 	return (
 		<Pressable
+			onPress={handlePress}
 			style={({ pressed }) => [
 				spec === 'texto' && {
 					backgroundColor: pressed ? 'rgb(22 41 48)' : texto,

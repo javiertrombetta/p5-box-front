@@ -13,6 +13,8 @@ import LogoBox from '../assets/LogoBox.svg';
 import buenos from '../assets/buenos.png';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -20,13 +22,29 @@ const HScale = height / 640;
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
+// NAVIGATION REPARTIDOR
+type RootStackParamList = {
+	HomeIniciarJornada: undefined;
+	ObtenerPaquetes: undefined;
+};
+
+type ProfileScreenNavigationProp<T extends keyof RootStackParamList> = NativeStackNavigationProp<
+  RootStackParamList,
+  T
+>;
+
+// NAVIGATION ADMIN
+
+
 function RepartoEnCurso() {
+	const navigation = useNavigation<ProfileScreenNavigationProp<'HomeIniciarJornada'>>();
+
 	return (
 		<View
 			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
 			className="w-full bg-verde h-full flex flex-col items-center"
 		>
-			<Header />
+			<Header navigation={navigation}/>
 			<View
 				style={{ height: 40 * HScale, paddingHorizontal: 20 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
 				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
@@ -108,7 +126,7 @@ function RepartoEnCurso() {
 					marginTop: 24 * HScale,
 				}}
 			>
-				<Button content="FINALIZAR" spec="texto" />
+				<Button content="FINALIZAR" spec="texto" navigate='ObtenerPaquetes'/>
 			</View>
 			<View
 				style={{
@@ -117,7 +135,7 @@ function RepartoEnCurso() {
 					marginTop: 10 * HScale,
 				}}
 			>
-				<Button content="CANCELAR ENTREGA" spec="blanco" />
+				<Button content="CANCELAR ENTREGA" spec="blanco" navigate=''/>
 			</View>
 		</View>
 	);

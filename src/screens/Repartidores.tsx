@@ -24,10 +24,11 @@ const HScale = height / 640;
 
 type RootStackParamList = {
 	HomeGestionarPedido: undefined;
-	Repartidores: undefined;
+	PerfilRepartidor: undefined;
   };
   
 type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'HomeGestionarPedido'>;
+
 
 const Repartidores = ({ navigation }: { navigation: HomeScreenNavigationProp }) => {
 	const isWeb = Platform.OS === 'web';
@@ -37,7 +38,7 @@ const Repartidores = ({ navigation }: { navigation: HomeScreenNavigationProp }) 
 			className="bg-verde w-full h-full flex-col items-center  flex"
 			style={{ paddingHorizontal: 30 * WScale, paddingVertical: 6 * HScale }}
 		>
-			<Header navigation={navigation}/>
+			<Header />
 			<View
 				style={{
 					height: 40 * HScale,
