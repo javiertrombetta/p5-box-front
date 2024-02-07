@@ -23,9 +23,18 @@ interface LoginCompProps {
 }
 
 const LoginComp = ({ client }: LoginCompProps) => {
+	const [data, setData] = useState({
+		email: '',
+		password: '',
+	});
 	const [text, setText] = useState('');
 	const isWeb = Platform.OS === 'web';
-
+	const handleInputChange = (field: keyof typeof data, value: string) => {
+		setData((prevData) => ({
+			...prevData,
+			[field]: value,
+		}));
+	};
 	return (
 		<View className="absolute flex rounded-2xl bg-verde w-full h-full">
 			<TextInput
@@ -38,8 +47,8 @@ const LoginComp = ({ client }: LoginCompProps) => {
 				}}
 				className="text-texto font-roboto absolute"
 				placeholder="Email@contraseña.com"
-				onChangeText={(newText) => setText(newText)}
-				defaultValue={text}
+				onChangeText={(newText) => handleInputChange('email', newText)}
+				defaultValue={data.email}
 			/>
 			<TextInput
 				style={{
@@ -51,8 +60,8 @@ const LoginComp = ({ client }: LoginCompProps) => {
 				}}
 				className="text-texto font-roboto absolute"
 				placeholder="**********"
-				onChangeText={(newText) => setText(newText)}
-				defaultValue={text}
+				onChangeText={(newText) => handleInputChange('password', newText)}
+				defaultValue={data.password}
 			/>
 			{isWeb ? (
 				<Image
@@ -85,7 +94,7 @@ const LoginComp = ({ client }: LoginCompProps) => {
 					width: 270 * WScale,
 				}}
 			>
-				<Button content={'INGRESAR'} spec={'texto'} borderR={8} />
+				<Button content={'INGRESAR'} spec={'texto'} borderR={8} action="postL" data={data} />
 			</View>
 			{client === true ? (
 				<View
