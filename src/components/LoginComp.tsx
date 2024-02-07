@@ -85,13 +85,13 @@ const LoginComp = ({ client }: LoginCompProps) => {
 					width: 270 * WScale,
 				}}
 			>
-				<Button content={'INGRESAR'} spec={'texto'} borderR={8} />
+				<Button content={'INGRESAR'} spec={'texto'} borderR={8} navigate="" />
 			</View>
 			{client === true ? (
 				<View
 					style={{ top: 185 * HScale, left: 15 * WScale, height: 30 * HScale, width: 270 * WScale }}
 				>
-					<Button content={'CREAR CUENTA'} spec={'blanco'} />
+					<Button content={'CREAR CUENTA'} spec={'blanco'} navigate="" />
 				</View>
 			) : (
 				''
@@ -101,7 +101,7 @@ const LoginComp = ({ client }: LoginCompProps) => {
 				className="underline"
 				style={client === true ? { top: 205 * HScale } : { top: 195 * HScale }}
 			>
-				<Button content={'Olvidé mi contraseña'} spec={'transp'} />
+				<Button content={'Olvidé mi contraseña'} spec={'transp'} navigate="" />
 			</View>
 		</View>
 	);
