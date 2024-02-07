@@ -56,7 +56,7 @@ export default function App() {
 
 			{/* Screens Repartidor */}
 
-			{/* <Login /> */}
+			<Login />
 			{/* <CreateAccount /> */}
 			{/* <HomeIniciarJornada /> */}
 			{/* <ObtenerPaquetes /> */}

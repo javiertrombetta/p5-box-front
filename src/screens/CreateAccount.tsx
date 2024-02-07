@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
-import { View, Text, Dimensions, Image, TextInput, Pressable, Platform } from 'react-native';
+import {
+	View,
+	Text,
+	Dimensions,
+	Image,
+	TextInput,
+	Pressable,
+	Platform,
+	NativeModules,
+} from 'react-native';
 import { launchImageLibrary, ImageLibraryOptions } from 'react-native-image-picker';
+import axios from 'axios';
 
 import box from '../assets/box.png';
 import leftArrow from '../assets/arrow-left.png';
@@ -22,7 +32,16 @@ const WScale = width / 360;
 const HScale = height / 640;
 
 const CreateAccount = () => {
-	const [text, setText] = useState('');
+	const [data, setData] = useState({
+		name: '',
+		lastname: '',
+		email: '',
+		password: '',
+	});
+	const [confirmPassword, setConfirmPassword] = useState('');
+	const [showPassword, setShowPassword] = useState(false);
+	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
 	const isWeb = Platform.OS === 'web';
 	const [selectPhoto, setSelectPhoto] = useState<string | undefined>();
 	const pickImage = () => {
@@ -44,6 +63,22 @@ const CreateAccount = () => {
 			}
 		});
 	};
+
+	const handleInputChange = (field: keyof typeof data, value: string) => {
+		setData((prevData) => ({
+			...prevData,
+			[field]: value,
+		}));
+	};
+
+	const handleTogglePassword = () => {
+		setShowPassword(!showPassword);
+	};
+
+	const handleToggleConfirmPassword = () => {
+		setShowConfirmPassword(!showConfirmPassword);
+	};
+
 	return (
 		<View
 			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
@@ -117,8 +152,8 @@ const CreateAccount = () => {
 					}}
 					className=" text-texto font-roboto"
 					placeholder="Nombre"
-					onChangeText={(newText) => setText(newText)}
-					defaultValue={text}
+					onChangeText={(newText) => handleInputChange('name', newText)}
+					defaultValue={data.name}
 				/>
 				<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
 
@@ -131,8 +166,8 @@ const CreateAccount = () => {
 					}}
 					className=" text-texto font-roboto"
 					placeholder="Apellido"
-					onChangeText={(newText) => setText(newText)}
-					defaultValue={text}
+					onChangeText={(newText) => handleInputChange('lastname', newText)}
+					defaultValue={data.lastname}
 				/>
 				<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
 
@@ -145,8 +180,8 @@ const CreateAccount = () => {
 					}}
 					className=" text-texto font-roboto"
 					placeholder="Email@contraseña.com"
-					onChangeText={(newText) => setText(newText)}
-					defaultValue={text}
+					onChangeText={(newText) => handleInputChange('email', newText)}
+					defaultValue={data.email}
 				/>
 				<View style={{ width: 260 * WScale, height: 0.5 }} className="bg-texto"></View>
 
@@ -160,13 +195,34 @@ const CreateAccount = () => {
 								fontSize: scaledSize(14),
 							}}
 							className=" text-texto font-roboto"
-							placeholder="**********"
-							onChangeText={(newText) => setText(newText)}
-							defaultValue={text}
+							placeholder="Contraseña"
+							secureTextEntry={!showPassword}
+							onChangeText={(newText) => handleInputChange('password', newText)}
+							defaultValue={data.password}
 						/>
 
-						<Pressable className="relative">
-							{isWeb ? (
+						<Pressable className="relative" onPress={handleTogglePassword}>
+							{showPassword ? (
+								isWeb ? (
+									<Image
+										style={{
+											top: 20 * HScale,
+											right: 5 * WScale,
+											width: scaledSize(20),
+											height: scaledSize(20),
+										}}
+										className=" text-texto"
+										source={openEye}
+									/>
+								) : (
+									<OpenEye
+										top={20 * HScale}
+										right={5 * WScale}
+										width={scaledSize(20)}
+										height={scaledSize(20)}
+									/>
+								)
+							) : isWeb ? (
 								<Image
 									style={{
 										top: 20 * HScale,
@@ -201,12 +257,33 @@ const CreateAccount = () => {
 							}}
 							className=" text-texto font-roboto"
 							placeholder="Confirmar contraseña"
-							onChangeText={(newText) => setText(newText)}
-							defaultValue={text}
+							secureTextEntry={!showConfirmPassword}
+							onChangeText={(newText) => setConfirmPassword(newText)}
+							defaultValue={confirmPassword}
 						/>
 
-						<Pressable className="relative">
-							{isWeb ? (
+						<Pressable className="relative" onPress={handleToggleConfirmPassword}>
+							{showConfirmPassword ? (
+								isWeb ? (
+									<Image
+										style={{
+											top: 20 * HScale,
+											right: 5 * WScale,
+											width: scaledSize(20),
+											height: scaledSize(20),
+										}}
+										className=" text-texto"
+										source={openEye}
+									/>
+								) : (
+									<OpenEye
+										top={20 * HScale}
+										right={5 * WScale}
+										width={scaledSize(20)}
+										height={scaledSize(20)}
+									/>
+								)
+							) : isWeb ? (
 								<Image
 									style={{
 										top: 20 * HScale,
@@ -215,10 +292,10 @@ const CreateAccount = () => {
 										height: scaledSize(20),
 									}}
 									className=" text-texto"
-									source={openEye}
+									source={closeEye}
 								/>
 							) : (
-								<OpenEye
+								<Eye
 									top={20 * HScale}
 									right={5 * WScale}
 									width={scaledSize(20)}
@@ -230,7 +307,7 @@ const CreateAccount = () => {
 					<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
 				</View>
 				<View style={{ height: 28 * HScale, width: 270 * WScale, marginTop: 50 * HScale }}>
-					<Button spec="texto" content="CREAR" />
+					<Button spec="texto" content="CREAR" data={data} action="postR" />
 				</View>
 				<View
 					style={{
@@ -250,6 +327,7 @@ const CreateAccount = () => {
 						className="font-roboto text-texto"
 						style={{ textDecorationLine: 'underline', fontSize: scaledSize(12) }}
 					> */}
+
 					<Button spec="transp" content="¿Ya tenés una cuenta?" />
 					{/* </Text> */}
 				</View>

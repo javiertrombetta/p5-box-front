@@ -1,8 +1,9 @@
-import { View, Text, Pressable, Dimensions } from 'react-native';
+import { View, Text, Pressable, Dimensions, Alert } from 'react-native';
 import React from 'react';
 import { BackgroundImage } from 'react-native-elements/dist/config';
 import { color } from 'react-native-elements/dist/helpers';
 import Sum from '../assets/Sum.svg';
+import axios from 'axios';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -15,15 +16,37 @@ interface ButtonProps {
 	content: string;
 	svg?: boolean;
 	borderR?: number;
+	data?: object;
+	action?: string;
 }
 
 const texto = '#24424D';
 const blanco = '#FEFEFE';
 const amarilloVerdoso = '#CEF169';
 
-const Button = ({ spec, content, svg, borderR }: ButtonProps) => {
+const Button = ({ spec, content, svg, borderR, data, action }: ButtonProps) => {
+	const handleCreateUser = async () => {
+		try {
+			const response = await axios.post('http://localhost:3000/api/v1/auth/register', data);
+			console.log('Usuario creado:', response.data);
+		} catch (error) {
+			console.error('Error al crear usuario:', error);
+		}
+	};
+	const handleLoginUser = async () => {
+		try {
+			const response = await axios.post('http://localhost:3000/api/v1/auth/login', data);
+			console.log('Usuario logueado:', response.data);
+		} catch (error) {
+			console.error('Error al loguear usuario:', error);
+		}
+	};
+
 	return (
 		<Pressable
+			onPress={
+				action === 'postR' ? handleCreateUser : action === 'postL' ? handleLoginUser : () => {}
+			}
 			style={({ pressed }) => [
 				spec === 'texto' && {
 					backgroundColor: pressed ? 'rgb(22 41 48)' : texto,
