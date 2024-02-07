@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Pressable, Image, StyleSheet, Dimensions, Platform } from 'react-native';
 import Header from '../components/Header';
-import { useNavigation } from '@react-navigation/native'
+import { NavigationProp, useNavigation, useNavigationContainerRef } from '@react-navigation/native'
 
 import box from '../assets/box.png';
 import leftArrow from '../assets/arrow-left.png';
@@ -22,6 +22,7 @@ import EllipseGreen from '../assets/EllipseGreen.svg';
 import EllipseOrange from '../assets/EllipseOrange.svg';
 import Button from '../components/Button';
 import List from '../components/List';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -29,15 +30,27 @@ const HScale = height / 640;
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
+type RootStackParamList = {
+	HomeIniciarJornada: undefined;
+	ObtenerPaquetes: undefined;
+};
+
+type ProfileScreenNavigationProp<T extends keyof RootStackParamList> = NativeStackNavigationProp<
+  RootStackParamList,
+  T
+>;
+
 const HomeIniciarJornada = () => {
+
 	const isWeb = Platform.OS === 'web';
-	// const navigation = useNavigation()
+	const navigation = useNavigation<ProfileScreenNavigationProp<'HomeIniciarJornada'>>();
+
 	return (
 		<View
 			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
 			className="w-full bg-verde h-full flex flex-col items-center"
 		>
-			{/* <Header/> */}
+			<Header navigation={navigation}/>
 			<View
 				style={{ height: 188 * HScale, marginTop: 28 * HScale }} // h-24 mt-[10]
 				className="w-full flex flex-col rounded-xl items-start justify-start align-middle bg-white"
@@ -235,7 +248,7 @@ const HomeIniciarJornada = () => {
 				<View
 					style={{ height: 28 * HScale, width: 270 * WScale }}
 				>
-					<Button content="OBTENER PAQUETES" spec="texto" />
+					<Button content="OBTENER PAQUETES" spec="texto" navigate='ObtenerPaquetes' />
 				</View>
 			</View>
 		</View>

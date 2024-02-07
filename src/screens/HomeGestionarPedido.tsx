@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, Pressable, Image, StyleSheet, Dimensions } from 'react-native';
 import CircleProgress from '../components/CircleProgress';
+import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack';
+
 
 import box from '../assets/box.png';
 import boxRight from '../assets/boxRight.png';
@@ -26,7 +28,15 @@ const HScale = height / 640;
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
-const HomeGestionarPedido = () => {
+type RootStackParamList = {
+	HomeGestionarPedido: undefined;
+	Repartidores: undefined;
+  };
+  
+type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'HomeGestionarPedido'>;
+
+const HomeGestionarPedido = ({ navigation }: { navigation: HomeScreenNavigationProp }) => {
+
 	return (
 		<View
 			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
@@ -63,28 +73,16 @@ const HomeGestionarPedido = () => {
 					</Text>
 				</View>
 			</View>
-
-			{/*style={{ height: 35 * HScale, paddingHorizontal: 16 * WScale, marginTop: 10 * HScale }} // px-4 mt-[10] h-[35]
-				className="bg-violeta flex-row flex w-full justify-between items-center rounded-t-xl"  */}
-			{/* 	<View className="w-full h-[30] flex rounded-t-xl justify-center bg-violeta"> */}
 			<View style={{ height: 84 * HScale, marginTop: 10 }} className="w-full flex justify-center">
 				<View
-					style={{ height: 30 * HScale }} // px-4 mt-[10] h-[35]
-					// className="bg-violeta flex-row flex w-full justify-between items-center rounded-t-xl"
+					style={{ height: 30 * HScale }}
 				>
 					<Title content={'ENERO'} color={'v'} size={14} />
-					{/* <Text
-						style={{ fontSize: scaledSize(14) }}
-						className="font-robotoBold text-texto flex align-middle"
-					>
-						ENERO
-					</Text> */}
 				</View>
 				<View
 					style={{ height: 54 * HScale }}
 					className="w-full flex flex-row rounded-b-xl items-center justify-evenly bg-white"
 				>
-					{/* <Image style={{ width: scaledSize(19), height: scaledSize(21) }} source={boxLeft} /> */}
 					<ArrowLeftBox height={scaledSize(21)} width={scaledSize(19)} />
 					<View
 						style={{ width: 34 * WScale, height: 34 * HScale }}
@@ -171,21 +169,6 @@ const HomeGestionarPedido = () => {
 			>
 				<View style={{ height: 40 * HScale, width: '100%' }}>
 					<Title content={'DETALLES'} arrow={'down'} date={true} size={14} />
-					{/* <Text
-						style={{ fontSize: scaledSize(14), marginLeft: 20 * WScale }}
-						className="font-sairaBold text-texto"
-					>
-						DETALLES
-					</Text>
-					<View className="flex flex-row items-center justify-center gap-2">
-						<Text style={{ fontSize: scaledSize(12) }} className="font-saira text-texto">
-							03/01/23
-						</Text>
-						<Pressable style={{ marginRight: 20 }}>
-							{/* <Image style={{ height: 8 * HScale, width: 14 * WScale }} source={arrowDown} /> */}
-					{/* <ArrowHeadDown height={8 * HScale} width={14 * WScale} />
-						</Pressable>
-					</View> */}
 				</View>
 				<View
 					style={{ height: 192 * HScale }}
