@@ -9,12 +9,23 @@ import BackgroundImage from '../assets/FondoLogin.svg';
 import LogoFull from '../assets/LogoFull.svg';
 import Eye from '../assets/Eye.svg';
 import LoginComp from '../components/LoginComp';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
 const HScale = height / 640;
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+
+// type RootStackParamList = {
+// 	Login: undefined;
+// 	CreateAccount: undefined;
+// };
+
+// type ProfileScreenNavigationProp<T extends keyof RootStackParamList> = NativeStackNavigationProp<
+//   RootStackParamList,
+//   T
+// >;
 
 const Login = () => {
 	const [text, setText] = useState('');

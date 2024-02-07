@@ -26,6 +26,17 @@ import OpenEye from '../assets/OpenEye.svg';
 import Button from '../components/Button';
 import Card from '../components/Card';
 import Title from '../components/Title';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+// type RootStackParamList = {
+// 	Login: undefined;
+// 	CreateAccount: undefined;
+// };
+
+// type ProfileScreenNavigationProp<T extends keyof RootStackParamList> = NativeStackNavigationProp<
+//   RootStackParamList,
+//   T
+// >;
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 const { width, height } = Dimensions.get('window');
