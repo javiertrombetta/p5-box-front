@@ -25,19 +25,22 @@ interface LoginCompProps {
 }
 
 type RootStackParamList = {
-	HomeIniciarJornada: undefined;
-	ObtenerPaquetes: undefined;
-	CreateAccount: undefined;
-	Login: undefined;
-	RepartoEnCurso: undefined
-	// backOffice
-	LoginAdmin: undefined;
-	HomeGestionarPedido: undefined;
-	Repartidores: undefined;
-	Paquetes: undefined;
-	AddPackage: undefined;
-	PerfilRepartidor: undefined;
+    [key in RouteName]: undefined;
 };
+
+enum RouteName {
+	HomeIniciarJornada = 'HomeIniciarJornada',
+	ObtenerPaquetes = 'ObtenerPaquetes',
+	CreateAccount = 'CreateAccount',
+	Login = 'Login',
+	RepartoEnCurso = 'RepartoEnCurso',
+	LoginAdmin = 'LoginAdmin',
+	HomeGestionarPedido = 'HomeGestionarPedido',
+	Repartidores = 'Repartidores',
+	Paquetes = 'Paquetes',
+	AddPackage = 'AddPackage',
+	PerfilRepartidor = 'PerfilRepartidor'
+}
 
 const LoginComp = ({ client, navigation }: LoginCompProps) => {
 	const [data, setData] = useState({
@@ -115,7 +118,7 @@ const LoginComp = ({ client, navigation }: LoginCompProps) => {
 					borderR={8}
 					// action="postL"
 					data={data}
-					navigate={client ? 'HomeIniciarJornada' : 'HomeGestionarPedido'}
+					navigate={client ? RouteName.HomeIniciarJornada : RouteName.HomeGestionarPedido}
 					navigation={navigation}
 					height={30}
 					width={270}
@@ -125,7 +128,7 @@ const LoginComp = ({ client, navigation }: LoginCompProps) => {
 				<View
 					style={{ top: 185 * HScale, left: 15 * WScale, height: 30 * HScale, width: 270 * WScale }}
 				>
-					<Button content={'CREAR CUENTA'} spec={'blanco'} navigate="CreateAccount" height={30} width={270} navigation={navigation} />
+					<Button content={'CREAR CUENTA'} spec={'blanco'} navigate={RouteName.CreateAccount} height={30} width={270} navigation={navigation} />
 				</View>
 			) : (
 				''
@@ -135,7 +138,7 @@ const LoginComp = ({ client, navigation }: LoginCompProps) => {
 				className="underline"
 				style={client === true ? { top: 205 * HScale } : { top: 195 * HScale }}
 			>
-				<Button content={'Olvidé mi contraseña'} width={300} height={30} spec={'transp'} navigate="" navigation={navigation} />
+				<Button content={'Olvidé mi contraseña'} width={300} height={30} spec={'transp'} navigate={RouteName.CreateAccount} navigation={navigation} />
 			</View>
 		</View>
 	);

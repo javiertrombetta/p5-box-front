@@ -15,6 +15,7 @@ import Header from '../components/Header';
 import Button from '../components/Button';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { NavigationProp, useNavigation } from '@react-navigation/native';
+import ObtenerPaquetes from './ObtenerPaquetes';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -22,21 +23,23 @@ const HScale = height / 640;
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
-// NAVIGATION REPARTIDOR
 type RootStackParamList = {
-	HomeIniciarJornada: undefined;
-	ObtenerPaquetes: undefined;
-	CreateAccount: undefined;
-	Login: undefined;
-	RepartoEnCurso: undefined
-	// backOffice
-	LoginAdmin: undefined;
-	HomeGestionarPedido: undefined;
-	Repartidores: undefined;
-	Paquetes: undefined;
-	AddPackage: undefined;
-	PerfilRepartidor: undefined;
+    [key in RouteName]: undefined;
 };
+
+enum RouteName {
+	HomeIniciarJornada = 'HomeIniciarJornada',
+	ObtenerPaquetes = 'ObtenerPaquetes',
+	CreateAccount = 'CreateAccount',
+	Login = 'Login',
+	RepartoEnCurso = 'RepartoEnCurso',
+	LoginAdmin = 'LoginAdmin',
+	HomeGestionarPedido = 'HomeGestionarPedido',
+	Repartidores = 'Repartidores',
+	Paquetes = 'Paquetes',
+	AddPackage = 'AddPackage',
+	PerfilRepartidor = 'PerfilRepartidor'
+}
 
 type Props = {
 	navigation: NavigationProp<RootStackParamList>;
@@ -134,7 +137,7 @@ function RepartoEnCurso({navigation}: Props) {
 					marginTop: 24 * HScale,
 				}}
 			>
-				<Button content="FINALIZAR" width={270} height={30} spec="texto" navigation={navigation} navigate='ObtenerPaquetes'/>
+				<Button content="FINALIZAR" width={270} height={30} spec="texto" navigation={navigation} navigate={RouteName.ObtenerPaquetes}/>
 			</View>
 			<View
 				style={{
@@ -143,7 +146,7 @@ function RepartoEnCurso({navigation}: Props) {
 					marginTop: 10 * HScale,
 				}}
 			>
-				<Button content="CANCELAR ENTREGA" width={270} height={30} spec="blanco" navigation={navigation} navigate=''/>
+				<Button content="CANCELAR ENTREGA" width={270} height={30} spec="blanco" navigation={navigation} navigate={RouteName.HomeIniciarJornada}/>
 			</View>
 		</View>
 	);
