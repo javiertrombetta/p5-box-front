@@ -21,28 +21,70 @@ import Header from '../components/Header';
 import Button from '../components/Button';
 import List from '../components/List';
 import Title from '../components/Title';
+import { NavigationProp } from '@react-navigation/native';
+import HomeIniciarJornada from './HomeIniciarJornada';
+import ObtenerPaquetes from './ObtenerPaquetes';
+import CreateAccount from './CreateAccount';
+import Login from './Login';
+import RepartoEnCurso from './RepartoEnCurso';
+import LoginAdmin from './LoginAdmin';
+import Repartidores from './Repartidores';
+import Paquetes from './Paquetes';
+import AddPackage from './AddPackage';
+import PerfilRepartidor from './PerfilRepartidor';
 
-const { width, height } = Dimensions.get('window');
-const WScale = width / 360;
-const HScale = height / 640;
-
-const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+// type RootStackParamList = {
+// 	HomeIniciarJornada: undefined;
+// 	ObtenerPaquetes: undefined;
+// 	CreateAccount: undefined;
+// 	Login: undefined;
+// 	RepartoEnCurso: undefined
+// 	// backOffice
+// 	LoginAdmin: undefined;
+// 	HomeGestionarPedido: undefined;
+// 	Repartidores: undefined;
+// 	Paquetes: undefined;
+// 	AddPackage: undefined;
+// 	PerfilRepartidor: undefined;
+// };
 
 type RootStackParamList = {
-	HomeGestionarPedido: undefined;
-	Repartidores: undefined;
-  };
-  
-type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'HomeGestionarPedido'>;
+    [key in RouteName]: undefined;
+};
 
-const HomeGestionarPedido = ({ navigation }: { navigation: HomeScreenNavigationProp }) => {
+enum RouteName {
+	HomeIniciarJornada = 'HomeIniciarJornada',
+	ObtenerPaquetes = 'ObtenerPaquetes',
+	CreateAccount = 'CreateAccount',
+	Login = 'Login',
+	RepartoEnCurso = 'RepartoEnCurso',
+	LoginAdmin = 'LoginAdmin',
+	HomeGestionarPedido = 'HomeGestionarPedido',
+	Repartidores = 'Repartidores',
+	Paquetes = 'Paquetes',
+	AddPackage = 'AddPackage',
+	PerfilRepartidor = 'PerfilRepartidor'
+}
+
+type Props = {
+	navigation: NavigationProp<RootStackParamList>;
+}
+
+const HomeGestionarPedido = ({ navigation }:  Props ) => {
+	const { width, height } = Dimensions.get('window');
+	const WScale = width / 360;
+	const HScale = height / 640;
+
+	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+
+	
 
 	return (
 		<View
 			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
 			className="w-full bg-verde h-full flex flex-col items-center"
 		>
-			<Header />
+			<Header navigation={navigation}/>
 			<View style={{ height: 40 * HScale, marginTop: 28 * HScale, width: '100%' }}>
 				<Title content={'GESTIONAR PEDIDOS'} size={18} />
 			</View>
@@ -181,7 +223,8 @@ const HomeGestionarPedido = ({ navigation }: { navigation: HomeScreenNavigationP
 							column2="stringsImg"
 							content2String="Repartidores, 2/10 Habilitados"
 							column3="buttonVer"
-							content3=""
+							content3="repartidores"
+							navigation={navigation}
 						/>
 					</View>
 					<View className="flex w-full items-center">
@@ -194,20 +237,22 @@ const HomeGestionarPedido = ({ navigation }: { navigation: HomeScreenNavigationP
 							column2="stringsImg"
 							content2String="Paquetes, 16/20 Repartidos"
 							column3="buttonVer"
-							content3=""
+							content3="paquetes"
+							navigation={navigation}
 						/>
 					</View>
 				</View>
 			</View>
 			<View
 				style={{
-					height: 30 * HScale,
-					width: 265 * WScale,
 					marginTop: 15 * HScale,
 				}}
 			>
-				<Button spec="texto" content="NUEVO PAQUETE" svg={true} />
+				<Button spec="texto" content="NUEVO PAQUETE" svg={true} navigation={navigation} navigate={RouteName.AddPackage} height={30} width={265} />
 			</View>
+			<Pressable>
+				<Text>NUEVO PAQUETE</Text>
+			</Pressable>
 		</View>
 	);
 };

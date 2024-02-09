@@ -26,24 +26,34 @@ import OpenEye from '../assets/OpenEye.svg';
 import Button from '../components/Button';
 import Card from '../components/Card';
 import Title from '../components/Title';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { NavigationProp } from '@react-navigation/native';
 
-// type RootStackParamList = {
-// 	Login: undefined;
-// 	CreateAccount: undefined;
-// };
+type RootStackParamList = {
+	HomeIniciarJornada: undefined;
+	ObtenerPaquetes: undefined;
+	CreateAccount: undefined;
+	Login: undefined;
+	RepartoEnCurso: undefined
+	// backOffice
+	LoginAdmin: undefined;
+	HomeGestionarPedido: undefined;
+	Repartidores: undefined;
+	Paquetes: undefined;
+	AddPackage: undefined;
+	PerfilRepartidor: undefined;
+};
 
-// type ProfileScreenNavigationProp<T extends keyof RootStackParamList> = NativeStackNavigationProp<
-//   RootStackParamList,
-//   T
-// >;
+type Props = {
+	navigation: NavigationProp<RootStackParamList>;
+}
+  
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
 const HScale = height / 640;
 
-const CreateAccount = () => {
+const CreateAccount = ({navigation}: Props) => {
 	const [data, setData] = useState({
 		name: '',
 		lastname: '',
@@ -319,18 +329,16 @@ const CreateAccount = () => {
 					</View>
 					<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
 				</View>
-				<View style={{ height: 28 * HScale, width: 270 * WScale, marginTop: 50 * HScale }}>
-					<Button spec="texto" content="CREAR" data={data} action="postR" navigate="" />
+				<View style={{ marginTop: 50 * HScale }}>
+					<Button spec="texto" height={28} width={270} content="CREAR" data={data} navigate="Login" navigation={navigation}/> {/* action="postR"*/}
 				</View>
 				<View
 					style={{
-						width: 270 * WScale,
-						height: 30 * HScale,
 						marginTop: 10 * HScale,
 					}}
 					// className="flex justify-center items-center align-middle border border-texto text-texto"
 				>
-					<Button spec="blanco" content="INICIAR SESION" navigate="" />
+					<Button spec="blanco" height={30} width={270} content="INICIAR SESION" navigate="Login" navigation={navigation}/> {/* action="postL"*/}
 				</View>
 				<View
 					style={{ top: 15 * HScale }}
@@ -342,7 +350,7 @@ const CreateAccount = () => {
 					> */}
 
 					{/* </Text> */}
-					<Button spec="transp" content="¿Ya tenés una cuenta?" navigate="" />
+					<Button spec="transp" height={30} width={270} content="¿Ya tenés una cuenta?" navigate="Login" navigation={navigation} />
 				</View>
 			</Card>
 

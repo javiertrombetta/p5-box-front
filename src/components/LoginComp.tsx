@@ -11,6 +11,7 @@ import BackgroundImage from '../assets/FondoLogin.svg';
 import LogoFull from '../assets/LogoFull.svg';
 import Eye from '../assets/Eye.svg';
 import CloseEye from '../assets/Eye.svg';
+import { NavigationProp } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -19,10 +20,26 @@ const HScale = height / 640;
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 interface LoginCompProps {
-	client?: boolean;
+	client: boolean;
+	navigation: NavigationProp<RootStackParamList>;
 }
 
-const LoginComp = ({ client }: LoginCompProps) => {
+type RootStackParamList = {
+	HomeIniciarJornada: undefined;
+	ObtenerPaquetes: undefined;
+	CreateAccount: undefined;
+	Login: undefined;
+	RepartoEnCurso: undefined
+	// backOffice
+	LoginAdmin: undefined;
+	HomeGestionarPedido: undefined;
+	Repartidores: undefined;
+	Paquetes: undefined;
+	AddPackage: undefined;
+	PerfilRepartidor: undefined;
+};
+
+const LoginComp = ({ client, navigation }: LoginCompProps) => {
 	const [data, setData] = useState({
 		email: '',
 		password: '',
@@ -90,24 +107,25 @@ const LoginComp = ({ client }: LoginCompProps) => {
 				style={{
 					top: 175 * HScale,
 					left: 15 * WScale,
-					height: 30 * HScale,
-					width: 270 * WScale,
 				}}
 			>
 				<Button
 					content={'INGRESAR'}
 					spec={'texto'}
 					borderR={8}
-					action="postL"
+					// action="postL"
 					data={data}
-					navigate=""
+					navigate={client ? 'HomeIniciarJornada' : 'HomeGestionarPedido'}
+					navigation={navigation}
+					height={30}
+					width={270}
 				/>
 			</View>
 			{client === true ? (
 				<View
 					style={{ top: 185 * HScale, left: 15 * WScale, height: 30 * HScale, width: 270 * WScale }}
 				>
-					<Button content={'CREAR CUENTA'} spec={'blanco'} navigate="" />
+					<Button content={'CREAR CUENTA'} spec={'blanco'} navigate="CreateAccount" height={30} width={270} navigation={navigation} />
 				</View>
 			) : (
 				''
@@ -117,7 +135,7 @@ const LoginComp = ({ client }: LoginCompProps) => {
 				className="underline"
 				style={client === true ? { top: 205 * HScale } : { top: 195 * HScale }}
 			>
-				<Button content={'Olvidé mi contraseña'} spec={'transp'} navigate="" />
+				<Button content={'Olvidé mi contraseña'} width={300} height={30} spec={'transp'} navigate="" navigation={navigation} />
 			</View>
 		</View>
 	);

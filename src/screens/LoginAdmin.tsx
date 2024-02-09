@@ -10,6 +10,7 @@ import LogoFull from '../assets/LogoFull.svg';
 import CloseEye from '../assets/Eye.svg';
 import Button from '../components/Button';
 import LoginComp from '../components/LoginComp';
+import { NavigationProp } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -17,7 +18,26 @@ const HScale = height / 640;
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
-const LoginAdmin = () => {
+type RootStackParamList = {
+	HomeIniciarJornada: undefined;
+	ObtenerPaquetes: undefined;
+	CreateAccount: undefined;
+	Login: undefined;
+	RepartoEnCurso: undefined
+	// backOffice
+	LoginAdmin: undefined;
+	HomeGestionarPedido: undefined;
+	Repartidores: undefined;
+	Paquetes: undefined;
+	AddPackage: undefined;
+	PerfilRepartidor: undefined;
+};
+// PropsBackOffice
+type Props = {
+	navigation: NavigationProp<RootStackParamList>;
+}
+
+const LoginAdmin = ({navigation}: Props) => {
 	const [text, setText] = useState('');
 	const isWeb = Platform.OS === 'web';
 
@@ -33,7 +53,7 @@ const LoginAdmin = () => {
 					position: 'absolute',
 				}}
 			>
-				<LoginComp />
+				<LoginComp navigation={navigation} client={false}/>
 			</View>
 
 			<View
