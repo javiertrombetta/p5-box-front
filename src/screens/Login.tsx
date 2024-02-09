@@ -18,19 +18,23 @@ const HScale = height / 640;
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 type RootStackParamList = {
-	HomeIniciarJornada: undefined;
-	ObtenerPaquetes: undefined;
-	CreateAccount: undefined;
-	Login: undefined;
-	RepartoEnCurso: undefined
-	// backOffice
-	LoginAdmin: undefined;
-	HomeGestionarPedido: undefined;
-	Repartidores: undefined;
-	Paquetes: undefined;
-	AddPackage: undefined;
-	PerfilRepartidor: undefined;
+    [key in RouteName]: undefined;
 };
+
+enum RouteName {
+	HomeIniciarJornada = 'HomeIniciarJornada',
+	ObtenerPaquetes = 'ObtenerPaquetes',
+	CreateAccount = 'CreateAccount',
+	Login = 'Login',
+	RepartoEnCurso = 'RepartoEnCurso',
+	LoginAdmin = 'LoginAdmin',
+	HomeGestionarPedido = 'HomeGestionarPedido',
+	Repartidores = 'Repartidores',
+	Paquetes = 'Paquetes',
+	AddPackage = 'AddPackage',
+	PerfilRepartidor = 'PerfilRepartidor'
+}
+
 type Props = {
 	navigation: NavigationProp<RootStackParamList>;
 }

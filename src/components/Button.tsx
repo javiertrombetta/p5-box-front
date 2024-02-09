@@ -17,7 +17,7 @@ interface ButtonProps {
 	width: number;
 	spec: string;
 	content: string;
-	navigate?: string;
+	navigate?: RouteName;
 	svg?: boolean;
 	borderR?: number;
 	data?: object;
@@ -30,19 +30,22 @@ const blanco = '#FEFEFE';
 const amarilloVerdoso = '#CEF169';
 
 type RootStackParamList = {
-	HomeIniciarJornada: undefined;
-	ObtenerPaquetes: undefined;
-	CreateAccount: undefined;
-	Login: undefined;
-	RepartoEnCurso: undefined
-	// backOffice
-	LoginAdmin: undefined;
-	HomeGestionarPedido: undefined;
-	Repartidores: undefined;
-	Paquetes: undefined;
-	AddPackage: undefined;
-	PerfilRepartidor: undefined;
+    [key in RouteName]: undefined;
 };
+
+enum RouteName {
+	HomeIniciarJornada = 'HomeIniciarJornada',
+	ObtenerPaquetes = 'ObtenerPaquetes',
+	CreateAccount = 'CreateAccount',
+	Login = 'Login',
+	RepartoEnCurso = 'RepartoEnCurso',
+	LoginAdmin = 'LoginAdmin',
+	HomeGestionarPedido = 'HomeGestionarPedido',
+	Repartidores = 'Repartidores',
+	Paquetes = 'Paquetes',
+	AddPackage = 'AddPackage',
+	PerfilRepartidor = 'PerfilRepartidor'
+}
 
 const Button = (
 	{ spec, content, svg, borderR, data, action, navigate, navigation, height, width }: ButtonProps,
