@@ -14,6 +14,7 @@ import ArrowLeft from '../assets/ArrowLeft.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 import Header from '../components/Header';
 import List from '../components/List';
+import { NavigationProp } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -21,14 +22,33 @@ const HScale = height / 640;
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
-const Paquetes = () => {
+type RootStackParamList = {
+	HomeIniciarJornada: undefined;
+	ObtenerPaquetes: undefined;
+	CreateAccount: undefined;
+	Login: undefined;
+	RepartoEnCurso: undefined
+	// backOffice
+	LoginAdmin: undefined;
+	HomeGestionarPedido: undefined;
+	Repartidores: undefined;
+	Paquetes: undefined;
+	AddPackage: undefined;
+	PerfilRepartidor: undefined;
+};
+
+type Props = {
+	navigation: NavigationProp<RootStackParamList>;
+}
+
+const Paquetes = ({navigation} : Props) => {
 	const isWeb = Platform.OS === 'web';
 	return (
 		<View
 			className="bg-verde w-full h-full flex-col items-center  flex"
 			style={{ paddingHorizontal: 30 * WScale, paddingVertical: 6 * HScale }}
 		>
-			<Header />
+			<Header navigation={navigation}/>
 			<View
 				style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale, marginTop: 26 * HScale }} // h-[40] mt-[28] px-4
 				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
@@ -98,9 +118,10 @@ const Paquetes = () => {
 					<View style={{ height: 70 * HScale, width: '100%', paddingHorizontal: 16 * WScale }}>
 						<List
 							column1="svg"
-							column2="strings"
+							column2="stringsCol"
 							content2String="#0G370, Heredia 785, CABA"
 							column3="svgTrash"
+							navigation={navigation}
 						/>
 					</View>
 					<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
@@ -109,9 +130,10 @@ const Paquetes = () => {
 					<View style={{ height: 70 * HScale, width: '100%', paddingHorizontal: 16 * WScale }}>
 						<List
 							column1="svg"
-							column2="strings"
+							column2="stringsCol"
 							content2String="#0G370, Heredia 785, CABA"
 							column3="svgTrash"
+							navigation={navigation}
 						/>
 					</View>
 					<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
@@ -120,9 +142,10 @@ const Paquetes = () => {
 					<View style={{ height: 70 * HScale, width: '100%', paddingHorizontal: 16 * WScale }}>
 						<List
 							column1="svg"
-							column2="strings"
+							column2="stringsCol"
 							content2String="#0G370, Heredia 785, CABA"
 							column3="svgTrash"
+							navigation={navigation}
 						/>
 					</View>
 					<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
@@ -131,9 +154,10 @@ const Paquetes = () => {
 					<View style={{ height: 70 * HScale, width: '100%', paddingHorizontal: 16 * WScale }}>
 						<List
 							column1="svg"
-							column2="strings"
+							column2="stringsCol"
 							content2String="#0G370, Heredia 785, CABA"
 							column3="svgTrash"
+							navigation={navigation}
 						/>
 					</View>
 					<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
@@ -142,9 +166,10 @@ const Paquetes = () => {
 					<View style={{ height: 70 * HScale, width: '100%', paddingHorizontal: 16 * WScale }}>
 						<List
 							column1="svg"
-							column2="strings"
+							column2="stringsCol"
 							content2String="#0G370, Heredia 785, CABA"
 							column3="svgTrash"
+							navigation={navigation}
 						/>
 					</View>
 				</View>
