@@ -11,6 +11,7 @@ import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 
 import Header from '../components/Header';
 import Button from '../components/Button';
+import { NavigationProp } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -18,17 +19,35 @@ const HScale = height / 640;
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
-const AddPackage = () => {
+type RootStackParamList = {
+	HomeIniciarJornada: undefined;
+	ObtenerPaquetes: undefined;
+	CreateAccount: undefined;
+	Login: undefined;
+	RepartoEnCurso: undefined
+	// backOffice
+	LoginAdmin: undefined;
+	HomeGestionarPedido: undefined;
+	Repartidores: undefined;
+	Paquetes: undefined;
+	AddPackage: undefined;
+	PerfilRepartidor: undefined;
+};
+
+type Props = {
+	navigation: NavigationProp<RootStackParamList>;
+}
+
+const AddPackage = ({navigation}: Props) => {
 	const [text, setText] = useState('');
 	const isWeb = Platform.OS === 'web';
 
 	return (
-		<SafeAreaView>
 		<View
 			className="bg-verde w-full h-full flex-col items-center  flex"
 			style={{ paddingHorizontal: 30 * WScale, paddingVertical: 6 * HScale }}
 		>
-			{/* <Header /> */}
+			<Header navigation={navigation}/>
 			<View
 				style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
 				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
@@ -133,10 +152,9 @@ const AddPackage = () => {
 					marginTop: 16 * HScale,
 				}}
 			>
-				<Button spec="texto" content="AGREGAR" />
+				<Button spec="texto" height={28} width={270} content="AGREGAR" navigation={navigation} navigate=''/>
 			</View>
 		</View>
-		</SafeAreaView>
 	);
 };
 

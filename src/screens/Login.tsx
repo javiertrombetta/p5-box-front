@@ -9,7 +9,7 @@ import BackgroundImage from '../assets/FondoLogin.svg';
 import LogoFull from '../assets/LogoFull.svg';
 import Eye from '../assets/Eye.svg';
 import LoginComp from '../components/LoginComp';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { NavigationProp } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -17,17 +17,26 @@ const HScale = height / 640;
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
-// type RootStackParamList = {
-// 	Login: undefined;
-// 	CreateAccount: undefined;
-// };
+type RootStackParamList = {
+	HomeIniciarJornada: undefined;
+	ObtenerPaquetes: undefined;
+	CreateAccount: undefined;
+	Login: undefined;
+	RepartoEnCurso: undefined
+	// backOffice
+	LoginAdmin: undefined;
+	HomeGestionarPedido: undefined;
+	Repartidores: undefined;
+	Paquetes: undefined;
+	AddPackage: undefined;
+	PerfilRepartidor: undefined;
+};
+type Props = {
+	navigation: NavigationProp<RootStackParamList>;
+}
+  
 
-// type ProfileScreenNavigationProp<T extends keyof RootStackParamList> = NativeStackNavigationProp<
-//   RootStackParamList,
-//   T
-// >;
-
-const Login = () => {
+const Login = ({navigation}: Props) => {
 	const [text, setText] = useState('');
 	const isWeb = Platform.OS === 'web';
 
@@ -43,7 +52,7 @@ const Login = () => {
 					position: 'absolute',
 				}}
 			>
-				<LoginComp client={true} />
+				<LoginComp navigation={navigation} client={true} />
 			</View>
 			<View
 				style={{ top: 150 * HScale, left: 30 * WScale, width: 204 * WScale, height: 69 * HScale }}
