@@ -15,19 +15,22 @@ const HScale = height / 640;
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 type RootStackParamList = {
-	HomeIniciarJornada: undefined;
-	ObtenerPaquetes: undefined;
-	CreateAccount: undefined;
-	Login: undefined;
-	RepartoEnCurso: undefined
-	// backOffice
-	LoginAdmin: undefined;
-	HomeGestionarPedido: undefined;
-	Repartidores: undefined;
-	Paquetes: undefined;
-	AddPackage: undefined;
-	PerfilRepartidor: undefined;
+    [key in RouteName]: undefined;
 };
+
+enum RouteName {
+	HomeIniciarJornada = 'HomeIniciarJornada',
+	ObtenerPaquetes = 'ObtenerPaquetes',
+	CreateAccount = 'CreateAccount',
+	Login = 'Login',
+	RepartoEnCurso = 'RepartoEnCurso',
+	LoginAdmin = 'LoginAdmin',
+	HomeGestionarPedido = 'HomeGestionarPedido',
+	Repartidores = 'Repartidores',
+	Paquetes = 'Paquetes',
+	AddPackage = 'AddPackage',
+	PerfilRepartidor = 'PerfilRepartidor'
+}
 
 type Props = {
 	navigation: NavigationProp<RootStackParamList>;
@@ -83,31 +86,10 @@ const PerfilRepartidor = ({navigation}: Props) => {
 				</View>
 				<View className="flex items-end">
 					<BotonActivado width={35 * WScale} hieght={21 * HScale} />
-					{/* <Image source={boton} /> */}
 				</View>
 			</View>
 			<View style={{ height: 48 * HScale, marginTop: 10 * HScale, width: '100%' }}>
 				<Title content={'REPARTOS PENDIENTES'} details={'sin repartos'} arrow={'right'} size={14} />
-				{/* <View
-					style={{ height: 48 * HScale }}
-					className="w-full flex flex-row rounded-t-xl items-center justify-between"
-				> */}
-				{/* <View className="flex flex-col items-start justify-center">
-						<Text style={{ fontSize: scaledSize(14) }} className="font-sairaBold text-texto">
-							REPARTOS PENDIENTES
-						</Text>
-						<Text
-							style={{ fontSize: scaledSize(12), marginTop: scaledSize(-8) }}
-							className="text-texto font-sairaMedium"
-						>
-							sin repartos
-						</Text>
-					</View>
-					<Pressable style={{ width: scaledSize(8), height: scaledSize(12) }}>
-						<ArrowRight height={14 * HScale} width={8 * WScale} />
-						{/* <Image source={rightarrow} /> */}
-				{/* </Pressable> */}
-				{/* </View> */}
 			</View>
 			<View
 				style={{ height: 282 * HScale, marginTop: 10 * HScale }}
@@ -115,13 +97,6 @@ const PerfilRepartidor = ({navigation}: Props) => {
 			>
 				<View style={{ height: 40 * HScale, width: '100%' }}>
 					<Title content={'HISTORIAL DE REPARTOS'} arrow={'down'} size={14} />
-					{/* <Text style={{ fontSize: scaledSize(14) }} className="font-sairaBold text-texto">
-						HISTORIAL DE REPARTOS
-					</Text>
-					<Pressable>
-						<SmallDownArrow height={8 * HScale} width={14 * WScale} />
-						{/* <Image source={downarrow} /> */}
-					{/* </Pressable>  */}
 				</View>
 				<View
 					style={{

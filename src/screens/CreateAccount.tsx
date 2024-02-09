@@ -29,25 +29,27 @@ import Title from '../components/Title';
 import { NavigationProp } from '@react-navigation/native';
 
 type RootStackParamList = {
-	HomeIniciarJornada: undefined;
-	ObtenerPaquetes: undefined;
-	CreateAccount: undefined;
-	Login: undefined;
-	RepartoEnCurso: undefined
-	// backOffice
-	LoginAdmin: undefined;
-	HomeGestionarPedido: undefined;
-	Repartidores: undefined;
-	Paquetes: undefined;
-	AddPackage: undefined;
-	PerfilRepartidor: undefined;
+    [key in RouteName]: undefined;
 };
+
+enum RouteName {
+	HomeIniciarJornada = 'HomeIniciarJornada',
+	ObtenerPaquetes = 'ObtenerPaquetes',
+	CreateAccount = 'CreateAccount',
+	Login = 'Login',
+	RepartoEnCurso = 'RepartoEnCurso',
+	LoginAdmin = 'LoginAdmin',
+	HomeGestionarPedido = 'HomeGestionarPedido',
+	Repartidores = 'Repartidores',
+	Paquetes = 'Paquetes',
+	AddPackage = 'AddPackage',
+	PerfilRepartidor = 'PerfilRepartidor'
+}
 
 type Props = {
 	navigation: NavigationProp<RootStackParamList>;
 }
   
-
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -330,7 +332,7 @@ const CreateAccount = ({navigation}: Props) => {
 					<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
 				</View>
 				<View style={{ marginTop: 50 * HScale }}>
-					<Button spec="texto" height={28} width={270} content="CREAR" data={data} navigate="Login" navigation={navigation}/> {/* action="postR"*/}
+					<Button spec="texto" height={28} width={270} content="CREAR" data={data} navigate={RouteName.Login} navigation={navigation}/> {/* action="postR"*/}
 				</View>
 				<View
 					style={{
@@ -338,7 +340,7 @@ const CreateAccount = ({navigation}: Props) => {
 					}}
 					// className="flex justify-center items-center align-middle border border-texto text-texto"
 				>
-					<Button spec="blanco" height={30} width={270} content="INICIAR SESION" navigate="Login" navigation={navigation}/> {/* action="postL"*/}
+					<Button spec="blanco" height={30} width={270} content="INICIAR SESION" navigate={RouteName.Login} navigation={navigation}/> {/* action="postL"*/}
 				</View>
 				<View
 					style={{ top: 15 * HScale }}
@@ -350,7 +352,7 @@ const CreateAccount = ({navigation}: Props) => {
 					> */}
 
 					{/* </Text> */}
-					<Button spec="transp" height={30} width={270} content="¿Ya tenés una cuenta?" navigate="Login" navigation={navigation} />
+					<Button spec="transp" height={30} width={270} content="¿Ya tenés una cuenta?" navigate={RouteName.Login} navigation={navigation} />
 				</View>
 			</Card>
 

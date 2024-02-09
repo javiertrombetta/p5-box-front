@@ -4,6 +4,7 @@ import LogoBox from '../assets/LogoBox.svg';
 import box from '../assets/box.png';
 import Button from './Button';
 import { NavigationProp } from '@react-navigation/native';
+import HomeGestionarPedido from '../screens/HomeGestionarPedido';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -12,19 +13,22 @@ const HScale = height / 640;
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 type RootStackParamList = {
-	HomeIniciarJornada: undefined;
-	ObtenerPaquetes: undefined;
-	CreateAccount: undefined;
-	Login: undefined;
-	RepartoEnCurso: undefined
-	// backOffice
-	LoginAdmin: undefined;
-	HomeGestionarPedido: undefined;
-	Repartidores: undefined;
-	Paquetes: undefined;
-	AddPackage: undefined;
-	PerfilRepartidor: undefined;
+    [key in RouteName]: undefined;
 };
+
+enum RouteName {
+	HomeIniciarJornada = 'HomeIniciarJornada',
+	ObtenerPaquetes = 'ObtenerPaquetes',
+	CreateAccount = 'CreateAccount',
+	Login = 'Login',
+	RepartoEnCurso = 'RepartoEnCurso',
+	LoginAdmin = 'LoginAdmin',
+	HomeGestionarPedido = 'HomeGestionarPedido',
+	Repartidores = 'Repartidores',
+	Paquetes = 'Paquetes',
+	AddPackage = 'AddPackage',
+	PerfilRepartidor = 'PerfilRepartidor'
+}
 
 type Props = {
 	navigation: NavigationProp<RootStackParamList>;
@@ -32,10 +36,10 @@ type Props = {
   
 
 const Header = ({ navigation }: Props) => {
-	const client = false; // cambiar por pedido rol
+	const client = false;
 	const isWeb = Platform.OS === 'web';
 	const handleNavigate = ()  => {
-		client ? navigation.navigate('HomeIniciarJornada') : navigation.navigate('HomeGestionarPedido')
+		client ? navigation.navigate(RouteName.HomeIniciarJornada) : navigation.navigate(RouteName.HomeGestionarPedido)
 	}
 
 	return (
@@ -59,7 +63,7 @@ const Header = ({ navigation }: Props) => {
 					marginTop: 6 * HScale,
 				}}
 			>
-				<Button content="CERRAR SESION" height={26} width={109} spec="blanco" navigate={client ? "CreateAccount" : "LoginAdmin"} navigation={navigation}/>
+				<Button content="CERRAR SESION" height={26} width={109} spec="blanco" navigate={client ? RouteName.Login : RouteName.LoginAdmin} navigation={navigation}/>
 			</View>
 		</View>
 	);

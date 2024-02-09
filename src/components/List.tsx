@@ -40,20 +40,24 @@ interface listProps {
 	content3?: string;
 	navigation: NavigationProp<RootStackParamList>;
 }
+
 type RootStackParamList = {
-	HomeIniciarJornada: undefined;
-	ObtenerPaquetes: undefined;
-	CreateAccount: undefined;
-	Login: undefined;
-	RepartoEnCurso: undefined
-	// backOffice
-	LoginAdmin: undefined;
-	HomeGestionarPedido: undefined;
-	Repartidores: undefined;
-	Paquetes: undefined;
-	AddPackage: undefined;
-	PerfilRepartidor: undefined;
+    [key in RouteName]: undefined;
 };
+
+enum RouteName {
+	HomeIniciarJornada = 'HomeIniciarJornada',
+	ObtenerPaquetes = 'ObtenerPaquetes',
+	CreateAccount = 'CreateAccount',
+	Login = 'Login',
+	RepartoEnCurso = 'RepartoEnCurso',
+	LoginAdmin = 'LoginAdmin',
+	HomeGestionarPedido = 'HomeGestionarPedido',
+	Repartidores = 'Repartidores',
+	Paquetes = 'Paquetes',
+	AddPackage = 'AddPackage',
+	PerfilRepartidor = 'PerfilRepartidor'
+}
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -73,8 +77,8 @@ const List = ({
 	const isWeb = Platform.OS === 'web';
 	const arrayColumn2: string[] = content2String.split(', ');
 	const handleNavigation = () => {
-		content3 !== 'svgTrash' && content3 !== 'img' && navigation.navigate('RepartoEnCurso');
-		content3 === 'img' && navigation.navigate('PerfilRepartidor')
+		content3 !== 'svgTrash' && content3 !== 'img' && navigation.navigate(RouteName.RepartoEnCurso);
+		content3 === 'img' && navigation.navigate(RouteName.PerfilRepartidor)
 	};
 	return (
 		<Pressable
@@ -190,11 +194,11 @@ const List = ({
 						arrayColumn2[1] === 'gray' ||
 						arrayColumn2[1] === 'black' ? (
 							<View
-								style={{ gap: 4 * HScale }} // gap-1
+								style={{ gap: 4 * HScale }}
 								className="flex flex-col items-start justify-center"
 							>
 								<Text
-									style={{ fontSize: scaledSize(14) }} // h-[15]
+									style={{ fontSize: scaledSize(14) }}
 									className="text-left items-center flex font-robotoBold text-texto"
 								>
 									{arrayColumn2[0]}
@@ -310,7 +314,7 @@ const List = ({
 				{column3 === 'buttonVer' && content3 && content3 === 'repartidores' && (
 					<Button
 						navigation={navigation}
-						navigate="Repartidores"
+						navigate={RouteName.Repartidores}
 						height={26}
 						width={52}
 						spec="texto"
@@ -321,7 +325,7 @@ const List = ({
 				{column3 === 'buttonVer' && content3 && content3 === 'paquetes' && (
 					<Button
 						navigation={navigation}
-						navigate="Paquetes"
+						navigate={RouteName.Paquetes}
 						height={26}
 						width={52}
 						spec="texto"
@@ -451,7 +455,7 @@ const List = ({
 								</View>
 								<View style={{ paddingRight: 16 * WScale }}>
 									<Button
-										navigate=""
+										navigate={RouteName.Login}
 										navigation={navigation}
 										width={62}
 										height={20}

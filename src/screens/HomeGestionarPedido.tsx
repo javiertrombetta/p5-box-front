@@ -33,21 +33,6 @@ import Paquetes from './Paquetes';
 import AddPackage from './AddPackage';
 import PerfilRepartidor from './PerfilRepartidor';
 
-// type RootStackParamList = {
-// 	HomeIniciarJornada: undefined;
-// 	ObtenerPaquetes: undefined;
-// 	CreateAccount: undefined;
-// 	Login: undefined;
-// 	RepartoEnCurso: undefined
-// 	// backOffice
-// 	LoginAdmin: undefined;
-// 	HomeGestionarPedido: undefined;
-// 	Repartidores: undefined;
-// 	Paquetes: undefined;
-// 	AddPackage: undefined;
-// 	PerfilRepartidor: undefined;
-// };
-
 type RootStackParamList = {
     [key in RouteName]: undefined;
 };
