@@ -14,7 +14,7 @@ import buenos from '../assets/buenos.png';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useNavigation } from '@react-navigation/native';
+import { NavigationProp, useNavigation } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -26,18 +26,26 @@ const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 type RootStackParamList = {
 	HomeIniciarJornada: undefined;
 	ObtenerPaquetes: undefined;
+	CreateAccount: undefined;
+	Login: undefined;
+	RepartoEnCurso: undefined
+	// backOffice
+	LoginAdmin: undefined;
+	HomeGestionarPedido: undefined;
+	Repartidores: undefined;
+	Paquetes: undefined;
+	AddPackage: undefined;
+	PerfilRepartidor: undefined;
 };
 
-type ProfileScreenNavigationProp<T extends keyof RootStackParamList> = NativeStackNavigationProp<
-  RootStackParamList,
-  T
->;
+type Props = {
+	navigation: NavigationProp<RootStackParamList>;
+}
 
 // NAVIGATION ADMIN
 
 
-function RepartoEnCurso() {
-	const navigation = useNavigation<ProfileScreenNavigationProp<'HomeIniciarJornada'>>();
+function RepartoEnCurso({navigation}: Props) {
 
 	return (
 		<View
@@ -126,7 +134,7 @@ function RepartoEnCurso() {
 					marginTop: 24 * HScale,
 				}}
 			>
-				<Button content="FINALIZAR" spec="texto" navigate='ObtenerPaquetes'/>
+				<Button content="FINALIZAR" width={270} height={30} spec="texto" navigation={navigation} navigate='ObtenerPaquetes'/>
 			</View>
 			<View
 				style={{
@@ -135,7 +143,7 @@ function RepartoEnCurso() {
 					marginTop: 10 * HScale,
 				}}
 			>
-				<Button content="CANCELAR ENTREGA" spec="blanco" navigate=''/>
+				<Button content="CANCELAR ENTREGA" width={270} height={30} spec="blanco" navigation={navigation} navigate=''/>
 			</View>
 		</View>
 	);

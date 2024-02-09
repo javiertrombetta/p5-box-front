@@ -1,18 +1,12 @@
-import { View, Text, Pressable, Image, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, Image, Dimensions } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
-import Box from '../assets/LogoBox.svg';
-import ArrowLeft from '../assets/ArrowLeft.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
-import ArrowRight from '../assets/Arrow-right.svg';
-import Paquetes from '../assets/Paquetes.svg';
-import Entregado from '../assets/Entregado.svg';
-import Tachito from '../assets/Tachito.svg';
 import BotonActivado from '../assets/BotonActivado.svg';
-import SmallDownArrow from '../assets/SmallFlechaAbajo.svg';
 import Header from '../components/Header';
 import List from '../components/List';
 import Title from '../components/Title';
+import { NavigationProp } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -20,31 +14,36 @@ const HScale = height / 640;
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
-const PerfilRepartidor = () => {
+type RootStackParamList = {
+	HomeIniciarJornada: undefined;
+	ObtenerPaquetes: undefined;
+	CreateAccount: undefined;
+	Login: undefined;
+	RepartoEnCurso: undefined
+	// backOffice
+	LoginAdmin: undefined;
+	HomeGestionarPedido: undefined;
+	Repartidores: undefined;
+	Paquetes: undefined;
+	AddPackage: undefined;
+	PerfilRepartidor: undefined;
+};
+
+type Props = {
+	navigation: NavigationProp<RootStackParamList>;
+}
+
+const PerfilRepartidor = ({navigation}: Props) => {
 	return (
 		<View
 			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
 			className="w-full bg-verde h-full flex flex-col items-center"
 		>
-			<Header />
+			<Header navigation={navigation}/>
 			<View
 				style={{ height: 40 * HScale, marginTop: 28 * HScale, width: '100%' }} // h-[40] mt-[28] px-4
 			>
 				<Title content={'GESTIONAR PEDIDOS'} arrow={'left'} size={18} />
-				{/* <Text
-					style={{ paddingVertical: 4 * HScale, fontSize: scaledSize(18) }} // py-1
-					className="flex justify-center items-center font-sairaBold text-texto"
-				>
-					GESTIONAR PEDIDOS
-				</Text>
-				<View
-					style={{ paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
-					className="flex justify-center items-center"
-				>
-					{/* style={{ width: 13 * WScale, height: 15 * HScale, */}
-				{/* <Image source={leftArrow} /> */}
-				{/* <ArrowLeft height={15 * HScale} width={13 * WScale} />
-				</View>  */}
 			</View>
 			<View
 				style={{ height: 90 * HScale, marginTop: 10 * HScale, paddingHorizontal: 16 * WScale }} // h-24 mt-[10]
@@ -154,10 +153,11 @@ const PerfilRepartidor = () => {
 					>
 						<List
 							column1="svg"
-							column2="strings"
+							column2="stringsCol"
 							content2String="#0A903, Las Heras 5678, CABA"
 							column3="svgStringButton"
 							content3="entregadoTrash"
+							navigation={navigation}
 						/>
 					</View>
 					<View style={{ paddingRight: 16 * WScale }} className="flex w-full items-center">
@@ -169,10 +169,11 @@ const PerfilRepartidor = () => {
 					>
 						<List
 							column1="svg"
-							column2="strings"
+							column2="stringsCol"
 							content2String="#0A903, Las Heras 5678, CABA"
 							column3="svgStringButton"
 							content3="entregadoTrash"
+							navigation={navigation}
 						/>
 					</View>
 					<View style={{ paddingRight: 16 * WScale }} className="flex w-full items-center">
@@ -184,10 +185,11 @@ const PerfilRepartidor = () => {
 					>
 						<List
 							column1="svg"
-							column2="strings"
+							column2="stringsCol"
 							content2String="#0A903, Las Heras 5678, CABA"
 							column3="svgStringButton"
 							content3="entregadoTrash"
+							navigation={navigation}
 						/>
 					</View>
 				</View>

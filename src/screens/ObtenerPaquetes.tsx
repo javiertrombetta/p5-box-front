@@ -13,8 +13,8 @@ import ButtonTrue from '../assets/ButtonTrue.svg';
 
 import Header from '../components/Header';
 import Button from '../components/Button';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useNavigation } from '@react-navigation/native';
+import { NavigationProp } from '@react-navigation/native';
+import List from '../components/List';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -25,21 +25,29 @@ const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 type RootStackParamList = {
 	HomeIniciarJornada: undefined;
 	ObtenerPaquetes: undefined;
+	CreateAccount: undefined;
+	Login: undefined;
+	RepartoEnCurso: undefined
+	// backOffice
+	LoginAdmin: undefined;
+	HomeGestionarPedido: undefined;
+	Repartidores: undefined;
+	Paquetes: undefined;
+	AddPackage: undefined;
+	PerfilRepartidor: undefined;
 };
 
-type ProfileScreenNavigationProp<T extends keyof RootStackParamList> = NativeStackNavigationProp<
-  RootStackParamList,
-  T
->;
+type Props = {
+	navigation: NavigationProp<RootStackParamList>;
+};
 
-const ObtenerPaquetes = () => {
-	const navigation = useNavigation<ProfileScreenNavigationProp<'HomeIniciarJornada'>>();
+const ObtenerPaquetes = ({ navigation }: Props) => {
 	return (
 		<View
 			className="bg-verde w-full h-full flex-col items-center  flex"
 			style={{ paddingHorizontal: 30 * WScale, paddingVertical: 6 * HScale }}
 		>
-			<Header navigation={navigation}/>
+			<Header navigation={navigation} />
 			<View
 				style={{ height: 40 * HScale, paddingHorizontal: 20 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
 				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
@@ -76,227 +84,102 @@ const ObtenerPaquetes = () => {
 				<View
 					style={{
 						height: 374 * HScale,
-						paddingVertical: 12 * HScale,
+						paddingVertical: 4 * HScale,
 					}}
-					className="flex flex-col items-center justify-around"
+					className="flex flex-col items-start justify-between"
 				>
-					<View
-						style={{ paddingHorizontal: 16 * WScale }}
-						className="flex flex-row justify-start items-center w-full gap-2"
-					>
-						{/* {
-                            isEnabled ? <Pressable style={{width: 19 * WScale, height: 19 * HScale}}/>
-                            : <Pressable style={{width: 19 * WScale, height: 19 * HScale}}></Pressable>
-                        } */}
-						<View className="flex items-center justify-start">
-							{/* <Image
-								style={{ width: 19 * WScale, height: 19 * WScale }}
-								resizeMode="contain"
-								source={buttonTrue}
-							/> */}
-							<ButtonTrue height={19 * HScale} width={19 * WScale} />
-						</View>
-						<View>
-							<Text
-								className="flex justify-center items-center font-roboto text-texto"
-								style={{ fontSize: scaledSize(12) }}
-							>
-								Amenabar 2356, CABA
-							</Text>
-						</View>
+					<View style={{paddingHorizontal: 16 * WScale}}>
+						<List
+							column1="buttonTrue"
+							column2="stringsRow"
+							content2String="Amenabar 2356, CABA"
+							column3="none"
+							navigation={navigation}
+						/>
 					</View>
-
-					<View style={{ paddingVertical: 8 * HScale }} className="flex w-full items-center">
+					<View className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View
-						style={{ paddingHorizontal: 16 * WScale }}
-						className="flex flex-row justify-start items-center w-full gap-2"
-					>
-						{/* {
-                            isEnabled ? <Pressable style={{width: 19 * WScale, height: 19 * HScale}}/>
-                            : <Pressable style={{width: 19 * WScale, height: 19 * HScale}}></Pressable>
-                        } */}
-						<View className="flex items-center justify-start">
-							{/* <Image
-								style={{ width: 19 * WScale, height: 19 * WScale }}
-								resizeMode="contain"
-								source={buttonTrue}
-							/> */}
-							<ButtonTrue height={19 * HScale} width={19 * WScale} />
-						</View>
-						<View>
-							<Text
-								className="flex justify-center items-center font-roboto text-texto"
-								style={{ fontSize: scaledSize(12) }}
-							>
-								Av Carabobo y Rivadavia, CABA
-							</Text>
-						</View>
+					<View style={{paddingHorizontal: 16 * WScale}}>
+						<List
+							column1="buttonTrue"
+							column2="stringsRow"
+							content2String="Av Carabobo y Rivadavia, CABA"
+							column3="none"
+							navigation={navigation}
+						/>
 					</View>
-
-					<View style={{ paddingVertical: 8 * HScale }} className="flex w-full items-center">
+					<View className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View
-						style={{ paddingHorizontal: 16 * WScale }}
-						className="flex flex-row justify-start items-center w-full gap-2"
-					>
-						{/* {
-                            isEnabled ? <Pressable style={{width: 19 * WScale, height: 19 * HScale}}/>
-                            : <Pressable style={{width: 19 * WScale, height: 19 * HScale}}></Pressable>
-                        } */}
-						<View className="flex items-center justify-start">
-							{/* <Image
-								style={{ width: 19 * WScale, height: 19 * WScale }}
-								resizeMode="contain"
-								source={buttonTrue}
-							/> */}
-							<ButtonTrue height={19 * HScale} width={19 * WScale} />
-						</View>
-						<View>
-							<Text
-								className="flex justify-center items-center font-roboto text-texto"
-								style={{ fontSize: scaledSize(12) }}
-							>
-								Melian 1242, CABA
-							</Text>
-						</View>
+					<View style={{paddingHorizontal: 16 * WScale, height: 40 * HScale}}>
+						<List
+							column1="buttonTrue"
+							column2="stringsRow"
+							content2String="Melian 1242, CABA"
+							column3="none"
+							navigation={navigation}
+						/>
 					</View>
-
-					<View style={{ paddingVertical: 8 * HScale }} className="flex w-full items-center">
+					<View className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View
-						style={{ paddingHorizontal: 16 * WScale }}
-						className="flex flex-row justify-start items-center w-full gap-2"
-					>
-						{/* {
-                            isEnabled ? <Pressable style={{width: 19 * WScale, height: 19 * HScale}}/>
-                            : <Pressable style={{width: 19 * WScale, height: 19 * HScale}}></Pressable>
-                        } */}
-						<View className="flex items-center justify-start">
-							<View
-								style={{ width: 19 * WScale, height: 19 * WScale }}
-								className="border border-gray-300 rounded-full"
-							/>
-						</View>
-						<View>
-							<Text
-								className="flex justify-center items-center font-roboto text-texto"
-								style={{ fontSize: scaledSize(12) }}
-							>
-								Castillo 670, CABA
-							</Text>
-						</View>
+					<View style={{paddingHorizontal: 16 * WScale, height: 40 * HScale}}>
+						<List
+							column1="buttonFalse"
+							column2="stringsRow"
+							content2String="Castillo 670, CABA"
+							column3="none"
+							navigation={navigation}
+						/>
 					</View>
-
-					<View style={{ paddingVertical: 8 * HScale }} className="flex w-full items-center">
+					<View className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View
-						style={{ paddingHorizontal: 16 * WScale }}
-						className="flex flex-row justify-start items-center w-full gap-2"
-					>
-						{/* {
-                            isEnabled ? <Pressable style={{width: 19 * WScale, height: 19 * HScale}}/>
-                            : <Pressable style={{width: 19 * WScale, height: 19 * HScale}}></Pressable>
-                        } */}
-						<View className="flex items-center justify-start">
-							<View
-								style={{ width: 19 * WScale, height: 19 * WScale }}
-								className="border border-gray-300 rounded-full"
-							/>
-						</View>
-						<View>
-							<Text
-								className="flex justify-center items-center font-roboto text-texto"
-								style={{ fontSize: scaledSize(12) }}
-							>
-								Gorriti 4595, CABA
-							</Text>
-						</View>
+					<View style={{paddingHorizontal: 16 * WScale, height: 40 * HScale}}>
+						<List
+							column1="buttonFalse"
+							column2="stringsRow"
+							content2String="Gorriti 4595, CABA"
+							column3="none"
+							navigation={navigation}
+						/>
 					</View>
-
-					<View style={{ paddingVertical: 8 * HScale }} className="flex w-full items-center">
+					<View className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View
-						style={{ paddingHorizontal: 16 * WScale }}
-						className="flex flex-row justify-start items-center w-full gap-2"
-					>
-						{/* {
-                            isEnabled ? <Pressable style={{width: 19 * WScale, height: 19 * HScale}}/>
-                            : <Pressable style={{width: 19 * WScale, height: 19 * HScale}}></Pressable>
-                        } */}
-						<View className="flex items-center justify-start">
-							<View
-								style={{ width: 19 * WScale, height: 19 * WScale }}
-								className="border border-gray-300 rounded-full"
-							/>
-						</View>
-						<View>
-							<Text
-								className="flex justify-center items-center font-roboto text-texto"
-								style={{ fontSize: scaledSize(12) }}
-							>
-								Av. Gral Mosconi 1056, CABA
-							</Text>
-						</View>
+					<View style={{paddingHorizontal: 16 * WScale, height: 40 * HScale}}>
+						<List
+							column1="buttonFalse"
+							column2="stringsRow"
+							content2String="Av. Gral. Mosconi 1056, CABA"
+							column3="none"
+							navigation={navigation}
+						/>
 					</View>
-
-					<View style={{ paddingVertical: 8 * HScale }} className="flex w-full items-center">
+					<View className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View
-						style={{ paddingHorizontal: 16 * WScale }}
-						className="flex flex-row justify-start items-center w-full gap-2"
-					>
-						{/* {
-                            isEnabled ? <Pressable style={{width: 19 * WScale, height: 19 * HScale}}/>
-                            : <Pressable style={{width: 19 * WScale, height: 19 * HScale}}></Pressable>
-                        } */}
-						<View className="flex items-center justify-start">
-							<View
-								style={{ width: 19 * WScale, height: 19 * WScale }}
-								className="border border-gray-300 rounded-full"
-							/>
-						</View>
-						<View>
-							<Text
-								className="flex justify-center items-center font-roboto text-texto"
-								style={{ fontSize: scaledSize(12) }}
-							>
-								Tacuari 1797, CABA
-							</Text>
-						</View>
+					<View style={{paddingHorizontal: 16 * WScale, height: 40 * HScale}}>
+						<List
+							column1="buttonFalse"
+							column2="stringsRow"
+							content2String="Tacuarí 1797, CABA"
+							column3="none"
+							navigation={navigation}
+						/>
 					</View>
-
-					<View style={{ paddingVertical: 8 * HScale }} className="flex w-full items-center">
+					<View className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View
-						style={{ paddingHorizontal: 16 * WScale }}
-						className="flex flex-row justify-start items-center w-full gap-2"
-					>
-						{/* {
-                            isEnabled ? <Pressable style={{width: 19 * WScale, height: 19 * HScale}}/>
-                            : <Pressable style={{width: 19 * WScale, height: 19 * HScale}}></Pressable>
-                        } */}
-						<View className="flex items-center justify-start">
-							<View
-								style={{ width: 19 * WScale, height: 19 * WScale }}
-								className="border border-gray-300 rounded-full"
-							/>
-						</View>
-						<View>
-							<Text
-								className="flex justify-center items-center font-roboto text-texto"
-								style={{ fontSize: scaledSize(12) }}
-							>
-								Av. Gaona 1284, CABA
-							</Text>
-						</View>
+					<View style={{paddingHorizontal: 16 * WScale, height: 40 * HScale}}>
+						<List
+							column1="buttonFalse"
+							column2="stringsRow"
+							content2String="Av. Gaona 1284, CABA"
+							column3="none"
+							navigation={navigation}
+						/>
 					</View>
 				</View>
 			</View>
@@ -305,17 +188,21 @@ const ObtenerPaquetes = () => {
 				style={{ height: 41 * HScale }}
 				className="w-full flex justify-center items-center rounded-b-xl bg-white z-10"
 			>
-				{/* <Image source={downArrow} /> */}
 				<ArrowHeadDown height={19 * HScale} width={24 * WScale} />
 			</View>
 			<View
 				style={{
-					height: 30 * HScale,
-					width: 270 * WScale,
 					marginTop: 10 * HScale,
 				}}
 			>
-				<Button content="INICIAR JORNADA" spec="texto" navigate='HomeIniciarJornada'/>
+				<Button
+					content="INICIAR JORNADA"
+					width={270}
+					height={30}
+					spec="texto"
+					navigation={navigation}
+					navigate="HomeIniciarJornada"
+				/>
 			</View>
 		</View>
 	);
