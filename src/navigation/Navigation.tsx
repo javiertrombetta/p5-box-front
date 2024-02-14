@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 {
@@ -23,18 +22,25 @@ import Repartidores from '../screens/Repartidores';
 
 const Navigation = () => {
 	const Stack = createNativeStackNavigator();
-
+	const client = true; // cambiar por pedido al rol
 	return (
-		<Stack.Navigator initialRouteName="CreateAccount">
-			<Stack.Screen name="Repartidores" component={Repartidores} options={{ headerShown: false }} />
+		<Stack.Navigator initialRouteName={client ? 'Login' : 'LoginAdmin'}>
+			{/* RootStackParamRepartidorList */}
+			<Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+
 			<Stack.Screen
-				name="HomeGestionarPedido"
-				component={HomeGestionarPedido}
+				name="CreateAccount"
+				component={CreateAccount}
 				options={{ headerShown: false }}
 			/>
 			<Stack.Screen
-				name="PerfilRepartidor"
-				component={PerfilRepartidor}
+				name="HomeIniciarJornada"
+				component={HomeIniciarJornada}
+				options={{ headerShown: false }}
+			/>
+			<Stack.Screen
+				name="ObtenerPaquetes"
+				component={ObtenerPaquetes}
 				options={{ headerShown: false }}
 			/>
 			<Stack.Screen
@@ -42,25 +48,23 @@ const Navigation = () => {
 				component={RepartoEnCurso}
 				options={{ headerShown: false }}
 			/>
-			<Stack.Screen name="Paquetes" component={Paquetes} options={{ headerShown: false }} />
-			<Stack.Screen
-				name="ObtenerPaquetes"
-				component={ObtenerPaquetes}
-				options={{ headerShown: false }}
-			/>
+
+			{/* RootStackParamBackOfficeList */}
+
 			<Stack.Screen name="LoginAdmin" component={LoginAdmin} options={{ headerShown: false }} />
-			<Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
 			<Stack.Screen
-				name="HomeIniciarJornada"
-				component={HomeIniciarJornada}
+				name="HomeGestionarPedido"
+				component={HomeGestionarPedido}
 				options={{ headerShown: false }}
 			/>
-			<Stack.Screen
-				name="CreateAccount"
-				component={CreateAccount}
-				options={{ headerShown: false }}
-			/>
+			<Stack.Screen name="Repartidores" component={Repartidores} options={{ headerShown: false }} />
+			<Stack.Screen name="Paquetes" component={Paquetes} options={{ headerShown: false }} />
 			<Stack.Screen name="AddPackage" component={AddPackage} options={{ headerShown: false }} />
+			<Stack.Screen
+				name="PerfilRepartidor"
+				component={PerfilRepartidor}
+				options={{ headerShown: false }}
+			/>
 		</Stack.Navigator>
 	);
 };
