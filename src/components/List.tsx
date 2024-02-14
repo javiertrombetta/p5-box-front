@@ -13,7 +13,6 @@ import buttonTrue from '../assets/buttonTrue.png';
 import enCurso from '../assets/EllipseGreen.png';
 import pendiente from '../assets/EllipseOrange.png';
 
-
 import GreenCircle from '../assets/GreenCircle.svg';
 import GrayCircle from '../assets/GrayCircle.svg';
 import EllipseGreen from '../assets/EllipseGreen.svg';
@@ -30,6 +29,7 @@ import IconsPeople from '../assets/IconsPeople.svg';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import ButtonTrue from '../assets/ButtonTrue.svg';
+import { NavigationProp } from '@react-navigation/native';
 
 interface listProps {
 	column1: string;
@@ -38,6 +38,25 @@ interface listProps {
 	content2String: string;
 	column3: string;
 	content3?: string;
+	navigation: NavigationProp<RootStackParamList>;
+}
+
+type RootStackParamList = {
+    [key in RouteName]: undefined;
+};
+
+enum RouteName {
+	HomeIniciarJornada = 'HomeIniciarJornada',
+	ObtenerPaquetes = 'ObtenerPaquetes',
+	CreateAccount = 'CreateAccount',
+	Login = 'Login',
+	RepartoEnCurso = 'RepartoEnCurso',
+	LoginAdmin = 'LoginAdmin',
+	HomeGestionarPedido = 'HomeGestionarPedido',
+	Repartidores = 'Repartidores',
+	Paquetes = 'Paquetes',
+	AddPackage = 'AddPackage',
+	PerfilRepartidor = 'PerfilRepartidor'
 }
 
 const { width, height } = Dimensions.get('window');
@@ -46,14 +65,26 @@ const HScale = height / 640;
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
-const List = ({ column1, circleValue, column2, content2String, column3, content3 }: listProps) => {
+const List = ({
+	column1,
+	circleValue,
+	column2,
+	content2String,
+	column3,
+	content3,
+	navigation,
+}: listProps) => {
 	const isWeb = Platform.OS === 'web';
 	const arrayColumn2: string[] = content2String.split(', ');
-
+	const handleNavigation = () => {
+		content3 !== 'svgTrash' && content3 !== 'img' && navigation.navigate(RouteName.RepartoEnCurso);
+		content3 === 'img' && navigation.navigate(RouteName.PerfilRepartidor)
+	};
 	return (
-		<View
+		<Pressable
 			style={{ height: '100%', width: '100%' }}
 			className="flex flex-row justify-between items-center"
+			onPress={handleNavigation}
 		>
 			<View className="flex justify-start items-center flex-row">
 				{/* COLUMNA UNO */}
@@ -80,16 +111,22 @@ const List = ({ column1, circleValue, column2, content2String, column3, content3
 						>
 							<Box height={30 * HScale} width={80.69 * WScale} />
 						</View>
-						)}
-					{column1 === 'button' && isWeb && (
+					)}
+					{column1 === 'buttonTrue' && isWeb && (
 						<Image
 							style={{ width: 19 * WScale, height: 19 * WScale }}
 							resizeMode="contain"
 							source={buttonTrue}
 						/>
 					)}
-					{column1 === 'button' && !isWeb && (
+					{column1 === 'buttonTrue' && !isWeb && (
 						<ButtonTrue height={19 * HScale} width={19 * WScale} />
+					)}
+					{column1 === 'buttonFalse' && (
+						<View
+							style={{ width: 19 * WScale, height: 19 * WScale }}
+							className="border border-gray-300 rounded-full"
+						/>
 					)}
 				</View>
 
@@ -99,7 +136,7 @@ const List = ({ column1, circleValue, column2, content2String, column3, content3
 					style={{ height: 40 * HScale, paddingLeft: 12 * WScale }}
 					className="flex justify-center align-middle"
 				>
-					{column2 === 'strings' && (
+					{column2 === 'stringsCol' && (
 						<View>
 							<Text
 								style={{ fontSize: scaledSize(14), marginBottom: -2 }}
@@ -132,6 +169,16 @@ const List = ({ column1, circleValue, column2, content2String, column3, content3
 							)}
 						</View>
 					)}
+					{column2 === 'stringsRow' && (
+						<View className="flex flex-row gap-1">
+							<Text style={{ fontSize: scaledSize(12) }} className="font-roboto text-texto">
+								{arrayColumn2[0]},
+							</Text>
+							<Text style={{ fontSize: scaledSize(12) }} className="font-roboto text-texto">
+								{arrayColumn2[1]}
+							</Text>
+						</View>
+					)}
 					{column2 === 'string' && (
 						<View>
 							<Text
@@ -147,11 +194,11 @@ const List = ({ column1, circleValue, column2, content2String, column3, content3
 						arrayColumn2[1] === 'gray' ||
 						arrayColumn2[1] === 'black' ? (
 							<View
-								style={{ gap: 4 * HScale }} // gap-1
+								style={{ gap: 4 * HScale }}
 								className="flex flex-col items-start justify-center"
 							>
 								<Text
-									style={{ fontSize: scaledSize(14) }} // h-[15]
+									style={{ fontSize: scaledSize(14) }}
 									className="text-left items-center flex font-robotoBold text-texto"
 								>
 									{arrayColumn2[0]}
@@ -264,10 +311,27 @@ const List = ({ column1, circleValue, column2, content2String, column3, content3
 						/>
 					</View>
 				)}
-				{column3 === 'buttonVer' && (
-					<View style={{ height: 26 * HScale, width: 52 * WScale }}>
-						<Button spec="texto" content="VER" borderR={10} />
-					</View>
+				{column3 === 'buttonVer' && content3 && content3 === 'repartidores' && (
+					<Button
+						navigation={navigation}
+						navigate={RouteName.Repartidores}
+						height={26}
+						width={52}
+						spec="texto"
+						content="VER"
+						borderR={10}
+					/>
+				)}
+				{column3 === 'buttonVer' && content3 && content3 === 'paquetes' && (
+					<Button
+						navigation={navigation}
+						navigate={RouteName.Paquetes}
+						height={26}
+						width={52}
+						spec="texto"
+						content="VER"
+						borderR={10}
+					/>
 				)}
 				{column3 === 'svgTrash' && (
 					<Pressable
@@ -288,37 +352,37 @@ const List = ({ column1, circleValue, column2, content2String, column3, content3
 				{column3 === 'svgStringButton' && (
 					<View>
 						{content3 === 'entregadoTrash' && (
-						<View style={{ gap: 12 * HScale }} className="flex flex-col items-end justify-end">
-							<View
-							style={{ width: 88 * WScale, height: 15 * HScale }}
-							className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
-							>
-								<View className="flex flex-row justify-center">
-									<Entregado />
+							<View style={{ gap: 12 * HScale }} className="flex flex-col items-end justify-end">
+								<View
+									style={{ width: 88 * WScale, height: 15 * HScale }}
+									className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
+								>
+									<View className="flex flex-row justify-center">
+										<Entregado />
+									</View>
+									<Text style={{ fontSize: scaledSize(10) }}>ENTREGADO</Text>
 								</View>
-								<Text style={{ fontSize: scaledSize(10) }}>ENTREGADO</Text>
-							</View>
-							<Pressable
-								style={{ height: 24 * HScale, width: 56 * WScale }}
-								className="flex flex-row justify-start items-center"
-							>
-								{isWeb ? (
-								<Image
-									resizeMode="stretch"
-									style={{ height: 20 * HScale, width: 32 * WScale }}
-									source={trash}
-								/>
-								) : (
-									<TrashIcon height={20 * HScale} width={32 * WScale} />
-								)}
+								<Pressable
+									style={{ height: 24 * HScale, width: 56 * WScale }}
+									className="flex flex-row justify-start items-center"
+								>
+									{isWeb ? (
+										<Image
+											resizeMode="stretch"
+											style={{ height: 20 * HScale, width: 32 * WScale }}
+											source={trash}
+										/>
+									) : (
+										<TrashIcon height={20 * HScale} width={32 * WScale} />
+									)}
 								</Pressable>
 							</View>
 						)}
 						{content3 === 'entregado' && (
 							<View style={{ gap: 12 * HScale }} className="flex flex-col items-end justify-end">
 								<View
-								style={{ width: 88 * WScale, height: 15 * HScale }}
-								className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
+									style={{ width: 88 * WScale, height: 15 * HScale }}
+									className="flex flex-row justify-evenly items-center rounded-l-md bg-gray-200"
 								>
 									<View className="flex flex-row justify-center">
 										<Entregado />
@@ -328,8 +392,7 @@ const List = ({ column1, circleValue, column2, content2String, column3, content3
 								<View
 									style={{ height: 24 * HScale, width: 56 * WScale }}
 									className="flex flex-row justify-start items-center"
-								>
-								</View>
+								></View>
 							</View>
 						)}
 						{content3 === 'enCursoTrash' && (
@@ -345,7 +408,10 @@ const List = ({ column1, circleValue, column2, content2String, column3, content3
 											<EllipseGreen />
 										)}
 									</View>
-									<Text className="font-robotoMedium text-texto" style={{ fontSize: scaledSize(10) }}>
+									<Text
+										className="font-robotoMedium text-texto"
+										style={{ fontSize: scaledSize(10) }}
+									>
 										EN CURSO
 									</Text>
 								</View>
@@ -356,18 +422,16 @@ const List = ({ column1, circleValue, column2, content2String, column3, content3
 									>
 										{isWeb ? (
 											<Image
-											resizeMode="stretch"
-											style={{ height: 20 * HScale, width: 32 * WScale }}
-											source={trash}
-										/>
+												resizeMode="stretch"
+												style={{ height: 20 * HScale, width: 32 * WScale }}
+												source={trash}
+											/>
 										) : (
 											<TrashIcon height={20 * HScale} width={32 * WScale} />
 										)}
 									</Pressable>
 								</View>
 							</View>
-
-							
 						)}
 						{content3 === 'pendienteIniciar' && (
 							<View style={{ gap: 12 * HScale }} className="flex flex-col items-end justify-end">
@@ -382,28 +446,31 @@ const List = ({ column1, circleValue, column2, content2String, column3, content3
 											<EllipseOrange />
 										)}
 									</View>
-									<Text className="font-robotoMedium text-texto" style={{ fontSize: scaledSize(10) }}>
+									<Text
+										className="font-robotoMedium text-texto"
+										style={{ fontSize: scaledSize(10) }}
+									>
 										PENDIENTE
 									</Text>
 								</View>
 								<View style={{ paddingRight: 16 * WScale }}>
-									<View
-										style={{
-											height: scaledSize(20),
-											width: scaledSize(62),
-										}}
-									>
-										<Button content="INICIAR" spec="blanco" borderR={4} />
-									</View>
+									<Button
+										navigate={RouteName.Login}
+										navigation={navigation}
+										width={62}
+										height={20}
+										content="INICIAR"
+										spec="blanco"
+										borderR={4}
+									/>
 								</View>
 							</View>
 						)}
-						
-						
 					</View>
 				)}
+				{column3 === 'none' && <View style={{ height: 15 * HScale, width: 83 * WScale }} />}
 			</View>
-		</View>
+		</Pressable>
 	);
 };
 

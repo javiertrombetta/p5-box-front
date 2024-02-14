@@ -3,7 +3,7 @@ import React from 'react';
 import { BackgroundImage } from 'react-native-elements/dist/config';
 import { color } from 'react-native-elements/dist/helpers';
 import Sum from '../assets/Sum.svg';
-import { useNavigation } from '@react-navigation/native';
+import { NavigationProp } from '@react-navigation/native';
 import axios from 'axios';
 
 const { width, height } = Dimensions.get('window');
@@ -13,20 +13,43 @@ const HScale = height / 640;
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 interface ButtonProps {
+	height: number;
+	width: number;
 	spec: string;
 	content: string;
-	navigate: string;
+	navigate?: RouteName;
 	svg?: boolean;
 	borderR?: number;
 	data?: object;
 	action?: string;
+	navigation: NavigationProp<RootStackParamList>;
 }
 
 const texto = '#24424D';
 const blanco = '#FEFEFE';
 const amarilloVerdoso = '#CEF169';
 
-const Button = ({ spec, content, svg, borderR, data, action }: ButtonProps) => {
+type RootStackParamList = {
+    [key in RouteName]: undefined;
+};
+
+enum RouteName {
+	HomeIniciarJornada = 'HomeIniciarJornada',
+	ObtenerPaquetes = 'ObtenerPaquetes',
+	CreateAccount = 'CreateAccount',
+	Login = 'Login',
+	RepartoEnCurso = 'RepartoEnCurso',
+	LoginAdmin = 'LoginAdmin',
+	HomeGestionarPedido = 'HomeGestionarPedido',
+	Repartidores = 'Repartidores',
+	Paquetes = 'Paquetes',
+	AddPackage = 'AddPackage',
+	PerfilRepartidor = 'PerfilRepartidor'
+}
+
+const Button = (
+	{ spec, content, svg, borderR, data, action, navigate, navigation, height, width }: ButtonProps,
+) => {
 	const handleCreateUser = async () => {
 		try {
 			const response = await axios.post('http://localhost:3000/api/v1/auth/register', data);
@@ -43,50 +66,142 @@ const Button = ({ spec, content, svg, borderR, data, action }: ButtonProps) => {
 			console.error('Error al loguear usuario:', error);
 		}
 	};
+	const handleNavigation = () => {
+		if (navigate && navigation) {
+			navigation.navigate(navigate);
+		}
+	};
 
 	return (
-		<Pressable
-			onPress={
-				action === 'postR' ? handleCreateUser : action === 'postL' ? handleLoginUser : () => {}
-			}
-			style={({ pressed }) => [
-				spec === 'texto' && {
-					backgroundColor: pressed ? 'rgb(22 41 48)' : texto,
-				},
-				spec === 'blanco' && {
-					backgroundColor: pressed ? 'rgb(231 231 231)' : 'transparent',
-					borderColor: texto,
-					borderWidth: 1,
-				},
-				borderR
-					? {
-							borderRadius: borderR,
-					  }
-					: {
-							borderRadius: 8,
-					  },
-				{
-					width: '100%',
-					height: '100%',
-					display: 'flex',
-					flexDirection: 'row',
-					justifyContent: 'center',
-					alignItems: 'center',
-					gap: 8,
-				},
-			]}
-		>
-			<Text
-				style={{
-					fontSize: scaledSize(12),
-					...(spec === 'texto' ? { color: amarilloVerdoso } : { color: texto }),
-				}}
-				className="text-center font-roboto"
-			>
-				{content}
-			</Text>
-			{svg && <Sum height={12 * HScale} width={12 * WScale} />}
-		</Pressable>
+		<View style={{height: height * HScale, width: width * WScale}}>
+			{action && navigate && (
+				<Pressable
+					onPress={
+						action === 'postR' ? handleCreateUser : action === 'postL' ? handleLoginUser : () => {}
+					}
+					style={({ pressed }) => [
+						spec === 'texto' && {
+							backgroundColor: pressed ? 'rgb(22 41 48)' : texto,
+						},
+						spec === 'blanco' && {
+							backgroundColor: pressed ? 'rgb(231 231 231)' : 'transparent',
+							borderColor: texto,
+							borderWidth: 1,
+						},
+						borderR
+							? {
+									borderRadius: borderR,
+							  }
+							: {
+									borderRadius: 8,
+							  },
+						{
+							width: '100%',
+							height: '100%',
+							display: 'flex',
+							flexDirection: 'row',
+							justifyContent: 'center',
+							alignItems: 'center',
+							gap: 8,
+						},
+					]}
+				>
+					<Text
+						style={{
+							fontSize: scaledSize(12),
+							...(spec === 'texto' ? { color: amarilloVerdoso } : { color: texto }),
+						}}
+						className="text-center font-roboto"
+					>
+						{content}
+					</Text>
+					{svg && <Sum height={12 * HScale} width={12 * WScale} />}
+				</Pressable>
+			)}
+			{navigate && !action && (
+				<Pressable
+					onPress={handleNavigation}
+					style={({ pressed }) => [
+						spec === 'texto' && {
+							backgroundColor: pressed ? 'rgb(22 41 48)' : texto,
+						},
+						spec === 'blanco' && {
+							backgroundColor: pressed ? 'rgb(231 231 231)' : 'transparent',
+							borderColor: texto,
+							borderWidth: 1,
+						},
+						borderR
+							? {
+									borderRadius: borderR,
+							  }
+							: {
+									borderRadius: 8,
+							  },
+						{
+							width: '100%',
+							height: '100%',
+							display: 'flex',
+							flexDirection: 'row',
+							justifyContent: 'center',
+							alignItems: 'center',
+							gap: 8,
+						},
+					]}
+				>
+					<Text
+						style={{
+							fontSize: scaledSize(12),
+							...(spec === 'texto' ? { color: amarilloVerdoso } : { color: texto }),
+						}}
+						className="text-center font-roboto"
+					>
+						{content}
+					</Text>
+					{svg && <Sum height={12 * HScale} width={12 * WScale} />}
+				</Pressable>
+			)}
+			{!navigate && !action && (
+				<Pressable
+					style={({ pressed }) => [
+						spec === 'texto' && {
+							backgroundColor: pressed ? 'rgb(22 41 48)' : texto,
+						},
+						spec === 'blanco' && {
+							backgroundColor: pressed ? 'rgb(231 231 231)' : 'transparent',
+							borderColor: texto,
+							borderWidth: 1,
+						},
+						borderR
+							? {
+									borderRadius: borderR,
+							  }
+							: {
+									borderRadius: 8,
+							  },
+						{
+							width: '100%',
+							height: '100%',
+							display: 'flex',
+							flexDirection: 'row',
+							justifyContent: 'center',
+							alignItems: 'center',
+							gap: 8,
+						},
+					]}
+				>
+					<Text
+						style={{
+							fontSize: scaledSize(12),
+							...(spec === 'texto' ? { color: amarilloVerdoso } : { color: texto }),
+						}}
+						className="text-center font-roboto"
+					>
+						{content}
+					</Text>
+					{svg && <Sum height={12 * HScale} width={12 * WScale} />}
+				</Pressable>
+			)}
+		</View>
 	);
 };
 

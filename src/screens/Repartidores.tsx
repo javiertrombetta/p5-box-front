@@ -16,6 +16,7 @@ import GrayCircle from '../assets/GrayCircle.svg';
 import BlackCircle from '../assets/BlackCircle.svg';
 import Header from '../components/Header';
 import List from '../components/List';
+import { NavigationProp } from '@react-navigation/native';
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 const { width, height } = Dimensions.get('window');
@@ -23,14 +24,28 @@ const WScale = width / 360;
 const HScale = height / 640;
 
 type RootStackParamList = {
-	HomeGestionarPedido: undefined;
-	PerfilRepartidor: undefined;
-  };
-  
-type HomeScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'HomeGestionarPedido'>;
+    [key in RouteName]: undefined;
+};
 
+enum RouteName {
+	HomeIniciarJornada = 'HomeIniciarJornada',
+	ObtenerPaquetes = 'ObtenerPaquetes',
+	CreateAccount = 'CreateAccount',
+	Login = 'Login',
+	RepartoEnCurso = 'RepartoEnCurso',
+	LoginAdmin = 'LoginAdmin',
+	HomeGestionarPedido = 'HomeGestionarPedido',
+	Repartidores = 'Repartidores',
+	Paquetes = 'Paquetes',
+	AddPackage = 'AddPackage',
+	PerfilRepartidor = 'PerfilRepartidor'
+}
 
-const Repartidores = ({ navigation }: { navigation: HomeScreenNavigationProp }) => {
+type Props = {
+	navigation: NavigationProp<RootStackParamList>;
+}
+
+const Repartidores = ({ navigation }: Props ) => {
 	const isWeb = Platform.OS === 'web';
 
 	return (
@@ -38,7 +53,7 @@ const Repartidores = ({ navigation }: { navigation: HomeScreenNavigationProp }) 
 			className="bg-verde w-full h-full flex-col items-center  flex"
 			style={{ paddingHorizontal: 30 * WScale, paddingVertical: 6 * HScale }}
 		>
-			<Header />
+			<Header navigation={navigation}/>
 			<View
 				style={{
 					height: 40 * HScale,
@@ -101,6 +116,7 @@ const Repartidores = ({ navigation }: { navigation: HomeScreenNavigationProp }) 
 						content2String="Javier Trombetta, green"
 						column3="img"
 						content3="https://media.licdn.com/dms/image/C4D03AQHrxjH4W8NPaQ/profile-displayphoto-shrink_100_100/0/1595166426988?e=1711584000&v=beta&t=JvYqCohzV0C4YBalxd1OrjXzkdphr-fEAlf1R_yaB2I"
+						navigation={navigation}
 					/>
 				</View>
 				<View className="w-full h-[0.5] bg-gray-300" />
@@ -112,6 +128,7 @@ const Repartidores = ({ navigation }: { navigation: HomeScreenNavigationProp }) 
 						content2String="Boris Manzano, black"
 						column3="img"
 						content3="https://cdn.discordapp.com/attachments/1153431672264597585/1197245225677107240/imagen_cv.jpg?ex=65c3cb01&is=65b15601&hm=1ef0e9a4d50b227820aedff86a7fc4f32298be71609da5b8caed50a49d4ef5d3&"
+						navigation={navigation}
 					/>
 				</View>
 				<View className="w-full h-[0.7] bg-gray-300" />
@@ -123,6 +140,7 @@ const Repartidores = ({ navigation }: { navigation: HomeScreenNavigationProp }) 
 						content2String="Javier Colodro, green"
 						column3="img"
 						content3="https://media.licdn.com/dms/image/C4D03AQGdOefz2XaJIA/profile-displayphoto-shrink_100_100/0/1612753310949?e=1711584000&v=beta&t=HW9EJnZysnYHEbMwD2B_XZgzcvt6RI5owIDOtCBwWUc"
+						navigation={navigation}
 					/>
 				</View>
 				<View className="w-full h-[1] bg-gray-300" />
@@ -134,6 +152,7 @@ const Repartidores = ({ navigation }: { navigation: HomeScreenNavigationProp }) 
 						content2String="Lucas Glave, gray"
 						column3="img"
 						content3="https://media.licdn.com/dms/image/D4D03AQHbMGou_Pxf1w/profile-displayphoto-shrink_200_200/0/1679951269315?e=1711584000&v=beta&t=tmxoWJKRET9g3XGq5W_-y1HScfPezAPCwXJwrbheKFw"
+						navigation={navigation}
 					/>
 				</View>
 			</View>
