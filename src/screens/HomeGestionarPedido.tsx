@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, Text, Pressable, Image, StyleSheet, Dimensions } from 'react-native';
 import CircleProgress from '../components/CircleProgress';
-import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack';
-
+import {
+	createNativeStackNavigator,
+	NativeStackNavigationProp,
+} from '@react-navigation/native-stack';
 
 import box from '../assets/box.png';
 import boxRight from '../assets/boxRight.png';
@@ -34,7 +36,7 @@ import AddPackage from './AddPackage';
 import PerfilRepartidor from './PerfilRepartidor';
 
 type RootStackParamList = {
-    [key in RouteName]: undefined;
+	[key in RouteName]: undefined;
 };
 
 enum RouteName {
@@ -48,28 +50,26 @@ enum RouteName {
 	Repartidores = 'Repartidores',
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
-	PerfilRepartidor = 'PerfilRepartidor'
+	PerfilRepartidor = 'PerfilRepartidor',
 }
 
 type Props = {
 	navigation: NavigationProp<RootStackParamList>;
-}
+};
 
-const HomeGestionarPedido = ({ navigation }:  Props ) => {
+const HomeGestionarPedido = ({ navigation }: Props) => {
 	const { width, height } = Dimensions.get('window');
 	const WScale = width / 360;
 	const HScale = height / 640;
 
 	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
-	
-
 	return (
 		<View
 			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
 			className="w-full bg-verde h-full flex flex-col items-center"
 		>
-			<Header navigation={navigation}/>
+			<Header navigation={navigation} />
 			<View style={{ height: 40 * HScale, marginTop: 28 * HScale, width: '100%' }}>
 				<Title content={'GESTIONAR PEDIDOS'} size={18} />
 			</View>
@@ -101,9 +101,7 @@ const HomeGestionarPedido = ({ navigation }:  Props ) => {
 				</View>
 			</View>
 			<View style={{ height: 84 * HScale, marginTop: 10 }} className="w-full flex justify-center">
-				<View
-					style={{ height: 30 * HScale }}
-				>
+				<View style={{ height: 30 * HScale }}>
 					<Title content={'ENERO'} color={'v'} size={14} />
 				</View>
 				<View
@@ -233,11 +231,16 @@ const HomeGestionarPedido = ({ navigation }:  Props ) => {
 					marginTop: 15 * HScale,
 				}}
 			>
-				<Button spec="texto" content="NUEVO PAQUETE" svg={true} navigation={navigation} navigate={RouteName.AddPackage} height={30} width={265} />
+				<Button
+					spec="texto"
+					content="NUEVO PAQUETE"
+					svg={true}
+					navigation={navigation}
+					navigate={RouteName.AddPackage}
+					height={30}
+					width={265}
+				/>
 			</View>
-			<Pressable>
-				<Text>NUEVO PAQUETE</Text>
-			</Pressable>
 		</View>
 	);
 };
