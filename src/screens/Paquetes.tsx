@@ -1,15 +1,8 @@
 import React from 'react';
-import { View, Text, Button, Pressable, Image, Dimensions, Platform } from 'react-native';
+import { View, Text, Image, Dimensions, Platform } from 'react-native';
 
-import box from '../assets/box.png';
-import BoxList from '../assets/BoxList.png';
-import trash from '../assets/trash.png';
 import arrowLeft from '../assets/arrow-left.png';
 import downArrow from '../assets/arrow-head-down.png';
-
-import LogoBox from '../assets/LogoBox.svg';
-import Box from '../assets/Box.svg';
-import TrashIcon from '../assets/Trash.svg';
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 import Header from '../components/Header';
@@ -23,7 +16,7 @@ const HScale = height / 640;
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 type RootStackParamList = {
-    [key in RouteName]: undefined;
+	[key in RouteName]: undefined;
 };
 
 enum RouteName {
@@ -37,21 +30,21 @@ enum RouteName {
 	Repartidores = 'Repartidores',
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
-	PerfilRepartidor = 'PerfilRepartidor'
+	PerfilRepartidor = 'PerfilRepartidor',
 }
 
 type Props = {
 	navigation: NavigationProp<RootStackParamList>;
-}
+};
 
-const Paquetes = ({navigation} : Props) => {
+const Paquetes = ({ navigation }: Props) => {
 	const isWeb = Platform.OS === 'web';
 	return (
 		<View
 			className="bg-verde w-full h-full flex-col items-center  flex"
 			style={{ paddingHorizontal: 30 * WScale, paddingVertical: 6 * HScale }}
 		>
-			<Header navigation={navigation}/>
+			<Header navigation={navigation} />
 			<View
 				style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale, marginTop: 26 * HScale }} // h-[40] mt-[28] px-4
 				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
@@ -62,9 +55,7 @@ const Paquetes = ({navigation} : Props) => {
 				>
 					PAQUETES
 				</Text>
-				<View
-					className="flex justify-center items-center"
-				>
+				<View className="flex justify-center items-center">
 					{isWeb ? (
 						<Image
 							source={arrowLeft}
