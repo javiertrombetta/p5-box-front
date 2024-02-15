@@ -1,15 +1,8 @@
-import { View, Text, Pressable, Image, Dimensions, Switch } from 'react-native';
-import React, { useState } from 'react';
+import { View, Text, Dimensions } from 'react-native';
+import React from 'react';
 
-import box from '../assets/box.png';
-import arrowLeft from '../assets/arrow-left.png';
-import downArrow from '../assets/arrow-head-down.png';
-import buttonTrue from '../assets/buttonTrue.png';
-
-import LogoBox from '../assets/LogoBox.svg';
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
-import ButtonTrue from '../assets/ButtonTrue.svg';
 
 import Header from '../components/Header';
 import Button from '../components/Button';
@@ -23,7 +16,7 @@ const HScale = height / 640;
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 type RootStackParamList = {
-    [key in RouteName]: undefined;
+	[key in RouteName]: undefined;
 };
 
 enum RouteName {
@@ -37,7 +30,7 @@ enum RouteName {
 	Repartidores = 'Repartidores',
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
-	PerfilRepartidor = 'PerfilRepartidor'
+	PerfilRepartidor = 'PerfilRepartidor',
 }
 
 type Props = {
@@ -91,7 +84,7 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 					}}
 					className="flex flex-col items-start justify-between"
 				>
-					<View style={{paddingHorizontal: 16 * WScale}}>
+					<View style={{ paddingHorizontal: 16 * WScale }}>
 						<List
 							column1="buttonTrue"
 							column2="stringsRow"
@@ -103,7 +96,7 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 					<View className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View style={{paddingHorizontal: 16 * WScale}}>
+					<View style={{ paddingHorizontal: 16 * WScale }}>
 						<List
 							column1="buttonTrue"
 							column2="stringsRow"
@@ -115,7 +108,7 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 					<View className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View style={{paddingHorizontal: 16 * WScale, height: 40 * HScale}}>
+					<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
 						<List
 							column1="buttonTrue"
 							column2="stringsRow"
@@ -127,7 +120,7 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 					<View className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View style={{paddingHorizontal: 16 * WScale, height: 40 * HScale}}>
+					<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
 						<List
 							column1="buttonFalse"
 							column2="stringsRow"
@@ -139,7 +132,7 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 					<View className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View style={{paddingHorizontal: 16 * WScale, height: 40 * HScale}}>
+					<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
 						<List
 							column1="buttonFalse"
 							column2="stringsRow"
@@ -151,7 +144,7 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 					<View className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View style={{paddingHorizontal: 16 * WScale, height: 40 * HScale}}>
+					<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
 						<List
 							column1="buttonFalse"
 							column2="stringsRow"
@@ -163,7 +156,7 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 					<View className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View style={{paddingHorizontal: 16 * WScale, height: 40 * HScale}}>
+					<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
 						<List
 							column1="buttonFalse"
 							column2="stringsRow"
@@ -175,7 +168,7 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 					<View className="flex w-full items-center">
 						<View style={{ height: 1 }} className="w-full bg-gray-300" />
 					</View>
-					<View style={{paddingHorizontal: 16 * WScale, height: 40 * HScale}}>
+					<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
 						<List
 							column1="buttonFalse"
 							column2="stringsRow"

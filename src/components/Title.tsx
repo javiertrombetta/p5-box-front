@@ -1,7 +1,6 @@
 import { View, Text, Dimensions, Platform, Image, Pressable } from 'react-native';
 import React from 'react';
 import { format } from 'date-fns';
-import { es } from 'date-fns/locale';
 
 import leftArrow from '../assets/arrow-left.png';
 import downArrow from '../assets/arrow-head-down.png';

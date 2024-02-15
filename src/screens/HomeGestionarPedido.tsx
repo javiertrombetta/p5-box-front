@@ -1,39 +1,12 @@
 import React from 'react';
-import { View, Text, Pressable, Image, StyleSheet, Dimensions } from 'react-native';
-import CircleProgress from '../components/CircleProgress';
-import {
-	createNativeStackNavigator,
-	NativeStackNavigationProp,
-} from '@react-navigation/native-stack';
-
-import box from '../assets/box.png';
-import boxRight from '../assets/boxRight.png';
-import boxLeft from '../assets/boxLeft.png';
-import vectorSuma from '../assets/vectorSuma.png';
-import arrowDown from '../assets/arrow-head-down.png';
-import personas from '../assets/Group 37396.png';
-
-import LogoBox from '../assets/LogoBox.svg';
+import { View, Text, Image, Dimensions } from 'react-native';
 import ArrowRightBox from '../assets/ArrowRightBox.svg';
 import ArrowLeftBox from '../assets/ArrowLeftBox.svg';
-import Sum from '../assets/Sum.svg';
-import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
-import IconsPeople from '../assets/IconsPeople.svg';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import List from '../components/List';
 import Title from '../components/Title';
 import { NavigationProp } from '@react-navigation/native';
-import HomeIniciarJornada from './HomeIniciarJornada';
-import ObtenerPaquetes from './ObtenerPaquetes';
-import CreateAccount from './CreateAccount';
-import Login from './Login';
-import RepartoEnCurso from './RepartoEnCurso';
-import LoginAdmin from './LoginAdmin';
-import Repartidores from './Repartidores';
-import Paquetes from './Paquetes';
-import AddPackage from './AddPackage';
-import PerfilRepartidor from './PerfilRepartidor';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
