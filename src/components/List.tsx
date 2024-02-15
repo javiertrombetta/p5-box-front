@@ -4,10 +4,6 @@ import CircleProgress from './CircleProgress';
 
 import boxList from '../assets/BoxList.png';
 import trash from '../assets/trash.png';
-import boxRight from '../assets/boxRight.png';
-import boxLeft from '../assets/boxLeft.png';
-import vectorSuma from '../assets/vectorSuma.png';
-import arrowDown from '../assets/arrow-head-down.png';
 import personas from '../assets/Group 37396.png';
 import buttonTrue from '../assets/buttonTrue.png';
 import enCurso from '../assets/EllipseGreen.png';
@@ -21,12 +17,6 @@ import BlackCircle from '../assets/BlackCircle.svg';
 import TrashIcon from '../assets/Trash.svg';
 import Box from '../assets/Box.svg';
 import Entregado from '../assets/Entregado.svg';
-import ArrowRightBox from '../assets/ArrowRightBox.svg';
-import ArrowLeftBox from '../assets/ArrowLeftBox.svg';
-import Sum from '../assets/Sum.svg';
-import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
-import IconsPeople from '../assets/IconsPeople.svg';
-import Header from '../components/Header';
 import Button from '../components/Button';
 import ButtonTrue from '../assets/ButtonTrue.svg';
 import { NavigationProp } from '@react-navigation/native';
@@ -42,7 +32,7 @@ interface listProps {
 }
 
 type RootStackParamList = {
-    [key in RouteName]: undefined;
+	[key in RouteName]: undefined;
 };
 
 enum RouteName {
@@ -56,7 +46,7 @@ enum RouteName {
 	Repartidores = 'Repartidores',
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
-	PerfilRepartidor = 'PerfilRepartidor'
+	PerfilRepartidor = 'PerfilRepartidor',
 }
 
 const { width, height } = Dimensions.get('window');
@@ -78,7 +68,7 @@ const List = ({
 	const arrayColumn2: string[] = content2String.split(', ');
 	const handleNavigation = () => {
 		content3 !== 'svgTrash' && content3 !== 'img' && navigation.navigate(RouteName.RepartoEnCurso);
-		content3 === 'img' && navigation.navigate(RouteName.PerfilRepartidor)
+		content3 === 'img' && navigation.navigate(RouteName.PerfilRepartidor);
 	};
 	return (
 		<Pressable

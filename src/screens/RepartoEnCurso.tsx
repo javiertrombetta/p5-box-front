@@ -1,21 +1,10 @@
 import React from 'react';
-import {
-	View,
-	ImageBackground,
-	Text,
-	Pressable,
-	Image,
-	StyleSheet,
-	Dimensions,
-} from 'react-native';
+import { View, ImageBackground, Text, Dimensions } from 'react-native';
 import ArrowLeft from '../assets/ArrowLeft.svg';
-import LogoBox from '../assets/LogoBox.svg';
 import buenos from '../assets/buenos.png';
 import Header from '../components/Header';
 import Button from '../components/Button';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { NavigationProp, useNavigation } from '@react-navigation/native';
-import ObtenerPaquetes from './ObtenerPaquetes';
+import { NavigationProp } from '@react-navigation/native';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -24,7 +13,7 @@ const HScale = height / 640;
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 type RootStackParamList = {
-    [key in RouteName]: undefined;
+	[key in RouteName]: undefined;
 };
 
 enum RouteName {
@@ -38,24 +27,22 @@ enum RouteName {
 	Repartidores = 'Repartidores',
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
-	PerfilRepartidor = 'PerfilRepartidor'
+	PerfilRepartidor = 'PerfilRepartidor',
 }
 
 type Props = {
 	navigation: NavigationProp<RootStackParamList>;
-}
+};
 
 // NAVIGATION ADMIN
 
-
-function RepartoEnCurso({navigation}: Props) {
-
+function RepartoEnCurso({ navigation }: Props) {
 	return (
 		<View
 			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
 			className="w-full bg-verde h-full flex flex-col items-center"
 		>
-			<Header navigation={navigation}/>
+			<Header navigation={navigation} />
 			<View
 				style={{ height: 40 * HScale, paddingHorizontal: 20 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
 				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
@@ -137,7 +124,14 @@ function RepartoEnCurso({navigation}: Props) {
 					marginTop: 24 * HScale,
 				}}
 			>
-				<Button content="FINALIZAR" width={270} height={30} spec="texto" navigation={navigation} navigate={RouteName.ObtenerPaquetes}/>
+				<Button
+					content="FINALIZAR"
+					width={270}
+					height={30}
+					spec="texto"
+					navigation={navigation}
+					navigate={RouteName.ObtenerPaquetes}
+				/>
 			</View>
 			<View
 				style={{
@@ -146,7 +140,14 @@ function RepartoEnCurso({navigation}: Props) {
 					marginTop: 10 * HScale,
 				}}
 			>
-				<Button content="CANCELAR ENTREGA" width={270} height={30} spec="blanco" navigation={navigation} navigate={RouteName.HomeIniciarJornada}/>
+				<Button
+					content="CANCELAR ENTREGA"
+					width={270}
+					height={30}
+					spec="blanco"
+					navigation={navigation}
+					navigate={RouteName.HomeIniciarJornada}
+				/>
 			</View>
 		</View>
 	);

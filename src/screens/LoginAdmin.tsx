@@ -1,14 +1,11 @@
-import { View, Text, Image, TextInput, Pressable, Dimensions, Platform } from 'react-native';
+import { View, Image, Dimensions, Platform } from 'react-native';
 import React, { useState } from 'react';
 
 import backgroundI from '../assets/fondoLogin.jpg';
 import logo from '../assets/logo.png';
-import closeEye from '../assets/Eye.png';
 
 import BackgroundImage from '../assets/FondoLogin.svg';
 import LogoFull from '../assets/LogoFull.svg';
-import CloseEye from '../assets/Eye.svg';
-import Button from '../components/Button';
 import LoginComp from '../components/LoginComp';
 import { NavigationProp } from '@react-navigation/native';
 
@@ -19,7 +16,7 @@ const HScale = height / 640;
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 type RootStackParamList = {
-    [key in RouteName]: undefined;
+	[key in RouteName]: undefined;
 };
 
 enum RouteName {
@@ -33,14 +30,14 @@ enum RouteName {
 	Repartidores = 'Repartidores',
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
-	PerfilRepartidor = 'PerfilRepartidor'
+	PerfilRepartidor = 'PerfilRepartidor',
 }
 
 type Props = {
 	navigation: NavigationProp<RootStackParamList>;
-}
+};
 
-const LoginAdmin = ({navigation}: Props) => {
+const LoginAdmin = ({ navigation }: Props) => {
 	const [text, setText] = useState('');
 	const isWeb = Platform.OS === 'web';
 
@@ -56,7 +53,7 @@ const LoginAdmin = ({navigation}: Props) => {
 					position: 'absolute',
 				}}
 			>
-				<LoginComp navigation={navigation} client={false}/>
+				<LoginComp navigation={navigation} client={false} />
 			</View>
 
 			<View
