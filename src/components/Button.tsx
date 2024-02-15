@@ -1,7 +1,5 @@
-import { View, Text, Pressable, Dimensions, Alert } from 'react-native';
+import { View, Text, Pressable, Dimensions } from 'react-native';
 import React from 'react';
-import { BackgroundImage } from 'react-native-elements/dist/config';
-import { color } from 'react-native-elements/dist/helpers';
 import Sum from '../assets/Sum.svg';
 import { NavigationProp } from '@react-navigation/native';
 import axios from 'axios';
@@ -30,7 +28,7 @@ const blanco = '#FEFEFE';
 const amarilloVerdoso = '#CEF169';
 
 type RootStackParamList = {
-    [key in RouteName]: undefined;
+	[key in RouteName]: undefined;
 };
 
 enum RouteName {
@@ -44,12 +42,21 @@ enum RouteName {
 	Repartidores = 'Repartidores',
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
-	PerfilRepartidor = 'PerfilRepartidor'
+	PerfilRepartidor = 'PerfilRepartidor',
 }
 
-const Button = (
-	{ spec, content, svg, borderR, data, action, navigate, navigation, height, width }: ButtonProps,
-) => {
+const Button = ({
+	spec,
+	content,
+	svg,
+	borderR,
+	data,
+	action,
+	navigate,
+	navigation,
+	height,
+	width,
+}: ButtonProps) => {
 	const handleCreateUser = async () => {
 		try {
 			const response = await axios.post('http://localhost:3000/api/v1/auth/register', data);
@@ -73,7 +80,7 @@ const Button = (
 	};
 
 	return (
-		<View style={{height: height * HScale, width: width * WScale}}>
+		<View style={{ height: height * HScale, width: width * WScale }}>
 			{action && navigate && (
 				<Pressable
 					onPress={

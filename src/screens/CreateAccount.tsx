@@ -1,25 +1,13 @@
 import React, { useState } from 'react';
-import {
-	View,
-	Text,
-	Dimensions,
-	Image,
-	TextInput,
-	Pressable,
-	Platform,
-	NativeModules,
-} from 'react-native';
+import { View, Dimensions, Image, TextInput, Pressable, Platform } from 'react-native';
 import { launchImageLibrary, ImageLibraryOptions } from 'react-native-image-picker';
-import axios from 'axios';
 
 import box from '../assets/box.png';
-import leftArrow from '../assets/arrow-left.png';
 import closeEye from '../assets/Eye.png';
 import profilePic from '../assets/profile-pic.png';
 import openEye from '../assets/close-eye.png';
 
 import LogoBox from '../assets/LogoBox.svg';
-import ArrowLeft from '../assets/ArrowLeft.svg';
 import Eye from '../assets/Eye.svg';
 import ProfilePic from '../assets/ProfilePic.svg';
 import OpenEye from '../assets/OpenEye.svg';
@@ -29,7 +17,7 @@ import Title from '../components/Title';
 import { NavigationProp } from '@react-navigation/native';
 
 type RootStackParamList = {
-    [key in RouteName]: undefined;
+	[key in RouteName]: undefined;
 };
 
 enum RouteName {
@@ -43,19 +31,19 @@ enum RouteName {
 	Repartidores = 'Repartidores',
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
-	PerfilRepartidor = 'PerfilRepartidor'
+	PerfilRepartidor = 'PerfilRepartidor',
 }
 
 type Props = {
 	navigation: NavigationProp<RootStackParamList>;
-}
-  
+};
+
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
 const HScale = height / 640;
 
-const CreateAccount = ({navigation}: Props) => {
+const CreateAccount = ({ navigation }: Props) => {
 	const [data, setData] = useState({
 		name: '',
 		lastname: '',
@@ -332,7 +320,16 @@ const CreateAccount = ({navigation}: Props) => {
 					<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
 				</View>
 				<View style={{ marginTop: 50 * HScale }}>
-					<Button spec="texto" height={28} width={270} content="CREAR" data={data} navigate={RouteName.Login} navigation={navigation}/> {/* action="postR"*/}
+					<Button
+						spec="texto"
+						height={28}
+						width={270}
+						content="CREAR"
+						data={data}
+						navigate={RouteName.Login}
+						navigation={navigation}
+					/>{' '}
+					{/* action="postR"*/}
 				</View>
 				<View
 					style={{
@@ -340,7 +337,15 @@ const CreateAccount = ({navigation}: Props) => {
 					}}
 					// className="flex justify-center items-center align-middle border border-texto text-texto"
 				>
-					<Button spec="blanco" height={30} width={270} content="INICIAR SESION" navigate={RouteName.Login} navigation={navigation}/> {/* action="postL"*/}
+					<Button
+						spec="blanco"
+						height={30}
+						width={270}
+						content="INICIAR SESION"
+						navigate={RouteName.Login}
+						navigation={navigation}
+					/>{' '}
+					{/* action="postL"*/}
 				</View>
 				<View
 					style={{ top: 15 * HScale }}
@@ -352,7 +357,14 @@ const CreateAccount = ({navigation}: Props) => {
 					> */}
 
 					{/* </Text> */}
-					<Button spec="transp" height={30} width={270} content="¿Ya tenés una cuenta?" navigate={RouteName.Login} navigation={navigation} />
+					<Button
+						spec="transp"
+						height={30}
+						width={270}
+						content="¿Ya tenés una cuenta?"
+						navigate={RouteName.Login}
+						navigation={navigation}
+					/>
 				</View>
 			</Card>
 

@@ -1,19 +1,11 @@
-import { View, Text, Button, Pressable, Image, Dimensions, Platform } from 'react-native';
-import React, { useEffect } from 'react';
-import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { View, Text, Image, Dimensions, Platform } from 'react-native';
+import React from 'react';
 
-
-import box from '../assets/box.png';
 import leftArrow from '../assets/arrow-left.png';
 import downarrow from '../assets/arrow-head-down.png';
-import CircleProgress from '../components/CircleProgress';
 
-import LogoBox from '../assets/LogoBox.svg';
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
-import GreenCircle from '../assets/GreenCircle.svg';
-import GrayCircle from '../assets/GrayCircle.svg';
-import BlackCircle from '../assets/BlackCircle.svg';
 import Header from '../components/Header';
 import List from '../components/List';
 import { NavigationProp } from '@react-navigation/native';
@@ -24,7 +16,7 @@ const WScale = width / 360;
 const HScale = height / 640;
 
 type RootStackParamList = {
-    [key in RouteName]: undefined;
+	[key in RouteName]: undefined;
 };
 
 enum RouteName {
@@ -38,14 +30,14 @@ enum RouteName {
 	Repartidores = 'Repartidores',
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
-	PerfilRepartidor = 'PerfilRepartidor'
+	PerfilRepartidor = 'PerfilRepartidor',
 }
 
 type Props = {
 	navigation: NavigationProp<RootStackParamList>;
-}
+};
 
-const Repartidores = ({ navigation }: Props ) => {
+const Repartidores = ({ navigation }: Props) => {
 	const isWeb = Platform.OS === 'web';
 
 	return (
@@ -53,7 +45,7 @@ const Repartidores = ({ navigation }: Props ) => {
 			className="bg-verde w-full h-full flex-col items-center  flex"
 			style={{ paddingHorizontal: 30 * WScale, paddingVertical: 6 * HScale }}
 		>
-			<Header navigation={navigation}/>
+			<Header navigation={navigation} />
 			<View
 				style={{
 					height: 40 * HScale,
@@ -106,7 +98,7 @@ const Repartidores = ({ navigation }: Props ) => {
 					style={{
 						marginVertical: 12 * HScale,
 						paddingTop: 2 * HScale,
-						paddingHorizontal: 16 * WScale
+						paddingHorizontal: 16 * WScale,
 					}}
 				>
 					<List

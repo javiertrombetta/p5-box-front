@@ -1,25 +1,12 @@
 import React from 'react';
-import { View, Text, Pressable, Image, StyleSheet, Dimensions, Platform } from 'react-native';
+import { View, Text, Pressable, Image, Dimensions, Platform } from 'react-native';
 import Header from '../components/Header';
 import { NavigationProp } from '@react-navigation/native';
 
-import box from '../assets/box.png';
-import leftArrow from '../assets/arrow-left.png';
-import entregado from '../assets/entregado.png';
 import downarrow from '../assets/arrow-head-down.png';
-import boxlist from '../assets/BoxList.png';
-import tachito from '../assets/trash.png';
-import enCurso from '../assets/EllipseGreen.png';
-import pendiente from '../assets/EllipseOrange.png';
 
-import LogoBox from '../assets/LogoBox.svg';
 import ArrowLeft from '../assets/ArrowLeft.svg';
-import Entregado from '../assets/Entregado.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
-import Box from '../assets/Box.svg';
-import Trash from '../assets/Trash.svg';
-import EllipseGreen from '../assets/EllipseGreen.svg';
-import EllipseOrange from '../assets/EllipseOrange.svg';
 import Button from '../components/Button';
 import List from '../components/List';
 
@@ -30,7 +17,7 @@ const HScale = height / 640;
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 type RootStackParamList = {
-    [key in RouteName]: undefined;
+	[key in RouteName]: undefined;
 };
 
 enum RouteName {
@@ -44,7 +31,7 @@ enum RouteName {
 	Repartidores = 'Repartidores',
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
-	PerfilRepartidor = 'PerfilRepartidor'
+	PerfilRepartidor = 'PerfilRepartidor',
 }
 
 type Props = {
