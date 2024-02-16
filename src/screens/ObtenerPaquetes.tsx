@@ -45,20 +45,16 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 		>
 			<Header navigation={navigation} />
 			<View
-				style={{ height: 40 * HScale, paddingHorizontal: 20 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
+				style={{ height: 40 * HScale, paddingHorizontal: 20 * WScale, marginTop: 28 * HScale }}
 				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
 			>
 				<Text
-					style={{ fontSize: scaledSize(18) }} // py-1
+					style={{ fontSize: scaledSize(18) }}
 					className="flex justify-center items-center font-sairaBold text-texto"
 				>
 					OBTENER PAQUETES
 				</Text>
-				<View
-					style={{ paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
-					className="flex justify-center items-center"
-				>
-					{/* <Image source={arrowLeft} /> */}
+				<View style={{ paddingVertical: 8 * HScale }} className="flex justify-center items-center">
 					<ArrowLeft width={scaledSize(14)} />
 				</View>
 			</View>

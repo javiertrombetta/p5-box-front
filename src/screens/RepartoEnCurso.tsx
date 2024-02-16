@@ -44,24 +44,22 @@ function RepartoEnCurso({ navigation }: Props) {
 		>
 			<Header navigation={navigation} />
 			<View
-				style={{ height: 40 * HScale, paddingHorizontal: 20 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
+				style={{ height: 40 * HScale, paddingHorizontal: 20 * WScale, marginTop: 28 * HScale }}
 				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
 			>
 				<Text
-					style={{ paddingVertical: 4 * HScale, fontSize: scaledSize(18) }} // py-1
+					style={{ paddingVertical: 4 * HScale, fontSize: scaledSize(18) }}
 					className="flex justify-center items-center font-sairaBold text-texto"
 				>
 					REPARTO EN CURSO
 				</Text>
 				<View
-					style={{ width: 13 * WScale, height: 40 * HScale, paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
+					style={{ width: 13 * WScale, height: 40 * HScale, paddingVertical: 8 * HScale }}
 					className="flex justify-center items-center"
 				>
-					{/* <Image style={{ paddingVertical: 8 * HScale }} /> */}
 					<ArrowLeft width={scaledSize(14)} />
 				</View>
 			</View>
-			{/* caja!!! */}
 
 			<View
 				style={{ marginTop: 10 * HScale }}
