@@ -46,11 +46,11 @@ const Paquetes = ({ navigation }: Props) => {
 		>
 			<Header navigation={navigation} />
 			<View
-				style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale, marginTop: 26 * HScale }} // h-[40] mt-[28] px-4
+				style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale, marginTop: 26 * HScale }}
 				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
 			>
 				<Text
-					style={{ fontSize: scaledSize(18) }} // py-1
+					style={{ fontSize: scaledSize(18) }}
 					className="text-lg flex justify-center items-center font-sairaBold text-texto"
 				>
 					PAQUETES

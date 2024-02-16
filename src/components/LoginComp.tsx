@@ -108,7 +108,7 @@ const LoginComp = ({ client, navigation }: LoginCompProps) => {
 					content={'INGRESAR'}
 					spec={'texto'}
 					borderR={8}
-					// action="postL"
+					action="postL"
 					data={data}
 					navigate={client ? RouteName.HomeIniciarJornada : RouteName.HomeGestionarPedido}
 					navigation={navigation}
