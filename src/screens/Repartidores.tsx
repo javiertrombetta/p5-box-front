@@ -61,7 +61,7 @@ const Repartidores = ({ navigation }: Props) => {
 					REPARTIDORES
 				</Text>
 				<View
-					style={{ width: 13 * WScale, height: 40 * HScale, paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
+					style={{ width: 13 * WScale, height: 40 * HScale, paddingVertical: 8 * HScale }}
 					className="flex justify-center items-center "
 				>
 					{isWeb ? (
@@ -72,7 +72,7 @@ const Repartidores = ({ navigation }: Props) => {
 				</View>
 			</View>
 			<View
-				style={{ height: 35 * HScale, paddingHorizontal: 16 * WScale, marginTop: 10 * HScale }} // px-4 mt-[10] h-[35]
+				style={{ height: 35 * HScale, paddingHorizontal: 16 * WScale, marginTop: 10 * HScale }}
 				className="bg-violeta flex-row flex w-full justify-between items-center rounded-t-xl"
 			>
 				<Text
@@ -90,10 +90,7 @@ const Repartidores = ({ navigation }: Props) => {
 					</Text>
 				</View>
 			</View>
-			<View
-				style={{ height: 407 * HScale }} // h-[407]
-				className="bg-blanco flex justify-evenly w-full"
-			>
+			<View style={{ height: 407 * HScale }} className="bg-blanco flex justify-evenly w-full">
 				<View
 					style={{
 						marginVertical: 12 * HScale,

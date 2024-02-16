@@ -15,7 +15,7 @@ const HScale = height / 640;
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 type RootStackParamList = {
-    [key in RouteName]: undefined;
+	[key in RouteName]: undefined;
 };
 
 enum RouteName {
@@ -29,27 +29,25 @@ enum RouteName {
 	Repartidores = 'Repartidores',
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
-	PerfilRepartidor = 'PerfilRepartidor'
+	PerfilRepartidor = 'PerfilRepartidor',
 }
 
 type Props = {
 	navigation: NavigationProp<RootStackParamList>;
-}
+};
 
-const PerfilRepartidor = ({navigation}: Props) => {
+const PerfilRepartidor = ({ navigation }: Props) => {
 	return (
 		<View
 			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
 			className="w-full bg-verde h-full flex flex-col items-center"
 		>
-			<Header navigation={navigation}/>
-			<View
-				style={{ height: 40 * HScale, marginTop: 28 * HScale, width: '100%' }} // h-[40] mt-[28] px-4
-			>
+			<Header navigation={navigation} />
+			<View style={{ height: 40 * HScale, marginTop: 28 * HScale, width: '100%' }}>
 				<Title content={'GESTIONAR PEDIDOS'} arrow={'left'} size={18} />
 			</View>
 			<View
-				style={{ height: 90 * HScale, marginTop: 10 * HScale, paddingHorizontal: 16 * WScale }} // h-24 mt-[10]
+				style={{ height: 90 * HScale, marginTop: 10 * HScale, paddingHorizontal: 16 * WScale }}
 				className="w-full flex flex-row rounded-xl items-center justify-between align-middle bg-white"
 			>
 				<View style={{ gap: 12 * WScale }} className="flex flex-row items-center justify-start">

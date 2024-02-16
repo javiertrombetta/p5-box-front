@@ -121,16 +121,11 @@ const CreateAccount = ({ navigation }: Props) => {
 					height: 40 * HScale,
 					marginTop: 28 * HScale,
 					width: '100%',
-				}} // h-[40] mt-[28] px-4
+				}}
 			>
 				<Title content={'CREÁ TU CUENTA'} arrow={'left'} size={18} />
 			</View>
-			{/* <View
-				style={{ height: 510 * HScale, marginTop: 10 * HScale }}
-				className="w-full items-center rounded-xl bg-blanco"
-			> */}
 			<Card header="none" height={510} dropdown="false">
-				{/* aca loco */}
 				{selectPhoto ? (
 					<Pressable
 						onPress={pickImage}
@@ -325,17 +320,16 @@ const CreateAccount = ({ navigation }: Props) => {
 						height={28}
 						width={270}
 						content="CREAR"
+						action="postR"
 						data={data}
 						navigate={RouteName.Login}
 						navigation={navigation}
 					/>{' '}
-					{/* action="postR"*/}
 				</View>
 				<View
 					style={{
 						marginTop: 10 * HScale,
 					}}
-					// className="flex justify-center items-center align-middle border border-texto text-texto"
 				>
 					<Button
 						spec="blanco"
@@ -344,19 +338,12 @@ const CreateAccount = ({ navigation }: Props) => {
 						content="INICIAR SESION"
 						navigate={RouteName.Login}
 						navigation={navigation}
-					/>{' '}
-					{/* action="postL"*/}
+					/>
 				</View>
 				<View
 					style={{ top: 15 * HScale }}
 					className="justify-center underline items-center align-middle"
 				>
-					{/* <Text
-						className="font-roboto text-texto"
-						style={{ textDecorationLine: 'underline', fontSize: scaledSize(12) }}
-					> */}
-
-					{/* </Text> */}
 					<Button
 						spec="transp"
 						height={30}
@@ -367,8 +354,6 @@ const CreateAccount = ({ navigation }: Props) => {
 					/>
 				</View>
 			</Card>
-
-			{/* </View> */}
 		</View>
 	);
 };
