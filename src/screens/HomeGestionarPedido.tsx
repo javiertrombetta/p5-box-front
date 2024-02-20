@@ -7,6 +7,8 @@ import Button from '../components/Button';
 import List from '../components/List';
 import Title from '../components/Title';
 import { NavigationProp } from '@react-navigation/native';
+import Card from '../components/Card';
+import WeeklyDatePicker from '../components/WeeklyDatePicker';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -73,94 +75,9 @@ const HomeGestionarPedido = ({ navigation }: Props) => {
 					</Text>
 				</View>
 			</View>
-			<View style={{ height: 84 * HScale, marginTop: 10 }} className="w-full flex justify-center">
-				<View style={{ height: 30 * HScale }}>
-					<Title content={'ENERO'} color={'v'} size={14} />
-				</View>
-				<View
-					style={{ height: 54 * HScale }}
-					className="w-full flex flex-row rounded-b-xl items-center justify-evenly bg-white"
-				>
-					<ArrowLeftBox height={scaledSize(21)} width={scaledSize(19)} />
-					<View
-						style={{ width: 34 * WScale, height: 34 * HScale }}
-						className="rounded-md flex items-center justify-center"
-					>
-						<Text style={{ fontSize: scaledSize(12) }} className="font-saira flex text-end">
-							lun
-						</Text>
-						<Text
-							style={{ marginTop: -8 * HScale }}
-							className="font-sairaBold flex items-start justify-start text-start"
-						>
-							01
-						</Text>
-					</View>
-					<View
-						style={{ width: 34 * WScale, height: 34 * HScale }}
-						className="rounded-md flex items-center justify-center"
-					>
-						<Text style={{ fontSize: scaledSize(12) }} className="font-saira flex text-end">
-							mar
-						</Text>
-						<Text
-							style={{ marginTop: -8 * HScale }}
-							className="font-sairaBold flex items-start justify-start text-start"
-						>
-							02
-						</Text>
-					</View>
-					<View
-						style={{ width: 38 * WScale, height: 38 * HScale }}
-						className="rounded-md bg-amarilloVerdoso flex justify-center items-center"
-					>
-						<Text style={{ fontSize: scaledSize(12) }} className="font-saira flex text-end">
-							mie
-						</Text>
-						<Text
-							style={{ marginTop: -8 * HScale }}
-							className="font-sairaBold flex items-start justify-start text-start"
-						>
-							03
-						</Text>
-					</View>
-					<View
-						style={{ width: 34 * WScale, height: 34 * HScale }}
-						className="rounded-md flex items-center justify-center"
-					>
-						<Text
-							style={{ fontSize: scaledSize(12) }}
-							className="font-saira  flex text-end opacity-50"
-						>
-							jue
-						</Text>
-						<Text
-							style={{ marginTop: -8 * HScale }}
-							className="font-sairaBold flex items-start justify-start text-start opacity-50"
-						>
-							04
-						</Text>
-					</View>
-					<View
-						style={{ width: 34 * WScale, height: 34 * HScale }}
-						className="rounded-md  flex items-center justify-center"
-					>
-						<Text
-							style={{ fontSize: scaledSize(12) }}
-							className="font-saira flex text-end opacity-50"
-						>
-							vie
-						</Text>
-						<Text
-							style={{ marginTop: -8 * HScale }}
-							className="font-sairaBold flex items-start justify-start text-start opacity-50"
-						>
-							05
-						</Text>
-					</View>
-					<ArrowRightBox height={scaledSize(21)} width={scaledSize(19)} />
-				</View>
-			</View>
+			<Card header={'violet, FEBRERO, 14, true,'} heightC={84} heightT={30} dropdown={false}>
+				<WeeklyDatePicker />
+			</Card>
 			<View
 				style={{ height: 248 * HScale, marginTop: 10 * HScale }}
 				className="w-full flex rounded-xl bg-white"

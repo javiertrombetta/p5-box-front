@@ -11,36 +11,50 @@ const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 interface cardProps {
 	header: string;
-	contentHeader?: string;
-	dropdown: string;
-	height: number;
+	heightT: number;
+	heightC: number;
 	children: ReactNode;
+	dropdown: boolean;
 }
 
-const Card = ({ header, contentHeader, dropdown, height, children }: cardProps) => {
-	const arrayHeader: Array<string | number> = header.split(', ');
-	const arrayDropdown: Array<string | number> = dropdown.split(', ');
+const Card = ({ header, heightT, heightC, children, dropdown }: cardProps) => {
+	const arrayHeader: Array<string> = header.split(', ');
+
+	const sizeInt = parseInt(arrayHeader[2]);
+	const date = arrayHeader[3] === 'true' ? true : false;
 
 	return (
 		<View
-			style={{ height: height * HScale, width: '100%', marginTop: 10 * HScale }}
-			className="w-full items-center justify-start rounded-xl bg-blanco"
+			style={{ height: heightC * HScale, width: '100%', marginTop: 10 * HScale }}
+			className={
+				dropdown
+					? 'w-full items-center justify-start rounded-t-xl bg-blanco'
+					: 'w-full items-center justify-start rounded-xl bg-blanco'
+			}
 		>
-			{/* {arrayHeader[0] === 'violet' && (
+			<View style={{ height: heightT * HScale, width: '100%' }}>
+				{arrayHeader[0] === 'violet' && (
+					<Title
+						color="v"
+						content={arrayHeader[1]}
+						size={sizeInt}
+						date={date}
+						arrow={arrayHeader[4]}
+						details={arrayHeader[5]}
+					/>
+				)}
+				{arrayHeader[0] === 'green' && (
+					<Title
+						content={arrayHeader[1]}
+						size={sizeInt}
+						date={date}
+						arrow={arrayHeader[4]}
+						details={arrayHeader[5]}
+					/>
+				)}
+			</View>
 
-            )} */}
-			{/* {arrayHeader[0] === 'green' && (
-                <Title />
-            )} */}
 			<View className="flex items-center">{children}</View>
-			{arrayDropdown[0] === 'true' && (
-				<Pressable
-					style={{ height: arrayDropdown[1] as number }}
-					className="w-full flex justify-center items-center rounded-b-xl bg-white z-10"
-				>
-					<ArrowHeadDown height={19 * HScale} width={24 * WScale} />
-				</Pressable>
-			)}
 		</View>
 	);
 };
