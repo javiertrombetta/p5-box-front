@@ -16,12 +16,12 @@ const HScale = height / 640;
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 interface titleProps {
+	color?: string;
 	content: string;
+	size: number;
+	date?: boolean;
 	arrow?: string;
 	details?: string;
-	date?: boolean;
-	color?: string;
-	size: number;
 }
 
 const Title = ({ content, arrow, details, date, color, size }: titleProps) => {
@@ -43,7 +43,14 @@ const Title = ({ content, arrow, details, date, color, size }: titleProps) => {
 			}
 		>
 			<View className={details ? 'items-start' : 'items-center' + ' flex flex-row justify-between'}>
-				<Text style={{ fontSize: scaledSize(size) }} className="font-sairaBold text-texto">
+				<Text
+					style={{ fontSize: scaledSize(size) }}
+					className={
+						color === 'v'
+							? 'text-sm font-robotoBold text-texto text-center'
+							: 'font-sairaBold text-texto'
+					}
+				>
 					{content}
 				</Text>
 
