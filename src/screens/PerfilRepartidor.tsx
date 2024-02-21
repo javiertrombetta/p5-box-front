@@ -44,7 +44,13 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 		>
 			<Header navigation={navigation} />
 			<View style={{ height: 40 * HScale, marginTop: 28 * HScale, width: '100%' }}>
-				<Title content={'GESTIONAR PEDIDOS'} arrow={'left'} size={18} />
+				<Title
+					content={'GESTIONAR PEDIDOS'}
+					arrow={'left'}
+					navigate={RouteName.Repartidores}
+					size={18}
+					navigation={navigation}
+				/>
 			</View>
 			<View
 				style={{ height: 90 * HScale, marginTop: 10 * HScale, paddingHorizontal: 16 * WScale }}
@@ -87,14 +93,27 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 				</View>
 			</View>
 			<View style={{ height: 48 * HScale, marginTop: 10 * HScale, width: '100%' }}>
-				<Title content={'REPARTOS PENDIENTES'} details={'sin repartos'} arrow={'right'} size={14} />
+				<Title
+					content={'REPARTOS PENDIENTES'}
+					details={'sin repartos'}
+					arrow={'right'}
+					size={14}
+					navigation={navigation}
+					navigate={RouteName.PerfilRepartidor}
+				/>
 			</View>
 			<View
 				style={{ height: 282 * HScale, marginTop: 10 * HScale }}
 				className="w-full justify-start flex rounded-t-xl bg-white"
 			>
 				<View style={{ height: 40 * HScale, width: '100%' }}>
-					<Title content={'HISTORIAL DE REPARTOS'} arrow={'down'} size={14} />
+					<Title
+						content={'HISTORIAL DE REPARTOS'}
+						arrow={'down'}
+						size={14}
+						navigation={navigation}
+						navigate={RouteName.PerfilRepartidor}
+					/>
 				</View>
 				<View
 					style={{

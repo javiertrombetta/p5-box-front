@@ -34,7 +34,7 @@ type Props = {
 };
 
 const Header = ({ navigation }: Props) => {
-	const client = false;
+	const client = true;
 	const isWeb = Platform.OS === 'web';
 	const handleNavigate = () => {
 		client

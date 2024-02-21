@@ -1,5 +1,5 @@
 import { View, Text, Dimensions, Image, Pressable, Platform } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import CircleProgress from './CircleProgress';
 
 import boxList from '../assets/BoxList.png';
@@ -49,12 +49,6 @@ enum RouteName {
 	PerfilRepartidor = 'PerfilRepartidor',
 }
 
-const { width, height } = Dimensions.get('window');
-const WScale = width / 360;
-const HScale = height / 640;
-
-const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
-
 const List = ({
 	column1,
 	circleValue,
@@ -64,11 +58,20 @@ const List = ({
 	content3,
 	navigation,
 }: listProps) => {
+	const { width, height } = Dimensions.get('window');
+	const WScale = width / 360;
+	const HScale = height / 640;
+	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 	const isWeb = Platform.OS === 'web';
 	const arrayColumn2: string[] = content2String.split(', ');
 	const handleNavigation = () => {
-		content3 !== 'svgTrash' && content3 !== 'img' && navigation.navigate(RouteName.RepartoEnCurso);
-		content3 === 'img' && navigation.navigate(RouteName.PerfilRepartidor);
+		(content3 === 'enCursoTrash' || content3 === 'pendienteIniciar' || column3 === 'none') &&
+			navigation.navigate(RouteName.RepartoEnCurso);
+		column3 === 'img' && navigation.navigate(RouteName.PerfilRepartidor);
+	};
+	const [checked, setChecked] = useState(false);
+	const handleCheck = () => {
+		checked ? setChecked(false) : setChecked(true);
 	};
 	return (
 		<Pressable
@@ -102,18 +105,22 @@ const List = ({
 							<Box height={30 * HScale} width={80.69 * WScale} />
 						</View>
 					)}
-					{column1 === 'buttonTrue' && isWeb && (
-						<Image
-							style={{ width: 19 * WScale, height: 19 * WScale }}
-							resizeMode="contain"
-							source={buttonTrue}
-						/>
+					{column1 === 'buttonCheck' && checked && (
+						<Pressable onPress={handleCheck}>
+							{isWeb ? (
+								<Image
+									style={{ width: 19 * WScale, height: 19 * WScale }}
+									resizeMode="contain"
+									source={buttonTrue}
+								/>
+							) : (
+								<ButtonTrue height={19 * HScale} width={19 * WScale} />
+							)}
+						</Pressable>
 					)}
-					{column1 === 'buttonTrue' && !isWeb && (
-						<ButtonTrue height={19 * HScale} width={19 * WScale} />
-					)}
-					{column1 === 'buttonFalse' && (
-						<View
+					{column1 === 'buttonCheck' && !checked && (
+						<Pressable
+							onPress={handleCheck}
 							style={{ width: 19 * WScale, height: 19 * WScale }}
 							className="border border-gray-300 rounded-full"
 						/>
@@ -445,7 +452,7 @@ const List = ({
 								</View>
 								<View style={{ paddingRight: 16 * WScale }}>
 									<Button
-										navigate={RouteName.Login}
+										navigate={RouteName.RepartoEnCurso}
 										navigation={navigation}
 										width={62}
 										height={20}

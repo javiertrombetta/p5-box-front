@@ -46,7 +46,12 @@ const HomeGestionarPedido = ({ navigation }: Props) => {
 		>
 			<Header navigation={navigation} />
 			<View style={{ height: 40 * HScale, marginTop: 28 * HScale, width: '100%' }}>
-				<Title content={'GESTIONAR PEDIDOS'} size={18} />
+				<Title
+					content={'GESTIONAR PEDIDOS'}
+					size={18}
+					navigate={RouteName.HomeGestionarPedido}
+					navigation={navigation}
+				/>
 			</View>
 
 			<View
@@ -83,7 +88,14 @@ const HomeGestionarPedido = ({ navigation }: Props) => {
 				className="w-full flex rounded-xl bg-white"
 			>
 				<View style={{ height: 40 * HScale, width: '100%' }}>
-					<Title content={'DETALLES'} arrow={'down'} date={true} size={14} />
+					<Title
+						content={'DETALLES'}
+						arrow={'down'}
+						date={true}
+						size={14}
+						navigate={RouteName.HomeGestionarPedido}
+						navigation={navigation}
+					/>
 				</View>
 				<View
 					style={{ height: 192 * HScale }}
