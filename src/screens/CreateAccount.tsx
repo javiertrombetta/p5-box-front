@@ -49,6 +49,7 @@ const CreateAccount = ({ navigation }: Props) => {
 		lastname: '',
 		email: '',
 		password: '',
+		photoUrl: '',
 	});
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [showPassword, setShowPassword] = useState(false);
@@ -131,7 +132,7 @@ const CreateAccount = ({ navigation }: Props) => {
 					navigation={navigation}
 				/>
 			</View>
-			<Card header="none" height={510} dropdown="false">
+			<Card header="none" heightC={510} dropdown={false} heightT={0}>
 				{selectPhoto ? (
 					<Pressable
 						onPress={pickImage}
@@ -327,10 +328,10 @@ const CreateAccount = ({ navigation }: Props) => {
 						width={270}
 						content="CREAR"
 						action="postR"
-						data={data}
+						data={{ ...data, photoUrl: 'sdasdsa' }}
 						navigate={RouteName.Login}
 						navigation={navigation}
-					/>{' '}
+					/>
 				</View>
 				<View
 					style={{
