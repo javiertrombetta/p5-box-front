@@ -1,8 +1,11 @@
-import { View, Text, Pressable, Dimensions } from 'react-native';
+import { View, Text, Pressable, Dimensions, Platform } from 'react-native';
 import React from 'react';
 import Sum from '../assets/Sum.svg';
 import { NavigationProp } from '@react-navigation/native';
-import axios from 'axios';
+import { handleCreateUser, handleLoginUser } from '../services/user.service';
+import { Image } from 'react-native';
+import ArrowLeft from '../assets/ArrowLeft.svg';
+import leftArrow from '../assets/arrow-left.png';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -15,11 +18,12 @@ interface ButtonProps {
 	width: number;
 	spec: string;
 	content: string;
-	navigate?: RouteName;
+	navigate: RouteName;
 	svg?: boolean;
 	borderR?: number;
 	data?: object;
 	action?: string;
+	arrowLeft?: boolean;
 	navigation: NavigationProp<RootStackParamList>;
 }
 
@@ -56,27 +60,16 @@ const Button = ({
 	navigation,
 	height,
 	width,
+	arrowLeft,
 }: ButtonProps) => {
-	const handleCreateUser = async () => {
-		try {
-			const response = await axios.post('http://localhost:3000/api/v1/auth/register', data);
-			console.log('Usuario creado:', response.data);
-		} catch (error) {
-			console.error('Error al crear usuario:', error);
-		}
-	};
-	const handleLoginUser = async () => {
-		try {
-			const response = await axios.post('http://localhost:3000/api/v1/auth/login', data);
-			console.log('Usuario logueado:', response.data);
-		} catch (error) {
-			console.error('Error al loguear usuario:', error);
-		}
-	};
+	const isWeb = Platform.OS === 'web';
 	const handleNavigation = () => {
 		if (navigate && navigation) {
 			navigation.navigate(navigate);
 		}
+	};
+	const handleBack = () => {
+		navigate && navigation.navigate(navigate);
 	};
 
 	return (
@@ -125,7 +118,7 @@ const Button = ({
 					{svg && <Sum height={12 * HScale} width={12 * WScale} />}
 				</Pressable>
 			)}
-			{navigate && !action && (
+			{navigate && !action && !arrowLeft && (
 				<Pressable
 					onPress={handleNavigation}
 					style={({ pressed }) => [
@@ -167,6 +160,18 @@ const Button = ({
 					{svg && <Sum height={12 * HScale} width={12 * WScale} />}
 				</Pressable>
 			)}
+			{navigate &&
+				!action &&
+				arrowLeft &&
+				(isWeb ? (
+					<Pressable onPress={handleBack}>
+						<Image source={leftArrow} />
+					</Pressable>
+				) : (
+					<Pressable onPress={handleBack}>
+						<ArrowLeft width={scaledSize(14)} />
+					</Pressable>
+				))}
 			{!navigate && !action && (
 				<Pressable
 					style={({ pressed }) => [

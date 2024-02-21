@@ -1,4 +1,4 @@
-import { View, Text, Dimensions } from 'react-native';
+import { View, Text, Dimensions, Pressable } from 'react-native';
 import React from 'react';
 
 import ArrowLeft from '../assets/ArrowLeft.svg';
@@ -54,9 +54,13 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 				>
 					OBTENER PAQUETES
 				</Text>
-				<View style={{ paddingVertical: 8 * HScale }} className="flex justify-center items-center">
+				<Pressable
+					onPress={() => navigation.navigate(RouteName.HomeIniciarJornada)}
+					style={{ paddingVertical: 8 * HScale }}
+					className="flex justify-center items-center"
+				>
 					<ArrowLeft width={scaledSize(14)} />
-				</View>
+				</Pressable>
 			</View>
 			<View
 				style={{ height: 409 * HScale, marginTop: 10 * HScale }}
@@ -82,7 +86,7 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 				>
 					<View style={{ paddingHorizontal: 16 * WScale }}>
 						<List
-							column1="buttonTrue"
+							column1="buttonCheck"
 							column2="stringsRow"
 							content2String="Amenabar 2356, CABA"
 							column3="none"
@@ -94,7 +98,7 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 					</View>
 					<View style={{ paddingHorizontal: 16 * WScale }}>
 						<List
-							column1="buttonTrue"
+							column1="buttonCheck"
 							column2="stringsRow"
 							content2String="Av Carabobo y Rivadavia, CABA"
 							column3="none"
@@ -106,7 +110,7 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 					</View>
 					<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
 						<List
-							column1="buttonTrue"
+							column1="buttonCheck"
 							column2="stringsRow"
 							content2String="Melian 1242, CABA"
 							column3="none"
@@ -118,7 +122,7 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 					</View>
 					<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
 						<List
-							column1="buttonFalse"
+							column1="buttonCheck"
 							column2="stringsRow"
 							content2String="Castillo 670, CABA"
 							column3="none"
@@ -130,7 +134,7 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 					</View>
 					<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
 						<List
-							column1="buttonFalse"
+							column1="buttonCheck"
 							column2="stringsRow"
 							content2String="Gorriti 4595, CABA"
 							column3="none"
@@ -142,7 +146,7 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 					</View>
 					<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
 						<List
-							column1="buttonFalse"
+							column1="buttonCheck"
 							column2="stringsRow"
 							content2String="Av. Gral. Mosconi 1056, CABA"
 							column3="none"
@@ -154,7 +158,7 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 					</View>
 					<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
 						<List
-							column1="buttonFalse"
+							column1="buttonCheck"
 							column2="stringsRow"
 							content2String="Tacuarí 1797, CABA"
 							column3="none"
@@ -166,7 +170,7 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 					</View>
 					<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
 						<List
-							column1="buttonFalse"
+							column1="buttonCheck"
 							column2="stringsRow"
 							content2String="Av. Gaona 1284, CABA"
 							column3="none"

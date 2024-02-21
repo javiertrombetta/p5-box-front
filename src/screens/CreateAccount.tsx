@@ -123,7 +123,13 @@ const CreateAccount = ({ navigation }: Props) => {
 					width: '100%',
 				}}
 			>
-				<Title content={'CREÁ TU CUENTA'} arrow={'left'} size={18} />
+				<Title
+					content={'CREA TU CUENTA'}
+					arrow={'left'}
+					navigate={RouteName.Login}
+					size={18}
+					navigation={navigation}
+				/>
 			</View>
 			<Card header="none" height={510} dropdown="false">
 				{selectPhoto ? (

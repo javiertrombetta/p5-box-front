@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ImageBackground, Text, Dimensions } from 'react-native';
+import { View, ImageBackground, Text, Dimensions, Pressable } from 'react-native';
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import buenos from '../assets/buenos.png';
 import Header from '../components/Header';
@@ -53,12 +53,13 @@ function RepartoEnCurso({ navigation }: Props) {
 				>
 					REPARTO EN CURSO
 				</Text>
-				<View
+				<Pressable
+					onPress={() => navigation.navigate(RouteName.HomeIniciarJornada)}
 					style={{ width: 13 * WScale, height: 40 * HScale, paddingVertical: 8 * HScale }}
 					className="flex justify-center items-center"
 				>
 					<ArrowLeft width={scaledSize(14)} />
-				</View>
+				</Pressable>
 			</View>
 
 			<View
@@ -128,7 +129,7 @@ function RepartoEnCurso({ navigation }: Props) {
 					height={30}
 					spec="texto"
 					navigation={navigation}
-					navigate={RouteName.ObtenerPaquetes}
+					navigate={RouteName.HomeIniciarJornada}
 				/>
 			</View>
 			<View
