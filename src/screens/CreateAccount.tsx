@@ -1,25 +1,13 @@
 import React, { useState } from 'react';
-import {
-	View,
-	Text,
-	Dimensions,
-	Image,
-	TextInput,
-	Pressable,
-	Platform,
-	NativeModules,
-} from 'react-native';
+import { View, Dimensions, Image, TextInput, Pressable, Platform } from 'react-native';
 import { launchImageLibrary, ImageLibraryOptions } from 'react-native-image-picker';
-import axios from 'axios';
 
 import box from '../assets/box.png';
-import leftArrow from '../assets/arrow-left.png';
 import closeEye from '../assets/Eye.png';
 import profilePic from '../assets/profile-pic.png';
 import openEye from '../assets/close-eye.png';
 
 import LogoBox from '../assets/LogoBox.svg';
-import ArrowLeft from '../assets/ArrowLeft.svg';
 import Eye from '../assets/Eye.svg';
 import ProfilePic from '../assets/ProfilePic.svg';
 import OpenEye from '../assets/OpenEye.svg';
@@ -29,7 +17,7 @@ import Title from '../components/Title';
 import { NavigationProp } from '@react-navigation/native';
 
 type RootStackParamList = {
-    [key in RouteName]: undefined;
+	[key in RouteName]: undefined;
 };
 
 enum RouteName {
@@ -43,24 +31,25 @@ enum RouteName {
 	Repartidores = 'Repartidores',
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
-	PerfilRepartidor = 'PerfilRepartidor'
+	PerfilRepartidor = 'PerfilRepartidor',
 }
 
 type Props = {
 	navigation: NavigationProp<RootStackParamList>;
-}
-  
+};
+
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
 const HScale = height / 640;
 
-const CreateAccount = ({navigation}: Props) => {
+const CreateAccount = ({ navigation }: Props) => {
 	const [data, setData] = useState({
 		name: '',
 		lastname: '',
 		email: '',
 		password: '',
+		photoUrl: '',
 	});
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [showPassword, setShowPassword] = useState(false);
@@ -133,16 +122,17 @@ const CreateAccount = ({navigation}: Props) => {
 					height: 40 * HScale,
 					marginTop: 28 * HScale,
 					width: '100%',
-				}} // h-[40] mt-[28] px-4
+				}}
 			>
-				<Title content={'CREÁ TU CUENTA'} arrow={'left'} size={18} />
+				<Title
+					content={'CREA TU CUENTA'}
+					arrow={'left'}
+					navigate={RouteName.Login}
+					size={18}
+					navigation={navigation}
+				/>
 			</View>
-			{/* <View
-				style={{ height: 510 * HScale, marginTop: 10 * HScale }}
-				className="w-full items-center rounded-xl bg-blanco"
-			> */}
-			<Card header="none" height={510} dropdown="false">
-				{/* aca loco */}
+			<Card header="none" heightC={510} dropdown={false} heightT={0}>
 				{selectPhoto ? (
 					<Pressable
 						onPress={pickImage}
@@ -332,31 +322,45 @@ const CreateAccount = ({navigation}: Props) => {
 					<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
 				</View>
 				<View style={{ marginTop: 50 * HScale }}>
-					<Button spec="texto" height={28} width={270} content="CREAR" data={data} navigate={RouteName.Login} navigation={navigation}/> {/* action="postR"*/}
+					<Button
+						spec="texto"
+						height={28}
+						width={270}
+						content="CREAR"
+						action="postR"
+						data={{ ...data, photoUrl: 'sdasdsa' }}
+						navigate={RouteName.Login}
+						navigation={navigation}
+					/>
 				</View>
 				<View
 					style={{
 						marginTop: 10 * HScale,
 					}}
-					// className="flex justify-center items-center align-middle border border-texto text-texto"
 				>
-					<Button spec="blanco" height={30} width={270} content="INICIAR SESION" navigate={RouteName.Login} navigation={navigation}/> {/* action="postL"*/}
+					<Button
+						spec="blanco"
+						height={30}
+						width={270}
+						content="INICIAR SESION"
+						navigate={RouteName.Login}
+						navigation={navigation}
+					/>
 				</View>
 				<View
 					style={{ top: 15 * HScale }}
 					className="justify-center underline items-center align-middle"
 				>
-					{/* <Text
-						className="font-roboto text-texto"
-						style={{ textDecorationLine: 'underline', fontSize: scaledSize(12) }}
-					> */}
-
-					{/* </Text> */}
-					<Button spec="transp" height={30} width={270} content="¿Ya tenés una cuenta?" navigate={RouteName.Login} navigation={navigation} />
+					<Button
+						spec="transp"
+						height={30}
+						width={270}
+						content="¿Ya tenés una cuenta?"
+						navigate={RouteName.Login}
+						navigation={navigation}
+					/>
 				</View>
 			</Card>
-
-			{/* </View> */}
 		</View>
 	);
 };

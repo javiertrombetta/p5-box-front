@@ -1,7 +1,6 @@
 import { View, Text, Dimensions, Platform, Image, Pressable } from 'react-native';
 import React from 'react';
 import { format } from 'date-fns';
-import { es } from 'date-fns/locale';
 
 import leftArrow from '../assets/arrow-left.png';
 import downArrow from '../assets/arrow-head-down.png';
@@ -9,6 +8,8 @@ import rightArrow from '../assets/arrow-right.png';
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import ArrowDown from '../assets/ArrowHeadDown.svg';
 import ArrowRight from '../assets/Arrow-right.svg';
+import { NavigationProp } from '@react-navigation/native';
+import Button from './Button';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -17,15 +18,44 @@ const HScale = height / 640;
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 interface titleProps {
+	color?: string;
 	content: string;
+	size: number;
+	date?: boolean;
 	arrow?: string;
 	details?: string;
-	date?: boolean;
-	color?: string;
-	size: number;
+	navigate?: RouteName;
+	navigation?: NavigationProp<RootStackParamList>;
 }
 
-const Title = ({ content, arrow, details, date, color, size }: titleProps) => {
+type RootStackParamList = {
+	[key in RouteName]: undefined;
+};
+
+enum RouteName {
+	HomeIniciarJornada = 'HomeIniciarJornada',
+	ObtenerPaquetes = 'ObtenerPaquetes',
+	CreateAccount = 'CreateAccount',
+	Login = 'Login',
+	RepartoEnCurso = 'RepartoEnCurso',
+	LoginAdmin = 'LoginAdmin',
+	HomeGestionarPedido = 'HomeGestionarPedido',
+	Repartidores = 'Repartidores',
+	Paquetes = 'Paquetes',
+	AddPackage = 'AddPackage',
+	PerfilRepartidor = 'PerfilRepartidor',
+}
+
+const Title = ({
+	content,
+	arrow,
+	details,
+	date,
+	color,
+	size,
+	navigate,
+	navigation,
+}: titleProps) => {
 	const currentDate: Date = new Date();
 	const formattedDate: string = format(currentDate, 'dd/MM/yy');
 	const dayOfWeek = format(currentDate, 'EEE');
@@ -44,7 +74,14 @@ const Title = ({ content, arrow, details, date, color, size }: titleProps) => {
 			}
 		>
 			<View className={details ? 'items-start' : 'items-center' + ' flex flex-row justify-between'}>
-				<Text style={{ fontSize: scaledSize(size) }} className="font-sairaBold text-texto">
+				<Text
+					style={{ fontSize: scaledSize(size) }}
+					className={
+						color === 'v'
+							? 'text-sm font-robotoBold text-texto text-center'
+							: 'font-sairaBold text-texto'
+					}
+				>
 					{content}
 				</Text>
 
@@ -78,16 +115,20 @@ const Title = ({ content, arrow, details, date, color, size }: titleProps) => {
 				)}
 
 				{arrow ? (
-					<Pressable
+					<View
 						style={{ width: scaledSize(14), height: scaledSize(12) }}
 						className="flex items-center justify-center"
 					>
-						{arrow === 'left' ? (
-							isWeb ? (
-								<Image source={leftArrow} />
-							) : (
-								<ArrowLeft width={scaledSize(14)} />
-							)
+						{arrow === 'left' && navigate && navigation ? (
+							<Button
+								height={13}
+								width={15}
+								navigation={navigation}
+								spec=""
+								content=""
+								arrowLeft={true}
+								navigate={navigate}
+							/>
 						) : arrow === 'down' ? (
 							isWeb ? (
 								<Image source={downArrow} />
@@ -103,7 +144,7 @@ const Title = ({ content, arrow, details, date, color, size }: titleProps) => {
 						) : (
 							''
 						)}
-					</Pressable>
+					</View>
 				) : (
 					''
 				)}
