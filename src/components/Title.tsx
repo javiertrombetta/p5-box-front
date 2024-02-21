@@ -24,8 +24,8 @@ interface titleProps {
 	date?: boolean;
 	arrow?: string;
 	details?: string;
-	navigate: RouteName;
-	navigation: NavigationProp<RootStackParamList>;
+	navigate?: RouteName;
+	navigation?: NavigationProp<RootStackParamList>;
 }
 
 type RootStackParamList = {
@@ -119,7 +119,7 @@ const Title = ({
 						style={{ width: scaledSize(14), height: scaledSize(12) }}
 						className="flex items-center justify-center"
 					>
-						{arrow === 'left' ? (
+						{arrow === 'left' && navigate && navigation ? (
 							<Button
 								height={13}
 								width={15}

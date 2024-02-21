@@ -71,13 +71,31 @@ const Button = ({
 	const handleBack = () => {
 		navigate && navigation.navigate(navigate);
 	};
-
+	const client = true;
 	return (
 		<View style={{ height: height * HScale, width: width * WScale }}>
 			{action && navigate && (
 				<Pressable
 					onPress={
-						action === 'postR' ? handleCreateUser : action === 'postL' ? handleLoginUser : () => {}
+						action === 'postR'
+							? () => {
+									handleCreateUser(data);
+									try {
+										client
+											? navigation.navigate(RouteName.Login)
+											: navigation.navigate(RouteName.LoginAdmin);
+									} catch {}
+							  }
+							: action === 'postL'
+							? () => {
+									handleLoginUser(data);
+									try {
+										client
+											? navigation.navigate(RouteName.HomeIniciarJornada)
+											: navigation.navigate(RouteName.HomeGestionarPedido);
+									} catch {}
+							  }
+							: () => {}
 					}
 					style={({ pressed }) => [
 						spec === 'texto' && {
