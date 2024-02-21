@@ -1,36 +1,18 @@
 import React from 'react';
-import { View, Text, Pressable, Image, StyleSheet, Dimensions, Platform } from 'react-native';
+import { View, Text, Pressable, Image, Dimensions, Platform, VirtualizedList } from 'react-native';
 import Header from '../components/Header';
 import { NavigationProp } from '@react-navigation/native';
+import { fakePending, fakeHistory } from './fakeData';
 
-import box from '../assets/box.png';
-import leftArrow from '../assets/arrow-left.png';
-import entregado from '../assets/entregado.png';
 import downarrow from '../assets/arrow-head-down.png';
-import boxlist from '../assets/BoxList.png';
-import tachito from '../assets/trash.png';
-import enCurso from '../assets/EllipseGreen.png';
-import pendiente from '../assets/EllipseOrange.png';
 
-import LogoBox from '../assets/LogoBox.svg';
 import ArrowLeft from '../assets/ArrowLeft.svg';
-import Entregado from '../assets/Entregado.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
-import Box from '../assets/Box.svg';
-import Trash from '../assets/Trash.svg';
-import EllipseGreen from '../assets/EllipseGreen.svg';
-import EllipseOrange from '../assets/EllipseOrange.svg';
 import Button from '../components/Button';
 import List from '../components/List';
 
-const { width, height } = Dimensions.get('window');
-const WScale = width / 360;
-const HScale = height / 640;
-
-const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
-
 type RootStackParamList = {
-    [key in RouteName]: undefined;
+	[key in RouteName]: undefined;
 };
 
 enum RouteName {
@@ -44,7 +26,7 @@ enum RouteName {
 	Repartidores = 'Repartidores',
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
-	PerfilRepartidor = 'PerfilRepartidor'
+	PerfilRepartidor = 'PerfilRepartidor',
 }
 
 type Props = {
@@ -53,6 +35,70 @@ type Props = {
 
 const HomeIniciarJornada = ({ navigation }: Props) => {
 	const isWeb = Platform.OS === 'web';
+	const { width, height } = Dimensions.get('window');
+	const WScale = width / 360;
+	const HScale = height / 640;
+
+	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+
+	type ListItemPending = {
+		deliveryAddress: string;
+		state: string;
+	};
+
+	const renderItemsPendientes = ({ item, index }: { item: ListItemPending; index: number }) => {
+		return (
+			<View>
+				<View
+					style={{ height: 72 * HScale, paddingLeft: 16 * WScale }}
+					className="flex flex-row justify-between items-center w-full"
+				>
+					<List
+						column1="svg"
+						column2="stringsCol"
+						content2String={Object.values(item)[0]}
+						column3="svgStringButton"
+						content3={Object.values(item)[1]}
+						navigation={navigation}
+					/>
+				</View>
+				<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
+					<View style={{ height: 1 }} className="w-full bg-gray-300" />
+				</View>
+			</View>
+		);
+	};
+
+	const keyExtractorPending = (_: ListItemPending, index: number) => `item-${index}`;
+
+	type ListItemHistory = {
+		deliveryAddress: string;
+	};
+
+	const renderItemsHistory = ({ item, index }: { item: ListItemHistory; index: number }) => {
+		return (
+			<View>
+				<View
+					style={{ height: 74 * HScale, paddingLeft: 16 * WScale }}
+					className="flex flex-row justify-between items-center w-full"
+				>
+					<List
+						column1="svg"
+						column2="stringsCol"
+						content2String={Object.values(item)[0]}
+						column3="svgStringButton"
+						content3="entregado"
+						navigation={navigation}
+					/>
+				</View>
+				<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
+					<View style={{ height: 1 }} className="w-full bg-gray-300" />
+				</View>
+			</View>
+		);
+	};
+
+	const keyExtractorHistory = (_: ListItemHistory, index: number) => `item-${index}`;
 
 	return (
 		<View
@@ -61,15 +107,15 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 		>
 			<Header navigation={navigation} />
 			<View
-				style={{ height: 188 * HScale, marginTop: 28 * HScale }} // h-24 mt-[10]
+				style={{ height: 188 * HScale, marginTop: 28 * HScale }}
 				className="w-full flex flex-col rounded-xl items-start justify-start align-middle bg-white"
 			>
 				<View
-					style={{ height: 43 * HScale, paddingHorizontal: 16 * WScale }} // h-[40] mt-[28] px-4
+					style={{ height: 43 * HScale, paddingHorizontal: 16 * WScale }}
 					className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
 				>
 					<Text
-						style={{ paddingVertical: 4 * HScale, fontSize: scaledSize(14) }} // py-1
+						style={{ paddingVertical: 4 * HScale, fontSize: scaledSize(14) }}
 						className="flex justify-center items-center font-sairaBold text-texto"
 					>
 						REPARTOS PENDIENTES
@@ -78,38 +124,19 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 						style={{ paddingVertical: 8 * HScale }}
 						className="flex justify-center items-center"
 					>
-						<ArrowLeft width={13 * WScale} height={15 * HScale} />
+						<Pressable>
+							{isWeb ? <Image source={downarrow} /> : <ArrowHeadDown width={scaledSize(14)} />}
+						</Pressable>
 					</View>
 				</View>
-				<View
-					style={{ height: 70 * HScale, paddingLeft: 16 * WScale }}
-					className="flex flex-row justify-between items-center w-full"
-				>
-					<List
-						column1="svg"
-						column2="stringsCol"
-						content2String="#0H167, Amenabar 2356, CABA"
-						column3="svgStringButton"
-						content3="enCursoTrash"
-						navigation={navigation}
-					/>
-				</View>
-				<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
-					<View style={{ height: 1 }} className="w-full bg-gray-300" />
-				</View>
-				<View
-					style={{ height: 70 * HScale, paddingLeft: 16 * WScale }}
-					className="flex flex-row justify-between items-center w-full"
-				>
-					<List
-						column1="svg"
-						column2="stringsCol"
-						content2String="#0H167, Amenabar 2356, CABA"
-						column3="svgStringButton"
-						content3="pendienteIniciar"
-						navigation={navigation}
-					/>
-				</View>
+				<VirtualizedList
+					className="w-full"
+					data={fakePending()}
+					renderItem={renderItemsPendientes}
+					keyExtractor={keyExtractorPending}
+					getItemCount={() => fakePending().length}
+					getItem={(data, index) => data[index]}
+				/>
 			</View>
 
 			<View
@@ -140,56 +167,14 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 				<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
 					<View style={{ height: 1 }} className="w-full bg-gray-300" />
 				</View>
-				<View
-					style={{ height: 210 * HScale, paddingLeft: 16 * WScale }}
-					className="flex flex-col justify-around items-center"
-				>
-					<View
-						style={{ height: 70 * HScale }}
-						className="flex flex-row justify-between items-center w-full"
-					>
-						<List
-							column1="svg"
-							column2="stringsCol"
-							content2String="#0B438, Castillo 1356, CABA"
-							column3="svgStringButton"
-							content3="entregado"
-							navigation={navigation}
-						/>
-					</View>
-					<View style={{ paddingRight: 16 * WScale }} className="flex w-full items-center">
-						<View style={{ height: 1 }} className="w-full bg-gray-300" />
-					</View>
-					<View
-						style={{ height: 70 * HScale }}
-						className="flex flex-row justify-between items-center w-full"
-					>
-						<List
-							column1="svg"
-							column2="stringsCol"
-							content2String="#0H167, Av. Carabobo y Rivadavia, CABA"
-							column3="svgStringButton"
-							content3="entregado"
-							navigation={navigation}
-						/>
-					</View>
-					<View style={{ paddingRight: 16 * WScale }} className="flex w-full items-center">
-						<View style={{ height: 1 }} className="w-full bg-gray-300" />
-					</View>
-					<View
-						style={{ height: 70 * HScale }}
-						className="flex flex-row justify-between items-center w-full"
-					>
-						<List
-							column1="svg"
-							column2="stringsCol"
-							content2String="#0A903, Las Heras 5678, CABA"
-							column3="svgStringButton"
-							content3="entregado"
-							navigation={navigation}
-						/>
-					</View>
-				</View>
+				<VirtualizedList
+					className="w-full"
+					data={fakeHistory()}
+					renderItem={renderItemsHistory}
+					keyExtractor={keyExtractorHistory}
+					getItemCount={() => fakeHistory().length}
+					getItem={(data, index) => data[index]}
+				/>
 			</View>
 			<View style={{ marginTop: 24 * HScale }} className="flex justify-center items-center">
 				<Button

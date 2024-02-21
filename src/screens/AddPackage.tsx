@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, Pressable, Image, TextInput, Dimensions, Platform, SafeAreaView } from 'react-native';
+import { View, Text, Pressable, Image, TextInput, Dimensions, Platform } from 'react-native';
 
 import leftArrow from '../assets/arrow-left.png';
-import box from '../assets/box.png';
 import arrowHeadDown from '../assets/arrow-head-down.png';
 
 import ArrowLeft from '../assets/ArrowLeft.svg';
-import LogoBox from '../assets/LogoBox.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 
 import Header from '../components/Header';
@@ -20,7 +18,7 @@ const HScale = height / 640;
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 type RootStackParamList = {
-    [key in RouteName]: undefined;
+	[key in RouteName]: undefined;
 };
 
 enum RouteName {
@@ -34,14 +32,14 @@ enum RouteName {
 	Repartidores = 'Repartidores',
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
-	PerfilRepartidor = 'PerfilRepartidor'
+	PerfilRepartidor = 'PerfilRepartidor',
 }
 
 type Props = {
 	navigation: NavigationProp<RootStackParamList>;
-}
+};
 
-const AddPackage = ({navigation}: Props) => {
+const AddPackage = ({ navigation }: Props) => {
 	const [text, setText] = useState('');
 	const isWeb = Platform.OS === 'web';
 
@@ -50,21 +48,18 @@ const AddPackage = ({navigation}: Props) => {
 			className="bg-verde w-full h-full flex-col items-center  flex"
 			style={{ paddingHorizontal: 30 * WScale, paddingVertical: 6 * HScale }}
 		>
-			<Header navigation={navigation}/>
+			<Header navigation={navigation} />
 			<View
-				style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale, marginTop: 28 * HScale }} // h-[40] mt-[28] px-4
+				style={{ height: 40 * HScale, paddingHorizontal: 16 * WScale, marginTop: 28 * HScale }}
 				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
 			>
 				<Text
-					style={{ fontSize: scaledSize(18), paddingVertical: 4 * HScale }} // py-1
+					style={{ fontSize: scaledSize(18), paddingVertical: 4 * HScale }}
 					className="flex justify-center items-center font-sairaBold text-texto"
 				>
 					AGREGAR PAQUETES
 				</Text>
-				<View
-					style={{ paddingVertical: 8 * HScale }} // w-[13] h-[40] py-2
-					className="flex justify-center items-center"
-				>
+				<View style={{ paddingVertical: 8 * HScale }} className="flex justify-center items-center">
 					{isWeb ? (
 						<Image source={leftArrow} />
 					) : (
@@ -155,7 +150,14 @@ const AddPackage = ({navigation}: Props) => {
 					marginTop: 16 * HScale,
 				}}
 			>
-				<Button spec="texto" height={28} width={270} content="AGREGAR" navigation={navigation} navigate={RouteName.HomeGestionarPedido}/>
+				<Button
+					spec="texto"
+					height={28}
+					width={270}
+					content="AGREGAR"
+					navigation={navigation}
+					navigate={RouteName.HomeGestionarPedido}
+				/>
 			</View>
 		</View>
 	);

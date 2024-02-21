@@ -24,10 +24,8 @@ const Navigation = () => {
 	const Stack = createNativeStackNavigator();
 	const client = true; // cambiar por pedido al rol
 	return (
-		<Stack.Navigator initialRouteName={client ? 'Login' : 'LoginAdmin'}>
-			{/* RootStackParamRepartidorList */}
+		<Stack.Navigator initialRouteName={client ? 'Paquetes' : 'LoginAdmin'}>
 			<Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-
 			<Stack.Screen
 				name="CreateAccount"
 				component={CreateAccount}

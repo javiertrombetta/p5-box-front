@@ -1,15 +1,7 @@
-import { View, Text, Dimensions, Pressable, Image, Platform, TextInput } from 'react-native';
+import { View, Text, Dimensions, Image, Platform, TextInput } from 'react-native';
 import React, { useState } from 'react';
-
-import backgroundI from '../assets/fondoLogin.jpg';
-import logo from '../assets/logo.png';
 import closeEye from '../assets/Eye.png';
-
 import Button from './Button';
-
-import BackgroundImage from '../assets/FondoLogin.svg';
-import LogoFull from '../assets/LogoFull.svg';
-import Eye from '../assets/Eye.svg';
 import CloseEye from '../assets/Eye.svg';
 import { NavigationProp } from '@react-navigation/native';
 
@@ -25,7 +17,7 @@ interface LoginCompProps {
 }
 
 type RootStackParamList = {
-    [key in RouteName]: undefined;
+	[key in RouteName]: undefined;
 };
 
 enum RouteName {
@@ -39,7 +31,7 @@ enum RouteName {
 	Repartidores = 'Repartidores',
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
-	PerfilRepartidor = 'PerfilRepartidor'
+	PerfilRepartidor = 'PerfilRepartidor',
 }
 
 const LoginComp = ({ client, navigation }: LoginCompProps) => {
@@ -116,7 +108,7 @@ const LoginComp = ({ client, navigation }: LoginCompProps) => {
 					content={'INGRESAR'}
 					spec={'texto'}
 					borderR={8}
-					// action="postL"
+					action="postL"
 					data={data}
 					navigate={client ? RouteName.HomeIniciarJornada : RouteName.HomeGestionarPedido}
 					navigation={navigation}
@@ -128,7 +120,14 @@ const LoginComp = ({ client, navigation }: LoginCompProps) => {
 				<View
 					style={{ top: 185 * HScale, left: 15 * WScale, height: 30 * HScale, width: 270 * WScale }}
 				>
-					<Button content={'CREAR CUENTA'} spec={'blanco'} navigate={RouteName.CreateAccount} height={30} width={270} navigation={navigation} />
+					<Button
+						content={'CREAR CUENTA'}
+						spec={'blanco'}
+						navigate={RouteName.CreateAccount}
+						height={30}
+						width={270}
+						navigation={navigation}
+					/>
 				</View>
 			) : (
 				''
@@ -138,7 +137,14 @@ const LoginComp = ({ client, navigation }: LoginCompProps) => {
 				className="underline"
 				style={client === true ? { top: 205 * HScale } : { top: 195 * HScale }}
 			>
-				<Button content={'Olvidé mi contraseña'} width={300} height={30} spec={'transp'} navigate={RouteName.CreateAccount} navigation={navigation} />
+				<Button
+					content={'Olvidé mi contraseña'}
+					width={300}
+					height={30}
+					spec={'transp'}
+					navigate={RouteName.CreateAccount}
+					navigation={navigation}
+				/>
 			</View>
 		</View>
 	);

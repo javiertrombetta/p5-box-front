@@ -1,39 +1,14 @@
 import React from 'react';
-import { View, Text, Pressable, Image, StyleSheet, Dimensions } from 'react-native';
-import CircleProgress from '../components/CircleProgress';
-import {
-	createNativeStackNavigator,
-	NativeStackNavigationProp,
-} from '@react-navigation/native-stack';
-
-import box from '../assets/box.png';
-import boxRight from '../assets/boxRight.png';
-import boxLeft from '../assets/boxLeft.png';
-import vectorSuma from '../assets/vectorSuma.png';
-import arrowDown from '../assets/arrow-head-down.png';
-import personas from '../assets/Group 37396.png';
-
-import LogoBox from '../assets/LogoBox.svg';
+import { View, Text, Image, Dimensions } from 'react-native';
 import ArrowRightBox from '../assets/ArrowRightBox.svg';
 import ArrowLeftBox from '../assets/ArrowLeftBox.svg';
-import Sum from '../assets/Sum.svg';
-import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
-import IconsPeople from '../assets/IconsPeople.svg';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import List from '../components/List';
 import Title from '../components/Title';
 import { NavigationProp } from '@react-navigation/native';
-import HomeIniciarJornada from './HomeIniciarJornada';
-import ObtenerPaquetes from './ObtenerPaquetes';
-import CreateAccount from './CreateAccount';
-import Login from './Login';
-import RepartoEnCurso from './RepartoEnCurso';
-import LoginAdmin from './LoginAdmin';
-import Repartidores from './Repartidores';
-import Paquetes from './Paquetes';
-import AddPackage from './AddPackage';
-import PerfilRepartidor from './PerfilRepartidor';
+import Card from '../components/Card';
+import WeeklyDatePicker from '../components/WeeklyDatePicker';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -71,7 +46,12 @@ const HomeGestionarPedido = ({ navigation }: Props) => {
 		>
 			<Header navigation={navigation} />
 			<View style={{ height: 40 * HScale, marginTop: 28 * HScale, width: '100%' }}>
-				<Title content={'GESTIONAR PEDIDOS'} size={18} />
+				<Title
+					content={'GESTIONAR PEDIDOS'}
+					size={18}
+					navigate={RouteName.HomeGestionarPedido}
+					navigation={navigation}
+				/>
 			</View>
 
 			<View
@@ -100,100 +80,22 @@ const HomeGestionarPedido = ({ navigation }: Props) => {
 					</Text>
 				</View>
 			</View>
-			<View style={{ height: 84 * HScale, marginTop: 10 }} className="w-full flex justify-center">
-				<View style={{ height: 30 * HScale }}>
-					<Title content={'ENERO'} color={'v'} size={14} />
-				</View>
-				<View
-					style={{ height: 54 * HScale }}
-					className="w-full flex flex-row rounded-b-xl items-center justify-evenly bg-white"
-				>
-					<ArrowLeftBox height={scaledSize(21)} width={scaledSize(19)} />
-					<View
-						style={{ width: 34 * WScale, height: 34 * HScale }}
-						className="rounded-md flex items-center justify-center"
-					>
-						<Text style={{ fontSize: scaledSize(12) }} className="font-saira flex text-end">
-							lun
-						</Text>
-						<Text
-							style={{ marginTop: -8 * HScale }}
-							className="font-sairaBold flex items-start justify-start text-start"
-						>
-							01
-						</Text>
-					</View>
-					<View
-						style={{ width: 34 * WScale, height: 34 * HScale }}
-						className="rounded-md flex items-center justify-center"
-					>
-						<Text style={{ fontSize: scaledSize(12) }} className="font-saira flex text-end">
-							mar
-						</Text>
-						<Text
-							style={{ marginTop: -8 * HScale }}
-							className="font-sairaBold flex items-start justify-start text-start"
-						>
-							02
-						</Text>
-					</View>
-					<View
-						style={{ width: 38 * WScale, height: 38 * HScale }}
-						className="rounded-md bg-amarilloVerdoso flex justify-center items-center"
-					>
-						<Text style={{ fontSize: scaledSize(12) }} className="font-saira flex text-end">
-							mie
-						</Text>
-						<Text
-							style={{ marginTop: -8 * HScale }}
-							className="font-sairaBold flex items-start justify-start text-start"
-						>
-							03
-						</Text>
-					</View>
-					<View
-						style={{ width: 34 * WScale, height: 34 * HScale }}
-						className="rounded-md flex items-center justify-center"
-					>
-						<Text
-							style={{ fontSize: scaledSize(12) }}
-							className="font-saira  flex text-end opacity-50"
-						>
-							jue
-						</Text>
-						<Text
-							style={{ marginTop: -8 * HScale }}
-							className="font-sairaBold flex items-start justify-start text-start opacity-50"
-						>
-							04
-						</Text>
-					</View>
-					<View
-						style={{ width: 34 * WScale, height: 34 * HScale }}
-						className="rounded-md  flex items-center justify-center"
-					>
-						<Text
-							style={{ fontSize: scaledSize(12) }}
-							className="font-saira flex text-end opacity-50"
-						>
-							vie
-						</Text>
-						<Text
-							style={{ marginTop: -8 * HScale }}
-							className="font-sairaBold flex items-start justify-start text-start opacity-50"
-						>
-							05
-						</Text>
-					</View>
-					<ArrowRightBox height={scaledSize(21)} width={scaledSize(19)} />
-				</View>
-			</View>
+			<Card header={'violet, FEBRERO, 14, true,'} heightC={84} heightT={30} dropdown={false}>
+				<WeeklyDatePicker />
+			</Card>
 			<View
 				style={{ height: 248 * HScale, marginTop: 10 * HScale }}
 				className="w-full flex rounded-xl bg-white"
 			>
 				<View style={{ height: 40 * HScale, width: '100%' }}>
-					<Title content={'DETALLES'} arrow={'down'} date={true} size={14} />
+					<Title
+						content={'DETALLES'}
+						arrow={'down'}
+						date={true}
+						size={14}
+						navigate={RouteName.HomeGestionarPedido}
+						navigation={navigation}
+					/>
 				</View>
 				<View
 					style={{ height: 192 * HScale }}

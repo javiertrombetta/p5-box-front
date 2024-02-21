@@ -1,13 +1,9 @@
 import { View, Text, Dimensions, Image, Pressable, Platform } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import CircleProgress from './CircleProgress';
 
 import boxList from '../assets/BoxList.png';
 import trash from '../assets/trash.png';
-import boxRight from '../assets/boxRight.png';
-import boxLeft from '../assets/boxLeft.png';
-import vectorSuma from '../assets/vectorSuma.png';
-import arrowDown from '../assets/arrow-head-down.png';
 import personas from '../assets/Group 37396.png';
 import buttonTrue from '../assets/buttonTrue.png';
 import enCurso from '../assets/EllipseGreen.png';
@@ -21,12 +17,6 @@ import BlackCircle from '../assets/BlackCircle.svg';
 import TrashIcon from '../assets/Trash.svg';
 import Box from '../assets/Box.svg';
 import Entregado from '../assets/Entregado.svg';
-import ArrowRightBox from '../assets/ArrowRightBox.svg';
-import ArrowLeftBox from '../assets/ArrowLeftBox.svg';
-import Sum from '../assets/Sum.svg';
-import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
-import IconsPeople from '../assets/IconsPeople.svg';
-import Header from '../components/Header';
 import Button from '../components/Button';
 import ButtonTrue from '../assets/ButtonTrue.svg';
 import { NavigationProp } from '@react-navigation/native';
@@ -42,7 +32,7 @@ interface listProps {
 }
 
 type RootStackParamList = {
-    [key in RouteName]: undefined;
+	[key in RouteName]: undefined;
 };
 
 enum RouteName {
@@ -56,14 +46,8 @@ enum RouteName {
 	Repartidores = 'Repartidores',
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
-	PerfilRepartidor = 'PerfilRepartidor'
+	PerfilRepartidor = 'PerfilRepartidor',
 }
-
-const { width, height } = Dimensions.get('window');
-const WScale = width / 360;
-const HScale = height / 640;
-
-const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 const List = ({
 	column1,
@@ -74,11 +58,20 @@ const List = ({
 	content3,
 	navigation,
 }: listProps) => {
+	const { width, height } = Dimensions.get('window');
+	const WScale = width / 360;
+	const HScale = height / 640;
+	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 	const isWeb = Platform.OS === 'web';
 	const arrayColumn2: string[] = content2String.split(', ');
 	const handleNavigation = () => {
-		content3 !== 'svgTrash' && content3 !== 'img' && navigation.navigate(RouteName.RepartoEnCurso);
-		content3 === 'img' && navigation.navigate(RouteName.PerfilRepartidor)
+		(content3 === 'enCursoTrash' || content3 === 'pendienteIniciar' || column3 === 'none') &&
+			navigation.navigate(RouteName.RepartoEnCurso);
+		column3 === 'img' && navigation.navigate(RouteName.PerfilRepartidor);
+	};
+	const [checked, setChecked] = useState(false);
+	const handleCheck = () => {
+		checked ? setChecked(false) : setChecked(true);
 	};
 	return (
 		<Pressable
@@ -112,18 +105,22 @@ const List = ({
 							<Box height={30 * HScale} width={80.69 * WScale} />
 						</View>
 					)}
-					{column1 === 'buttonTrue' && isWeb && (
-						<Image
-							style={{ width: 19 * WScale, height: 19 * WScale }}
-							resizeMode="contain"
-							source={buttonTrue}
-						/>
+					{column1 === 'buttonCheck' && checked && (
+						<Pressable onPress={handleCheck}>
+							{isWeb ? (
+								<Image
+									style={{ width: 19 * WScale, height: 19 * WScale }}
+									resizeMode="contain"
+									source={buttonTrue}
+								/>
+							) : (
+								<ButtonTrue height={19 * HScale} width={19 * WScale} />
+							)}
+						</Pressable>
 					)}
-					{column1 === 'buttonTrue' && !isWeb && (
-						<ButtonTrue height={19 * HScale} width={19 * WScale} />
-					)}
-					{column1 === 'buttonFalse' && (
-						<View
+					{column1 === 'buttonCheck' && !checked && (
+						<Pressable
+							onPress={handleCheck}
 							style={{ width: 19 * WScale, height: 19 * WScale }}
 							className="border border-gray-300 rounded-full"
 						/>
@@ -455,7 +452,7 @@ const List = ({
 								</View>
 								<View style={{ paddingRight: 16 * WScale }}>
 									<Button
-										navigate={RouteName.Login}
+										navigate={RouteName.RepartoEnCurso}
 										navigation={navigation}
 										width={62}
 										height={20}

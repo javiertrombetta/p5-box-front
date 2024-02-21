@@ -1,10 +1,9 @@
-import { View, Text, Pressable, Dimensions, Platform, Image } from 'react-native';
+import { View, Pressable, Dimensions, Platform, Image } from 'react-native';
 import React from 'react';
 import LogoBox from '../assets/LogoBox.svg';
 import box from '../assets/box.png';
 import Button from './Button';
 import { NavigationProp } from '@react-navigation/native';
-import HomeGestionarPedido from '../screens/HomeGestionarPedido';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -13,7 +12,7 @@ const HScale = height / 640;
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 type RootStackParamList = {
-    [key in RouteName]: undefined;
+	[key in RouteName]: undefined;
 };
 
 enum RouteName {
@@ -27,20 +26,21 @@ enum RouteName {
 	Repartidores = 'Repartidores',
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
-	PerfilRepartidor = 'PerfilRepartidor'
+	PerfilRepartidor = 'PerfilRepartidor',
 }
 
 type Props = {
 	navigation: NavigationProp<RootStackParamList>;
-}
-  
+};
 
 const Header = ({ navigation }: Props) => {
-	const client = false;
+	const client = true;
 	const isWeb = Platform.OS === 'web';
-	const handleNavigate = ()  => {
-		client ? navigation.navigate(RouteName.HomeIniciarJornada) : navigation.navigate(RouteName.HomeGestionarPedido)
-	}
+	const handleNavigate = () => {
+		client
+			? navigation.navigate(RouteName.HomeIniciarJornada)
+			: navigation.navigate(RouteName.HomeGestionarPedido);
+	};
 
 	return (
 		<View
@@ -63,7 +63,14 @@ const Header = ({ navigation }: Props) => {
 					marginTop: 6 * HScale,
 				}}
 			>
-				<Button content="CERRAR SESION" height={26} width={109} spec="blanco" navigate={client ? RouteName.Login : RouteName.LoginAdmin} navigation={navigation}/>
+				<Button
+					content="CERRAR SESION"
+					height={26}
+					width={109}
+					spec="blanco"
+					navigate={client ? RouteName.Login : RouteName.LoginAdmin}
+					navigation={navigation}
+				/>
 			</View>
 		</View>
 	);
