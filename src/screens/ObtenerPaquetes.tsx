@@ -31,6 +31,7 @@ enum RouteName {
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
 	PerfilRepartidor = 'PerfilRepartidor',
+	DeclaracionJurada = 'DeclaracionJurada',
 }
 
 type Props = {
@@ -197,7 +198,7 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 					height={30}
 					spec="texto"
 					navigation={navigation}
-					navigate={RouteName.HomeIniciarJornada}
+					navigate={RouteName.DeclaracionJurada}
 				/>
 			</View>
 		</View>

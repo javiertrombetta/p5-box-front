@@ -30,6 +30,7 @@ enum RouteName {
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
 	PerfilRepartidor = 'PerfilRepartidor',
+	DeclaracionJurada = 'DeclaracionJurada',
 }
 
 type Props = {
