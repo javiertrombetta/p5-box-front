@@ -2,9 +2,10 @@ import React from 'react';
 import { NativeWindStyleSheet } from 'nativewind';
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Navigation from './src/navigation/Navigation';
 import { NavigationContainer } from '@react-navigation/native';
+import { Provider } from 'react-redux';
+import { store } from './src/state/user';
 
 NativeWindStyleSheet.setOutput({
 	default: 'native',
@@ -24,10 +25,12 @@ export default function App() {
 	if (!loaded) {
 		return <AppLoading />;
 	}
-	const Stack = createNativeStackNavigator();
+
 	return (
-		<NavigationContainer>
-			<Navigation />
-		</NavigationContainer>
+		<Provider store={store}>
+			<NavigationContainer>
+				<Navigation />
+			</NavigationContainer>
+		</Provider>
 	);
 }

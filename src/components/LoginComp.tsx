@@ -1,4 +1,4 @@
-import { View, Text, Dimensions, Image, Platform, TextInput } from 'react-native';
+import { View, Dimensions, Image, Platform, TextInput } from 'react-native';
 import React, { useState } from 'react';
 import closeEye from '../assets/Eye.png';
 import Button from './Button';
@@ -32,6 +32,7 @@ enum RouteName {
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
 	PerfilRepartidor = 'PerfilRepartidor',
+	DeclaracionJurada = 'DeclaracionJurada',
 }
 
 const LoginComp = ({ client, navigation }: LoginCompProps) => {
@@ -68,7 +69,7 @@ const LoginComp = ({ client, navigation }: LoginCompProps) => {
 					left: 15 * WScale,
 					height: 24 * HScale,
 					width: 270 * WScale,
-					fontSize: scaledSize(14),
+					fontSize: scaledSize(12),
 				}}
 				className="text-texto font-roboto absolute"
 				placeholder="**********"
@@ -78,7 +79,7 @@ const LoginComp = ({ client, navigation }: LoginCompProps) => {
 			{isWeb ? (
 				<Image
 					style={{
-						top: 108 * HScale,
+						top: 113 * HScale,
 						left: 255 * WScale,
 						width: scaledSize(20),
 						height: scaledSize(20),
@@ -90,11 +91,11 @@ const LoginComp = ({ client, navigation }: LoginCompProps) => {
 				<CloseEye top={108 * HScale} left={255 * WScale} height={20 * HScale} width={20 * WScale} />
 			)}
 			<View
-				style={{ top: 94 * HScale, left: 15 * WScale, width: 270 * WScale, height: 1 * HScale }}
+				style={{ top: 94 * HScale, left: 15 * WScale, width: 270 * WScale, height: 1 }}
 				className="absolute bg-texto"
 			></View>
 			<View
-				style={{ top: 135 * HScale, left: 15 * WScale, width: 270 * WScale, height: 1 * HScale }}
+				style={{ top: 135 * HScale, left: 15 * WScale, width: 270 * WScale, height: 1 }}
 				className="absolute bg-texto"
 			></View>
 

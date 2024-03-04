@@ -4,6 +4,7 @@ import LogoBox from '../assets/LogoBox.svg';
 import box from '../assets/box.png';
 import Button from './Button';
 import { NavigationProp } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -27,6 +28,7 @@ enum RouteName {
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
 	PerfilRepartidor = 'PerfilRepartidor',
+	DeclaracionJurada = 'DeclaracionJurada',
 }
 
 type Props = {
@@ -34,20 +36,22 @@ type Props = {
 };
 
 const Header = ({ navigation }: Props) => {
-	const client = true;
 	const isWeb = Platform.OS === 'web';
-	const handleNavigate = () => {
-		client
-			? navigation.navigate(RouteName.HomeIniciarJornada)
-			: navigation.navigate(RouteName.HomeGestionarPedido);
-	};
-
+	// const handleNavigate = () => {
+	// 	if (user) {
+	// 		user.roles[0] === 'repartidor'
+	// 			? navigation.navigate(RouteName.HomeIniciarJornada)
+	// 			: user.roles[0] === 'administrador'
+	// 			? navigation.navigate(RouteName.HomeGestionarPedido)
+	// 			: console.log('error');
+	// 	}
+	// };
 	return (
 		<View
 			style={{ marginTop: 6 * HScale }}
 			className="w-full flex flex-row justify-between items-center"
 		>
-			<Pressable onPress={handleNavigate}>
+			<Pressable>
 				{isWeb ? (
 					<Image
 						source={box}
@@ -68,7 +72,8 @@ const Header = ({ navigation }: Props) => {
 					height={26}
 					width={109}
 					spec="blanco"
-					navigate={client ? RouteName.Login : RouteName.LoginAdmin}
+					navigate={RouteName.Login}
+					// navigate={user?.roles[0] === 'repartidor' ? RouteName.Login : RouteName.LoginAdmin}
 					navigation={navigation}
 				/>
 			</View>

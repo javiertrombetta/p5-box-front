@@ -32,6 +32,7 @@ enum RouteName {
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
 	PerfilRepartidor = 'PerfilRepartidor',
+	DeclaracionJurada = 'DeclaracionJurada',
 }
 
 type Props = {
@@ -60,7 +61,7 @@ const CreateAccount = ({ navigation }: Props) => {
 	const pickImage = () => {
 		const options: ImageLibraryOptions = {
 			mediaType: 'photo',
-			includeBase64: false,
+			includeBase64: true,
 		};
 
 		launchImageLibrary(options, (response) => {
