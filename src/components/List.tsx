@@ -47,6 +47,7 @@ enum RouteName {
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
 	PerfilRepartidor = 'PerfilRepartidor',
+	DeclaracionJurada = 'DeclaracionJurada',
 }
 
 const List = ({

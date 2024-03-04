@@ -19,12 +19,13 @@ import HomeIniciarJornada from '../screens/HomeIniciarJornada';
 import ObtenerPaquetes from '../screens/ObtenerPaquetes';
 import RepartoEnCurso from '../screens/RepartoEnCurso';
 import Repartidores from '../screens/Repartidores';
+import DeclaracionJurada from '../screens/DeclaracionJurada';
 
 const Navigation = () => {
 	const Stack = createNativeStackNavigator();
 	const client = true; // cambiar por pedido al rol
 	return (
-		<Stack.Navigator initialRouteName={client ? 'Paquetes' : 'LoginAdmin'}>
+		<Stack.Navigator initialRouteName={client ? 'Login' : 'LoginAdmin'}>
 			<Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
 			<Stack.Screen
 				name="CreateAccount"
@@ -46,7 +47,11 @@ const Navigation = () => {
 				component={RepartoEnCurso}
 				options={{ headerShown: false }}
 			/>
-
+			<Stack.Screen
+				name="DeclaracionJurada"
+				component={DeclaracionJurada}
+				options={{ headerShown: false }}
+			/>
 			{/* RootStackParamBackOfficeList */}
 
 			<Stack.Screen name="LoginAdmin" component={LoginAdmin} options={{ headerShown: false }} />
