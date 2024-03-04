@@ -1,11 +1,18 @@
+'use client';
 import { View, Text, Pressable, Dimensions, Platform } from 'react-native';
 import React from 'react';
 import Sum from '../assets/Sum.svg';
 import { NavigationProp } from '@react-navigation/native';
-import { handleCreateUser, handleLoginUser } from '../services/user.service';
+import { handleCreateUser, handleLoginUser, handleMeUser } from '../services/user.service';
 import { Image } from 'react-native';
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import leftArrow from '../assets/arrow-left.png';
+// import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
+// import { login, useAppSelector } from '../state/user';
+// import { RootState, AppDispatch } from '../state/user';
+import { useAppSelector, useAppDispatch } from '../state/hooks';
+import { login, logout, store } from '../state/user';
+import { useSelector } from 'react-redux';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -47,6 +54,7 @@ enum RouteName {
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
 	PerfilRepartidor = 'PerfilRepartidor',
+	DeclaracionJurada = 'DeclaracionJurada',
 }
 
 const Button = ({
@@ -68,35 +76,50 @@ const Button = ({
 			navigation.navigate(navigate);
 		}
 	};
+	const handleNavigationRol = () => {
+		let user = store.getState();
+		console.log(store.getState(), 'store');
+		console.log(user, 'pre if');
+		if (user.name) {
+			console.log(user, 'navigationRol', user.roles[0], user.roles[0]);
+			user.roles[0] === 'repartidor'
+				? navigation.navigate(RouteName.HomeIniciarJornada)
+				: user.roles[0] === 'administrador'
+				? navigation.navigate(RouteName.HomeGestionarPedido)
+				: console.log('error');
+		}
+	};
 	const handleBack = () => {
 		navigate && navigation.navigate(navigate);
 	};
-	const client = true;
 	return (
 		<View style={{ height: height * HScale, width: width * WScale }}>
 			{action && navigate && (
 				<Pressable
-					onPress={
-						action === 'postR'
-							? () => {
-									handleCreateUser(data);
-									try {
-										client
-											? navigation.navigate(RouteName.Login)
-											: navigation.navigate(RouteName.LoginAdmin);
-									} catch {}
-							  }
-							: action === 'postL'
-							? () => {
-									handleLoginUser(data);
-									try {
-										client
-											? navigation.navigate(RouteName.HomeIniciarJornada)
-											: navigation.navigate(RouteName.HomeGestionarPedido);
-									} catch {}
-							  }
-							: () => {}
-					}
+					onPress={async () => {
+						if (action === 'postR') {
+							await handleCreateUser(data);
+							try {
+								navigation.navigate(RouteName.Login);
+							} catch (error) {
+								console.error(error);
+							}
+						} else if (action === 'postL') {
+							await handleLoginUser(data);
+							try {
+								console.log('primero');
+								await handleMeUser().then((data: object) => {
+									console.log(data, '/me button');
+									store.dispatch(login(data));
+								});
+								console.log('segundo');
+								handleNavigationRol();
+							} catch (error) {
+								console.error(error, 'hola');
+							}
+						}
+					}}
+					//glave7@gmail.com
 					style={({ pressed }) => [
 						spec === 'texto' && {
 							backgroundColor: pressed ? 'rgb(22 41 48)' : texto,
