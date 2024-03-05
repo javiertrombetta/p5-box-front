@@ -1,7 +1,11 @@
 import { NavigationProp } from '@react-navigation/native';
-import React from 'react';
+import React, { useState } from 'react';
 import { Dimensions, Platform, Pressable, Text, View } from 'react-native';
+import Button from '../components/Button';
 import Header from '../components/Header';
+import Title from '../components/Title';
+import CircleCheckbox from '../components/CircleCheckbox';
+import { Circle } from 'react-native-svg';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -39,19 +43,166 @@ const DeclaracionJurada = ({ navigation }: Props) => {
 		>
 			<Header navigation={navigation} />
 			<View
-				style={{ height: 188 * HScale, marginTop: 28 * HScale }}
-				className="w-full flex flex-col rounded-xl items-start justify-start align-middle bg-white"
+				style={{ height: 188 * HScale }}
+				className="w-full flex flex-col rounded-xl justify-start align-middle items-center"
 			>
+				<View style={{ height: 40 * HScale, marginTop: 28 * HScale, width: '100%' }}>
+					<Title
+						content={'DECLARACIÓN JURADA'}
+						size={18}
+						navigate={RouteName.HomeGestionarPedido}
+						navigation={navigation}
+					/>
+				</View>
+
+				{/* PRIMER CUADRADO BLANCO */}
 				<View
-					style={{ height: 43 * HScale, paddingHorizontal: 16 * WScale }}
-					className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
+					style={{
+						marginTop: 10 * HScale,
+						height: 118 * HScale,
+						paddingVertical: 10 * HScale,
+						paddingHorizontal: 10 * WScale,
+					}}
+					className="w-full flex flex-col rounded-xl justify-between bg-white"
 				>
-					<Text
-						style={{ paddingVertical: 4 * HScale, fontSize: scaledSize(14) }}
-						className="flex justify-center items-center font-sairaBold text-texto"
+					<View
+						style={{
+							height: 14 * HScale,
+							width: 71 * WScale,
+						}}
+						className="bg-violeta rounded-2xl flex items-center relative"
 					>
-						DECLARACION JURADA
-					</Text>
+						<Text
+							style={{ height: 75 * HScale, fontSize: scaledSize(10) }}
+							className="absolute top-[-2]"
+						>
+							Requerido*
+						</Text>
+					</View>
+
+					<View style={{ paddingHorizontal: 15 * WScale }}>
+						<Text
+							style={{ fontSize: scaledSize(14) }}
+							className="font-robotoMedium text-texto text-center"
+						>
+							¿Ha consumido bebidas alcohólicas en las ultimas 12 horas?
+						</Text>
+					</View>
+					<View style={{ paddingHorizontal: 10 * WScale }}>
+						<View style={{ height: 1 }} className="bg-gray-400 w-full" />
+					</View>
+
+					<View className="flex flex-row justify-center" style={{ gap: 30 * WScale }}>
+						<CircleCheckbox />
+					</View>
+				</View>
+
+				{/* SEGUNDO CUADRADO BLANCO */}
+				<View
+					style={{
+						marginTop: 10 * HScale,
+						height: 153 * HScale,
+						paddingVertical: 10 * HScale,
+						paddingHorizontal: 10 * WScale,
+					}}
+					className="w-full flex flex-col rounded-xl justify-between bg-white"
+				>
+					<View
+						style={{
+							height: 14 * HScale,
+							width: 71 * WScale,
+						}}
+						className="bg-violeta rounded-2xl flex items-center relative"
+					>
+						<Text
+							style={{ height: 75 * HScale, fontSize: scaledSize(10) }}
+							className="absolute top-[-2]"
+						>
+							Requerido*
+						</Text>
+					</View>
+
+					<View style={{ paddingHorizontal: 15 * WScale }}>
+						<Text
+							style={{ fontSize: scaledSize(14) }}
+							className="font-robotoMedium text-texto text-center"
+						>
+							¿Usted esta haciendo uso de algún tipo de medicamento psicoactivo?
+						</Text>
+
+						<Text
+							style={{ fontSize: scaledSize(10), marginTop: 5 * HScale }}
+							className="font-robotoMedium text-texto text-center"
+						>
+							por ejemplo tranquizantes, antigripales, antialérgicos o para insomnio
+						</Text>
+					</View>
+
+					<View style={{ paddingHorizontal: 10 * WScale }}>
+						<View style={{ height: 1 }} className="bg-gray-400 w-full" />
+					</View>
+
+					<View className="flex flex-row justify-center" style={{ gap: 30 * WScale }}>
+						<CircleCheckbox />
+					</View>
+				</View>
+
+				{/* TERCER CUADRADO BLANCO */}
+				<View
+					style={{
+						marginTop: 10 * HScale,
+						height: 133 * HScale,
+						paddingVertical: 10 * HScale,
+						paddingHorizontal: 10 * WScale,
+					}}
+					className="w-full flex flex-col rounded-xl justify-between bg-white"
+				>
+					<View
+						style={{
+							height: 14 * HScale,
+							width: 71 * WScale,
+						}}
+						className="bg-violeta rounded-2xl flex items-center relative"
+					>
+						<Text
+							style={{ height: 75 * HScale, fontSize: scaledSize(10) }}
+							className="absolute top-[-2]"
+						>
+							Requerido*
+						</Text>
+					</View>
+
+					<View style={{ paddingHorizontal: 15 * WScale }}>
+						<Text
+							style={{ fontSize: scaledSize(14) }}
+							className="font-robotoMedium text-texto text-center"
+						>
+							¿Tiene usted algún problema familiar, emocional o de cualquier tipo que lo distraiga?
+						</Text>
+					</View>
+					<View style={{ paddingHorizontal: 10 * WScale }}>
+						<View style={{ height: 1 }} className="bg-gray-400 w-full" />
+					</View>
+					<View className="flex flex-row justify-center" style={{ gap: 30 * WScale }}>
+						<CircleCheckbox />
+					</View>
+				</View>
+
+				<View
+					style={{
+						height: 30 * HScale,
+						width: 270 * WScale,
+						marginTop: 36 * HScale,
+					}}
+				>
+					<Button
+						content="CONTINUAR"
+						width={270}
+						height={30}
+						spec="texto"
+						navigation={navigation}
+						navigate={RouteName.HomeIniciarJornada}
+					/>
 				</View>
 			</View>
 		</View>
