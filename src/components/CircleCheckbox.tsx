@@ -1,13 +1,14 @@
 import { Dimensions, Pressable, Text, View } from 'react-native';
 import React, { Key, useEffect, useState } from 'react';
 
-type HandleToggleSetValuesType = (pos: Key, value: boolean) => void; // Reemplaza TipoParametro por el tipo real de tus parámetros
+type HandleToggleSetValuesType = (pos: Key, value: boolean) => void;
 
 interface CircleCheckboxProps {
 	handleToggleSetValues: HandleToggleSetValuesType;
 	position: string;
 }
-const CircleCheckbox: React.FC<CircleCheckboxProps> = ({ handleToggleSetValues, position }) => {
+
+const CircleCheckbox = ({ handleToggleSetValues, position }: CircleCheckboxProps) => {
 	const { width, height } = Dimensions.get('window');
 	const WScale = width / 360;
 	const HScale = height / 640;
@@ -15,10 +16,10 @@ const CircleCheckbox: React.FC<CircleCheckboxProps> = ({ handleToggleSetValues, 
 
 	const [checkTrue, setCheckTrue] = useState(false); //SI
 	const [checkFalse, setCheckFalse] = useState(false); //NO
-	const [realValue, setRealValue] = useState(false);
 
 	useEffect(() => {
-		handleToggleSetValues(position, realValue);
+		handleToggleSetValues(position, checkTrue);
+		console.log(checkTrue, 'Real Value');
 	}, [checkTrue, checkFalse]);
 
 	const handleCheck = (check: boolean) => {
@@ -29,29 +30,26 @@ const CircleCheckbox: React.FC<CircleCheckboxProps> = ({ handleToggleSetValues, 
 			: checkFalse
 			? setCheckFalse(false)
 			: (setCheckFalse(true), setCheckTrue(false));
-		checkTrue ? setRealValue(true) : setRealValue(false);
-		checkFalse ? setRealValue(false) : setRealValue(true);
 	};
 
-	console.log(position, realValue);
 	return (
 		<>
 			<View style={{ gap: 10 * WScale }} className="flex flex-row">
 				<Pressable
-					style={{ width: 19 * WScale, height: 19 * HScale }}
+					onPress={() => handleCheck(true)}
+					style={{ width: scaledSize(19), height: scaledSize(19) }}
 					className="border border-texto rounded-full relative"
 				/>
-				{checkTrue ? (
+				{checkTrue && (
 					<Pressable
 						onPress={() => handleCheck(true)}
-						style={{ width: 11 * WScale, height: 11 * HScale }}
-						className="border border-texto top-1 left-1 bg-amarilloVerdoso absolute rounded-full"
-					/>
-				) : (
-					<Pressable
-						onPress={() => handleCheck(true)}
-						style={{ width: 11 * WScale, height: 11 * HScale }}
-						className="top-1 left-1  absolute rounded-full"
+						style={{
+							width: scaledSize(11),
+							height: scaledSize(11),
+							top: scaledSize(4),
+							left: scaledSize(4),
+						}}
+						className="border border-texto bg-amarilloVerdoso absolute rounded-full"
 					/>
 				)}
 
@@ -62,20 +60,20 @@ const CircleCheckbox: React.FC<CircleCheckboxProps> = ({ handleToggleSetValues, 
 
 			<View style={{ gap: 10 * WScale }} className="flex flex-row">
 				<Pressable
-					style={{ width: 19 * WScale, height: 19 * HScale }}
+					onPress={() => handleCheck(false)}
+					style={{ width: scaledSize(19), height: scaledSize(19) }}
 					className="border border-texto rounded-full relative"
 				/>
-				{checkFalse ? (
+				{checkFalse && (
 					<Pressable
 						onPress={() => handleCheck(false)}
-						style={{ width: 11 * WScale, height: 11 * HScale }}
-						className="border border-texto top-1 left-1 bg-amarilloVerdoso absolute rounded-full"
-					/>
-				) : (
-					<Pressable
-						onPress={() => handleCheck(false)}
-						style={{ width: 11 * WScale, height: 11 * HScale }}
-						className="top-1 left-1  absolute rounded-full"
+						style={{
+							width: scaledSize(11),
+							height: scaledSize(11),
+							top: scaledSize(4),
+							left: scaledSize(4),
+						}}
+						className="border border-texto bg-amarilloVerdoso absolute rounded-full"
 					/>
 				)}
 				<Text style={{ fontSize: scaledSize(12) }} className="font-roboto text-texto text-center">
