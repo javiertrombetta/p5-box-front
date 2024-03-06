@@ -19,7 +19,6 @@ const CircleCheckbox = ({ handleToggleSetValues, position }: CircleCheckboxProps
 
 	useEffect(() => {
 		handleToggleSetValues(position, checkTrue);
-		console.log(checkTrue, 'Real Value');
 	}, [checkTrue, checkFalse]);
 
 	const handleCheck = (check: boolean) => {

@@ -83,10 +83,7 @@ const Button = ({
 	};
 	const handleNavigationRol = () => {
 		let user = store.getState();
-		console.log(store.getState(), 'store');
-		console.log(user, 'pre if');
 		if (user.name) {
-			console.log(user, 'navigationRol', user.roles[0], user.roles[0]);
 			user.roles[0] === 'repartidor'
 				? navigation.navigate(RouteName.HomeIniciarJornada)
 				: user.roles[0] === 'administrador'
@@ -112,12 +109,9 @@ const Button = ({
 						} else if (action === 'postL' && data) {
 							await handleLoginUser(data);
 							try {
-								console.log('primero');
 								await handleMeUser().then((data: object) => {
-									console.log(data, '/me button');
 									store.dispatch(login(data));
 								});
-								console.log('segundo');
 								handleNavigationRol();
 							} catch (error) {
 								console.error(error, 'hola');
