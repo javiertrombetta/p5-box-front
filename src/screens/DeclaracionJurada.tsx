@@ -1,5 +1,5 @@
 import { NavigationProp } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { Key, useEffect, useState } from 'react';
 import { Dimensions, Platform, Pressable, Text, View } from 'react-native';
 import Button from '../components/Button';
 import Header from '../components/Header';
@@ -31,11 +31,28 @@ type Props = {
 };
 
 const DeclaracionJurada = ({ navigation }: Props) => {
+	const [values, setValues] = useState({
+		v1: false,
+		v2: false,
+		v3: false,
+	});
+	const handleToggleSetValues = (pos: Key, value: boolean) => {
+		setValues(
+			pos === 'v1'
+				? { ...values, v1: value }
+				: pos === 'v2'
+				? { ...values, v2: value }
+				: { ...values, v3: value }
+		);
+	};
 	const isWeb = Platform.OS === 'web';
 	const { width, height } = Dimensions.get('window');
 	const WScale = width / 360;
 	const HScale = height / 640;
 	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+	useEffect(() => {
+		console.log('Valuessssssssssssssssssssssssssssss -----> ', values);
+	}, [values]);
 	return (
 		<View
 			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
@@ -93,7 +110,7 @@ const DeclaracionJurada = ({ navigation }: Props) => {
 					</View>
 
 					<View className="flex flex-row justify-center" style={{ gap: 30 * WScale }}>
-						<CircleCheckbox />
+						<CircleCheckbox handleToggleSetValues={handleToggleSetValues} position={'v1'} />
 					</View>
 				</View>
 
@@ -143,7 +160,7 @@ const DeclaracionJurada = ({ navigation }: Props) => {
 					</View>
 
 					<View className="flex flex-row justify-center" style={{ gap: 30 * WScale }}>
-						<CircleCheckbox />
+						<CircleCheckbox handleToggleSetValues={handleToggleSetValues} position={'v2'} />
 					</View>
 				</View>
 
@@ -184,7 +201,7 @@ const DeclaracionJurada = ({ navigation }: Props) => {
 						<View style={{ height: 1 }} className="bg-gray-400 w-full" />
 					</View>
 					<View className="flex flex-row justify-center" style={{ gap: 30 * WScale }}>
-						<CircleCheckbox />
+						<CircleCheckbox handleToggleSetValues={handleToggleSetValues} position={'v3'} />
 					</View>
 				</View>
 

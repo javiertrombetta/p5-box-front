@@ -1,7 +1,13 @@
 import { Dimensions, Pressable, Text, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { Key, useEffect, useState } from 'react';
 
-const CircleCheckbox = () => {
+type HandleToggleSetValuesType = (pos: Key, value: boolean) => void; // Reemplaza TipoParametro por el tipo real de tus parámetros
+
+interface CircleCheckboxProps {
+	handleToggleSetValues: HandleToggleSetValuesType;
+	position: string;
+}
+const CircleCheckbox: React.FC<CircleCheckboxProps> = ({ handleToggleSetValues, position }) => {
 	const { width, height } = Dimensions.get('window');
 	const WScale = width / 360;
 	const HScale = height / 640;
@@ -9,6 +15,11 @@ const CircleCheckbox = () => {
 
 	const [checkTrue, setCheckTrue] = useState(false); //SI
 	const [checkFalse, setCheckFalse] = useState(false); //NO
+	const [realValue, setRealValue] = useState(false);
+
+	useEffect(() => {
+		handleToggleSetValues(position, realValue);
+	}, [checkTrue, checkFalse]);
 
 	const handleCheck = (check: boolean) => {
 		check
@@ -18,10 +29,11 @@ const CircleCheckbox = () => {
 			: checkFalse
 			? setCheckFalse(false)
 			: (setCheckFalse(true), setCheckTrue(false));
-
-		console.log(check, 'Check', checkTrue, 'CheckTrue', checkFalse, 'ChecFalse');
+		checkTrue ? setRealValue(true) : setRealValue(false);
+		checkFalse ? setRealValue(false) : setRealValue(true);
 	};
 
+	console.log(position, realValue);
 	return (
 		<>
 			<View style={{ gap: 10 * WScale }} className="flex flex-row">
