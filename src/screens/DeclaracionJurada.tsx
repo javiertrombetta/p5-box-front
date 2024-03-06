@@ -1,11 +1,10 @@
 import { NavigationProp } from '@react-navigation/native';
 import React, { Key, useEffect, useState } from 'react';
-import { Dimensions, Platform, Pressable, Text, View } from 'react-native';
+import { Dimensions, Platform, Text, View } from 'react-native';
 import Button from '../components/Button';
 import Header from '../components/Header';
 import Title from '../components/Title';
 import CircleCheckbox from '../components/CircleCheckbox';
-import { Circle } from 'react-native-svg';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -51,7 +50,7 @@ const DeclaracionJurada = ({ navigation }: Props) => {
 	const HScale = height / 640;
 	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 	useEffect(() => {
-		console.log('Valuessssssssssssssssssssssssssssss -----> ', values);
+		console.log(values);
 	}, [values]);
 	return (
 		<View
