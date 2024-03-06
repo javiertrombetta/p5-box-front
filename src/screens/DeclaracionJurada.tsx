@@ -49,9 +49,6 @@ const DeclaracionJurada = ({ navigation }: Props) => {
 	const WScale = width / 360;
 	const HScale = height / 640;
 	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
-	useEffect(() => {
-		console.log(values);
-	}, [values]);
 	return (
 		<View
 			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
