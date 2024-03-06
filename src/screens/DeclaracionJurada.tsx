@@ -31,17 +31,17 @@ type Props = {
 
 const DeclaracionJurada = ({ navigation }: Props) => {
 	const [values, setValues] = useState({
-		v1: false,
-		v2: false,
-		v3: false,
+		hasConsumedAlcohol: false,
+		isUsingPsychoactiveDrugs: false,
+		hasEmotionalDistress: false,
 	});
 	const handleToggleSetValues = (pos: Key, value: boolean) => {
 		setValues(
-			pos === 'v1'
-				? { ...values, v1: value }
-				: pos === 'v2'
-				? { ...values, v2: value }
-				: { ...values, v3: value }
+			pos === 'hasConsumedAlcohol'
+				? { ...values, hasConsumedAlcohol: value }
+				: pos === 'isUsingPsychoactiveDrugs'
+				? { ...values, isUsingPsychoactiveDrugs: value }
+				: { ...values, hasEmotionalDistress: value }
 		);
 	};
 	const isWeb = Platform.OS === 'web';
@@ -109,7 +109,10 @@ const DeclaracionJurada = ({ navigation }: Props) => {
 					</View>
 
 					<View className="flex flex-row justify-center" style={{ gap: 30 * WScale }}>
-						<CircleCheckbox handleToggleSetValues={handleToggleSetValues} position={'v1'} />
+						<CircleCheckbox
+							handleToggleSetValues={handleToggleSetValues}
+							position={'hasConsumedAlcohol'}
+						/>
 					</View>
 				</View>
 
@@ -159,7 +162,10 @@ const DeclaracionJurada = ({ navigation }: Props) => {
 					</View>
 
 					<View className="flex flex-row justify-center" style={{ gap: 30 * WScale }}>
-						<CircleCheckbox handleToggleSetValues={handleToggleSetValues} position={'v2'} />
+						<CircleCheckbox
+							handleToggleSetValues={handleToggleSetValues}
+							position={'isUsingPsychoactiveDrugs'}
+						/>
 					</View>
 				</View>
 
@@ -200,7 +206,10 @@ const DeclaracionJurada = ({ navigation }: Props) => {
 						<View style={{ height: 1 }} className="bg-gray-400 w-full" />
 					</View>
 					<View className="flex flex-row justify-center" style={{ gap: 30 * WScale }}>
-						<CircleCheckbox handleToggleSetValues={handleToggleSetValues} position={'v3'} />
+						<CircleCheckbox
+							handleToggleSetValues={handleToggleSetValues}
+							position={'hasEmotionalDistress'}
+						/>
 					</View>
 				</View>
 
@@ -216,6 +225,8 @@ const DeclaracionJurada = ({ navigation }: Props) => {
 						width={270}
 						height={30}
 						spec="texto"
+						data={values}
+						action="postC"
 						navigation={navigation}
 						navigate={RouteName.HomeIniciarJornada}
 					/>

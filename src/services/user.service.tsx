@@ -1,7 +1,7 @@
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
-export const handleCreateUser = async (data) => {
+export const handleCreateUser = async (data: object) => {
 	try {
 		const response = await axios.post('http://localhost:3000/api/v1/auth/register', data, {
 			withCredentials: true,
@@ -14,7 +14,7 @@ export const handleCreateUser = async (data) => {
 	}
 };
 
-export const handleLoginUser = async (data) => {
+export const handleLoginUser = async (data: object) => {
 	try {
 		const response = await axios.post('http://localhost:3000/api/v1/auth/login', data, {
 			withCredentials: true,
@@ -28,7 +28,19 @@ export const handleLoginUser = async (data) => {
 };
 
 export const handleMeUser = async () => {
-	console.log("pre response me")
-	const response = await axios.get('http://localhost:3000/api/v1/auth/me', {withCredentials: true})
+	console.log('pre response me');
+	const response = await axios.get('http://localhost:3000/api/v1/auth/me', {
+		withCredentials: true,
+	});
 	return response.data;
-}
+};
+
+export const handleConditions = async (data: object) => {
+	try {
+		const response = await axios.post('http://localhost:3000/api/v1/legals/declaration', data);
+		return response.data;
+	} catch (error) {
+		console.error('Error al procesar la declaración:', error);
+		throw error;
+	}
+};
