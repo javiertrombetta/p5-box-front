@@ -39,7 +39,7 @@ export const handleConditions = async (data: object) => {
 			'http://localhost:3000/api/v1/auth/me/packages',
 			{
 				...data,
-				packages: ['0570d7c0-586a-4e56-bc03-e9790abd5390'],
+				packages: ['fa453ddb-52ac-46a7-9c87-2e96538ec8c2'],
 			},
 			{
 				withCredentials: true,
