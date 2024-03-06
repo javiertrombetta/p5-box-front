@@ -3,7 +3,12 @@ import { View, Text, Pressable, Dimensions, Platform } from 'react-native';
 import React from 'react';
 import Sum from '../assets/Sum.svg';
 import { NavigationProp } from '@react-navigation/native';
-import { handleCreateUser, handleLoginUser, handleMeUser } from '../services/user.service';
+import {
+	handleConditions,
+	handleCreateUser,
+	handleLoginUser,
+	handleMeUser,
+} from '../services/user.service';
 import { Image } from 'react-native';
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import leftArrow from '../assets/arrow-left.png';
@@ -97,14 +102,14 @@ const Button = ({
 			{action && navigate && (
 				<Pressable
 					onPress={async () => {
-						if (action === 'postR') {
+						if (action === 'postR' && data) {
 							await handleCreateUser(data);
 							try {
 								navigation.navigate(RouteName.Login);
 							} catch (error) {
 								console.error(error);
 							}
-						} else if (action === 'postL') {
+						} else if (action === 'postL' && data) {
 							await handleLoginUser(data);
 							try {
 								console.log('primero');
@@ -117,9 +122,14 @@ const Button = ({
 							} catch (error) {
 								console.error(error, 'hola');
 							}
+						} else if (action === 'postC' && data) {
+							try {
+								await handleConditions(data);
+							} catch (error) {
+								console.error(error, 'hola');
+							}
 						}
 					}}
-					//glave7@gmail.com
 					style={({ pressed }) => [
 						spec === 'texto' && {
 							backgroundColor: pressed ? 'rgb(22 41 48)' : texto,
