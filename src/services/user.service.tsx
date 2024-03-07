@@ -19,6 +19,7 @@ export const handleLoginUser = async (data: object) => {
 		const response = await axios.post('http://localhost:3000/api/v1/auth/login', data, {
 			withCredentials: true,
 		});
+		console.log('Usuario creado:', response.data);
 		return response.data;
 	} catch (error) {
 		console.error('Error al loguear usuario:', error);

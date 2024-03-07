@@ -12,12 +12,7 @@ import {
 import { Image } from 'react-native';
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import leftArrow from '../assets/arrow-left.png';
-// import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
-// import { login, useAppSelector } from '../state/user';
-// import { RootState, AppDispatch } from '../state/user';
-import { useAppSelector, useAppDispatch } from '../state/hooks';
-import { login, logout, store } from '../state/user';
-import { useSelector } from 'react-redux';
+import { login, store } from '../state/user';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
