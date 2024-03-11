@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Pressable, Image, Dimensions, Platform, VirtualizedList } from 'react-native';
 import Header from '../components/Header';
 import { NavigationProp } from '@react-navigation/native';
@@ -10,6 +10,8 @@ import ArrowLeft from '../assets/ArrowLeft.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 import Button from '../components/Button';
 import List from '../components/List';
+import { handleDelivered } from '../services/package.service';
+import { handleMePackages } from '../services/user.service';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -42,12 +44,25 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 
 	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
+	const [packagesDelivered, setPackagesDelivered] = useState([]);
+	const [packagesPending, setPackagesPending] = useState([]);
+
+	useEffect(() => {
+		handleDelivered().then((data) => setPackagesDelivered(data));
+		handleMePackages().then((data) => setPackagesPending(data));
+	}, []);
+
 	type ListItemPending = {
 		deliveryAddress: string;
 		state: string;
+		_id: string;
 	};
 
 	const renderItemsPendientes = ({ item, index }: { item: ListItemPending; index: number }) => {
+		const id = '#' + item._id.slice(0, 5).toUpperCase() + '...';
+		const deliveryAddress1 = item.deliveryAddress.slice(0, -4);
+		const deliveryAddress2 = item.deliveryAddress.slice(-3);
+		console.log(item.state);
 		return (
 			<View>
 				<View
@@ -57,9 +72,10 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 					<List
 						column1="svg"
 						column2="stringsCol"
-						content2String={Object.values(item)[0]}
+						content2String={`${id}, ${deliveryAddress1}, ${deliveryAddress2}`}
 						column3="svgStringButton"
-						content3={Object.values(item)[1]}
+						content3={item.state}
+						idPackage={`${item._id}`}
 						navigation={navigation}
 					/>
 				</View>
@@ -74,9 +90,14 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 
 	type ListItemHistory = {
 		deliveryAddress: string;
+		_id: string;
 	};
 
 	const renderItemsHistory = ({ item, index }: { item: ListItemHistory; index: number }) => {
+		console.log(packagesDelivered);
+		const id = '#' + item._id.slice(0, 5).toUpperCase() + '...';
+		const deliveryAddress1 = item.deliveryAddress.slice(0, -4);
+		const deliveryAddress2 = item.deliveryAddress.slice(-3);
 		return (
 			<View>
 				<View
@@ -86,7 +107,7 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 					<List
 						column1="svg"
 						column2="stringsCol"
-						content2String={Object.values(item)[0]}
+						content2String={`${id}, ${deliveryAddress1}, ${deliveryAddress2}`}
 						column3="svgStringButton"
 						content3="entregado"
 						navigation={navigation}
@@ -132,10 +153,10 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 				</View>
 				<VirtualizedList
 					className="w-full"
-					data={fakePending()}
+					data={packagesPending}
 					renderItem={renderItemsPendientes}
 					keyExtractor={keyExtractorPending}
-					getItemCount={() => fakePending().length}
+					getItemCount={() => packagesPending.length}
 					getItem={(data, index) => data[index]}
 				/>
 			</View>
@@ -170,10 +191,10 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 				</View>
 				<VirtualizedList
 					className="w-full"
-					data={fakeHistory()}
+					data={packagesDelivered}
 					renderItem={renderItemsHistory}
 					keyExtractor={keyExtractorHistory}
-					getItemCount={() => fakeHistory().length}
+					getItemCount={() => packagesDelivered.length}
 					getItem={(data, index) => data[index]}
 				/>
 			</View>
