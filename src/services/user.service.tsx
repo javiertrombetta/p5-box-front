@@ -20,6 +20,7 @@ export const handleLoginUser = async (data: object) => {
 		const response = await axios.post('http://localhost:3000/api/v1/auth/login', data, {
 			withCredentials: true,
 		});
+		console.log('Usuario creado:', response.data);
 		return response.data;
 	} catch (error) {
 		console.error('Error al loguear usuario:', error);
@@ -57,4 +58,18 @@ export const handleConditions = async (data: object) => {
 		console.error('Error al procesar la declaración:', error);
 		throw error;
 	}
+};
+
+export const handleMePackages = async () => {
+	const response = await axios.get('http://localhost:3000/api/v1/auth/me/packages', {
+		withCredentials: true,
+	});
+	return response.data;
+};
+
+export const handlePackageCancel = async (uuid: string) => {
+	const response = await axios.put(`http://localhost:3000/api/v1/auth/me/packages/${uuid}/cancel`, {
+		withCredentials: true,
+	});
+	return response.data;
 };

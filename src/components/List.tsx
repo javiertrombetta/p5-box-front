@@ -20,6 +20,7 @@ import Entregado from '../assets/Entregado.svg';
 import Button from '../components/Button';
 import ButtonTrue from '../assets/ButtonTrue.svg';
 import { NavigationProp } from '@react-navigation/native';
+import { handlePackageCancel } from '../services/user.service';
 
 interface listProps {
 	column1: string;
@@ -29,6 +30,7 @@ interface listProps {
 	column3: string;
 	content3?: string;
 	navigation: NavigationProp<RootStackParamList>;
+	idPackage?: string;
 }
 
 type RootStackParamList = {
@@ -58,6 +60,7 @@ const List = ({
 	column3,
 	content3,
 	navigation,
+	idPackage,
 }: listProps) => {
 	const { width, height } = Dimensions.get('window');
 	const WScale = width / 360;
@@ -393,7 +396,7 @@ const List = ({
 								></View>
 							</View>
 						)}
-						{content3 === 'enCursoTrash' && (
+						{content3 === 'en curso' && (
 							<View style={{ gap: 12 * HScale }} className="flex flex-col items-end justify-end">
 								<View
 									style={{ minWidth: 78 * WScale, height: 15 * HScale }}
@@ -415,6 +418,7 @@ const List = ({
 								</View>
 								<View style={{ paddingRight: 16 * WScale }}>
 									<Pressable
+										onPress={() => idPackage && handlePackageCancel(idPackage)}
 										style={{ height: scaledSize(24), width: scaledSize(56) }}
 										className="flex flex-row justify-end items-center"
 									>
@@ -431,7 +435,7 @@ const List = ({
 								</View>
 							</View>
 						)}
-						{content3 === 'pendienteIniciar' && (
+						{content3 === 'pendiente' && (
 							<View style={{ gap: 12 * HScale }} className="flex flex-col items-end justify-end">
 								<View
 									style={{ minWidth: 83 * WScale, height: 15 * HScale }}
