@@ -2,6 +2,7 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 export const handleCreateUser = async (data: object) => {
+
 	try {
 		const response = await axios.post('http://localhost:3000/api/v1/auth/register', data, {
 			withCredentials: true,
@@ -25,6 +26,12 @@ export const handleLoginUser = async (data: object) => {
 		console.error('Error al loguear usuario:', error);
 		throw error;
 	}
+};
+
+export const handleLogout = async () => {
+	const response = await axios.post('http://localhost:3000/api/v1/auth/logout', {
+		withCredentials: true,
+	});
 };
 
 export const handleMeUser = async () => {
