@@ -62,7 +62,6 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 	const handleArrow = () => {
 		dropdown ? setDropdown(false) : setDropdown(true);
 	};
-	console.log(dropdown);
 
 	const renderItemsUsers = ({ item, index }: RenderItemsUsersProps) => {
 		if (!item) {
@@ -170,99 +169,6 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 										{renderItemsUsers({ item, index })}
 									</View>
 							  ))}
-						{/* <View style={{ paddingHorizontal: 16 * WScale }}>
-							<List
-								column1="buttonCheck"
-								column2="stringsRow"
-								content2String="Amenabar 2356, CABA"
-								column3="none"
-								navigation={navigation}
-							/>
-						</View>
-						<View className="flex w-full items-center">
-							<View style={{ height: 1 }} className="w-full bg-gray-300" />
-						</View>
-						<View style={{ paddingHorizontal: 16 * WScale }}>
-							<List
-								column1="buttonCheck"
-								column2="stringsRow"
-								content2String="Av Carabobo y Rivadavia, CABA"
-								column3="none"
-								navigation={navigation}
-							/>
-						</View>
-						<View className="flex w-full items-center">
-							<View style={{ height: 1 }} className="w-full bg-gray-300" />
-						</View>
-						<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
-							<List
-								column1="buttonCheck"
-								column2="stringsRow"
-								content2String="Melian 1242, CABA"
-								column3="none"
-								navigation={navigation}
-							/>
-						</View>
-						<View className="flex w-full items-center">
-							<View style={{ height: 1 }} className="w-full bg-gray-300" />
-						</View>
-						<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
-							<List
-								column1="buttonCheck"
-								column2="stringsRow"
-								content2String="Castillo 670, CABA"
-								column3="none"
-								navigation={navigation}
-							/>
-						</View>
-						<View className="flex w-full items-center">
-							<View style={{ height: 1 }} className="w-full bg-gray-300" />
-						</View>
-						<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
-							<List
-								column1="buttonCheck"
-								column2="stringsRow"
-								content2String="Gorriti 4595, CABA"
-								column3="none"
-								navigation={navigation}
-							/>
-						</View>
-						<View className="flex w-full items-center">
-							<View style={{ height: 1 }} className="w-full bg-gray-300" />
-						</View>
-						<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
-							<List
-								column1="buttonCheck"
-								column2="stringsRow"
-								content2String="Av. Gral. Mosconi 1056, CABA"
-								column3="none"
-								navigation={navigation}
-							/>
-						</View>
-						<View className="flex w-full items-center">
-							<View style={{ height: 1 }} className="w-full bg-gray-300" />
-						</View>
-						<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
-							<List
-								column1="buttonCheck"
-								column2="stringsRow"
-								content2String="Tacuarí 1797, CABA"
-								column3="none"
-								navigation={navigation}
-							/>
-						</View>
-						<View className="flex w-full items-center">
-							<View style={{ height: 1 }} className="w-full bg-gray-300" />
-						</View>
-						<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
-							<List
-								column1="buttonCheck"
-								column2="stringsRow"
-								content2String="Av. Gaona 1284, CABA"
-								column3="none"
-								navigation={navigation}
-							/>
-						</View> */}
 					</View>
 				</View>
 				<View style={{ height: 1 * HScale }} className="w-full bg-gray-300 z-10" />
