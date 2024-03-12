@@ -62,7 +62,6 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 		const id = '#' + item._id.slice(0, 5).toUpperCase() + '...';
 		const deliveryAddress1 = item.deliveryAddress.slice(0, -4);
 		const deliveryAddress2 = item.deliveryAddress.slice(-3);
-		console.log(item.state);
 		return (
 			<View>
 				<View
@@ -94,7 +93,6 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 	};
 
 	const renderItemsHistory = ({ item, index }: { item: ListItemHistory; index: number }) => {
-		console.log(packagesDelivered);
 		const id = '#' + item._id.slice(0, 5).toUpperCase() + '...';
 		const deliveryAddress1 = item.deliveryAddress.slice(0, -4);
 		const deliveryAddress2 = item.deliveryAddress.slice(-3);

@@ -4,7 +4,10 @@ import ArrowLeft from '../assets/ArrowLeft.svg';
 import buenos from '../assets/buenos.png';
 import Header from '../components/Header';
 import Button from '../components/Button';
+import { useParams } from 'react-router-dom';
+import { CommonActions, useRoute } from '@react-navigation/native';
 import { NavigationProp } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -35,9 +38,20 @@ type Props = {
 	navigation: NavigationProp<RootStackParamList>;
 };
 
+type User = {
+	roles: string[];
+};
+
 // NAVIGATION ADMIN
 
 function RepartoEnCurso({ navigation }: Props) {
+	// const route = useRoute();
+	// console.log(route);
+	let user = useSelector((state) => state) as User;
+	console.log(user);
+	setTimeout(() => {
+		console.log(user);
+	}, 100);
 	return (
 		<View
 			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
@@ -52,7 +66,7 @@ function RepartoEnCurso({ navigation }: Props) {
 					style={{ paddingVertical: 4 * HScale, fontSize: scaledSize(18) }}
 					className="flex justify-center items-center font-sairaBold text-texto"
 				>
-					REPARTO EN CURSO
+					{}
 				</Text>
 				<Pressable
 					onPress={() => navigation.navigate(RouteName.HomeIniciarJornada)}

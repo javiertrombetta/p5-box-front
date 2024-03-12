@@ -50,6 +50,7 @@
     "react-native-swiper": "^1.6.0",
     "react-native-web": "~0.19.6",
     "react-redux": "^9.1.0",
+    "react-router-dom": "^6.22.3",
     "recharts": "^2.10.4",
     "standard-version": "^9.5.0",
     "typescript": "^5.3.0",

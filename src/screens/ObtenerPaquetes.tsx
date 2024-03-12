@@ -45,10 +45,9 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 	const [packages, setPackages] = useState([]);
-
-	useEffect(() => {
+	setTimeout(() => {
 		handleAvailable().then((data) => setPackages(data));
-	}, []);
+	}, 100);
 
 	type ListItemPackage = {
 		[key: string]: string;
