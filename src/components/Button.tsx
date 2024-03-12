@@ -7,6 +7,7 @@ import {
 	handleConditions,
 	handleCreateUser,
 	handleLoginUser,
+	handleLogout,
 	handleMeUser,
 } from '../services/user.service';
 import { Image } from 'react-native';
@@ -94,6 +95,9 @@ const Button = ({
 			{action && navigate && (
 				<Pressable
 					onPress={async () => {
+						if (action === 'postError') {
+							console.log('Las contraseñas no son iguales');
+						}
 						if (action === 'postR' && data) {
 							await handleCreateUser(data);
 							try {
@@ -109,13 +113,20 @@ const Button = ({
 								});
 								handleNavigationRol();
 							} catch (error) {
-								console.error(error, 'hola');
+								console.error(error);
 							}
 						} else if (action === 'postC' && data) {
 							try {
 								await handleConditions(data);
 							} catch (error) {
-								console.error(error, 'hola');
+								console.error(error);
+							}
+						} else if (action === 'postCS') {
+							try {
+								await handleLogout();
+								navigation.navigate(RouteName.Login);
+							} catch (error) {
+								console.error(error);
 							}
 						}
 					}}
