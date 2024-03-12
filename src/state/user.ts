@@ -11,13 +11,17 @@ const initialState = {
     state: "",
     points: 0,
     __v: 0,
+    // back: ""
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    login: (state, action) => action.payload,
+    login: (state, action) => {
+      action.payload
+      // state.back = action.payload.back;
+    },
     logout: (state, action) => {
       return {
         ...initialState,

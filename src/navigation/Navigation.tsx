@@ -42,7 +42,9 @@ const Navigation = () => {
 		setUser(store.getState());
 	});
 	return (
-		<Stack.Navigator initialRouteName={user.roles[0] !== 'repartidor' ? 'Login' : 'LoginAdmin'}>
+		<Stack.Navigator
+			initialRouteName={user.roles[0] !== 'repartidor' ? 'HomeIniciarJornada' : 'LoginAdmin'}
+		>
 			<Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
 			<Stack.Screen
 				name="CreateAccount"
