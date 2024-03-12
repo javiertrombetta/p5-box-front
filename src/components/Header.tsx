@@ -82,6 +82,7 @@ const Header = ({ navigation }: Props) => {
 					navigate={RouteName.Login}
 					// navigate={user?.roles[0] === 'repartidor' ? RouteName.Login : RouteName.LoginAdmin}
 					navigation={navigation}
+					action='postCS'
 				/>
 			</View>
 		</View>

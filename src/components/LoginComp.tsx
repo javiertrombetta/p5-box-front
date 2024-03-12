@@ -1,9 +1,12 @@
-import { View, Dimensions, Image, Platform, TextInput } from 'react-native';
+import { View, Dimensions, Image, Platform, TextInput, Pressable } from 'react-native';
 import React, { useState } from 'react';
 import closeEye from '../assets/Eye.png';
 import Button from './Button';
 import CloseEye from '../assets/Eye.svg';
 import { NavigationProp } from '@react-navigation/native';
+import openEye from '../assets/open-eye.png';
+import OpenEye from '../assets/OpenEye.svg';
+import Eye from '../assets/Eye.svg';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -36,6 +39,12 @@ enum RouteName {
 }
 
 const LoginComp = ({ client, navigation }: LoginCompProps) => {
+	const [showPassword, setShowPassword] = useState(false);
+
+	const togglePassword = () => {
+		setShowPassword(!showPassword);
+	};
+
 	const [data, setData] = useState({
 		email: '',
 		password: '',
@@ -63,33 +72,68 @@ const LoginComp = ({ client, navigation }: LoginCompProps) => {
 				onChangeText={(newText) => handleInputChange('email', newText)}
 				defaultValue={data.email}
 			/>
-			<TextInput
-				style={{
-					top: 111 * HScale,
-					left: 15 * WScale,
-					height: 24 * HScale,
-					width: 270 * WScale,
-					fontSize: scaledSize(12),
-				}}
-				className="text-texto font-roboto absolute"
-				placeholder="**********"
-				onChangeText={(newText) => handleInputChange('password', newText)}
-				defaultValue={data.password}
-			/>
-			{isWeb ? (
-				<Image
-					style={{
-						top: 113 * HScale,
-						left: 255 * WScale,
-						width: scaledSize(20),
-						height: scaledSize(20),
-					}}
-					className="absolute"
-					source={closeEye}
-				/>
-			) : (
-				<CloseEye top={108 * HScale} left={255 * WScale} height={20 * HScale} width={20 * WScale} />
-			)}
+
+			<View>
+				<View>
+					<TextInput
+						style={{
+							top: 111 * HScale,
+							left: 15 * WScale,
+							height: 24 * HScale,
+							width: 270 * WScale,
+							fontSize: scaledSize(12),
+						}}
+						className="text-texto font-roboto absolute"
+						secureTextEntry={!showPassword}
+						placeholder="**********"
+						onChangeText={(newText) => handleInputChange('password', newText)}
+						defaultValue={data.password}
+					/>
+
+					<Pressable className="relative" onPress={togglePassword}>
+						{showPassword ? (
+							isWeb ? (
+								<Image
+									style={{
+										top: 113 * HScale,
+										left: 255 * WScale,
+										width: scaledSize(20),
+										height: scaledSize(20),
+									}}
+									className="absolute"
+									source={openEye}
+								/>
+							) : (
+								<OpenEye
+									top={108 * HScale}
+									left={255 * WScale}
+									height={20 * HScale}
+									width={20 * WScale}
+								/>
+							)
+						) : isWeb ? (
+							<Image
+								style={{
+									top: 113 * HScale,
+									left: 255 * WScale,
+									width: scaledSize(20),
+									height: scaledSize(20),
+								}}
+								className="absolute"
+								source={closeEye}
+							/>
+						) : (
+							<Eye
+								top={108 * HScale}
+								left={255 * WScale}
+								height={20 * HScale}
+								width={20 * WScale}
+							/>
+						)}
+					</Pressable>
+				</View>
+			</View>
+
 			<View
 				style={{ top: 94 * HScale, left: 15 * WScale, width: 270 * WScale, height: 1 }}
 				className="absolute bg-texto"
@@ -98,7 +142,6 @@ const LoginComp = ({ client, navigation }: LoginCompProps) => {
 				style={{ top: 135 * HScale, left: 15 * WScale, width: 270 * WScale, height: 1 }}
 				className="absolute bg-texto"
 			></View>
-
 			<View
 				style={{
 					top: 175 * HScale,
@@ -133,7 +176,6 @@ const LoginComp = ({ client, navigation }: LoginCompProps) => {
 			) : (
 				''
 			)}
-
 			<View
 				className="underline"
 				style={client === true ? { top: 205 * HScale } : { top: 195 * HScale }}
