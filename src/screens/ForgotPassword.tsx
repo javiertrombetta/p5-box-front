@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { View, Text, Dimensions, Image, TextInput, Platform, Pressable } from 'react-native';
 import box from '../assets/box.png';
 import LogoBox from '../assets/LogoBox.svg';
-import Button from '../components/Button';
 import Title from '../components/Title';
 import { handleForgot, handleResetPassword, handleVerify } from '../services/user.service';
 
@@ -37,8 +36,6 @@ const ForgotPassword = ({ navigation }: LoginCompProps) => {
 	const { width, height } = Dimensions.get('window');
 	const WScale = width / 360;
 	const HScale = height / 640;
-
-	// const [email, setEmail] = useState('');
 	const isWeb = Platform.OS === 'web';
 
 	const [email, setEmail] = useState('');
@@ -103,132 +100,173 @@ const ForgotPassword = ({ navigation }: LoginCompProps) => {
 			</View>
 
 			{step === 1 ? (
-				<View
-					className="bg-texto rounded-xl items-center"
-					style={{
-						top: 185 * HScale,
-						left: 30 * WScale,
-						width: 300 * WScale,
-						height: 200 * HScale,
-						position: 'absolute',
-					}}
-				>
-					<Text style={{ color: 'white', top: 50 * HScale, fontSize: scaledSize(22) }}>
-						Ingrese su e-mail
-					</Text>
-					<TextInput
-						style={{
-							top: 140 * HScale,
-							height: 24 * HScale,
-							width: 270 * WScale,
-							fontSize: scaledSize(12),
-						}}
-						className="bg-white text-texto font-roboto absolute rounded p-2"
-						placeholder="Email@contraseña.com"
-						onChangeText={(newText) => handleInputEmail(newText)}
-						defaultValue={email}
-					/>
-
+				<View className="w-full h-[80%] flex justify-evenly">
 					<View
+						className="bg-white rounded-xl items-center"
 						style={{
-							top: 375 * HScale,
+							width: 300 * WScale,
+							height: 200 * HScale,
+							marginTop: 10 * HScale,
 						}}
-						className="flex justify-center"
 					>
-						<Pressable onPress={() => handleForgot(email).then(() => setStep(2))}>
-							<Text>Enviar</Text>
+						<View
+							style={{ height: 35 * HScale, paddingHorizontal: 16 * WScale }}
+							className="w-full flex flex-row rounded-t-xl items-center justify-center bg-violeta"
+						>
+							<Text
+								className="font-robotoMedium text-texto text-center"
+								style={{ fontSize: scaledSize(12) }}
+							>
+								INGRESE SU EMAIL
+							</Text>
+						</View>
+						<View className="flex items-center justify-evenly w-full h-full p-2">
+							<View>
+								<TextInput
+									style={{
+										height: 24 * HScale,
+										fontSize: scaledSize(12),
+									}}
+									className="bg-white text-texto w-full font-roboto rounded p-2"
+									placeholder="email@gmail.com"
+									onChangeText={(newText) => handleInputEmail(newText)}
+									defaultValue={email}
+								/>
+								<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto" />
+							</View>
+
+							<View className="p-2">
+								<Text style={{ fontSize: scaledSize(12) }} className="text-texto text-center">
+									Se le enviará un token el cual tendrá que verificar para cambiar su contraseña.
+								</Text>
+							</View>
+						</View>
+					</View>
+					<View className="flex justify-center w-full p-4">
+						<Pressable
+							style={{ borderRadius: 8 }}
+							className="bg-texto flex w-full h-10 items-center justify-center"
+							onPress={() => handleForgot(email).then(() => setStep(2))}
+						>
+							<Text className="text-amarilloVerdoso">ENVIAR</Text>
 						</Pressable>
 					</View>
 				</View>
 			) : step === 2 ? (
-				<View
-					className="bg-texto rounded-xl items-center"
-					style={{
-						top: 185 * HScale,
-						left: 30 * WScale,
-						width: 300 * WScale,
-						height: 200 * HScale,
-						position: 'absolute',
-					}}
-				>
-					<Text style={{ color: 'white', top: 50 * HScale, fontSize: scaledSize(22) }}>
-						Ingrese su token
-					</Text>
-					<TextInput
-						style={{
-							top: 140 * HScale,
-							height: 24 * HScale,
-							width: 270 * WScale,
-							fontSize: scaledSize(12),
-						}}
-						className="bg-white text-texto font-roboto absolute rounded p-2"
-						placeholder="Email@contraseña.com"
-						onChangeText={(newText) => handleInputToken(newText)}
-						defaultValue={token}
-					/>
-
+				<View className="w-full h-[80%] flex justify-evenly">
 					<View
+						className="bg-white rounded-xl items-center"
 						style={{
-							top: 375 * HScale,
+							width: 300 * WScale,
+							height: 200 * HScale,
+							marginTop: 10 * HScale,
 						}}
-						className="flex justify-center"
 					>
-						<Pressable onPress={() => handleVerify(token).then(() => setStep(3))}>
-							<Text>Enviar</Text>
+						<View
+							style={{ height: 35 * HScale, paddingHorizontal: 16 * WScale }}
+							className="w-full flex flex-row rounded-t-xl items-center justify-center bg-violeta"
+						>
+							<Text
+								className="font-robotoMedium text-texto text-center"
+								style={{ fontSize: scaledSize(12) }}
+							>
+								INGRESE SU TOKEN
+							</Text>
+						</View>
+						<View className="flex items-center justify-evenly w-full h-full p-2">
+							<View>
+								<TextInput
+									style={{
+										height: 24 * HScale,
+										fontSize: scaledSize(12),
+									}}
+									className="bg-white text-texto w-full font-roboto rounded p-2"
+									placeholder="token"
+									onChangeText={(newText) => handleInputToken(newText)}
+									defaultValue={token}
+								/>
+								<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto" />
+							</View>
+
+							<View className="p-2">
+								<Text style={{ fontSize: scaledSize(12) }} className="text-texto text-center">
+									Una vez verfificado ya podrá cambiar su contraseña.
+								</Text>
+							</View>
+						</View>
+					</View>
+					<View className="flex justify-center w-full p-4">
+						<Pressable
+							style={{ borderRadius: 8 }}
+							className="bg-texto flex w-full h-10 items-center justify-center"
+							onPress={() => handleVerify(token).then(() => setStep(3))}
+						>
+							<Text className="text-amarilloVerdoso">ENVIAR</Text>
 						</Pressable>
 					</View>
 				</View>
 			) : (
-				<View
-					className="bg-texto rounded-xl items-center"
-					style={{
-						top: 185 * HScale,
-						left: 30 * WScale,
-						width: 300 * WScale,
-						height: 200 * HScale,
-						position: 'absolute',
-					}}
-				>
-					<Text style={{ color: 'white', top: 50 * HScale, fontSize: scaledSize(22) }}>
-						Ingrese las contraseñas
-					</Text>
-					<TextInput
-						style={{
-							top: 140 * HScale,
-							height: 24 * HScale,
-							width: 270 * WScale,
-							fontSize: scaledSize(12),
-						}}
-						className="bg-white text-texto font-roboto absolute rounded p-2"
-						placeholder="Email@contraseña.com"
-						onChangeText={(newText) => handlePassword('password', newText)}
-						defaultValue={passwords.password}
-					/>
-					<TextInput
-						style={{
-							top: 140 * HScale,
-							height: 24 * HScale,
-							width: 270 * WScale,
-							fontSize: scaledSize(12),
-						}}
-						className="bg-white text-texto font-roboto absolute rounded p-2"
-						placeholder="Email@contraseña.com"
-						onChangeText={(newText) => handlePassword('confirmPassword', newText)}
-						defaultValue={passwords.confirmPassword}
-					/>
-
+				<View className="w-full h-[80%] flex justify-evenly">
 					<View
+						className="bg-white rounded-xl items-center"
 						style={{
-							top: 375 * HScale,
+							width: 300 * WScale,
+							height: 200 * HScale,
+							marginTop: 10 * HScale,
 						}}
-						className="flex justify-center"
 					>
+						<View
+							style={{ height: 35 * HScale, paddingHorizontal: 16 * WScale }}
+							className="w-full flex flex-row rounded-t-xl items-center justify-center bg-violeta"
+						>
+							<Text
+								className="font-robotoMedium text-texto text-center"
+								style={{ fontSize: scaledSize(12) }}
+							>
+								INGRESE SU CONTRASEÑA NUEVA
+							</Text>
+						</View>
+						<View className="flex items-center justify-evenly w-full h-full p-2">
+							<View>
+								<TextInput
+									style={{
+										height: 24 * HScale,
+										fontSize: scaledSize(12),
+									}}
+									className="bg-white text-texto w-full font-roboto rounded p-2"
+									placeholder="contraseña"
+									onChangeText={(newText) => handlePassword('password', newText)}
+									defaultValue={passwords.password}
+								/>
+								<TextInput
+									style={{
+										height: 24 * HScale,
+										fontSize: scaledSize(12),
+									}}
+									className="bg-white text-texto w-full font-roboto rounded p-2"
+									placeholder="confirmar contraseña"
+									onChangeText={(newText) => handlePassword('confirmPassword', newText)}
+									defaultValue={passwords.confirmPassword}
+								/>
+								<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto" />
+							</View>
+
+							<View className="p-2">
+								<Text style={{ fontSize: scaledSize(12) }} className="text-texto text-center">
+									Si las contraseñas coinciden esa será su nueva contraseña.
+								</Text>
+							</View>
+						</View>
+					</View>
+					<View className="flex justify-center w-full p-4">
 						<Pressable
+							style={{ borderRadius: 8 }}
+							className="bg-texto flex w-full h-10 items-center justify-center"
 							onPress={() =>
 								handleResetPassword(passwords).then(() => navigation.navigate(RouteName.Login))
 							}
 						>
-							<Text>Enviar</Text>
+							<Text className="text-amarilloVerdoso">ENVIAR</Text>
 						</Pressable>
 					</View>
 				</View>

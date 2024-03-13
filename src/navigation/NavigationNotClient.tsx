@@ -1,18 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
-{
-	/* Importaciones Back-Office */
-}
+import { NavigationContainer } from '@react-navigation/native';
 import LoginAdmin from '../screens/LoginAdmin';
 import HomeGestionarPedido from '../screens/HomeGestionarPedido';
 import Paquetes from '../screens/Paquetes';
 import AddPackage from '../screens/AddPackage';
 import PerfilRepartidor from '../screens/PerfilRepartidor';
-
-{
-	/* Importaciones Repartidor */
-}
 import Login from '../screens/Login';
 import CreateAccount from '../screens/CreateAccount';
 import HomeIniciarJornada from '../screens/HomeIniciarJornada';
@@ -20,19 +13,12 @@ import ObtenerPaquetes from '../screens/ObtenerPaquetes';
 import RepartoEnCurso from '../screens/RepartoEnCurso';
 import Repartidores from '../screens/Repartidores';
 import DeclaracionJurada from '../screens/DeclaracionJurada';
-import { store } from '../state/user';
-import { useSelector } from 'react-redux';
+import ForgotPassword from '../screens/ForgotPassword';
 
-type clientObj = {
-	_id: string;
-};
-
-const NavigationNotClient = () => {
+const NavigationClient = () => {
 	const Stack = createNativeStackNavigator();
-	console.log('not client');
-
 	return (
-		<Stack.Navigator initialRouteName={'Login'}>
+		<Stack.Navigator initialRouteName={'ForgotPassword'}>
 			<Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
 			<Stack.Screen
 				name="CreateAccount"
@@ -42,6 +28,11 @@ const NavigationNotClient = () => {
 			<Stack.Screen
 				name="HomeIniciarJornada"
 				component={HomeIniciarJornada}
+				options={{ headerShown: false }}
+			/>
+			<Stack.Screen
+				name="ForgotPassword"
+				component={ForgotPassword}
 				options={{ headerShown: false }}
 			/>
 			<Stack.Screen
@@ -59,8 +50,6 @@ const NavigationNotClient = () => {
 				component={DeclaracionJurada}
 				options={{ headerShown: false }}
 			/>
-			{/* RootStackParamBackOfficeList */}
-
 			<Stack.Screen name="LoginAdmin" component={LoginAdmin} options={{ headerShown: false }} />
 			<Stack.Screen
 				name="HomeGestionarPedido"
@@ -79,4 +68,4 @@ const NavigationNotClient = () => {
 	);
 };
 
-export default NavigationNotClient;
+export default NavigationClient;
