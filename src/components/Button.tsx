@@ -130,7 +130,7 @@ const Button = ({
 							await handleLoginUser(data);
 							try {
 								await handleMeUser().then((data: object) => {
-									data = { ...data, back: '', packageSelect: '' };
+									data = { ...data, back: '', packageSelect: '', paquetesObtenidos: [] };
 									store.dispatch(login(data));
 								});
 								handleNavigationRol();
@@ -140,6 +140,8 @@ const Button = ({
 						} else if (action === 'postC' && data) {
 							try {
 								await handleConditions(data);
+								store.dispatch(login({ ...user, back: undefined }));
+								navigation.navigate(RouteName.HomeIniciarJornada);
 							} catch (error) {
 								console.error(error);
 							}
@@ -171,6 +173,16 @@ const Button = ({
 								await handlePackageCancel(id);
 								store.dispatch(login({ ...user, back: undefined }));
 								navigation.navigate(RouteName.HomeIniciarJornada);
+							} catch (error) {
+								console.error(error);
+							}
+						} else if (action === 'pushPackages' && data) {
+							console.log(user.back);
+							try {
+								store.dispatch(
+									login({ ...user, paquetesObtenidos: data, back: 'obtenerPaquetes' })
+								);
+								navigation.navigate(RouteName.DeclaracionJurada);
 							} catch (error) {
 								console.error(error);
 							}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image, Dimensions } from 'react-native';
 import ArrowRightBox from '../assets/ArrowRightBox.svg';
 import ArrowLeftBox from '../assets/ArrowLeftBox.svg';
@@ -39,6 +39,14 @@ const HomeGestionarPedido = ({ navigation }: Props) => {
 	const HScale = height / 640;
 
 	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+
+	const [selectedDate, setSelectedDate] = useState(new Date());
+	const handleSelect = (date: Date) => {
+		setSelectedDate(date);
+	};
+	useEffect(() => {
+		console.log(selectedDate);
+	}, [selectedDate]);
 
 	return (
 		<View
@@ -82,7 +90,7 @@ const HomeGestionarPedido = ({ navigation }: Props) => {
 				</View>
 			</View>
 			<Card header={'violet, FEBRERO, 14, true,'} heightC={84} heightT={30} dropdown={false}>
-				<WeeklyDatePicker />
+				<WeeklyDatePicker handleSelect={handleSelect} />
 			</Card>
 			<View
 				style={{ height: 248 * HScale, marginTop: 10 * HScale }}
