@@ -36,6 +36,8 @@ enum RouteName {
 	AddPackage = 'AddPackage',
 	PerfilRepartidor = 'PerfilRepartidor',
 	DeclaracionJurada = 'DeclaracionJurada',
+	ForgotPassword = 'ForgotPassword',
+	NewPassword = 'NewPassword',
 }
 
 const LoginComp = ({ client, navigation }: LoginCompProps) => {
@@ -185,7 +187,7 @@ const LoginComp = ({ client, navigation }: LoginCompProps) => {
 					width={300}
 					height={30}
 					spec={'transp'}
-					navigate={RouteName.CreateAccount}
+					navigate={RouteName.ForgotPassword}
 					navigation={navigation}
 				/>
 			</View>
