@@ -5,6 +5,7 @@ import Button from '../components/Button';
 import Header from '../components/Header';
 import Title from '../components/Title';
 import CircleCheckbox from '../components/CircleCheckbox';
+import { store } from '../state/user';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -32,7 +33,9 @@ type Props = {
 };
 
 const DeclaracionJurada = ({ navigation }: Props) => {
+	const paquetesObtenidos = store.getState().paquetesObtenidos;
 	const [values, setValues] = useState({
+		packages: paquetesObtenidos,
 		hasConsumedAlcohol: false,
 		isUsingPsychoactiveDrugs: false,
 		hasEmotionalDistress: false,
@@ -70,7 +73,6 @@ const DeclaracionJurada = ({ navigation }: Props) => {
 					/>
 				</View>
 
-				{/* PRIMER CUADRADO BLANCO */}
 				<View
 					style={{
 						marginTop: 10 * HScale,
@@ -115,7 +117,6 @@ const DeclaracionJurada = ({ navigation }: Props) => {
 					</View>
 				</View>
 
-				{/* SEGUNDO CUADRADO BLANCO */}
 				<View
 					style={{
 						marginTop: 10 * HScale,
@@ -168,7 +169,6 @@ const DeclaracionJurada = ({ navigation }: Props) => {
 					</View>
 				</View>
 
-				{/* TERCER CUADRADO BLANCO */}
 				<View
 					style={{
 						marginTop: 10 * HScale,

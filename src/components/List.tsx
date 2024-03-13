@@ -1,6 +1,7 @@
 import { View, Text, Dimensions, Image, Pressable, Platform } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CircleProgress from './CircleProgress';
+import { CommonActions, useRoute } from '@react-navigation/native';
 
 import boxList from '../assets/BoxList.png';
 import trash from '../assets/trash.png';
@@ -20,6 +21,9 @@ import Entregado from '../assets/Entregado.svg';
 import Button from '../components/Button';
 import ButtonTrue from '../assets/ButtonTrue.svg';
 import { NavigationProp } from '@react-navigation/native';
+import { handlePackageCancel } from '../services/user.service';
+import { useSelector } from 'react-redux';
+import { login, store } from '../state/user';
 
 interface listProps {
 	column1: string;
@@ -29,6 +33,8 @@ interface listProps {
 	column3: string;
 	content3?: string;
 	navigation: NavigationProp<RootStackParamList>;
+	idPackage?: string;
+	handleSelectPackage?: (idPackage: string, add: boolean) => void;
 }
 
 type RootStackParamList = {
@@ -52,6 +58,20 @@ enum RouteName {
 	NewPassword = 'NewPassword',
 }
 
+type User = {
+	_id: '';
+	name: '';
+	lastname: '';
+	email: '';
+	roles: [''];
+	packages: [''];
+	photoUrl: '';
+	state: '';
+	points: 0;
+	__v: 0;
+	back: '';
+};
+
 const List = ({
 	column1,
 	circleValue,
@@ -60,7 +80,11 @@ const List = ({
 	column3,
 	content3,
 	navigation,
+	idPackage,
+	handleSelectPackage,
 }: listProps) => {
+	let route: any;
+	let user = useSelector((state) => state) as User;
 	const { width, height } = Dimensions.get('window');
 	const WScale = width / 360;
 	const HScale = height / 640;
@@ -68,13 +92,25 @@ const List = ({
 	const isWeb = Platform.OS === 'web';
 	const arrayColumn2: string[] = content2String.split(', ');
 	const handleNavigation = () => {
-		(content3 === 'enCursoTrash' || content3 === 'pendienteIniciar' || column3 === 'none') &&
+		(content3 === 'en curso' ||
+			content3 === 'pendiente' ||
+			content3 === 'entregado' ||
+			column3 === 'none') &&
+			store.dispatch(login({ ...user, back: content3, packageSelect: idPackage })),
 			navigation.navigate(RouteName.RepartoEnCurso);
 		column3 === 'img' && navigation.navigate(RouteName.PerfilRepartidor);
 	};
 	const [checked, setChecked] = useState(false);
 	const handleCheck = () => {
-		checked ? setChecked(false) : setChecked(true);
+		if (handleSelectPackage && idPackage) {
+			if (checked) {
+				setChecked(false);
+				handleSelectPackage(idPackage, false);
+			} else {
+				setChecked(true);
+				handleSelectPackage(idPackage, true);
+			}
+		}
 	};
 	return (
 		<Pressable
@@ -395,7 +431,7 @@ const List = ({
 								></View>
 							</View>
 						)}
-						{content3 === 'enCursoTrash' && (
+						{content3 === 'en curso' && (
 							<View style={{ gap: 12 * HScale }} className="flex flex-col items-end justify-end">
 								<View
 									style={{ minWidth: 78 * WScale, height: 15 * HScale }}
@@ -417,6 +453,7 @@ const List = ({
 								</View>
 								<View style={{ paddingRight: 16 * WScale }}>
 									<Pressable
+										onPress={() => idPackage && handlePackageCancel(idPackage)}
 										style={{ height: scaledSize(24), width: scaledSize(56) }}
 										className="flex flex-row justify-end items-center"
 									>
@@ -433,7 +470,7 @@ const List = ({
 								</View>
 							</View>
 						)}
-						{content3 === 'pendienteIniciar' && (
+						{content3 === 'pendiente' && (
 							<View style={{ gap: 12 * HScale }} className="flex flex-col items-end justify-end">
 								<View
 									style={{ minWidth: 83 * WScale, height: 15 * HScale }}
@@ -457,6 +494,8 @@ const List = ({
 									<Button
 										navigate={RouteName.RepartoEnCurso}
 										navigation={navigation}
+										action="postI"
+										id={idPackage}
 										width={62}
 										height={20}
 										content="INICIAR"

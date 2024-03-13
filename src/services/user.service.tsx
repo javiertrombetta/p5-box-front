@@ -19,6 +19,7 @@ export const handleLoginUser = async (data: object) => {
 		const response = await axios.post('http://localhost:3000/api/v1/auth/login', data, {
 			withCredentials: true,
 		});
+		console.log('Usuario creado:', response.data);
 		return response.data;
 	} catch (error) {
 		console.error('Error al loguear usuario:', error);
@@ -41,23 +42,16 @@ export const handleMeUser = async () => {
 
 export const handleConditions = async (data: object) => {
 	try {
-		const response = await axios.post(
-			'http://localhost:3000/api/v1/auth/me/packages',
-			{
-				...data,
-				packages: ['fa453ddb-52ac-46a7-9c87-2e96538ec8c2'],
-			},
-			{
-				withCredentials: true,
-			}
-		);
+		console.log(data);
+		const response = await axios.put('http://localhost:3000/api/v1/auth/me/packages', data, {
+			withCredentials: true,
+		});
 		return response.data;
 	} catch (error) {
 		console.error('Error al procesar la declaración:', error);
 		throw error;
 	}
 };
-
 export const handleVerify = async (token: string) => {
 	try {
 		const response = await axios.post('http://localhost:3000/api/v1/auth/verify-token', token, {
@@ -101,4 +95,37 @@ export const handleResetPassword = async (passwords: object) => {
 	}
 };
 
-//http://localhost:3000/api/v1/auth/verify-token?token=TOKEN_AQUÍ
+export const handleMePackages = async () => {
+	const response = await axios.get('http://localhost:3000/api/v1/auth/me/packages', {
+		withCredentials: true,
+	});
+	return response.data;
+};
+
+export const handlePackageCancel = async (idPackage: string) => {
+	const response = await axios.put(
+		`http://localhost:3000/api/v1/auth/me/packages/${idPackage}/cancel`,
+		{
+			withCredentials: true,
+		}
+	);
+	return response.data;
+};
+
+export const handleIniciarPackage = async (idPackage: string) => {
+	const response = await axios.put(`http://localhost:3000/api/v1/auth/me/packages/${idPackage}`, {
+		withCredentials: true,
+	});
+	return response.data;
+};
+
+export const handleFinishPackage = async (idPackage: string) => {
+	const response = await axios.put(
+		`http://localhost:3000/api/v1/auth/me/packages/${idPackage}/finish`,
+		{
+			withCredentials: true,
+		}
+	);
+	return response.data;
+};
+

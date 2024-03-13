@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 {
@@ -20,65 +20,52 @@ import ObtenerPaquetes from '../screens/ObtenerPaquetes';
 import RepartoEnCurso from '../screens/RepartoEnCurso';
 import Repartidores from '../screens/Repartidores';
 import DeclaracionJurada from '../screens/DeclaracionJurada';
-import ForgotPassword from '../screens/ForgotPassword';
+import { store } from '../state/user';
+import { useSelector } from 'react-redux';
+
+type clientObj = {
+	_id: string;
+};
 
 const Navigation = () => {
 	const Stack = createNativeStackNavigator();
-
-	const config = {
-		screens: {
-			NewPassword: 'reset-password',
-		},
-	};
-	const linking = {
-		prefixes: ['boxapp://'],
-		config,
-	};
+	let client = '';
+	client = useSelector((state: clientObj) => state._id);
+	console.log(client);
 
 	return (
-		<NavigationContainer independent={true} linking={linking}>
-			<Stack.Navigator initialRouteName={'Login'}>
-				<Stack.Screen name="Login" component={ForgotPassword} options={{ headerShown: false }} />
-				<Stack.Screen
-					name="CreateAccount"
-					component={CreateAccount}
-					options={{ headerShown: false }}
-				/>
-				<Stack.Screen
-					name="ForgotPassword"
-					component={ForgotPassword}
-					options={{ headerShown: false }}
-				/>
-				{/* <Stack.Screen name="NewPassword" component={NewPassword} options={{ headerShown: false }} /> */}
-
-				{/* <Stack.Screen
-					name="Verification"
-					component={Verification}
-					options={{ headerShown: false }}
-				/> */}
-
-				<Stack.Screen
-					name="HomeIniciarJornada"
-					component={HomeIniciarJornada}
-					options={{ headerShown: false }}
-				/>
-				<Stack.Screen
-					name="ObtenerPaquetes"
-					component={ObtenerPaquetes}
-					options={{ headerShown: false }}
-				/>
-				<Stack.Screen
-					name="RepartoEnCurso"
-					component={RepartoEnCurso}
-					options={{ headerShown: false }}
-				/>
-				<Stack.Screen
-					name="DeclaracionJurada"
-					component={DeclaracionJurada}
-					options={{ headerShown: false }}
-				/>
-				{/* RootStackParamBackOfficeList */}
-
+		<Stack.Navigator initialRouteName={client.length > 0 ? 'HomeIniciarJornada' : 'Login'}>
+			<Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+			<Stack.Screen
+				name="CreateAccount"
+				component={CreateAccount}
+				options={{ headerShown: false }}
+			/>
+			<Stack.Screen
+				name="HomeIniciarJornada"
+				component={HomeIniciarJornada}
+				options={{ headerShown: false }}
+			/>
+      <Stack.Screen
+				name="ForgotPassword"
+				component={ForgotPassword}
+				options={{ headerShown: false }}
+			/>
+			<Stack.Screen
+				name="ObtenerPaquetes"
+				component={ObtenerPaquetes}
+				options={{ headerShown: false }}
+			/>
+			<Stack.Screen
+				name="RepartoEnCurso"
+				component={RepartoEnCurso}
+				options={{ headerShown: false }}
+			/>
+			<Stack.Screen
+				name="DeclaracionJurada"
+				component={DeclaracionJurada}
+				options={{ headerShown: false }}
+			/>
 				<Stack.Screen name="LoginAdmin" component={LoginAdmin} options={{ headerShown: false }} />
 				<Stack.Screen
 					name="HomeGestionarPedido"

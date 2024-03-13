@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Pressable, Image, Dimensions, Platform, VirtualizedList } from 'react-native';
 import Header from '../components/Header';
 import { NavigationProp } from '@react-navigation/native';
@@ -10,6 +10,10 @@ import ArrowLeft from '../assets/ArrowLeft.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 import Button from '../components/Button';
 import List from '../components/List';
+import { handleDelivered } from '../services/package.service';
+import { handleMePackages } from '../services/user.service';
+import { useSelector } from 'react-redux';
+import { store } from '../state/user';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -44,12 +48,32 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 
 	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
+	const [packagesDelivered, setPackagesDelivered] = useState([]);
+	const [packagesPending, setPackagesPending] = useState([]);
+	type User = {
+		back: string;
+	};
+	let user = useSelector((state) => state) as User;
+	useEffect(() => {
+		handleDelivered().then((data) => data && setPackagesDelivered(data));
+		handleMePackages().then((data) => data && setPackagesPending(data));
+		console.log('cambio', store.getState().back);
+	}, [packagesPending.length, packagesDelivered.length, store.getState().back]);
+
 	type ListItemPending = {
 		deliveryAddress: string;
 		state: string;
+		_id: string;
 	};
 
 	const renderItemsPendientes = ({ item, index }: { item: ListItemPending; index: number }) => {
+		const id = '#' + item._id.slice(0, 5).toUpperCase() + '...';
+		const deliveryAddressSlice = item.deliveryAddress.slice(0, -4);
+		const deliveryAddress1 =
+			deliveryAddressSlice.length > 17
+				? deliveryAddressSlice.slice(0, 20) + '...'
+				: deliveryAddressSlice;
+		const deliveryAddress2 = item.deliveryAddress.slice(-3);
 		return (
 			<View>
 				<View
@@ -59,9 +83,10 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 					<List
 						column1="svg"
 						column2="stringsCol"
-						content2String={Object.values(item)[0]}
+						content2String={`${id}, ${deliveryAddress1}, ${deliveryAddress2}`}
 						column3="svgStringButton"
-						content3={Object.values(item)[1]}
+						content3={item.state}
+						idPackage={`${item._id}`}
 						navigation={navigation}
 					/>
 				</View>
@@ -76,9 +101,17 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 
 	type ListItemHistory = {
 		deliveryAddress: string;
+		_id: string;
 	};
 
 	const renderItemsHistory = ({ item, index }: { item: ListItemHistory; index: number }) => {
+		const id = '#' + item._id.slice(0, 5).toUpperCase() + '...';
+		const deliveryAddressSlice = item.deliveryAddress.slice(0, -4);
+		const deliveryAddress1 =
+			deliveryAddressSlice.length > 17
+				? deliveryAddressSlice.slice(0, 20) + '...'
+				: deliveryAddressSlice;
+		const deliveryAddress2 = item.deliveryAddress.slice(-3);
 		return (
 			<View>
 				<View
@@ -88,9 +121,10 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 					<List
 						column1="svg"
 						column2="stringsCol"
-						content2String={Object.values(item)[0]}
+						content2String={`${id}, ${deliveryAddress1}, ${deliveryAddress2}`}
 						column3="svgStringButton"
 						content3="entregado"
+						idPackage={`${item._id}`}
 						navigation={navigation}
 					/>
 				</View>
@@ -111,7 +145,7 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 			<Header navigation={navigation} />
 			<View
 				style={{ height: 188 * HScale, marginTop: 28 * HScale }}
-				className="w-full flex flex-col rounded-xl items-start justify-start align-middle bg-white"
+				className="w-full flex flex-col rounded-xl justify-start align-middle bg-white"
 			>
 				<View
 					style={{ height: 43 * HScale, paddingHorizontal: 16 * WScale }}
@@ -132,14 +166,18 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 						</Pressable>
 					</View>
 				</View>
-				<VirtualizedList
-					className="w-full"
-					data={fakePending()}
-					renderItem={renderItemsPendientes}
-					keyExtractor={keyExtractorPending}
-					getItemCount={() => fakePending().length}
-					getItem={(data, index) => data[index]}
-				/>
+				{packagesPending.length > 0 ? (
+					<VirtualizedList
+						className="w-full"
+						data={packagesPending}
+						renderItem={renderItemsPendientes}
+						keyExtractor={keyExtractorPending}
+						getItemCount={() => packagesPending.length}
+						getItem={(data, index) => data[index]}
+					/>
+				) : (
+					<Text className="text-center text-texto mt-2">No tienes paquetes pendientes.</Text>
+				)}
 			</View>
 
 			<View
@@ -165,19 +203,23 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 					}}
 					className="font-robotoMedium text-texto"
 				>
-					58 Paquetes entregados
+					{`${packagesDelivered.length} paquetes entregados`}
 				</Text>
 				<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
 					<View style={{ height: 1 }} className="w-full bg-gray-300" />
 				</View>
-				<VirtualizedList
-					className="w-full"
-					data={fakeHistory()}
-					renderItem={renderItemsHistory}
-					keyExtractor={keyExtractorHistory}
-					getItemCount={() => fakeHistory().length}
-					getItem={(data, index) => data[index]}
-				/>
+				{packagesDelivered.length > 0 ? (
+					<VirtualizedList
+						className="w-full"
+						data={packagesDelivered}
+						renderItem={renderItemsHistory}
+						keyExtractor={keyExtractorHistory}
+						getItemCount={() => packagesDelivered.length}
+						getItem={(data, index) => data[index]}
+					/>
+				) : (
+					<Text className="text-center text-texto mt-2">No tienes paquetes entregados.</Text>
+				)}
 			</View>
 			<View style={{ marginTop: 24 * HScale }} className="flex justify-center items-center">
 				<Button

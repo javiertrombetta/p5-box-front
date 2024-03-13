@@ -1,5 +1,7 @@
-import { View, Text, Dimensions, Pressable } from 'react-native';
-import React from 'react';
+import { View, Text, Dimensions, Pressable, ScrollView, Platform } from 'react-native';
+import React, { useEffect, useState } from 'react';
+
+import downArrow from '../assets/arrow-head-down.png';
 
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
@@ -8,12 +10,8 @@ import Header from '../components/Header';
 import Button from '../components/Button';
 import { NavigationProp } from '@react-navigation/native';
 import List from '../components/List';
-
-const { width, height } = Dimensions.get('window');
-const WScale = width / 360;
-const HScale = height / 640;
-
-const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+import { handleAvailable } from '../services/package.service';
+import { Image } from 'react-native';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -41,169 +39,197 @@ type Props = {
 };
 
 const ObtenerPaquetes = ({ navigation }: Props) => {
+	const isWeb = Platform.OS === 'web';
+	const [dropdown, setDropdown] = useState(false);
+	const { width, height } = Dimensions.get('window');
+	const WScale = width / 360;
+	const HScale = height / 640;
+	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+
+	const [packages, setPackages] = useState([]);
+	let [packagesSelected, setPackagesSelected] = useState<string[]>([]);
+	const handleSelectPackage = (idPackage: string, add: boolean) => {
+		add && idPackage
+			? setPackagesSelected([...packagesSelected, idPackage])
+			: (packagesSelected = packagesSelected.filter((id) => id !== idPackage));
+	};
+
+	useEffect(() => {
+		const fetchPackage = async () => {
+			try {
+				const data = await handleAvailable();
+				setPackages(data);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+		const timer = setTimeout(() => {
+			fetchPackage();
+		}, 100);
+		return () => clearTimeout(timer);
+	}, []);
+
+	type ListItemPackage = {
+		deliveryAddress: string;
+		state: string;
+		_id: string;
+	};
+
+	interface RenderItemsUsersProps {
+		item: ListItemPackage;
+		index: number;
+	}
+
+	const handleArrow = () => {
+		dropdown ? setDropdown(false) : setDropdown(true);
+	};
+
+	const renderItemsUsers = ({ item, index }: RenderItemsUsersProps) => {
+		if (!item) {
+			console.error('El ítem en el índice proporcionado es undefined');
+			return null;
+		}
+
+		const lastItem: boolean = index === 7;
+
+		return (
+			<>
+				<View style={{ paddingHorizontal: 16 * WScale, minHeight: 45 * HScale }}>
+					<List
+						column1="buttonCheck"
+						column2="stringsRow"
+						content2String={item.deliveryAddress}
+						column3="none"
+						idPackage={`${item._id}`}
+						navigation={navigation}
+						handleSelectPackage={handleSelectPackage}
+					/>
+				</View>
+				{!dropdown && !lastItem && (
+					<View className="flex w-full items-center">
+						<View style={{ height: 1 }} className="w-full bg-gray-300" />
+					</View>
+				)}
+				{dropdown && (
+					<View className="flex w-full items-center">
+						<View style={{ height: 1 }} className="w-full bg-gray-300" />
+					</View>
+				)}
+			</>
+		);
+	};
+	const keyExtractorPackage = (_: ListItemPackage, index: number) => `item-${index}`;
 	return (
-		<View
-			className="bg-verde w-full h-full flex-col items-center  flex"
-			style={{ paddingHorizontal: 30 * WScale, paddingVertical: 6 * HScale }}
-		>
-			<Header navigation={navigation} />
+		<ScrollView className="bg-verde w-full h-full">
 			<View
-				style={{ height: 40 * HScale, paddingHorizontal: 20 * WScale, marginTop: 28 * HScale }}
-				className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
+				className="bg-verde w-full h-full flex-col items-center  flex"
+				style={{ paddingHorizontal: 30 * WScale, paddingVertical: 6 * HScale }}
 			>
-				<Text
-					style={{ fontSize: scaledSize(18) }}
-					className="flex justify-center items-center font-sairaBold text-texto"
-				>
-					OBTENER PAQUETES
-				</Text>
-				<Pressable
-					onPress={() => navigation.navigate(RouteName.HomeIniciarJornada)}
-					style={{ paddingVertical: 8 * HScale }}
-					className="flex justify-center items-center"
-				>
-					<ArrowLeft width={scaledSize(14)} />
-				</Pressable>
-			</View>
-			<View
-				style={{ height: 409 * HScale, marginTop: 10 * HScale }}
-				className="w-full flex rounded-t-xl bg-white"
-			>
+				<Header navigation={navigation} />
 				<View
-					style={{ height: 35 * HScale, paddingHorizontal: 16 * WScale }}
-					className="w-full flex flex-row rounded-t-xl items-center justify-center bg-violeta"
+					style={{ height: 40 * HScale, paddingHorizontal: 20 * WScale, marginTop: 28 * HScale }}
+					className="bg-amarilloVerdoso w-full flex-row flex items-center justify-between rounded-xl"
 				>
 					<Text
-						className="font-robotoMedium text-texto text-center"
-						style={{ fontSize: scaledSize(12) }}
+						style={{ fontSize: scaledSize(18) }}
+						className="flex justify-center items-center font-sairaBold text-texto"
 					>
-						¿Cuántos paquetes repartirás hoy?
+						OBTENER PAQUETES
 					</Text>
+					<Pressable
+						onPress={() => navigation.navigate(RouteName.HomeIniciarJornada)}
+						style={{ paddingVertical: 8 * HScale }}
+						className="flex justify-center items-center"
+					>
+						<ArrowLeft width={scaledSize(14)} />
+					</Pressable>
 				</View>
 				<View
-					style={{
-						height: 374 * HScale,
-						paddingVertical: 4 * HScale,
-					}}
-					className="flex flex-col items-start justify-between"
+					style={{ minHeight: 409 * HScale, marginTop: 10 * HScale }}
+					className="w-full flex rounded-t-xl bg-white"
 				>
-					<View style={{ paddingHorizontal: 16 * WScale }}>
-						<List
-							column1="buttonCheck"
-							column2="stringsRow"
-							content2String="Amenabar 2356, CABA"
-							column3="none"
-							navigation={navigation}
-						/>
+					<View
+						style={{ height: 35 * HScale, paddingHorizontal: 16 * WScale }}
+						className="w-full flex flex-row rounded-t-xl items-center justify-center bg-violeta"
+					>
+						<Text
+							className="font-robotoMedium text-texto text-center"
+							style={{ fontSize: scaledSize(12) }}
+						>
+							¿Cuántos paquetes repartirás hoy?
+						</Text>
 					</View>
-					<View className="flex w-full items-center">
-						<View style={{ height: 1 }} className="w-full bg-gray-300" />
-					</View>
-					<View style={{ paddingHorizontal: 16 * WScale }}>
-						<List
-							column1="buttonCheck"
-							column2="stringsRow"
-							content2String="Av Carabobo y Rivadavia, CABA"
-							column3="none"
-							navigation={navigation}
-						/>
-					</View>
-					<View className="flex w-full items-center">
-						<View style={{ height: 1 }} className="w-full bg-gray-300" />
-					</View>
-					<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
-						<List
-							column1="buttonCheck"
-							column2="stringsRow"
-							content2String="Melian 1242, CABA"
-							column3="none"
-							navigation={navigation}
-						/>
-					</View>
-					<View className="flex w-full items-center">
-						<View style={{ height: 1 }} className="w-full bg-gray-300" />
-					</View>
-					<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
-						<List
-							column1="buttonCheck"
-							column2="stringsRow"
-							content2String="Castillo 670, CABA"
-							column3="none"
-							navigation={navigation}
-						/>
-					</View>
-					<View className="flex w-full items-center">
-						<View style={{ height: 1 }} className="w-full bg-gray-300" />
-					</View>
-					<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
-						<List
-							column1="buttonCheck"
-							column2="stringsRow"
-							content2String="Gorriti 4595, CABA"
-							column3="none"
-							navigation={navigation}
-						/>
-					</View>
-					<View className="flex w-full items-center">
-						<View style={{ height: 1 }} className="w-full bg-gray-300" />
-					</View>
-					<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
-						<List
-							column1="buttonCheck"
-							column2="stringsRow"
-							content2String="Av. Gral. Mosconi 1056, CABA"
-							column3="none"
-							navigation={navigation}
-						/>
-					</View>
-					<View className="flex w-full items-center">
-						<View style={{ height: 1 }} className="w-full bg-gray-300" />
-					</View>
-					<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
-						<List
-							column1="buttonCheck"
-							column2="stringsRow"
-							content2String="Tacuarí 1797, CABA"
-							column3="none"
-							navigation={navigation}
-						/>
-					</View>
-					<View className="flex w-full items-center">
-						<View style={{ height: 1 }} className="w-full bg-gray-300" />
-					</View>
-					<View style={{ paddingHorizontal: 16 * WScale, height: 40 * HScale }}>
-						<List
-							column1="buttonCheck"
-							column2="stringsRow"
-							content2String="Av. Gaona 1284, CABA"
-							column3="none"
-							navigation={navigation}
-						/>
+					<View
+						style={
+							!dropdown
+								? {
+										height: 374 * HScale,
+								  }
+								: { minHeight: 374 * HScale }
+						}
+						className="flex flex-col items-start justify-start w-full"
+					>
+						{dropdown
+							? packages.map((item, index) => (
+									<View
+										key={keyExtractorPackage(item, index)}
+										style={{
+											height: 45 * HScale,
+											width: '100%',
+										}}
+									>
+										{renderItemsUsers({ item, index })}
+									</View>
+							  ))
+							: packages.slice(0, 8).map((item, index) => (
+									<View
+										key={keyExtractorPackage(item, index)}
+										style={{
+											height: 45 * HScale,
+											width: '100%',
+										}}
+									>
+										{renderItemsUsers({ item, index })}
+									</View>
+							  ))}
 					</View>
 				</View>
+				<View style={{ height: 1 * HScale }} className="w-full bg-gray-300 z-10" />
+				<Pressable
+					onPress={handleArrow}
+					style={{ height: 47.5 * HScale }}
+					className="w-full flex justify-center items-center rounded-b-xl bg-white"
+				>
+					{dropdown ? (
+						isWeb ? (
+							<Image source={downArrow} className="rotate-180" />
+						) : (
+							<ArrowHeadDown width={scaledSize(20)} className="rotate-180" />
+						)
+					) : isWeb ? (
+						<Image source={downArrow} />
+					) : (
+						<ArrowHeadDown width={scaledSize(20)} />
+					)}
+				</Pressable>
+				<View
+					style={{
+						marginTop: 10 * HScale,
+					}}
+				>
+					<Button
+						content="INICIAR JORNADA"
+						width={270}
+						height={30}
+						spec="texto"
+						data={packagesSelected}
+						action="pushPackages"
+						navigation={navigation}
+						navigate={RouteName.DeclaracionJurada}
+					/>
+				</View>
 			</View>
-			<View style={{ height: 1 * HScale }} className="w-full bg-gray-300 z-10" />
-			<View
-				style={{ height: 41 * HScale }}
-				className="w-full flex justify-center items-center rounded-b-xl bg-white z-10"
-			>
-				<ArrowHeadDown height={19 * HScale} width={24 * WScale} />
-			</View>
-			<View
-				style={{
-					marginTop: 10 * HScale,
-				}}
-			>
-				<Button
-					content="INICIAR JORNADA"
-					width={270}
-					height={30}
-					spec="texto"
-					navigation={navigation}
-					navigate={RouteName.DeclaracionJurada}
-				/>
-			</View>
-		</View>
+		</ScrollView>
 	);
 };
 
