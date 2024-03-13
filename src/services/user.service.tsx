@@ -42,16 +42,10 @@ export const handleMeUser = async () => {
 
 export const handleConditions = async (data: object) => {
 	try {
-		const response = await axios.post(
-			'http://localhost:3000/api/v1/auth/me/packages',
-			{
-				...data,
-				packages: ['fa453ddb-52ac-46a7-9c87-2e96538ec8c2'],
-			},
-			{
-				withCredentials: true,
-			}
-		);
+		console.log(data);
+		const response = await axios.put('http://localhost:3000/api/v1/auth/me/packages', data, {
+			withCredentials: true,
+		});
 		return response.data;
 	} catch (error) {
 		console.error('Error al procesar la declaración:', error);

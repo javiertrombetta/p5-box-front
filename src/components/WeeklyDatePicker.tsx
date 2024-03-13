@@ -11,13 +11,12 @@ const HScale = height / 640;
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
-interface WeeklyDatePickerProps {}
-
-const WeeklyDatePicker: React.FC<WeeklyDatePickerProps> = () => {
+const WeeklyDatePicker = ({ handleSelect }: { handleSelect: (date: Date) => void }) => {
 	const [offset, setOffset] = useState<number>(0);
 	const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-	const [selected, setSelected] = useState<boolean>(false);
-
+	useEffect(() => {
+		handleSelect(selectedDate);
+	}, [selectedDate]);
 	const today = new Date();
 
 	const days = useMemo(() => {

@@ -13,6 +13,7 @@ import List from '../components/List';
 import { handleDelivered } from '../services/package.service';
 import { handleMePackages } from '../services/user.service';
 import { useSelector } from 'react-redux';
+import { store } from '../state/user';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -52,9 +53,10 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 	};
 	let user = useSelector((state) => state) as User;
 	useEffect(() => {
-		handleDelivered().then((data) => setPackagesDelivered(data));
-		handleMePackages().then((data) => setPackagesPending(data));
-	}, [packagesPending.length, packagesDelivered.length, user.back]);
+		handleDelivered().then((data) => data && setPackagesDelivered(data));
+		handleMePackages().then((data) => data && setPackagesPending(data));
+		console.log('cambio', store.getState().back);
+	}, [packagesPending.length, packagesDelivered.length, store.getState().back]);
 
 	type ListItemPending = {
 		deliveryAddress: string;
@@ -64,7 +66,11 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 
 	const renderItemsPendientes = ({ item, index }: { item: ListItemPending; index: number }) => {
 		const id = '#' + item._id.slice(0, 5).toUpperCase() + '...';
-		const deliveryAddress1 = item.deliveryAddress.slice(0, -4);
+		const deliveryAddressSlice = item.deliveryAddress.slice(0, -4);
+		const deliveryAddress1 =
+			deliveryAddressSlice.length > 17
+				? deliveryAddressSlice.slice(0, 20) + '...'
+				: deliveryAddressSlice;
 		const deliveryAddress2 = item.deliveryAddress.slice(-3);
 		return (
 			<View>
@@ -98,7 +104,11 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 
 	const renderItemsHistory = ({ item, index }: { item: ListItemHistory; index: number }) => {
 		const id = '#' + item._id.slice(0, 5).toUpperCase() + '...';
-		const deliveryAddress1 = item.deliveryAddress.slice(0, -4);
+		const deliveryAddressSlice = item.deliveryAddress.slice(0, -4);
+		const deliveryAddress1 =
+			deliveryAddressSlice.length > 17
+				? deliveryAddressSlice.slice(0, 20) + '...'
+				: deliveryAddressSlice;
 		const deliveryAddress2 = item.deliveryAddress.slice(-3);
 		return (
 			<View>
@@ -133,7 +143,7 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 			<Header navigation={navigation} />
 			<View
 				style={{ height: 188 * HScale, marginTop: 28 * HScale }}
-				className="w-full flex flex-col rounded-xl items-start justify-start align-middle bg-white"
+				className="w-full flex flex-col rounded-xl justify-start align-middle bg-white"
 			>
 				<View
 					style={{ height: 43 * HScale, paddingHorizontal: 16 * WScale }}
@@ -154,14 +164,18 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 						</Pressable>
 					</View>
 				</View>
-				<VirtualizedList
-					className="w-full"
-					data={packagesPending}
-					renderItem={renderItemsPendientes}
-					keyExtractor={keyExtractorPending}
-					getItemCount={() => packagesPending.length}
-					getItem={(data, index) => data[index]}
-				/>
+				{packagesPending.length > 0 ? (
+					<VirtualizedList
+						className="w-full"
+						data={packagesPending}
+						renderItem={renderItemsPendientes}
+						keyExtractor={keyExtractorPending}
+						getItemCount={() => packagesPending.length}
+						getItem={(data, index) => data[index]}
+					/>
+				) : (
+					<Text className="text-center text-texto mt-2">No tienes paquetes pendientes.</Text>
+				)}
 			</View>
 
 			<View
@@ -192,14 +206,18 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 				<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
 					<View style={{ height: 1 }} className="w-full bg-gray-300" />
 				</View>
-				<VirtualizedList
-					className="w-full"
-					data={packagesDelivered}
-					renderItem={renderItemsHistory}
-					keyExtractor={keyExtractorHistory}
-					getItemCount={() => packagesDelivered.length}
-					getItem={(data, index) => data[index]}
-				/>
+				{packagesDelivered.length > 0 ? (
+					<VirtualizedList
+						className="w-full"
+						data={packagesDelivered}
+						renderItem={renderItemsHistory}
+						keyExtractor={keyExtractorHistory}
+						getItemCount={() => packagesDelivered.length}
+						getItem={(data, index) => data[index]}
+					/>
+				) : (
+					<Text className="text-center text-texto mt-2">No tienes paquetes entregados.</Text>
+				)}
 			</View>
 			<View style={{ marginTop: 24 * HScale }} className="flex justify-center items-center">
 				<Button

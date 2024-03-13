@@ -8,6 +8,7 @@ const initialState = {
     back: "",
     packageSelect: "",
     roles: [""],
+    paquetesObtenidos: [""],
     packages: [""],
     photoUrl: "",
     state: "",
