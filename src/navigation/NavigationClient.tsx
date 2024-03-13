@@ -1,18 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
-{
-	/* Importaciones Back-Office */
-}
 import LoginAdmin from '../screens/LoginAdmin';
 import HomeGestionarPedido from '../screens/HomeGestionarPedido';
 import Paquetes from '../screens/Paquetes';
 import AddPackage from '../screens/AddPackage';
 import PerfilRepartidor from '../screens/PerfilRepartidor';
-
-{
-	/* Importaciones Repartidor */
-}
 import Login from '../screens/Login';
 import CreateAccount from '../screens/CreateAccount';
 import HomeIniciarJornada from '../screens/HomeIniciarJornada';
@@ -20,19 +13,10 @@ import ObtenerPaquetes from '../screens/ObtenerPaquetes';
 import RepartoEnCurso from '../screens/RepartoEnCurso';
 import Repartidores from '../screens/Repartidores';
 import DeclaracionJurada from '../screens/DeclaracionJurada';
-import { store } from '../state/user';
-import { useSelector } from 'react-redux';
-
-type clientObj = {
-	_id: string;
-};
+import ForgotPassword from '../screens/ForgotPassword';
 
 const NavigationClient = () => {
 	const Stack = createNativeStackNavigator();
-	// let client = '';
-	// client = useSelector((state: clientObj) => state._id);
-	console.log('client');
-
 	return (
 		<Stack.Navigator initialRouteName={'HomeIniciarJornada'}>
 			<Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
@@ -46,7 +30,7 @@ const NavigationClient = () => {
 				component={HomeIniciarJornada}
 				options={{ headerShown: false }}
 			/>
-      <Stack.Screen
+			<Stack.Screen
 				name="ForgotPassword"
 				component={ForgotPassword}
 				options={{ headerShown: false }}
@@ -66,26 +50,21 @@ const NavigationClient = () => {
 				component={DeclaracionJurada}
 				options={{ headerShown: false }}
 			/>
-				<Stack.Screen name="LoginAdmin" component={LoginAdmin} options={{ headerShown: false }} />
-				<Stack.Screen
-					name="HomeGestionarPedido"
-					component={HomeGestionarPedido}
-					options={{ headerShown: false }}
-				/>
-				<Stack.Screen
-					name="Repartidores"
-					component={Repartidores}
-					options={{ headerShown: false }}
-				/>
-				<Stack.Screen name="Paquetes" component={Paquetes} options={{ headerShown: false }} />
-				<Stack.Screen name="AddPackage" component={AddPackage} options={{ headerShown: false }} />
-				<Stack.Screen
-					name="PerfilRepartidor"
-					component={PerfilRepartidor}
-					options={{ headerShown: false }}
-				/>
-			</Stack.Navigator>
-		</NavigationContainer>
+			<Stack.Screen name="LoginAdmin" component={LoginAdmin} options={{ headerShown: false }} />
+			<Stack.Screen
+				name="HomeGestionarPedido"
+				component={HomeGestionarPedido}
+				options={{ headerShown: false }}
+			/>
+			<Stack.Screen name="Repartidores" component={Repartidores} options={{ headerShown: false }} />
+			<Stack.Screen name="Paquetes" component={Paquetes} options={{ headerShown: false }} />
+			<Stack.Screen name="AddPackage" component={AddPackage} options={{ headerShown: false }} />
+			<Stack.Screen
+				name="PerfilRepartidor"
+				component={PerfilRepartidor}
+				options={{ headerShown: false }}
+			/>
+		</Stack.Navigator>
 	);
 };
 
