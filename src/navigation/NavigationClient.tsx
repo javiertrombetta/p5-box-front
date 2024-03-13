@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+import { NavigationContainer } from '@react-navigation/native';
 {
 	/* Importaciones Back-Office */
 }
@@ -46,6 +46,11 @@ const NavigationClient = () => {
 				component={HomeIniciarJornada}
 				options={{ headerShown: false }}
 			/>
+      <Stack.Screen
+				name="ForgotPassword"
+				component={ForgotPassword}
+				options={{ headerShown: false }}
+			/>
 			<Stack.Screen
 				name="ObtenerPaquetes"
 				component={ObtenerPaquetes}
@@ -61,23 +66,26 @@ const NavigationClient = () => {
 				component={DeclaracionJurada}
 				options={{ headerShown: false }}
 			/>
-			{/* RootStackParamBackOfficeList */}
-
-			<Stack.Screen name="LoginAdmin" component={LoginAdmin} options={{ headerShown: false }} />
-			<Stack.Screen
-				name="HomeGestionarPedido"
-				component={HomeGestionarPedido}
-				options={{ headerShown: false }}
-			/>
-			<Stack.Screen name="Repartidores" component={Repartidores} options={{ headerShown: false }} />
-			<Stack.Screen name="Paquetes" component={Paquetes} options={{ headerShown: false }} />
-			<Stack.Screen name="AddPackage" component={AddPackage} options={{ headerShown: false }} />
-			<Stack.Screen
-				name="PerfilRepartidor"
-				component={PerfilRepartidor}
-				options={{ headerShown: false }}
-			/>
-		</Stack.Navigator>
+				<Stack.Screen name="LoginAdmin" component={LoginAdmin} options={{ headerShown: false }} />
+				<Stack.Screen
+					name="HomeGestionarPedido"
+					component={HomeGestionarPedido}
+					options={{ headerShown: false }}
+				/>
+				<Stack.Screen
+					name="Repartidores"
+					component={Repartidores}
+					options={{ headerShown: false }}
+				/>
+				<Stack.Screen name="Paquetes" component={Paquetes} options={{ headerShown: false }} />
+				<Stack.Screen name="AddPackage" component={AddPackage} options={{ headerShown: false }} />
+				<Stack.Screen
+					name="PerfilRepartidor"
+					component={PerfilRepartidor}
+					options={{ headerShown: false }}
+				/>
+			</Stack.Navigator>
+		</NavigationContainer>
 	);
 };
 

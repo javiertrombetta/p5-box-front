@@ -6,11 +6,14 @@ import { NavigationProp } from '@react-navigation/native';
 import {
 	handleConditions,
 	handleCreateUser,
+	handleForgot,
+	handleVerify,
 	handleFinishPackage,
 	handleLoginUser,
 	handleLogout,
 	handleMeUser,
 	handlePackageCancel,
+
 } from '../services/user.service';
 import { Image } from 'react-native';
 import ArrowLeft from '../assets/ArrowLeft.svg';
@@ -60,6 +63,8 @@ enum RouteName {
 	AddPackage = 'AddPackage',
 	PerfilRepartidor = 'PerfilRepartidor',
 	DeclaracionJurada = 'DeclaracionJurada',
+	ForgotPassword = 'ForgotPassword',
+	NewPassword = 'NewPassword',
 }
 
 type User = {
@@ -95,6 +100,7 @@ const Button = ({
 	let user = useSelector((state) => state) as User;
 	const handleNavigation = () => {
 		if (navigate && navigation) {
+			console.log(navigate, 'esto es el navigate!!!!');
 			navigation.navigate(navigate);
 		}
 	};
@@ -116,9 +122,6 @@ const Button = ({
 			{action && navigate && (
 				<Pressable
 					onPress={async () => {
-						if (action === 'postError') {
-							console.log('Las contraseñas no son iguales');
-						}
 						if (action === 'postR' && data) {
 							await handleCreateUser(data);
 							try {
