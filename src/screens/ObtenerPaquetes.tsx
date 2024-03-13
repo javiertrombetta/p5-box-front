@@ -45,6 +45,12 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 	const [packages, setPackages] = useState([]);
+	let [packagesSelected, setPackagesSelected] = useState<string[]>([]);
+	const handleSelectPackage = (idPackage: string, add: boolean) => {
+		add && idPackage
+			? setPackagesSelected([...packagesSelected, idPackage])
+			: (packagesSelected = packagesSelected.filter((id) => id !== idPackage));
+	};
 
 	useEffect(() => {
 		const fetchPackage = async () => {
@@ -60,10 +66,6 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 		}, 100);
 		return () => clearTimeout(timer);
 	}, []);
-
-	// setTimeout(() => {
-	// 	handleAvailable().finally((data) => setPackages(data));
-	// }, 0);
 
 	type ListItemPackage = {
 		deliveryAddress: string;
@@ -98,6 +100,7 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 						column3="none"
 						idPackage={`${item._id}`}
 						navigation={navigation}
+						handleSelectPackage={handleSelectPackage}
 					/>
 				</View>
 				{!dropdown && !lastItem && (
@@ -217,6 +220,8 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 						width={270}
 						height={30}
 						spec="texto"
+						data={packagesSelected}
+						action="pushPackages"
 						navigation={navigation}
 						navigate={RouteName.DeclaracionJurada}
 					/>

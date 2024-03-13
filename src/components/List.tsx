@@ -34,6 +34,7 @@ interface listProps {
 	content3?: string;
 	navigation: NavigationProp<RootStackParamList>;
 	idPackage?: string;
+	handleSelectPackage?: (idPackage: string, add: boolean) => void;
 }
 
 type RootStackParamList = {
@@ -78,6 +79,7 @@ const List = ({
 	content3,
 	navigation,
 	idPackage,
+	handleSelectPackage,
 }: listProps) => {
 	let route: any;
 	let user = useSelector((state) => state) as User;
@@ -93,13 +95,20 @@ const List = ({
 			content3 === 'entregado' ||
 			column3 === 'none') &&
 			store.dispatch(login({ ...user, back: content3, packageSelect: idPackage })),
-			// console.log(store.getState()),
 			navigation.navigate(RouteName.RepartoEnCurso);
 		column3 === 'img' && navigation.navigate(RouteName.PerfilRepartidor);
 	};
 	const [checked, setChecked] = useState(false);
 	const handleCheck = () => {
-		checked ? setChecked(false) : setChecked(true);
+		if (handleSelectPackage && idPackage) {
+			if (checked) {
+				setChecked(false);
+				handleSelectPackage(idPackage, false);
+			} else {
+				setChecked(true);
+				handleSelectPackage(idPackage, true);
+			}
+		}
 	};
 	return (
 		<Pressable

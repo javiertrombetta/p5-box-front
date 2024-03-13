@@ -16,10 +16,17 @@ const PackageDetail = () => {
 	});
 	let user2 = store.getState();
 	useEffect(() => {
-		handleDetailsPackage(user2.packageSelect).then((data) => {
-			store.dispatch(login({ ...user2, packageSelect: data._id }));
-			setPackageSelect(data);
-		});
+		if (user2.back !== undefined) {
+			handleDetailsPackage(user2.packageSelect).then((data) => {
+				store.dispatch(login({ ...user2, packageSelect: data._id }));
+				setPackageSelect(data);
+			});
+		} else {
+			handleDetailsPackage(user2.packageSelect, true).then((data) => {
+				store.dispatch(login({ ...user2, packageSelect: data._id }));
+				setPackageSelect(data);
+			});
+		}
 	}, []);
 
 	return (

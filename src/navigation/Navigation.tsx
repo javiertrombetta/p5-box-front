@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 {
@@ -20,11 +20,21 @@ import ObtenerPaquetes from '../screens/ObtenerPaquetes';
 import RepartoEnCurso from '../screens/RepartoEnCurso';
 import Repartidores from '../screens/Repartidores';
 import DeclaracionJurada from '../screens/DeclaracionJurada';
+import { store } from '../state/user';
+import { useSelector } from 'react-redux';
+
+type clientObj = {
+	_id: string;
+};
 
 const Navigation = () => {
 	const Stack = createNativeStackNavigator();
+	let client = '';
+	client = useSelector((state: clientObj) => state._id);
+	console.log(client);
+
 	return (
-		<Stack.Navigator initialRouteName={'HomeIniciarJornada'}>
+		<Stack.Navigator initialRouteName={client.length > 0 ? 'HomeIniciarJornada' : 'Login'}>
 			<Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
 			<Stack.Screen
 				name="CreateAccount"
