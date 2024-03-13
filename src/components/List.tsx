@@ -1,5 +1,5 @@
 import { View, Text, Dimensions, Image, Pressable, Platform } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CircleProgress from './CircleProgress';
 import { CommonActions, useRoute } from '@react-navigation/native';
 
@@ -81,10 +81,6 @@ const List = ({
 }: listProps) => {
 	let route: any;
 	let user = useSelector((state) => state) as User;
-	// console.log(user);
-	setTimeout(() => {
-		console.log(user);
-	}, 10);
 	const { width, height } = Dimensions.get('window');
 	const WScale = width / 360;
 	const HScale = height / 640;
@@ -96,17 +92,15 @@ const List = ({
 			content3 === 'pendiente' ||
 			content3 === 'entregado' ||
 			column3 === 'none') &&
-			// store.dispatch(login({ ...user, back: content3 })),
-			navigation.navigate(RouteName.RepartoEnCurso),
-			column3 === 'img' && navigation.navigate(RouteName.PerfilRepartidor);
+			store.dispatch(login({ ...user, back: content3, packageSelect: idPackage })),
+			// console.log(store.getState()),
+			navigation.navigate(RouteName.RepartoEnCurso);
+		column3 === 'img' && navigation.navigate(RouteName.PerfilRepartidor);
 	};
 	const [checked, setChecked] = useState(false);
 	const handleCheck = () => {
 		checked ? setChecked(false) : setChecked(true);
 	};
-
-	// route = useRoute();
-	// console.log(route);
 	return (
 		<Pressable
 			style={{ height: '100%', width: '100%' }}
@@ -489,6 +483,8 @@ const List = ({
 									<Button
 										navigate={RouteName.RepartoEnCurso}
 										navigation={navigation}
+										action="postI"
+										id={idPackage}
 										width={62}
 										height={20}
 										content="INICIAR"

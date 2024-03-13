@@ -50,7 +50,7 @@ const Header = ({ navigation }: Props) => {
 				: user.roles[0] === 'administrador'
 				? navigation.navigate(RouteName.HomeGestionarPedido)
 				: console.log('error');
-			console.log(user);
+			// console.log(user);
 		}
 	};
 	return (
@@ -82,7 +82,7 @@ const Header = ({ navigation }: Props) => {
 					navigate={RouteName.Login}
 					// navigate={user?.roles[0] === 'repartidor' ? RouteName.Login : RouteName.LoginAdmin}
 					navigation={navigation}
-					action='postCS'
+					action="postCS"
 				/>
 			</View>
 		</View>

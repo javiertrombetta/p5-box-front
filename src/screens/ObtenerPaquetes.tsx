@@ -45,12 +45,30 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 	const [packages, setPackages] = useState([]);
-	setTimeout(() => {
-		handleAvailable().then((data) => setPackages(data));
-	}, 100);
+
+	useEffect(() => {
+		const fetchPackage = async () => {
+			try {
+				const data = await handleAvailable();
+				setPackages(data);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+		const timer = setTimeout(() => {
+			fetchPackage();
+		}, 100);
+		return () => clearTimeout(timer);
+	}, []);
+
+	// setTimeout(() => {
+	// 	handleAvailable().finally((data) => setPackages(data));
+	// }, 0);
 
 	type ListItemPackage = {
-		[key: string]: string;
+		deliveryAddress: string;
+		state: string;
+		_id: string;
 	};
 
 	interface RenderItemsUsersProps {
@@ -78,6 +96,7 @@ const ObtenerPaquetes = ({ navigation }: Props) => {
 						column2="stringsRow"
 						content2String={item.deliveryAddress}
 						column3="none"
+						idPackage={`${item._id}`}
 						navigation={navigation}
 					/>
 				</View>

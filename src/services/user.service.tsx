@@ -2,7 +2,6 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 export const handleCreateUser = async (data: object) => {
-
 	try {
 		const response = await axios.post('http://localhost:3000/api/v1/auth/register', data, {
 			withCredentials: true,
@@ -67,9 +66,29 @@ export const handleMePackages = async () => {
 	return response.data;
 };
 
-export const handlePackageCancel = async (uuid: string) => {
-	const response = await axios.put(`http://localhost:3000/api/v1/auth/me/packages/${uuid}/cancel`, {
+export const handlePackageCancel = async (idPackage: string) => {
+	const response = await axios.put(
+		`http://localhost:3000/api/v1/auth/me/packages/${idPackage}/cancel`,
+		{
+			withCredentials: true,
+		}
+	);
+	return response.data;
+};
+
+export const handleIniciarPackage = async (idPackage: string) => {
+	const response = await axios.put(`http://localhost:3000/api/v1/auth/me/packages/${idPackage}`, {
 		withCredentials: true,
 	});
+	return response.data;
+};
+
+export const handleFinishPackage = async (idPackage: string) => {
+	const response = await axios.put(
+		`http://localhost:3000/api/v1/auth/me/packages/${idPackage}/finish`,
+		{
+			withCredentials: true,
+		}
+	);
 	return response.data;
 };

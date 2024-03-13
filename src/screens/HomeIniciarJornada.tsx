@@ -12,6 +12,7 @@ import Button from '../components/Button';
 import List from '../components/List';
 import { handleDelivered } from '../services/package.service';
 import { handleMePackages } from '../services/user.service';
+import { useSelector } from 'react-redux';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -46,11 +47,14 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 
 	const [packagesDelivered, setPackagesDelivered] = useState([]);
 	const [packagesPending, setPackagesPending] = useState([]);
-
+	type User = {
+		back: string;
+	};
+	let user = useSelector((state) => state) as User;
 	useEffect(() => {
 		handleDelivered().then((data) => setPackagesDelivered(data));
 		handleMePackages().then((data) => setPackagesPending(data));
-	}, []);
+	}, [packagesPending.length, packagesDelivered.length, user.back]);
 
 	type ListItemPending = {
 		deliveryAddress: string;
@@ -108,6 +112,7 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 						content2String={`${id}, ${deliveryAddress1}, ${deliveryAddress2}`}
 						column3="svgStringButton"
 						content3="entregado"
+						idPackage={`${item._id}`}
 						navigation={navigation}
 					/>
 				</View>
@@ -182,7 +187,7 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 					}}
 					className="font-robotoMedium text-texto"
 				>
-					58 Paquetes entregados
+					{`${packagesDelivered.length} paquetes entregados`}
 				</Text>
 				<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
 					<View style={{ height: 1 }} className="w-full bg-gray-300" />
