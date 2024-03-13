@@ -1,9 +1,10 @@
 {
   "expo": {
     "name": "Box App",
-    "slug": "box-app",
+    "slug": "boxapp",
     "version": "1.0.0",
     "orientation": "portrait",
+    "scheme": "boxapp",
     "icon": "./src/assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
