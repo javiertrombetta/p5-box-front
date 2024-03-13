@@ -27,14 +27,14 @@ type clientObj = {
 	_id: string;
 };
 
-const Navigation = () => {
+const NavigationClient = () => {
 	const Stack = createNativeStackNavigator();
-	let client = '';
-	client = useSelector((state: clientObj) => state._id);
-	console.log(client);
+	// let client = '';
+	// client = useSelector((state: clientObj) => state._id);
+	console.log('client');
 
 	return (
-		<Stack.Navigator initialRouteName={client.length > 0 ? 'HomeIniciarJornada' : 'Login'}>
+		<Stack.Navigator initialRouteName={'HomeIniciarJornada'}>
 			<Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
 			<Stack.Screen
 				name="CreateAccount"
@@ -81,4 +81,4 @@ const Navigation = () => {
 	);
 };
 
-export default Navigation;
+export default NavigationClient;
