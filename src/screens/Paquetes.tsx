@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Image, Dimensions, Platform, Pressable, ScrollView } from 'react-native';
 import { fakeHistory } from './fakeData';
 
-import arrowLeft from '../assets/arrow-left.png';
 import downArrow from '../assets/arrow-head-down.png';
-import ArrowLeft from '../assets/ArrowLeft.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 import Header from '../components/Header';
 import List from '../components/List';
