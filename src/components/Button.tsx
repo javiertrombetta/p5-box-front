@@ -6,14 +6,18 @@ import { NavigationProp } from '@react-navigation/native';
 import {
 	handleConditions,
 	handleCreateUser,
+	handleFinishPackage,
 	handleLoginUser,
 	handleLogout,
 	handleMeUser,
+	handlePackageCancel,
 } from '../services/user.service';
 import { Image } from 'react-native';
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import leftArrow from '../assets/arrow-left.png';
 import { login, store } from '../state/user';
+import { handleIniciarPackage } from '../services/user.service';
+import { useSelector } from 'react-redux';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -33,10 +37,10 @@ interface ButtonProps {
 	action?: string;
 	arrowLeft?: boolean;
 	navigation: NavigationProp<RootStackParamList>;
+	id?: string;
 }
 
 const texto = '#24424D';
-const blanco = '#FEFEFE';
 const amarilloVerdoso = '#CEF169';
 
 type RootStackParamList = {
@@ -58,6 +62,21 @@ enum RouteName {
 	DeclaracionJurada = 'DeclaracionJurada',
 }
 
+type User = {
+	_id: '';
+	name: '';
+	lastname: '';
+	email: '';
+	roles: [''];
+	packages: [''];
+	photoUrl: '';
+	state: '';
+	points: 0;
+	__v: 0;
+	back: '';
+	packageSelect: '';
+};
+
 const Button = ({
 	spec,
 	content,
@@ -70,8 +89,10 @@ const Button = ({
 	height,
 	width,
 	arrowLeft,
+	id,
 }: ButtonProps) => {
 	const isWeb = Platform.OS === 'web';
+	let user = useSelector((state) => state) as User;
 	const handleNavigation = () => {
 		if (navigate && navigation) {
 			navigation.navigate(navigate);
@@ -109,6 +130,7 @@ const Button = ({
 							await handleLoginUser(data);
 							try {
 								await handleMeUser().then((data: object) => {
+									data = { ...data, back: '', packageSelect: '' };
 									store.dispatch(login(data));
 								});
 								handleNavigationRol();
@@ -125,6 +147,30 @@ const Button = ({
 							try {
 								await handleLogout();
 								navigation.navigate(RouteName.Login);
+							} catch (error) {
+								console.error(error);
+							}
+						} else if (action === 'postI' && id) {
+							try {
+								await handleIniciarPackage(id);
+								store.dispatch(login({ ...user, back: 'en curso', packageSelect: id }));
+								navigation.navigate(RouteName.RepartoEnCurso);
+							} catch (error) {
+								console.error(error);
+							}
+						} else if (action === 'putFinalizar' && id) {
+							try {
+								await handleFinishPackage(id);
+								store.dispatch(login({ ...user, back: undefined }));
+								navigation.navigate(RouteName.HomeIniciarJornada);
+							} catch (error) {
+								console.error(error);
+							}
+						} else if (action === 'postCancelPackage' && id) {
+							try {
+								await handlePackageCancel(id);
+								store.dispatch(login({ ...user, back: undefined }));
+								navigation.navigate(RouteName.HomeIniciarJornada);
 							} catch (error) {
 								console.error(error);
 							}

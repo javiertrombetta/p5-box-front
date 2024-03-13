@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 {
@@ -20,29 +20,11 @@ import ObtenerPaquetes from '../screens/ObtenerPaquetes';
 import RepartoEnCurso from '../screens/RepartoEnCurso';
 import Repartidores from '../screens/Repartidores';
 import DeclaracionJurada from '../screens/DeclaracionJurada';
-import { login, store } from '../state/user';
-import { handleMeUser } from '../services/user.service';
 
 const Navigation = () => {
 	const Stack = createNativeStackNavigator();
-	const [user, setUser] = useState({
-		_id: '',
-		name: '',
-		lastname: '',
-		email: '',
-		roles: [''],
-		packages: [''],
-		photoUrl: '',
-		state: '',
-		points: 0,
-		__v: 0,
-	});
-	handleMeUser().then((data: object) => {
-		store.dispatch(login(data));
-		setUser(store.getState());
-	});
 	return (
-		<Stack.Navigator initialRouteName={user.roles[0] !== 'repartidor' ? 'Login' : 'LoginAdmin'}>
+		<Stack.Navigator initialRouteName={'HomeIniciarJornada'}>
 			<Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
 			<Stack.Screen
 				name="CreateAccount"

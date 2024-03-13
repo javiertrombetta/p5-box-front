@@ -5,6 +5,8 @@ const initialState = {
     name: "",
     lastname: "",
     email: "",
+    back: "",
+    packageSelect: "",
     roles: [""],
     packages: [""],
     photoUrl: "",

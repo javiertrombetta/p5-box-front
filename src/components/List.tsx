@@ -1,6 +1,7 @@
 import { View, Text, Dimensions, Image, Pressable, Platform } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CircleProgress from './CircleProgress';
+import { CommonActions, useRoute } from '@react-navigation/native';
 
 import boxList from '../assets/BoxList.png';
 import trash from '../assets/trash.png';
@@ -21,6 +22,8 @@ import Button from '../components/Button';
 import ButtonTrue from '../assets/ButtonTrue.svg';
 import { NavigationProp } from '@react-navigation/native';
 import { handlePackageCancel } from '../services/user.service';
+import { useSelector } from 'react-redux';
+import { login, store } from '../state/user';
 
 interface listProps {
 	column1: string;
@@ -52,6 +55,20 @@ enum RouteName {
 	DeclaracionJurada = 'DeclaracionJurada',
 }
 
+type User = {
+	_id: '';
+	name: '';
+	lastname: '';
+	email: '';
+	roles: [''];
+	packages: [''];
+	photoUrl: '';
+	state: '';
+	points: 0;
+	__v: 0;
+	back: '';
+};
+
 const List = ({
 	column1,
 	circleValue,
@@ -62,6 +79,8 @@ const List = ({
 	navigation,
 	idPackage,
 }: listProps) => {
+	let route: any;
+	let user = useSelector((state) => state) as User;
 	const { width, height } = Dimensions.get('window');
 	const WScale = width / 360;
 	const HScale = height / 640;
@@ -69,7 +88,12 @@ const List = ({
 	const isWeb = Platform.OS === 'web';
 	const arrayColumn2: string[] = content2String.split(', ');
 	const handleNavigation = () => {
-		(content3 === 'enCursoTrash' || content3 === 'pendienteIniciar' || column3 === 'none') &&
+		(content3 === 'en curso' ||
+			content3 === 'pendiente' ||
+			content3 === 'entregado' ||
+			column3 === 'none') &&
+			store.dispatch(login({ ...user, back: content3, packageSelect: idPackage })),
+			// console.log(store.getState()),
 			navigation.navigate(RouteName.RepartoEnCurso);
 		column3 === 'img' && navigation.navigate(RouteName.PerfilRepartidor);
 	};
@@ -459,6 +483,8 @@ const List = ({
 									<Button
 										navigate={RouteName.RepartoEnCurso}
 										navigation={navigation}
+										action="postI"
+										id={idPackage}
 										width={62}
 										height={20}
 										content="INICIAR"
