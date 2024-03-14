@@ -41,7 +41,8 @@ const ForgotPassword = ({ navigation }: LoginCompProps) => {
 	const [email, setEmail] = useState('');
 	const [step, setStep] = useState(1);
 	const [token, setToken] = useState('');
-	const [passwords, setPasswords] = useState({ password: '', confirmPassword: '' });
+	const [confirmPassword, setConfirmPassword] = useState('');
+	const [newPassword, setNewPassword] = useState('');
 
 	const handleInputToken = (value: string) => {
 		setToken(value);
@@ -51,12 +52,21 @@ const ForgotPassword = ({ navigation }: LoginCompProps) => {
 		setEmail(value);
 	};
 
-	const handlePassword = (field: keyof typeof passwords, value: string) => {
-		setPasswords((prevState) => ({
-			...prevState,
-			[field]: value,
-		}));
+	const handleInputNewPassword = (value: string) => {
+		setNewPassword(value);
 	};
+	const handleInputConfirmPassword = (value: string) => {
+		setConfirmPassword(value);
+	};
+
+	function confirmation() {
+		if (newPassword === confirmPassword) {
+			handleResetPassword({ newPassword, token }).then(() => navigation.navigate(RouteName.Login));
+			setStep(1);
+		} else {
+			console.log("'La confirmacion debe coincidir con el nuevo password'");
+		}
+	}
 
 	return (
 		<View
@@ -146,7 +156,12 @@ const ForgotPassword = ({ navigation }: LoginCompProps) => {
 						<Pressable
 							style={{ borderRadius: 8 }}
 							className="bg-texto flex w-full h-10 items-center justify-center"
-							onPress={() => handleForgot(email).then(() => setStep(2))}
+							onPress={() =>
+								handleForgot(email).then(() => {
+									setStep(2);
+									setEmail('hola');
+								})
+							}
 						>
 							<Text className="text-amarilloVerdoso">ENVIAR</Text>
 						</Pressable>
@@ -199,7 +214,11 @@ const ForgotPassword = ({ navigation }: LoginCompProps) => {
 						<Pressable
 							style={{ borderRadius: 8 }}
 							className="bg-texto flex w-full h-10 items-center justify-center"
-							onPress={() => handleVerify(token).then(() => setStep(3))}
+							onPress={() =>
+								handleVerify(token).then(() => {
+									setStep(3);
+								})
+							}
 						>
 							<Text className="text-amarilloVerdoso">ENVIAR</Text>
 						</Pressable>
@@ -235,8 +254,8 @@ const ForgotPassword = ({ navigation }: LoginCompProps) => {
 									}}
 									className="bg-white text-texto w-full font-roboto rounded p-2"
 									placeholder="contraseña"
-									onChangeText={(newText) => handlePassword('password', newText)}
-									defaultValue={passwords.password}
+									onChangeText={(newText) => handleInputNewPassword(newText)}
+									defaultValue={newPassword}
 								/>
 								<TextInput
 									style={{
@@ -245,8 +264,8 @@ const ForgotPassword = ({ navigation }: LoginCompProps) => {
 									}}
 									className="bg-white text-texto w-full font-roboto rounded p-2"
 									placeholder="confirmar contraseña"
-									onChangeText={(newText) => handlePassword('confirmPassword', newText)}
-									defaultValue={passwords.confirmPassword}
+									onChangeText={(newText) => handleInputConfirmPassword(newText)}
+									defaultValue={confirmPassword}
 								/>
 								<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto" />
 							</View>
@@ -262,9 +281,7 @@ const ForgotPassword = ({ navigation }: LoginCompProps) => {
 						<Pressable
 							style={{ borderRadius: 8 }}
 							className="bg-texto flex w-full h-10 items-center justify-center"
-							onPress={() =>
-								handleResetPassword(passwords).then(() => navigation.navigate(RouteName.Login))
-							}
+							onPress={confirmation}
 						>
 							<Text className="text-amarilloVerdoso">ENVIAR</Text>
 						</Pressable>
