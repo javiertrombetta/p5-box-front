@@ -73,22 +73,25 @@ export const handleForgot = async (email: string) => {
 
 export const handleVerify = async (token: string) => {
 	try {
-		// const response = await axios.get('http://localhost:3000/api/v1/auth/verify-token', token, {
-		// 	withCredentials: true,
-		// });
-		// console.log('enviado el tokennnnn', response.data);
-		// return response.data;
+		const response = await axios.get(
+			`http://localhost:3000/api/v1/auth/verify-token?token=${token}`,
+			{
+				withCredentials: true,
+			}
+		);
+		console.log('enviado el tokennnnn', response.data);
+		return response.data;
 	} catch (error) {
 		console.error(error);
 		throw error;
 	}
 };
 
-export const handleResetPassword = async (passwords: object) => {
+export const handleResetPassword = async (password: object) => {
 	try {
 		const response = await axios.post(
 			'http://localhost:3000/api/v1/auth/reset-password',
-			passwords,
+			password,
 			{
 				withCredentials: true,
 			}
