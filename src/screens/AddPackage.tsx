@@ -1,8 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, Pressable, Image, TextInput, Dimensions, Platform } from 'react-native';
-// lo agregue todo junto
-import DateTimePicker from '@react-native-community/datetimepicker';
-//
 import { DatePickerModal } from 'react-native-paper-dates';
 import leftArrow from '../assets/arrow-left.png';
 import arrowHeadDown from '../assets/arrow-head-down.png';
@@ -43,9 +40,6 @@ enum RouteName {
 type Props = {
 	navigation: NavigationProp<RootStackParamList>;
 };
-type PropParams = {
-	date: Date;
-};
 
 const AddPackage = ({ navigation }: Props) => {
 	const [date, setDate] = useState(new Date());
@@ -54,25 +48,22 @@ const AddPackage = ({ navigation }: Props) => {
 	const onDismissSingle = React.useCallback(() => {
 		setOpen(false);
 	}, [open]);
-
 	const onConfirmSingle = React.useCallback(
 		(params: any) => {
 			setOpen(false);
 			setDate(params.date);
+			setDate(params.date.setHours(0, 0, 0, 0));
+			setData((prevData) => ({ ...prevData, deliveryDate: params.date }));
+			console.log(params.date);
 		},
-		[open, setDate]
+		[setOpen, setDate]
 	);
-	let deliveryDate = date.toString();
-
-	useEffect(() => {
-		deliveryDate = format(date, 'yyyy/MM/dd').toString();
-		console.log(deliveryDate, 'dateeee');
-	}, [date]);
 
 	const [data, setData] = useState({
 		deliveryAddress: '',
 		deliveryFullname: '',
-		deliveryWeight: '',
+		deliveryWeight: 0,
+		deliveryDate: new Date(),
 	});
 
 	const handleInputChange = (field: keyof typeof data, value: string) => {
@@ -87,10 +78,6 @@ const AddPackage = ({ navigation }: Props) => {
 	const handleCalendario = () => {
 		setOpen(!open);
 	};
-
-	// const handleCalendarValue = (e: DateTimePickerEvent) => {
-	// 	setDate(date);
-	// };
 
 	return (
 		<View
@@ -156,7 +143,6 @@ const AddPackage = ({ navigation }: Props) => {
 					className=" text-texto font-roboto"
 					placeholder="Peso del paquete (Kg)"
 					onChangeText={(newText) => handleInputChange('deliveryWeight', newText)}
-					defaultValue={data.deliveryWeight}
 				/>
 				<View style={{ width: 260 * WScale, height: 1 }} className="bg-gray-400"></View>
 				<Text
@@ -205,7 +191,7 @@ const AddPackage = ({ navigation }: Props) => {
 			>
 				<Button
 					action="postAgregar"
-					data={{ ...data, date }}
+					data={data}
 					spec="texto"
 					height={28}
 					width={270}
