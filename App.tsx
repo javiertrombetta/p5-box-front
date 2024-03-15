@@ -38,23 +38,19 @@ export default function App() {
 		.then((data: object) => {
 			store.dispatch(login({ ...data, back: '', packageSelect: '', paquetesObtenidos: [] }));
 			user = store.getState();
-			console.log(user);
 		})
 		.then(() => {
 			setProgress(true);
 		})
 		.catch(() => setProgress(true));
-
-	console.log(progress);
-	console.log(user._id.length);
-
+	let rol = user && user?.roles[0];
 	return (
 		<Provider store={store}>
 			{!progress ? (
 				<Progress />
 			) : (
 				<NavigationContainer>
-					{user._id.length > 0 ? <NavigationClient /> : <NavigationNotClient />}
+					{user._id.length > 0 && rol ? <NavigationClient /> : <NavigationNotClient />}
 				</NavigationContainer>
 			)}
 		</Provider>

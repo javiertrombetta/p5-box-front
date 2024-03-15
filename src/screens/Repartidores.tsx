@@ -1,13 +1,4 @@
-import {
-	View,
-	Text,
-	Image,
-	Dimensions,
-	Platform,
-	VirtualizedList,
-	ScrollView,
-	Pressable,
-} from 'react-native';
+import { View, Text, Image, Dimensions, Platform, ScrollView, Pressable } from 'react-native';
 import React, { useState } from 'react';
 import { fakeUsers } from './fakeData';
 
