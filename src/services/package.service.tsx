@@ -16,7 +16,6 @@ export const handleDelivered = async () => {
 };
 
 export const handleDetailsPackage = async (idPackage: string, disponible?: boolean) => {
-	console.log(idPackage);
 	let response;
 	disponible
 		? (response = await axios.get(

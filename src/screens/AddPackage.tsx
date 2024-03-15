@@ -70,7 +70,6 @@ const AddPackage = ({ navigation }: Props) => {
 					)}
 				</View>
 			</View>
-
 			<View
 				style={{ height: 450 * HScale, marginTop: 10 * HScale }}
 				className="w-full items-center rounded-xl bg-blanco"
@@ -88,7 +87,6 @@ const AddPackage = ({ navigation }: Props) => {
 					defaultValue={text}
 				/>
 				<View style={{ width: 260 * WScale, height: 1 }} className="bg-gray-400"></View>
-
 				<TextInput
 					style={{
 						height: 24 * HScale,
@@ -102,7 +100,6 @@ const AddPackage = ({ navigation }: Props) => {
 					defaultValue={text}
 				/>
 				<View style={{ width: 260 * WScale, height: 1 }} className="bg-gray-400"></View>
-
 				<TextInput
 					style={{
 						height: 24 * HScale,
@@ -116,7 +113,6 @@ const AddPackage = ({ navigation }: Props) => {
 					defaultValue={text}
 				/>
 				<View style={{ width: 260 * WScale, height: 1 }} className="bg-gray-400"></View>
-
 				<TextInput
 					style={{
 						height: 24 * HScale,
