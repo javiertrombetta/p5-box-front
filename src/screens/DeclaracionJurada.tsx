@@ -72,7 +72,6 @@ const DeclaracionJurada = ({ navigation }: Props) => {
 						navigation={navigation}
 					/>
 				</View>
-
 				<View
 					style={{
 						marginTop: 10 * HScale,
@@ -116,7 +115,6 @@ const DeclaracionJurada = ({ navigation }: Props) => {
 						/>
 					</View>
 				</View>
-
 				<View
 					style={{
 						marginTop: 10 * HScale,
@@ -168,7 +166,6 @@ const DeclaracionJurada = ({ navigation }: Props) => {
 						/>
 					</View>
 				</View>
-
 				<View
 					style={{
 						marginTop: 10 * HScale,
@@ -211,7 +208,6 @@ const DeclaracionJurada = ({ navigation }: Props) => {
 						/>
 					</View>
 				</View>
-
 				<View
 					style={{
 						height: 30 * HScale,
