@@ -108,7 +108,6 @@ const ForgotPassword = ({ navigation }: LoginCompProps) => {
 					navigation={navigation}
 				/>
 			</View>
-
 			{step === 1 ? (
 				<View className="w-full h-[80%] flex justify-evenly">
 					<View
@@ -202,7 +201,6 @@ const ForgotPassword = ({ navigation }: LoginCompProps) => {
 								/>
 								<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto" />
 							</View>
-
 							<View className="p-2">
 								<Text style={{ fontSize: scaledSize(12) }} className="text-texto text-center">
 									Una vez verfificado ya podrá cambiar su contraseña.
@@ -269,7 +267,6 @@ const ForgotPassword = ({ navigation }: LoginCompProps) => {
 								/>
 								<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto" />
 							</View>
-
 							<View className="p-2">
 								<Text style={{ fontSize: scaledSize(12) }} className="text-texto text-center">
 									Si las contraseñas coinciden esa será su nueva contraseña.

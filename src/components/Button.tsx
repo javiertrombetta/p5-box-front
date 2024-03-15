@@ -13,7 +13,6 @@ import {
 	handleLogout,
 	handleMeUser,
 	handlePackageCancel,
-
 } from '../services/user.service';
 import { Image } from 'react-native';
 import ArrowLeft from '../assets/ArrowLeft.svg';
@@ -100,7 +99,6 @@ const Button = ({
 	let user = useSelector((state) => state) as User;
 	const handleNavigation = () => {
 		if (navigate && navigation) {
-			console.log(navigate, 'esto es el navigate!!!!');
 			navigation.navigate(navigate);
 		}
 	};
@@ -180,7 +178,6 @@ const Button = ({
 								console.error(error);
 							}
 						} else if (action === 'pushPackages' && data) {
-							console.log(user.back);
 							try {
 								store.dispatch(
 									login({ ...user, paquetesObtenidos: data, back: 'obtenerPaquetes' })

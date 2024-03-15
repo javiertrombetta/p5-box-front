@@ -23,7 +23,7 @@ enum RouteName {
 	AddPackage = 'AddPackage',
 	PerfilRepartidor = 'PerfilRepartidor',
 	DeclaracionJurada = 'DeclaracionJurada',
-	ForgotPassword = "ForgotPassword",
+	ForgotPassword = 'ForgotPassword',
 	NewPassword = 'NewPassword',
 }
 
@@ -52,7 +52,6 @@ const Header = ({ navigation }: Props) => {
 				: user.roles[0] === 'administrador'
 				? navigation.navigate(RouteName.HomeGestionarPedido)
 				: console.log('error');
-			// console.log(user);
 		}
 	};
 	return (

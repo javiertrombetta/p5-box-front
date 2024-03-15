@@ -9,6 +9,9 @@ import Title from '../components/Title';
 import { NavigationProp } from '@react-navigation/native';
 import Card from '../components/Card';
 import WeeklyDatePicker from '../components/WeeklyDatePicker';
+import { store } from '../state/user';
+import RepartidoresHabilitados from '../components/RepartidoresHabilitados';
+import PaquetesRepartidos from '../components/PaquetesRepartidos';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -27,7 +30,7 @@ enum RouteName {
 	AddPackage = 'AddPackage',
 	PerfilRepartidor = 'PerfilRepartidor',
 	DeclaracionJurada = 'DeclaracionJurada',
-	ForgotPassword = "ForgotPassword",
+	ForgotPassword = 'ForgotPassword',
 	NewPassword = 'NewPassword',
 }
 
@@ -42,13 +45,30 @@ const HomeGestionarPedido = ({ navigation }: Props) => {
 
 	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
+	const user = store.getState();
+
 	const [selectedDate, setSelectedDate] = useState(new Date());
 	const handleSelect = (date: Date) => {
 		setSelectedDate(date);
 	};
-	useEffect(() => {
-		console.log(selectedDate);
-	}, [selectedDate]);
+
+	const [listRepartidores, setListRepartidores] = useState({
+		circleValue: 0,
+		cantidadHab: 0,
+		cantidad: 0,
+	});
+	const [listPaquetes, setListPaquetes] = useState({
+		circleValue: 0,
+		cantidadEntregados: 0,
+		cantidad: 0,
+	});
+
+	const setearRepartidores = (circleValue: number, cantidadHab: number, cantidad: number) => {
+		setListRepartidores({ circleValue, cantidadHab, cantidad });
+	};
+	const setearPaquetes = (circleValue: number, cantidadEntregados: number, cantidad: number) => {
+		setListPaquetes({ circleValue, cantidadEntregados, cantidad });
+	};
 
 	return (
 		<View
@@ -64,7 +84,6 @@ const HomeGestionarPedido = ({ navigation }: Props) => {
 					navigation={navigation}
 				/>
 			</View>
-
 			<View
 				style={{ height: 96 * HScale, marginTop: 10 * HScale }}
 				className="w-full flex flex-row rounded-xl items-center justify-around align-middle bg-white"
@@ -84,7 +103,7 @@ const HomeGestionarPedido = ({ navigation }: Props) => {
 						style={{ fontSize: scaledSize(14) }}
 						className="text-start  text-texto font-robotoBold"
 					>
-						¡Hola Admin!
+						¡Hola {user.name}!
 					</Text>
 					<Text style={{ fontSize: scaledSize(14) }} className="text-start text-texto font-roboto">
 						Estos son los pedidos del dia
@@ -106,6 +125,7 @@ const HomeGestionarPedido = ({ navigation }: Props) => {
 						size={14}
 						navigate={RouteName.HomeGestionarPedido}
 						navigation={navigation}
+						currentDate={selectedDate}
 					/>
 				</View>
 				<View
@@ -113,11 +133,15 @@ const HomeGestionarPedido = ({ navigation }: Props) => {
 					className="flex flex-col justify-evenly align-middle"
 				>
 					<View style={{ height: 100 * HScale, paddingHorizontal: 16 * WScale }}>
+						<RepartidoresHabilitados
+							setearRepartidores={setearRepartidores}
+							selectedDate={selectedDate}
+						/>
 						<List
 							column1="circleProgress"
-							circleValue={20}
+							circleValue={listRepartidores.circleValue}
 							column2="stringsImg"
-							content2String="Repartidores, 2/10 Habilitados"
+							content2String={`Repartidores, ${listRepartidores.cantidadHab}/${listRepartidores.cantidad} Habilitados`}
 							column3="buttonVer"
 							content3="repartidores"
 							navigation={navigation}
@@ -127,11 +151,12 @@ const HomeGestionarPedido = ({ navigation }: Props) => {
 						<View style={{ height: 1 }} className="w-[89%] bg-gray-300" />
 					</View>
 					<View style={{ height: 100 * HScale, paddingHorizontal: 16 * WScale }}>
+						<PaquetesRepartidos setearPaquetes={setearPaquetes} selectedDate={selectedDate} />
 						<List
 							column1="circleProgress"
-							circleValue={80}
+							circleValue={listPaquetes.circleValue}
 							column2="stringsImg"
-							content2String="Paquetes, 16/20 Repartidos"
+							content2String={`Paquetes, ${listPaquetes.cantidadEntregados}/${listPaquetes.cantidad} Repartidos`}
 							column3="buttonVer"
 							content3="paquetes"
 							navigation={navigation}

@@ -160,7 +160,6 @@ const CreateAccount = ({ navigation }: Props) => {
 						{isWeb ? <Image source={profilePic} /> : <ProfilePic width={30 * WScale} />}
 					</Pressable>
 				)}
-
 				<TextInput
 					style={{
 						height: 24 * HScale,
@@ -174,7 +173,6 @@ const CreateAccount = ({ navigation }: Props) => {
 					defaultValue={data.name}
 				/>
 				<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
-
 				<TextInput
 					style={{
 						height: 24 * HScale,
@@ -188,7 +186,6 @@ const CreateAccount = ({ navigation }: Props) => {
 					defaultValue={data.lastname}
 				/>
 				<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
-
 				<TextInput
 					style={{
 						height: 24 * HScale,
@@ -202,7 +199,6 @@ const CreateAccount = ({ navigation }: Props) => {
 					defaultValue={data.email}
 				/>
 				<View style={{ width: 260 * WScale, height: 0.5 }} className="bg-texto"></View>
-
 				<View>
 					<View className="flex flex-row">
 						<TextInput
@@ -218,7 +214,6 @@ const CreateAccount = ({ navigation }: Props) => {
 							onChangeText={(newText) => handleInputChange('password', newText)}
 							defaultValue={data.password}
 						/>
-
 						<Pressable className="relative" onPress={handleTogglePassword}>
 							{showPassword ? (
 								isWeb ? (
@@ -263,7 +258,6 @@ const CreateAccount = ({ navigation }: Props) => {
 					</View>
 					<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
 				</View>
-
 				<View>
 					<View className="flex flex-row">
 						<TextInput
@@ -323,7 +317,6 @@ const CreateAccount = ({ navigation }: Props) => {
 					</View>
 					<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
 				</View>
-
 				<View style={{ marginTop: 50 * HScale }}>
 					<Button
 						spec="texto"
