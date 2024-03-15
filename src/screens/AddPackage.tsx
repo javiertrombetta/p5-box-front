@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, Pressable, Image, TextInput, Dimensions, Platform } from 'react-native';
-
+// lo agregue todo junto
+import DateTimePicker from '@react-native-community/datetimepicker';
+//
+import { DatePickerModal } from 'react-native-paper-dates';
 import leftArrow from '../assets/arrow-left.png';
 import arrowHeadDown from '../assets/arrow-head-down.png';
-
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
-
 import Header from '../components/Header';
 import Button from '../components/Button';
 import { NavigationProp } from '@react-navigation/native';
+import { format } from 'date-fns';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -41,10 +43,54 @@ enum RouteName {
 type Props = {
 	navigation: NavigationProp<RootStackParamList>;
 };
+type PropParams = {
+	date: Date;
+};
 
 const AddPackage = ({ navigation }: Props) => {
-	const [text, setText] = useState('');
+	const [date, setDate] = useState(new Date());
+	const [open, setOpen] = useState(false);
+
+	const onDismissSingle = React.useCallback(() => {
+		setOpen(false);
+	}, [open]);
+
+	const onConfirmSingle = React.useCallback(
+		(params: any) => {
+			setOpen(false);
+			setDate(params.date);
+		},
+		[open, setDate]
+	);
+	let deliveryDate = date.toString();
+
+	useEffect(() => {
+		deliveryDate = format(date, 'yyyy/MM/dd').toString();
+		console.log(deliveryDate, 'dateeee');
+	}, [date]);
+
+	const [data, setData] = useState({
+		deliveryAddress: '',
+		deliveryFullname: '',
+		deliveryWeight: '',
+	});
+
+	const handleInputChange = (field: keyof typeof data, value: string) => {
+		setData((prevData) => ({
+			...prevData,
+			[field]: value,
+		}));
+	};
+
 	const isWeb = Platform.OS === 'web';
+
+	const handleCalendario = () => {
+		setOpen(!open);
+	};
+
+	// const handleCalendarValue = (e: DateTimePickerEvent) => {
+	// 	setDate(date);
+	// };
 
 	return (
 		<View
@@ -83,8 +129,8 @@ const AddPackage = ({ navigation }: Props) => {
 					}}
 					className=" text-texto font-roboto"
 					placeholder="Dirección"
-					onChangeText={(newText) => setText(newText)}
-					defaultValue={text}
+					onChangeText={(newText) => handleInputChange('deliveryAddress', newText)}
+					defaultValue={data.deliveryAddress}
 				/>
 				<View style={{ width: 260 * WScale, height: 1 }} className="bg-gray-400"></View>
 				<TextInput
@@ -96,8 +142,8 @@ const AddPackage = ({ navigation }: Props) => {
 					}}
 					className=" text-texto font-roboto"
 					placeholder="Nombre de quien recibe"
-					onChangeText={(newText) => setText(newText)}
-					defaultValue={text}
+					onChangeText={(newText) => handleInputChange('deliveryFullname', newText)}
+					defaultValue={data.deliveryFullname}
 				/>
 				<View style={{ width: 260 * WScale, height: 1 }} className="bg-gray-400"></View>
 				<TextInput
@@ -109,11 +155,11 @@ const AddPackage = ({ navigation }: Props) => {
 					}}
 					className=" text-texto font-roboto"
 					placeholder="Peso del paquete (Kg)"
-					onChangeText={(newText) => setText(newText)}
-					defaultValue={text}
+					onChangeText={(newText) => handleInputChange('deliveryWeight', newText)}
+					defaultValue={data.deliveryWeight}
 				/>
 				<View style={{ width: 260 * WScale, height: 1 }} className="bg-gray-400"></View>
-				<TextInput
+				<Text
 					style={{
 						height: 24 * HScale,
 						width: 260 * WScale,
@@ -121,18 +167,17 @@ const AddPackage = ({ navigation }: Props) => {
 						fontSize: scaledSize(15),
 					}}
 					className="relative  text-texto font-roboto"
-					placeholder="Fecha de entrega"
-					onChangeText={(newText) => setText(newText)}
-					defaultValue={text}
-				/>
+				>
+					Fecha de entrega
+				</Text>
 				<View
 					style={{ width: 270 * WScale, height: 35 * HScale }}
 					className="flex flex-row items-center border border-gray-400 rounded justify-between "
 				>
 					<Text style={{ left: 15 * WScale }} className="text-center font-roboto text-gray-500">
-						00/00/00
+						{format(date, 'dd/MM/yy')}
 					</Text>
-					<Pressable style={{ right: 10 * WScale }} className="relative">
+					<Pressable onPress={handleCalendario} style={{ right: 10 * WScale }} className="relative">
 						<View
 							style={{ width: 26 * WScale, height: 18 * HScale }}
 							className="justify-center items-center border rounded border-texto"
@@ -141,6 +186,15 @@ const AddPackage = ({ navigation }: Props) => {
 						</View>
 					</Pressable>
 				</View>
+				{/* {open && <DateTimePicker mode="date" display="spinner" value={date} />} */}
+				<DatePickerModal
+					locale="es"
+					mode="single"
+					visible={open}
+					date={date}
+					onDismiss={onDismissSingle}
+					onConfirm={onConfirmSingle}
+				/>
 			</View>
 			<View
 				style={{
@@ -150,6 +204,8 @@ const AddPackage = ({ navigation }: Props) => {
 				}}
 			>
 				<Button
+					action="postAgregar"
+					data={{ ...data, date }}
 					spec="texto"
 					height={28}
 					width={270}
