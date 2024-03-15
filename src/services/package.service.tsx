@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { err } from 'react-native-svg';
 axios.defaults.withCredentials = true;
 
 export const handleAvailable = async () => {
@@ -16,7 +17,6 @@ export const handleDelivered = async () => {
 };
 
 export const handleDetailsPackage = async (idPackage: string, disponible?: boolean) => {
-	console.log(idPackage);
 	let response;
 	disponible
 		? (response = await axios.get(
@@ -29,4 +29,15 @@ export const handleDetailsPackage = async (idPackage: string, disponible?: boole
 				withCredentials: true,
 		  }));
 	return response.data;
+};
+
+export const handleAddPackage = async (data: object) => {
+	try {
+		let response = await axios.post(`http://localhost:3000/api/v1/packages/new`, data, {
+			withCredentials: true,
+		});
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
 };

@@ -18,8 +18,8 @@ import ForgotPassword from '../screens/ForgotPassword';
 const NavigationClient = () => {
 	const Stack = createNativeStackNavigator();
 	return (
-		<Stack.Navigator initialRouteName={'HomeIniciarJornada'}>
-			<Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+		<Stack.Navigator initialRouteName={'AddPackage'}>
+			<Stack.Screen name="Login" component={AddPackage} options={{ headerShown: false }} />
 			<Stack.Screen
 				name="CreateAccount"
 				component={CreateAccount}
