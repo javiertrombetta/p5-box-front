@@ -64,7 +64,6 @@ export const fakePending = (): ListItem[] => [
 		state: Math.random() < 0.5 ? 'enCursoTrash' : 'pendienteIniciar',
 	},
 ];
-
 export const fakeHistory = (): ListItem[] => [
 	{
 		deliveryAddress: '#0A235, Amenabar 2356, CABA',
@@ -112,7 +111,6 @@ export const fakeHistory = (): ListItem[] => [
 		deliveryAddress: '#0A235, Cmenabar 2356, CABA',
 	},
 ];
-
 type ListItemUsers = {
 	[key: string]: {
 		circleValue: number;
@@ -120,7 +118,6 @@ type ListItemUsers = {
 		img: string;
 	};
 };
-
 export const fakeUsers = (): ListItemUsers[] => [
 	{
 		'0': {

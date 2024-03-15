@@ -100,7 +100,6 @@ const Button = ({
 	let user = useSelector((state) => state) as User;
 	const handleNavigation = () => {
 		if (navigate && navigation) {
-			console.log(navigate, 'esto es el navigate!!!!');
 			navigation.navigate(navigate);
 		}
 	};

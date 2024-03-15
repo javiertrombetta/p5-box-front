@@ -54,7 +54,7 @@ enum RouteName {
 	AddPackage = 'AddPackage',
 	PerfilRepartidor = 'PerfilRepartidor',
 	DeclaracionJurada = 'DeclaracionJurada',
-	ForgotPassword = "ForgotPassword",
+	ForgotPassword = 'ForgotPassword',
 	NewPassword = 'NewPassword',
 }
 
@@ -96,8 +96,10 @@ const List = ({
 			content3 === 'pendiente' ||
 			content3 === 'entregado' ||
 			column3 === 'none') &&
-			store.dispatch(login({ ...user, back: content3, packageSelect: idPackage })),
-			navigation.navigate(RouteName.RepartoEnCurso);
+			column1 !== 'circleProgress' &&
+			column3 !== 'buttonVer' &&
+			(store.dispatch(login({ ...user, back: content3, packageSelect: idPackage })),
+			navigation.navigate(RouteName.RepartoEnCurso));
 		column3 === 'img' && navigation.navigate(RouteName.PerfilRepartidor);
 	};
 	const [checked, setChecked] = useState(false);
