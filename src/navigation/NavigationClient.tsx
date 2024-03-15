@@ -14,11 +14,26 @@ import RepartoEnCurso from '../screens/RepartoEnCurso';
 import Repartidores from '../screens/Repartidores';
 import DeclaracionJurada from '../screens/DeclaracionJurada';
 import ForgotPassword from '../screens/ForgotPassword';
+import { store } from '../state/user';
+import { useSelector } from 'react-redux';
+
+type rolProps = {
+	roles: string;
+};
 
 const NavigationClient = () => {
 	const Stack = createNativeStackNavigator();
+	let rol = useSelector((state: rolProps) => state.roles);
 	return (
-		<Stack.Navigator initialRouteName={'HomeIniciarJornada'}>
+		<Stack.Navigator
+			initialRouteName={
+				rol[0] === 'administrador'
+					? 'HomeGestionarPedido'
+					: rol[0] === 'repartidor'
+					? 'HomeIniciarJornada'
+					: 'AddPackage'
+			}
+		>
 			<Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
 			<Stack.Screen
 				name="CreateAccount"

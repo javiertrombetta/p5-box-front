@@ -32,7 +32,7 @@ enum RouteName {
 	AddPackage = 'AddPackage',
 	PerfilRepartidor = 'PerfilRepartidor',
 	DeclaracionJurada = 'DeclaracionJurada',
-	ForgotPassword = "ForgotPassword",
+	ForgotPassword = 'ForgotPassword',
 	NewPassword = 'NewPassword',
 }
 
@@ -57,7 +57,6 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 	useEffect(() => {
 		handleDelivered().then((data) => data && setPackagesDelivered(data));
 		handleMePackages().then((data) => data && setPackagesPending(data));
-		console.log('cambio', store.getState().back);
 	}, [packagesPending.length, packagesDelivered.length, store.getState().back]);
 
 	type ListItemPending = {
@@ -179,7 +178,6 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 					<Text className="text-center text-texto mt-2">No tienes paquetes pendientes.</Text>
 				)}
 			</View>
-
 			<View
 				style={{ height: 293 * HScale, marginTop: 10 * HScale }}
 				className="w-full justify-start flex rounded-xl bg-white"
