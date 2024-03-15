@@ -20,6 +20,7 @@ import leftArrow from '../assets/arrow-left.png';
 import { login, store } from '../state/user';
 import { handleIniciarPackage } from '../services/user.service';
 import { useSelector } from 'react-redux';
+import { handleAddPackage } from '../services/package.service';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -183,6 +184,13 @@ const Button = ({
 									login({ ...user, paquetesObtenidos: data, back: 'obtenerPaquetes' })
 								);
 								navigation.navigate(RouteName.DeclaracionJurada);
+							} catch (error) {
+								console.error(error);
+							}
+						} else if (action === 'postAgregar' && data) {
+							try {
+								handleAddPackage(data);
+								navigation.navigate(RouteName.HomeGestionarPedido);
 							} catch (error) {
 								console.error(error);
 							}
