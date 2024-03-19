@@ -21,6 +21,7 @@ import { login, store } from '../state/user';
 import { handleIniciarPackage } from '../services/user.service';
 import { useSelector } from 'react-redux';
 import { handleAddPackage } from '../services/package.service';
+import { format } from 'date-fns';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -116,6 +117,7 @@ const Button = ({
 	const handleBack = () => {
 		navigate && navigation.navigate(navigate);
 	};
+	let formattedDate = format(new Date(), 'yyyy/MM/dd');
 	return (
 		<View style={{ height: height * HScale, width: width * WScale }}>
 			{action && navigate && (
@@ -137,7 +139,7 @@ const Button = ({
 										back: '',
 										packageSelect: '',
 										paquetesObtenidos: [],
-										date: '',
+										date: formattedDate,
 										userSelected: '',
 									};
 									store.dispatch(login(data));

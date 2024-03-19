@@ -125,7 +125,6 @@ const Repartidores = ({ navigation }: Props) => {
 	};
 
 	const keyExtractorUsers = (_: ListItemUsers, index: number) => `item-${index}`;
-	console.log(repartidores);
 	return (
 		<ScrollView style={{ paddingVertical: 6 * HScale }} className="w-full h-full bg-verde">
 			<View
@@ -174,17 +173,23 @@ const Repartidores = ({ navigation }: Props) => {
 					</View>
 				</View>
 				<View style={{ minHeight: 405 * HScale }} className="bg-blanco flex justify-evenly w-full">
-					{dropdown
-						? repartidores.map((item, index) => (
+					{repartidores ? (
+						dropdown ? (
+							repartidores?.map((item, index) => (
 								<View key={keyExtractorUsers(item, index)} style={{ height: 101 * HScale }}>
 									{renderItemsUsers({ item })}
 								</View>
-						  ))
-						: repartidores.slice(0, 4).map((item, index) => (
+							))
+						) : (
+							repartidores?.slice(0, 4).map((item, index) => (
 								<View key={keyExtractorUsers(item, index)} style={{ height: 101 * HScale }}>
 									{renderItemsUsers({ item })}
 								</View>
-						  ))}
+							))
+						)
+					) : (
+						<Text>No se encontraron repartidores para la fecha.</Text>
+					)}
 				</View>
 				<View className="w-full h-[0.5] bg-gray-300" />
 				<Pressable
