@@ -1,18 +1,15 @@
-import { View, Text, Image, Dimensions } from 'react-native';
+import { View, Text, Image, Dimensions, ScrollView, Pressable, Platform } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import downArrow from '../assets/arrow-head-down.png';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 import BotonActivado from '../assets/BotonActivado.svg';
 import Header from '../components/Header';
 import List from '../components/List';
 import Title from '../components/Title';
 import { NavigationProp } from '@react-navigation/native';
-
-const { width, height } = Dimensions.get('window');
-const WScale = width / 360;
-const HScale = height / 640;
-
-const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+import { store } from '../state/user';
+import { handleUserId, handleUserPackage } from '../services/user.service';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -40,10 +37,94 @@ type Props = {
 };
 
 const PerfilRepartidor = ({ navigation }: Props) => {
+	const isWeb = Platform.OS === 'web';
+	const { width, height } = Dimensions.get('window');
+	const WScale = width / 360;
+	const HScale = height / 640;
+	const [dropdown, setDropdown] = useState(false);
+	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+	const userId = store.getState().userSelected;
+	const [user, setUser] = useState({
+		id: '',
+		name: '',
+		lastname: '',
+		email: '',
+		photoUrl: '',
+		packages: [],
+	});
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const userData = await handleUserId(userId);
+				const userPackages = await handleUserPackage(userId);
+				const updatedUser = { ...userData, packages: userPackages };
+				setUser(updatedUser);
+			} catch (error) {
+				console.error('Error al obtener los datos del usuario:', error);
+			}
+		};
+		fetchData();
+	}, [userId]);
+	type ListItemPackage = {
+		deliveryAddress: string;
+		state: string;
+		_id: string;
+	};
+
+	interface RenderItemsUsersProps {
+		item: ListItemPackage;
+		index: number;
+	}
+
+	const handleArrow = () => {
+		dropdown ? setDropdown(false) : setDropdown(true);
+	};
+	const renderItemsUsers = ({ item, index }: RenderItemsUsersProps) => {
+		if (!item) {
+			console.error('El ítem en el índice proporcionado es undefined');
+			return null;
+		}
+
+		const lastItem: boolean = index === 3;
+
+		const id = '#' + item._id.slice(0, 5).toUpperCase() + '...';
+		const deliveryAddressSlice = item.deliveryAddress.slice(0, -4);
+		const deliveryAddress1 =
+			deliveryAddressSlice.length > 17
+				? deliveryAddressSlice.slice(0, 20) + '...'
+				: deliveryAddressSlice;
+		const deliveryAddress2 = item.deliveryAddress.slice(-3);
+
+		return (
+			<>
+				<View style={{ minHeight: 70 * HScale }}>
+					<List
+						column1="svg"
+						column2="stringsCol"
+						content2String={`${id}, ${deliveryAddress1}, ${deliveryAddress2}`}
+						column3="svgStringButton"
+						content3="entregado"
+						navigation={navigation}
+					/>
+				</View>
+				{!dropdown && !lastItem && (
+					<View className="flex w-full items-center">
+						<View style={{ height: 1 }} className="w-full bg-gray-300" />
+					</View>
+				)}
+				{dropdown && (
+					<View className="flex w-full items-center">
+						<View style={{ height: 1 }} className="w-full bg-gray-300" />
+					</View>
+				)}
+			</>
+		);
+	};
+	const keyExtractorPackage = (_: ListItemPackage, index: number) => `item-${index}`;
 	return (
-		<View
-			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
-			className="w-full bg-verde h-full flex flex-col items-center"
+		<ScrollView
+			style={{ paddingHorizontal: 30 * WScale, paddingVertical: 6 * HScale }}
+			className="w-full bg-verde h-full flex flex-col"
 		>
 			<Header navigation={navigation} />
 			<View style={{ height: 40 * HScale, marginTop: 28 * HScale, width: '100%' }}>
@@ -75,7 +156,7 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 							style={{ fontSize: scaledSize(14) }}
 							className="text-start font-robotoBold text-texto"
 						>
-							Palermo
+							{user?.name}
 						</Text>
 						<Text
 							style={{
@@ -106,7 +187,7 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 				/>
 			</View>
 			<View
-				style={{ height: 282 * HScale, marginTop: 10 * HScale }}
+				style={{ minHeight: 282 * HScale, marginTop: 10 * HScale }}
 				className="w-full justify-start flex rounded-t-xl bg-white"
 			>
 				<View style={{ height: 40 * HScale, width: '100%' }}>
@@ -139,77 +220,69 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 					<View style={{ height: 0.5 }} className="w-full bg-gray-300" />
 				</View>
 				<View
-					style={{ height: 192 * HScale, paddingLeft: 16 * WScale }}
+					style={{ minHeight: 192 * HScale, paddingLeft: 16 * WScale }}
 					className="flex flex-col justify-start items-center"
 				>
-					<View
-						style={{ height: 70 * HScale }}
-						className="flex flex-row justify-between items-center w-full"
-					>
-						<List
-							column1="svg"
-							column2="stringsCol"
-							content2String="#0A903, Las Heras 5678, CABA"
-							column3="svgStringButton"
-							content3="entregadoTrash"
-							navigation={navigation}
-						/>
-					</View>
-					<View style={{ paddingRight: 16 * WScale }} className="flex w-full items-center">
-						<View style={{ height: 1 }} className="w-full bg-gray-300" />
-					</View>
-					<View
-						style={{ height: 70 * HScale }}
-						className="flex flex-row justify-between items-center w-full"
-					>
-						<List
-							column1="svg"
-							column2="stringsCol"
-							content2String="#0A903, Las Heras 5678, CABA"
-							column3="svgStringButton"
-							content3="entregadoTrash"
-							navigation={navigation}
-						/>
-					</View>
-					<View style={{ paddingRight: 16 * WScale }} className="flex w-full items-center">
-						<View style={{ height: 1 }} className="w-full bg-gray-300" />
-					</View>
-					<View
-						style={{ height: 70 * HScale }}
-						className="flex flex-row justify-between items-center w-full"
-					>
-						<List
-							column1="svg"
-							column2="stringsCol"
-							content2String="#0A903, Las Heras 5678, CABA"
-							column3="svgStringButton"
-							content3="entregadoTrash"
-							navigation={navigation}
-						/>
-					</View>
+					{dropdown
+						? user.packages.map((item, index) => (
+								<View
+									key={keyExtractorPackage(item, index)}
+									style={{
+										height: 70 * HScale,
+										width: '100%',
+									}}
+								>
+									{renderItemsUsers({ item, index })}
+								</View>
+						  ))
+						: user.packages.slice(0, 3).map((item, index) => (
+								<View
+									key={keyExtractorPackage(item, index)}
+									style={{
+										height: 70 * HScale,
+										width: '100%',
+									}}
+								>
+									{renderItemsUsers({ item, index })}
+								</View>
+						  ))}
 				</View>
 			</View>
-			<View style={{ position: 'relative', height: 1 }} className="w-full bg-gray-300">
-				<LinearGradient
-					colors={['rgba(255, 255, 255, 0.0)', 'rgba(255, 255, 255, 1)']}
-					style={{
-						position: 'absolute',
-						left: 0,
-						right: 0,
-						height: 50 * HScale,
-						top: -50 * HScale,
-					}}
-					start={{ x: 0.5, y: 0.0 }}
-					end={{ x: 0.5, y: 1.0 }}
-				/>
-			</View>
-			<View
-				style={{ height: 48 * HScale }}
-				className="w-full flex justify-center items-center rounded-b-xl bg-blanco z-10"
+			{!dropdown && (
+				<View style={{ position: 'relative', height: 1 }} className="w-full bg-gray-300">
+					<LinearGradient
+						colors={['rgba(255, 255, 255, 0.0)', 'rgba(255, 255, 255, 1)']}
+						style={{
+							position: 'absolute',
+							left: 0,
+							right: 0,
+							height: 50 * HScale,
+							top: -50 * HScale,
+						}}
+						start={{ x: 0.5, y: 0.0 }}
+						end={{ x: 0.5, y: 1.0 }}
+					/>
+				</View>
+			)}
+
+			<Pressable
+				onPress={handleArrow}
+				style={{ height: 47.5 * HScale }}
+				className="w-full flex justify-center items-center rounded-b-xl bg-white"
 			>
-				<ArrowHeadDown height={12 * HScale} width={24 * WScale} />
-			</View>
-		</View>
+				{dropdown ? (
+					isWeb ? (
+						<Image source={downArrow} className="rotate-180" />
+					) : (
+						<ArrowHeadDown width={scaledSize(20)} className="rotate-180" />
+					)
+				) : isWeb ? (
+					<Image source={downArrow} />
+				) : (
+					<ArrowHeadDown width={scaledSize(20)} />
+				)}
+			</Pressable>
+		</ScrollView>
 	);
 };
 

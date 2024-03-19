@@ -9,6 +9,8 @@ const initialState = {
     packageSelect: "",
     roles: [""],
     paquetesObtenidos: [""],
+    userSelected: "",
+    date: "",
     packages: [""],
     photoUrl: "",
     state: "",
