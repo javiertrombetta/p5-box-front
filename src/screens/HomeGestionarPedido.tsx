@@ -13,6 +13,7 @@ import { login, store } from '../state/user';
 import RepartidoresHabilitados from '../components/RepartidoresHabilitados';
 import PaquetesRepartidos from '../components/PaquetesRepartidos';
 import { format } from 'date-fns';
+import { useSelector } from 'react-redux';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -46,15 +47,23 @@ const HomeGestionarPedido = ({ navigation }: Props) => {
 
 	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
-	const user = store.getState();
+	let user = store.getState();
 
 	const [selectedDate, setSelectedDate] = useState(new Date());
+
 	const handleSelect = (date: Date) => {
+		console.log(date);
 		setSelectedDate(date);
 		date.toLocaleDateString('es-ES');
 		let formattedDate = format(date, 'yyyy/MM/dd');
+		console.log(formattedDate);
 		store.dispatch(login({ ...user, date: formattedDate }));
 	};
+
+	useEffect(() => {
+		store.dispatch(login({ ...user, date: format(selectedDate, 'yyyy/MM/dd') }));
+		console.log(user);
+	}, []);
 
 	const [listRepartidores, setListRepartidores] = useState({
 		circleValue: 0,
