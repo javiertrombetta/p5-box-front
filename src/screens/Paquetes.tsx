@@ -1,19 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image, Dimensions, Platform, Pressable, ScrollView } from 'react-native';
 import { fakeHistory } from './fakeData';
-
+import { es } from 'date-fns/locale';
 import downArrow from '../assets/arrow-head-down.png';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 import Header from '../components/Header';
 import List from '../components/List';
 import { NavigationProp } from '@react-navigation/native';
 import Title from '../components/Title';
-
-const { width, height } = Dimensions.get('window');
-const WScale = width / 360;
-const HScale = height / 640;
-
-const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+import { store } from '../state/user';
+import { format } from 'date-fns';
+import { handlePackagesDelivered } from '../services/reports.service';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -42,8 +39,15 @@ type Props = {
 
 const Paquetes = ({ navigation }: Props) => {
 	const isWeb = Platform.OS === 'web';
+	const { width, height } = Dimensions.get('window');
+	const WScale = width / 360;
+	const HScale = height / 640;
+	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 	const [dropdown, setDropdown] = useState(false);
-
+	let date = store.getState().date;
+	const [dayFormat, setDayFormat] = useState<Date | string>();
+	const [paquetes, setPaquetes] = useState<ListItemPackage[]>([]);
+	const [month, setMonth] = useState<string>();
 	type ListItemPackage = {
 		[key: string]: string;
 	};
@@ -52,6 +56,23 @@ const Paquetes = ({ navigation }: Props) => {
 		item: ListItemPackage;
 		index: number;
 	}
+
+	useEffect(() => {
+		let year = date.slice(0, 4);
+		let month = date.slice(5, 7);
+		setMonth(month);
+		let day = date.slice(8, 10);
+		let newDate = new Date(parseInt(year), parseInt(month), parseInt(day));
+		setDayFormat(format(newDate, 'EEE LLLL', { locale: es }));
+		handlePackagesDelivered(year.toString(), month.toString(), day.toString())
+			.then((packages) => {
+				console.log(packages);
+				setPaquetes(packages);
+			})
+			.catch((error) => {
+				console.error('Error al obtener los paquetes de los usuarios:', error);
+			});
+	}, [date]);
 
 	const handleArrow = () => {
 		dropdown ? setDropdown(false) : setDropdown(true);
@@ -64,9 +85,16 @@ const Paquetes = ({ navigation }: Props) => {
 		}
 
 		const lastItem: boolean = index === 4;
+		const id = '#' + item._id.slice(0, 5).toUpperCase() + '...';
+		const deliveryAddressSlice = item.deliveryAddress.slice(0, -4);
+		const deliveryAddress1 =
+			deliveryAddressSlice.length > 17
+				? deliveryAddressSlice.slice(0, 20) + '...'
+				: deliveryAddressSlice;
+		const deliveryAddress2 = item.deliveryAddress.slice(-3);
 
 		return (
-			<View style={{ paddingHorizontal: 16 * WScale }}>
+			<View style={{ paddingLeft: 16 * WScale }}>
 				<View
 					style={{ minHeight: 70 * HScale }}
 					className="flex flex-row justify-between items-center w-full"
@@ -74,8 +102,9 @@ const Paquetes = ({ navigation }: Props) => {
 					<List
 						column1="svg"
 						column2="stringsCol"
-						content2String={item.deliveryAddress}
-						column3="svgTrash"
+						content2String={`${id}, ${deliveryAddress1}, ${deliveryAddress2}`}
+						column3="svgStringButton"
+						content3="entregado"
 						navigation={navigation}
 					/>
 				</View>
@@ -130,15 +159,14 @@ const Paquetes = ({ navigation }: Props) => {
 							className="text-sm font-robotoBold text-texto text-center"
 							style={{ fontSize: scaledSize(14) }}
 						>
-							ENERO
+							{dayFormat?.toString().slice(4).toUpperCase()}
 						</Text>
-						<View className="flex flex-row items-center">
+						<View className="flex flex-row items-center gap-1">
 							<Text className="font-roboto text-texto" style={{ fontSize: scaledSize(14) }}>
-								mie
+								{dayFormat?.toString().slice(0, 3)}
 							</Text>
 							<Text className="font-robotoBold text-texto" style={{ fontSize: scaledSize(14) }}>
-								{' '}
-								/ 03
+								/ {month}
 							</Text>
 						</View>
 					</View>
@@ -151,7 +179,7 @@ const Paquetes = ({ navigation }: Props) => {
 						}}
 						className=" text-texto font-robotoMedium"
 					>
-						58 Paquetes entregados
+						{paquetes.length} Paquetes entregados
 					</Text>
 					<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
 						<View className="h-[1] w-full bg-gray-300" />
@@ -161,7 +189,7 @@ const Paquetes = ({ navigation }: Props) => {
 						className="flex flex-col items-center justify-between w-full"
 					>
 						{dropdown
-							? fakeHistory().map((item, index) => (
+							? paquetes.map((item, index) => (
 									<View
 										key={keyExtractorPackage(item, index)}
 										style={{
@@ -172,19 +200,17 @@ const Paquetes = ({ navigation }: Props) => {
 										{renderItemsUsers({ item, index })}
 									</View>
 							  ))
-							: fakeHistory()
-									.slice(0, 5)
-									.map((item, index) => (
-										<View
-											key={keyExtractorPackage(item, index)}
-											style={{
-												height: 70 * HScale,
-												width: '100%',
-											}}
-										>
-											{renderItemsUsers({ item, index })}
-										</View>
-									))}
+							: paquetes.slice(0, 5).map((item, index) => (
+									<View
+										key={keyExtractorPackage(item, index)}
+										style={{
+											height: 70 * HScale,
+											width: '100%',
+										}}
+									>
+										{renderItemsUsers({ item, index })}
+									</View>
+							  ))}
 					</View>
 				</View>
 				<View style={{ height: 1 * HScale }} className="w-full bg-gray-300 z-10" />
