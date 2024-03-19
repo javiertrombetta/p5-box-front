@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { err } from 'react-native-svg';
 axios.defaults.withCredentials = true;
 
 export const handleAvailable = async () => {

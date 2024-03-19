@@ -100,7 +100,9 @@ const List = ({
 			column3 !== 'buttonVer' &&
 			(store.dispatch(login({ ...user, back: content3, packageSelect: idPackage })),
 			navigation.navigate(RouteName.RepartoEnCurso));
-		column3 === 'img' && navigation.navigate(RouteName.PerfilRepartidor);
+		column3 === 'img' &&
+			(store.dispatch(login({ ...user, userSelected: idPackage })),
+			navigation.navigate(RouteName.PerfilRepartidor));
 	};
 	const [checked, setChecked] = useState(false);
 	const handleCheck = () => {
