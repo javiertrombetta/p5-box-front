@@ -1,4 +1,7 @@
 import { configureStore, ThunkAction, Action, createSlice } from "@reduxjs/toolkit"
+import { format } from "date-fns";
+
+let formattedDate = format(new Date(), 'yyyy/MM/dd')
 
 const initialState = {
     _id: "",
@@ -6,11 +9,11 @@ const initialState = {
     lastname: "",
     email: "",
     back: "",
+    date: formattedDate,
     packageSelect: "",
     roles: [""],
     paquetesObtenidos: [""],
     userSelected: "",
-    date: "",
     packages: [""],
     photoUrl: "",
     state: "",
@@ -23,15 +26,10 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     login: (state, action) => action.payload,
-    logout: (state, action) => {
-      return {
-        ...initialState,
-      };
-    },
   },
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login } = userSlice.actions;
 
 export const store = configureStore({
     reducer: userSlice.reducer
