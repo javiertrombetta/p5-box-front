@@ -9,9 +9,10 @@ import Title from '../components/Title';
 import { NavigationProp } from '@react-navigation/native';
 import Card from '../components/Card';
 import WeeklyDatePicker from '../components/WeeklyDatePicker';
-import { store } from '../state/user';
+import { login, store } from '../state/user';
 import RepartidoresHabilitados from '../components/RepartidoresHabilitados';
 import PaquetesRepartidos from '../components/PaquetesRepartidos';
+import { format } from 'date-fns';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -50,6 +51,9 @@ const HomeGestionarPedido = ({ navigation }: Props) => {
 	const [selectedDate, setSelectedDate] = useState(new Date());
 	const handleSelect = (date: Date) => {
 		setSelectedDate(date);
+		date.toLocaleDateString('es-ES');
+		let formattedDate = format(date, 'yyyy/MM/dd');
+		store.dispatch(login({ ...user, date: formattedDate }));
 	};
 
 	const [listRepartidores, setListRepartidores] = useState({

@@ -132,7 +132,14 @@ const Button = ({
 							await handleLoginUser(data);
 							try {
 								await handleMeUser().then((data: object) => {
-									data = { ...data, back: '', packageSelect: '', paquetesObtenidos: [] };
+									data = {
+										...data,
+										back: '',
+										packageSelect: '',
+										paquetesObtenidos: [],
+										date: '',
+										userSelected: '',
+									};
 									store.dispatch(login(data));
 								});
 								handleNavigationRol();
