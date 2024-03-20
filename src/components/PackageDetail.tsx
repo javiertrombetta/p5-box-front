@@ -45,7 +45,7 @@ const PackageDetail = () => {
 				>
 					Destino:
 				</Text>
-				<Text style={{ fontSize: scaledSize(12) }} className="font-roboto text-texto text-center">
+				<Text style={{ fontSize: scaledSize(12) }} className="font-roboto text-texto text-start">
 					{selectPackage.deliveryAddress}
 				</Text>
 			</View>

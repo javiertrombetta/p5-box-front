@@ -64,7 +64,7 @@ export default function App() {
 			) : (
 				<NavigationContainer>
 					{user._id.length > 0 && rol ? <NavigationClient /> : <NavigationNotClient />}
-					<Toast />
+					<Toast  />
 				</NavigationContainer>
 			)}
 		</Provider>
