@@ -53,7 +53,7 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 	const [isSwitchOn, setIsSwitchOn] = useState(true);
 	const onToggleSwitch = () => {
 		setIsSwitchOn(!isSwitchOn);
-		handleToggleState(user.id).then((res) => console.log(res));
+		handleToggleState(user.id);
 	};
 
 	useEffect(() => {
@@ -69,7 +69,6 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 			try {
 				const userData = await handleUserId(userId);
 				userData.state === 'inactivo' && setIsSwitchOn(false);
-				console.log(userData);
 				setUser(userData);
 			} catch (error) {
 				console.error('Error al obtener los datos del usuario:', error);

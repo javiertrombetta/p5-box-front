@@ -63,7 +63,7 @@ const HomeGestionarPedido = ({ navigation }: Props) => {
 				indexNavigation: navigation.getState().index,
 			})
 		);
-		console.log(navigation.getState().routes[length - 1]);
+		// console.log(navigation.getState().routes[length - 1]);
 	}, [navigation.getState().routes[length - 1]]);
 
 	const [listRepartidores, setListRepartidores] = useState({

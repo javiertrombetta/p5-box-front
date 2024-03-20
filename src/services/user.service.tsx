@@ -44,6 +44,9 @@ export const handleConditions = async (data: object) => {
 		const response = await axios.put('http://localhost:3000/api/v1/auth/me/packages', data, {
 			withCredentials: true,
 		});
+		if (response.data.message === 'Se cerró la sesión debido a la declaración jurada registrada.') {
+			window.location.reload();
+		}
 		return response.data;
 	} catch (error) {
 		console.error('Error al procesar la declaración:', error);
