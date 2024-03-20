@@ -1,7 +1,6 @@
 import {
 	View,
 	Text,
-	Image,
 	Dimensions,
 	Pressable,
 	Platform,
@@ -9,16 +8,13 @@ import {
 	Easing,
 	VirtualizedList,
 } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+
 import React, { useEffect, useRef, useState } from 'react';
-import downArrow from '../assets/arrow-head-down.png';
-import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 import List from '../components/List';
 import Title from '../components/Title';
 import { NavigationProp } from '@react-navigation/native';
 import { login, store } from '../state/user';
-import { handleMePackages, handleUserId, handleUserPackage } from '../services/user.service';
-import { handlePackagesDeliveredUser } from '../services/reports.service';
+import { handleMePackages } from '../services/user.service';
 import { handleDelivered } from '../services/package.service';
 import { useSelector } from 'react-redux';
 
@@ -165,7 +161,7 @@ const ListPendingsRepartidor = ({ navigation }: Props) => {
 		<>
 			<Animated.View
 				style={{
-					marginTop: 10,
+					marginTop: 28,
 					height: heightAnim,
 					overflow: 'hidden',
 					borderBottomRightRadius: 12,

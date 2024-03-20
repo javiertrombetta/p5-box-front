@@ -106,14 +106,13 @@ export const handleMePackages = async () => {
 };
 
 export const handlePackageCancel = async (idPackage: string) => {
-	console.log(idPackage, 'Estas llegando???');
 	const response = await axios.put(
 		`http://localhost:3000/api/v1/auth/me/packages/${idPackage}/cancel`,
 		{
 			withCredentials: true,
 		}
 	);
-	console.log('Te cancelo');
+
 	return response.data;
 };
 

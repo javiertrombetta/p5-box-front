@@ -9,7 +9,6 @@ import personas from '../assets/Group 37396.png';
 import buttonTrue from '../assets/buttonTrue.png';
 import enCurso from '../assets/EllipseGreen.png';
 import pendiente from '../assets/EllipseOrange.png';
-
 import GreenCircle from '../assets/GreenCircle.svg';
 import GrayCircle from '../assets/GrayCircle.svg';
 import EllipseGreen from '../assets/EllipseGreen.svg';
@@ -452,10 +451,10 @@ const List = ({
 								<View style={{ paddingRight: 16 * WScale }}>
 									<Pressable
 										onPress={() => {
-											idPackage && handlePackageCancel(idPackage);
+											idPackage && handlePackageCancel(idPackage).then(()=>showToast())
 											store.dispatch(login({ ...user, back: 'cancel' }));
 										}}
-										onPressIn={showToast}
+										// onPressIn={showToast}
 										style={{ height: scaledSize(24), width: scaledSize(56) }}
 										className="flex flex-row justify-end items-center"
 									>
