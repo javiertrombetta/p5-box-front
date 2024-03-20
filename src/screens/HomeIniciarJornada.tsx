@@ -13,7 +13,7 @@ import List from '../components/List';
 import { handleDelivered } from '../services/package.service';
 import { handleMePackages } from '../services/user.service';
 import { useSelector } from 'react-redux';
-import { store } from '../state/user';
+import { login, store } from '../state/user';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -54,10 +54,16 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 		back: string;
 	};
 	let user = useSelector((state) => state) as User;
+
 	useEffect(() => {
 		handleDelivered().then((data) => data && setPackagesDelivered(data));
 		handleMePackages().then((data) => data && setPackagesPending(data));
-	}, [packagesPending.length, packagesDelivered.length, store.getState().back]);
+	}, [packagesPending.length, packagesDelivered.length, store.getState().back, user.back]);
+
+	useEffect(() => {
+		console.log(store.getState().back, user.back);
+		store.dispatch(login({ ...user, back: undefined }));
+	}, [user.back === `cancel`]);
 
 	type ListItemPending = {
 		deliveryAddress: string;
