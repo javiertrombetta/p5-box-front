@@ -76,7 +76,6 @@ const Repartidores = ({ navigation }: Props) => {
 					const userPromises = res.map((user: idsObj) => handleUserId(user.userId));
 					return Promise.all(userPromises);
 				} else {
-					// store.dispatch(login(user))
 					setRepartidores([]);
 					return null;
 				}
