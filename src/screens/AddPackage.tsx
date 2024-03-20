@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View, Text, Pressable, Image, TextInput, Dimensions, Platform } from 'react-native';
-
+import { DatePickerModal } from 'react-native-paper-dates';
 import leftArrow from '../assets/arrow-left.png';
 import arrowHeadDown from '../assets/arrow-head-down.png';
-
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
-
 import Header from '../components/Header';
 import Button from '../components/Button';
 import { NavigationProp } from '@react-navigation/native';
+import { format } from 'date-fns';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -33,6 +32,9 @@ enum RouteName {
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
 	PerfilRepartidor = 'PerfilRepartidor',
+	DeclaracionJurada = 'DeclaracionJurada',
+	ForgotPassword = 'ForgotPassword',
+	NewPassword = 'NewPassword',
 }
 
 type Props = {
@@ -40,8 +42,41 @@ type Props = {
 };
 
 const AddPackage = ({ navigation }: Props) => {
-	const [text, setText] = useState('');
+	const [date, setDate] = useState(new Date());
+	const [open, setOpen] = useState(false);
+
+	const onDismissSingle = React.useCallback(() => {
+		setOpen(false);
+	}, [open]);
+	const onConfirmSingle = React.useCallback(
+		(params: any) => {
+			setOpen(false);
+			setDate(params.date);
+			setDate(params.date.setHours(0, 0, 0, 0));
+			setData((prevData) => ({ ...prevData, deliveryDate: params.date }));
+		},
+		[setOpen, setDate]
+	);
+
+	const [data, setData] = useState({
+		deliveryAddress: '',
+		deliveryFullname: '',
+		deliveryWeight: 0,
+		deliveryDate: new Date(),
+	});
+
+	const handleInputChange = (field: keyof typeof data, value: string) => {
+		setData((prevData) => ({
+			...prevData,
+			[field]: value,
+		}));
+	};
+
 	const isWeb = Platform.OS === 'web';
+
+	const handleCalendario = () => {
+		setOpen(!open);
+	};
 
 	return (
 		<View
@@ -67,7 +102,6 @@ const AddPackage = ({ navigation }: Props) => {
 					)}
 				</View>
 			</View>
-
 			<View
 				style={{ height: 450 * HScale, marginTop: 10 * HScale }}
 				className="w-full items-center rounded-xl bg-blanco"
@@ -81,11 +115,10 @@ const AddPackage = ({ navigation }: Props) => {
 					}}
 					className=" text-texto font-roboto"
 					placeholder="Dirección"
-					onChangeText={(newText) => setText(newText)}
-					defaultValue={text}
+					onChangeText={(newText) => handleInputChange('deliveryAddress', newText)}
+					defaultValue={data.deliveryAddress}
 				/>
 				<View style={{ width: 260 * WScale, height: 1 }} className="bg-gray-400"></View>
-
 				<TextInput
 					style={{
 						height: 24 * HScale,
@@ -95,11 +128,10 @@ const AddPackage = ({ navigation }: Props) => {
 					}}
 					className=" text-texto font-roboto"
 					placeholder="Nombre de quien recibe"
-					onChangeText={(newText) => setText(newText)}
-					defaultValue={text}
+					onChangeText={(newText) => handleInputChange('deliveryFullname', newText)}
+					defaultValue={data.deliveryFullname}
 				/>
 				<View style={{ width: 260 * WScale, height: 1 }} className="bg-gray-400"></View>
-
 				<TextInput
 					style={{
 						height: 24 * HScale,
@@ -109,12 +141,10 @@ const AddPackage = ({ navigation }: Props) => {
 					}}
 					className=" text-texto font-roboto"
 					placeholder="Peso del paquete (Kg)"
-					onChangeText={(newText) => setText(newText)}
-					defaultValue={text}
+					onChangeText={(newText) => handleInputChange('deliveryWeight', newText)}
 				/>
 				<View style={{ width: 260 * WScale, height: 1 }} className="bg-gray-400"></View>
-
-				<TextInput
+				<Text
 					style={{
 						height: 24 * HScale,
 						width: 260 * WScale,
@@ -122,18 +152,17 @@ const AddPackage = ({ navigation }: Props) => {
 						fontSize: scaledSize(15),
 					}}
 					className="relative  text-texto font-roboto"
-					placeholder="Fecha de entrega"
-					onChangeText={(newText) => setText(newText)}
-					defaultValue={text}
-				/>
+				>
+					Fecha de entrega
+				</Text>
 				<View
 					style={{ width: 270 * WScale, height: 35 * HScale }}
 					className="flex flex-row items-center border border-gray-400 rounded justify-between "
 				>
 					<Text style={{ left: 15 * WScale }} className="text-center font-roboto text-gray-500">
-						00/00/00
+						{format(date, 'dd/MM/yy')}
 					</Text>
-					<Pressable style={{ right: 10 * WScale }} className="relative">
+					<Pressable onPress={handleCalendario} style={{ right: 10 * WScale }} className="relative">
 						<View
 							style={{ width: 26 * WScale, height: 18 * HScale }}
 							className="justify-center items-center border rounded border-texto"
@@ -142,6 +171,14 @@ const AddPackage = ({ navigation }: Props) => {
 						</View>
 					</Pressable>
 				</View>
+				<DatePickerModal
+					locale="es"
+					mode="single"
+					visible={open}
+					date={date}
+					onDismiss={onDismissSingle}
+					onConfirm={onConfirmSingle}
+				/>
 			</View>
 			<View
 				style={{
@@ -151,6 +188,8 @@ const AddPackage = ({ navigation }: Props) => {
 				}}
 			>
 				<Button
+					action="postAgregar"
+					data={data}
 					spec="texto"
 					height={28}
 					width={270}

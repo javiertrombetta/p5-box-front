@@ -26,6 +26,7 @@ interface titleProps {
 	details?: string;
 	navigate?: RouteName;
 	navigation?: NavigationProp<RootStackParamList>;
+	currentDate?: Date;
 }
 
 type RootStackParamList = {
@@ -44,6 +45,9 @@ enum RouteName {
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
 	PerfilRepartidor = 'PerfilRepartidor',
+	DeclaracionJurada = 'DeclaracionJurada',
+	ForgotPassword = 'ForgotPassword',
+	NewPassword = 'NewPassword',
 }
 
 const Title = ({
@@ -55,11 +59,16 @@ const Title = ({
 	size,
 	navigate,
 	navigation,
+	currentDate,
 }: titleProps) => {
-	const currentDate: Date = new Date();
-	const formattedDate: string = format(currentDate, 'dd/MM/yy');
-	const dayOfWeek = format(currentDate, 'EEE');
-	const dayOfMonth = format(currentDate, 'dd');
+	let formattedDate;
+	let dayOfWeek;
+	let dayOfMonth;
+	if (currentDate) {
+		formattedDate = format(currentDate, 'dd/MM/yy');
+		dayOfWeek = format(currentDate, 'EEE');
+		dayOfMonth = format(currentDate, 'dd');
+	}
 
 	const isWeb = Platform.OS === 'web';
 
@@ -84,7 +93,6 @@ const Title = ({
 				>
 					{content}
 				</Text>
-
 				<Text
 					style={{ fontSize: scaledSize(12), marginTop: scaledSize(-8) }}
 					className="text-texto font-sairaMedium"
@@ -92,9 +100,8 @@ const Title = ({
 					{details}
 				</Text>
 			</View>
-
 			<View className=" flex items-center flex-row justify-between">
-				{date === true && color === 'v' ? (
+				{date === true && color === 'v' && dayOfWeek ? (
 					<View className=" flex items-center flex-row justify-between">
 						<Text style={{ fontSize: scaledSize(14) }} className="font-roboto text-texto">
 							{dayOfWeek.toLocaleLowerCase() + ' '}
@@ -111,10 +118,9 @@ const Title = ({
 						{formattedDate}
 					</Text>
 				) : (
-					''
+					<Text></Text>
 				)}
-
-				{arrow ? (
+				{arrow && (
 					<View
 						style={{ width: scaledSize(14), height: scaledSize(12) }}
 						className="flex items-center justify-center"
@@ -135,18 +141,11 @@ const Title = ({
 							) : (
 								<ArrowDown width={scaledSize(14)} />
 							)
-						) : arrow === 'right' ? (
-							isWeb ? (
-								<Image source={rightArrow} />
-							) : (
-								<ArrowRight width={scaledSize(14)} />
-							)
 						) : (
-							''
+							arrow === 'right' &&
+							(isWeb ? <Image source={rightArrow} /> : <ArrowRight width={scaledSize(14)} />)
 						)}
 					</View>
-				) : (
-					''
 				)}
 			</View>
 		</View>

@@ -1,15 +1,10 @@
 import { View, Pressable, Dimensions, Platform, Image } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 import LogoBox from '../assets/LogoBox.svg';
 import box from '../assets/box.png';
 import Button from './Button';
 import { NavigationProp } from '@react-navigation/native';
-
-const { width, height } = Dimensions.get('window');
-const WScale = width / 360;
-const HScale = height / 640;
-
-const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+import { store } from '../state/user';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -27,21 +22,38 @@ enum RouteName {
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
 	PerfilRepartidor = 'PerfilRepartidor',
+	DeclaracionJurada = 'DeclaracionJurada',
+	ForgotPassword = 'ForgotPassword',
+	NewPassword = 'NewPassword',
 }
 
 type Props = {
 	navigation: NavigationProp<RootStackParamList>;
 };
 
-const Header = ({ navigation }: Props) => {
-	const client = true;
-	const isWeb = Platform.OS === 'web';
-	const handleNavigate = () => {
-		client
-			? navigation.navigate(RouteName.HomeIniciarJornada)
-			: navigation.navigate(RouteName.HomeGestionarPedido);
-	};
+interface User {
+	// otras propiedades de usuario
+	roles: string[];
+}
 
+const Header = ({ navigation }: Props) => {
+	const isWeb = Platform.OS === 'web';
+
+	const { width, height } = Dimensions.get('window');
+	const WScale = width / 360;
+	const HScale = height / 640;
+	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+
+	let user = store.getState();
+	const handleNavigate = () => {
+		if (user) {
+			user.roles[0] === 'repartidor'
+				? navigation.navigate(RouteName.HomeIniciarJornada)
+				: user.roles[0] === 'administrador'
+				? navigation.navigate(RouteName.HomeGestionarPedido)
+				: console.log('error');
+		}
+	};
 	return (
 		<View
 			style={{ marginTop: 6 * HScale }}
@@ -68,8 +80,10 @@ const Header = ({ navigation }: Props) => {
 					height={26}
 					width={109}
 					spec="blanco"
-					navigate={client ? RouteName.Login : RouteName.LoginAdmin}
+					navigate={RouteName.Login}
+					// navigate={user?.roles[0] === 'repartidor' ? RouteName.Login : RouteName.LoginAdmin}
 					navigation={navigation}
+					action="postCS"
 				/>
 			</View>
 		</View>

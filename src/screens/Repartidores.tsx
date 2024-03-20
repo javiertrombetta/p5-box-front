@@ -1,28 +1,16 @@
-import {
-	View,
-	Text,
-	Image,
-	Dimensions,
-	Platform,
-	VirtualizedList,
-	ScrollView,
-	Pressable,
-} from 'react-native';
-import React, { useState } from 'react';
-import { fakeUsers } from './fakeData';
-
+import { View, Text, Image, Dimensions, Platform, ScrollView, Pressable } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import downarrow from '../assets/arrow-head-down.png';
-
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 import Header from '../components/Header';
 import List from '../components/List';
 import { NavigationProp } from '@react-navigation/native';
 import Title from '../components/Title';
-
-const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
-const { width, height } = Dimensions.get('window');
-const WScale = width / 360;
-const HScale = height / 640;
+import { store } from '../state/user';
+import { es } from 'date-fns/locale';
+import { handleDeliverymanDelivery, handleTotalDeliveryman } from '../services/reports.service';
+import { format } from 'date-fns';
+import { handleUserId } from '../services/user.service';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -40,6 +28,9 @@ enum RouteName {
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
 	PerfilRepartidor = 'PerfilRepartidor',
+	DeclaracionJurada = 'DeclaracionJurada',
+	ForgotPassword = 'ForgotPassword',
+	NewPassword = 'NewPassword',
 }
 
 type Props = {
@@ -49,33 +40,68 @@ type Props = {
 const Repartidores = ({ navigation }: Props) => {
 	const isWeb = Platform.OS === 'web';
 	const [dropdown, setDropdown] = useState(false);
+	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+	const { width, height } = Dimensions.get('window');
+	const WScale = width / 360;
+	const HScale = height / 640;
 
 	type ListItemUsers = {
-		[key: string]: {
-			circleValue: number;
-			username: string;
-			img: string;
-		};
+		email: string;
+		id: string;
+		lastname: string;
+		name: string;
+		roles: string[];
+		photoUrl: string;
+		percentage: { percentage: number };
 	};
 
-	interface RenderItemsUsersProps {
-		item: ListItemUsers;
-		index: number;
-	}
+	type idsObj = {
+		userId: string;
+		state: string;
+	};
+
+	const [dayFormat, setDayFormat] = useState<Date | string>();
+	let date = store.getState().date;
+	const [repartidores, setRepartidores] = useState<ListItemUsers[]>([]);
+
+	useEffect(() => {
+		let year = date.slice(0, 4);
+		let month = date.slice(5, 7);
+		let day = date.slice(8, 10);
+		let newDate = new Date(parseInt(year), parseInt(month), parseInt(day));
+		setDayFormat(format(newDate, 'EEE LLLL', { locale: es }));
+		handleTotalDeliveryman(year.toString(), month.toString(), day.toString())
+			.then((res) => {
+				if (res) {
+					const userPromises = res.map((user: idsObj) => handleUserId(user.userId));
+					return Promise.all(userPromises);
+				} else {
+					setRepartidores([]);
+					return null;
+				}
+			})
+			.then((userDetailsArray) => {
+				if (userDetailsArray) {
+					userDetailsArray.map((user: ListItemUsers) => {
+						user.roles[0] === 'repartidor' &&
+							handleDeliverymanDelivery(year, month, day, user.id).then((percentage) => {
+								user = { ...user, percentage };
+								setRepartidores((prevState) => [...prevState, user]);
+							});
+					});
+				}
+			})
+			.catch((error) => {
+				console.error('Error al obtener detalles de los usuarios:', error);
+			});
+	}, [date]);
 
 	const handleArrow = () => {
 		dropdown ? setDropdown(false) : setDropdown(true);
 	};
 
-	const renderItemsUsers = ({ item, index }: RenderItemsUsersProps) => {
-		const itemKey = Object.keys(fakeUsers())[index];
-		let deliveryState = '';
-		const data = item[itemKey];
-		data.circleValue === 0
-			? (deliveryState = 'gray')
-			: data.circleValue === 100
-			? (deliveryState = 'black')
-			: (deliveryState = 'green');
+	const renderItemsUsers = ({ item }: { item: ListItemUsers }) => {
+		console.log(item.percentage.percentage);
 		if (!item) {
 			console.error('El ítem en el índice proporcionado es undefined');
 			return null;
@@ -88,12 +114,13 @@ const Repartidores = ({ navigation }: Props) => {
 				>
 					<List
 						column1="circleProgress"
-						circleValue={data.circleValue}
-						column2="stringsImg"
-						content2String={`${data.username}, ${deliveryState}`}
+						circleValue={item.percentage.percentage}
+						column2="string"
+						content2String={`${item.name}`}
 						column3="img"
-						content3={data.img}
+						content3={item.photoUrl}
 						navigation={navigation}
+						idPackage={item.id}
 					/>
 				</View>
 				<View className="flex w-full items-center">
@@ -104,7 +131,6 @@ const Repartidores = ({ navigation }: Props) => {
 	};
 
 	const keyExtractorUsers = (_: ListItemUsers, index: number) => `item-${index}`;
-
 	return (
 		<ScrollView style={{ paddingVertical: 6 * HScale }} className="w-full h-full bg-verde">
 			<View
@@ -141,11 +167,11 @@ const Repartidores = ({ navigation }: Props) => {
 						style={{ fontSize: scaledSize(14) }}
 						className=" font-robotoBold text-texto flex align-middle"
 					>
-						ENERO
+						{dayFormat?.toString().slice(4).toUpperCase()}
 					</Text>
 					<View style={{ gap: 4 * WScale }} className="flex flex-row items-center">
 						<Text style={{ fontSize: scaledSize(14) }} className="font-roboto">
-							mie
+							{dayFormat?.toString().slice(0, 3)}
 						</Text>
 						<Text style={{ fontSize: scaledSize(14) }} className="font-robotoBold">
 							/ 03
@@ -153,29 +179,23 @@ const Repartidores = ({ navigation }: Props) => {
 					</View>
 				</View>
 				<View style={{ minHeight: 405 * HScale }} className="bg-blanco flex justify-evenly w-full">
-					{dropdown
-						? fakeUsers().map((item, index) => (
-								<View
-									key={keyExtractorUsers(item, index)}
-									style={{
-										height: 101 * HScale,
-									}}
-								>
-									{renderItemsUsers({ item, index })}
+					{repartidores ? (
+						dropdown ? (
+							repartidores?.map((item, index) => (
+								<View key={keyExtractorUsers(item, index)} style={{ height: 101 * HScale }}>
+									{renderItemsUsers({ item })}
 								</View>
-						  ))
-						: fakeUsers()
-								.slice(0, 4)
-								.map((item, index) => (
-									<View
-										key={keyExtractorUsers(item, index)}
-										style={{
-											height: 101 * HScale,
-										}}
-									>
-										{renderItemsUsers({ item, index })}
-									</View>
-								))}
+							))
+						) : (
+							repartidores?.slice(0, 4).map((item, index) => (
+								<View key={keyExtractorUsers(item, index)} style={{ height: 101 * HScale }}>
+									{renderItemsUsers({ item })}
+								</View>
+							))
+						)
+					) : (
+						<Text>No se encontraron repartidores para la fecha.</Text>
+					)}
 				</View>
 				<View className="w-full h-[0.5] bg-gray-300" />
 				<Pressable

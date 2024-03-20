@@ -1,11 +1,26 @@
+'use client';
 import { View, Text, Pressable, Dimensions, Platform } from 'react-native';
 import React from 'react';
 import Sum from '../assets/Sum.svg';
 import { NavigationProp } from '@react-navigation/native';
-import { handleCreateUser, handleLoginUser } from '../services/user.service';
+import {
+	handleConditions,
+	handleCreateUser,
+	handleForgot,
+	handleVerify,
+	handleFinishPackage,
+	handleLoginUser,
+	handleLogout,
+	handleMeUser,
+	handlePackageCancel,
+} from '../services/user.service';
 import { Image } from 'react-native';
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import leftArrow from '../assets/arrow-left.png';
+import { login, store } from '../state/user';
+import { handleIniciarPackage } from '../services/user.service';
+import { handleAddPackage } from '../services/package.service';
+import { format } from 'date-fns';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -25,10 +40,10 @@ interface ButtonProps {
 	action?: string;
 	arrowLeft?: boolean;
 	navigation: NavigationProp<RootStackParamList>;
+	id?: string;
 }
 
 const texto = '#24424D';
-const blanco = '#FEFEFE';
 const amarilloVerdoso = '#CEF169';
 
 type RootStackParamList = {
@@ -47,7 +62,25 @@ enum RouteName {
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
 	PerfilRepartidor = 'PerfilRepartidor',
+	DeclaracionJurada = 'DeclaracionJurada',
+	ForgotPassword = 'ForgotPassword',
+	NewPassword = 'NewPassword',
 }
+
+type User = {
+	_id: '';
+	name: '';
+	lastname: '';
+	email: '';
+	roles: [''];
+	packages: [''];
+	photoUrl: '';
+	state: '';
+	points: 0;
+	__v: 0;
+	back: '';
+	packageSelect: '';
+};
 
 const Button = ({
 	spec,
@@ -61,42 +94,116 @@ const Button = ({
 	height,
 	width,
 	arrowLeft,
+	id,
 }: ButtonProps) => {
 	const isWeb = Platform.OS === 'web';
+	let user = store.getState();
 	const handleNavigation = () => {
 		if (navigate && navigation) {
 			navigation.navigate(navigate);
 		}
 	};
+	const handleNavigationRol = () => {
+		let user = store.getState();
+		if (user.name) {
+			user.roles[0] === 'repartidor'
+				? navigation.navigate(RouteName.HomeIniciarJornada)
+				: user.roles[0] === 'administrador'
+				? navigation.navigate(RouteName.HomeGestionarPedido)
+				: console.log('error');
+		}
+	};
 	const handleBack = () => {
 		navigate && navigation.navigate(navigate);
 	};
-	const client = true;
+	let formattedDate = format(new Date(), 'yyyy/MM/dd');
 	return (
 		<View style={{ height: height * HScale, width: width * WScale }}>
 			{action && navigate && (
 				<Pressable
-					onPress={
-						action === 'postR'
-							? () => {
-									handleCreateUser(data);
-									try {
-										client
-											? navigation.navigate(RouteName.Login)
-											: navigation.navigate(RouteName.LoginAdmin);
-									} catch {}
-							  }
-							: action === 'postL'
-							? () => {
-									handleLoginUser(data);
-									try {
-										client
-											? navigation.navigate(RouteName.HomeIniciarJornada)
-											: navigation.navigate(RouteName.HomeGestionarPedido);
-									} catch {}
-							  }
-							: () => {}
-					}
+					onPress={async () => {
+						if (action === 'postR' && data) {
+							await handleCreateUser(data);
+							try {
+								navigation.navigate(RouteName.Login);
+							} catch (error) {
+								console.error(error);
+							}
+						} else if (action === 'postL' && data) {
+							await handleLoginUser(data);
+							try {
+								await handleMeUser().then((data: object) => {
+									data = {
+										...data,
+										back: '',
+										packageSelect: '',
+										paquetesObtenidos: [],
+										date: formattedDate,
+										userSelected: '',
+									};
+									store.dispatch(login(data));
+								});
+								handleNavigationRol();
+							} catch (error) {
+								console.error(error);
+							}
+						} else if (action === 'postC' && data) {
+							try {
+								await handleConditions(data);
+								store.dispatch(login({ ...user, back: undefined }));
+								navigation.navigate(RouteName.HomeIniciarJornada);
+							} catch (error) {
+								console.error(error);
+							}
+						} else if (action === 'postCS') {
+							try {
+								await handleLogout();
+								navigation.navigate(RouteName.Login);
+							} catch (error) {
+								console.error(error);
+							}
+						} else if (action === 'postI' && id) {
+							try {
+								await handleIniciarPackage(id);
+								store.dispatch(login({ ...user, back: 'en curso', packageSelect: id }));
+								navigation.navigate(RouteName.RepartoEnCurso);
+							} catch (error) {
+								console.error(error);
+							}
+						} else if (action === 'putFinalizar' && id) {
+							try {
+								await handleFinishPackage(id);
+								store.dispatch(login({ ...user, back: undefined }));
+								navigation.navigate(RouteName.HomeIniciarJornada);
+							} catch (error) {
+								console.error(error);
+							}
+						} else if (action === 'postCancelPackage' && id) {
+							try {
+								await handlePackageCancel(id);
+								store.dispatch(login({ ...user, back: undefined }));
+								navigation.navigate(RouteName.HomeIniciarJornada);
+							} catch (error) {
+								console.error(error);
+							}
+						} else if (action === 'pushPackages' && data) {
+							try {
+								store.dispatch(
+									login({ ...user, paquetesObtenidos: data, back: 'obtenerPaquetes' })
+								);
+								navigation.navigate(RouteName.DeclaracionJurada);
+							} catch (error) {
+								console.error(error);
+							}
+						} else if (action === 'postAgregar' && data) {
+							try {
+								handleAddPackage(data);
+								navigation.navigate(RouteName.HomeGestionarPedido);
+							} catch (error) {
+								console.error(error);
+							}
+						}
+					}}
 					style={({ pressed }) => [
 						spec === 'texto' && {
 							backgroundColor: pressed ? 'rgb(22 41 48)' : texto,

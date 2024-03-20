@@ -31,6 +31,9 @@ enum RouteName {
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
 	PerfilRepartidor = 'PerfilRepartidor',
+	DeclaracionJurada = 'DeclaracionJurada',
+	ForgotPassword = 'ForgotPassword',
+	NewPassword = 'NewPassword',
 }
 
 type Props = {
@@ -55,7 +58,6 @@ const LoginAdmin = ({ navigation }: Props) => {
 			>
 				<LoginComp navigation={navigation} client={false} />
 			</View>
-
 			<View
 				style={{ top: 170 * HScale, left: 30 * WScale, width: 204 * WScale, height: 69 * HScale }}
 				className="absolute rounded-t-2xl rounded-r-2xl bg-amarilloVerdoso flex-row justify-center items-center"

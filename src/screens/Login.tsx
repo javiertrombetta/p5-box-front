@@ -8,6 +8,8 @@ import BackgroundImage from '../assets/FondoLogin.svg';
 import LogoFull from '../assets/LogoFull.svg';
 import LoginComp from '../components/LoginComp';
 import { NavigationProp } from '@react-navigation/native';
+import openEye from '../assets/OpenEye.svg';
+import cloeEye from '../assets/close-eye.png';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -31,6 +33,9 @@ enum RouteName {
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
 	PerfilRepartidor = 'PerfilRepartidor',
+	DeclaracionJurada = 'DeclaracionJurada',
+	ForgotPassword = 'ForgotPassword',
+	NewPassword = 'NewPassword',
 }
 
 type Props = {
