@@ -11,6 +11,9 @@ import NavigationClient from './src/navigation/NavigationClient';
 import NavigationNotClient from './src/navigation/NavigationNotClient';
 import Progress from './src/screens/Progress';
 import Toast from 'react-native-toast-message';
+import { format } from 'date-fns';
+import { es, registerTranslation } from 'react-native-paper-dates';
+
 
 NativeWindStyleSheet.setOutput({
 	default: 'native',
@@ -32,11 +35,21 @@ export default function App() {
 		return <AppLoading />;
 	}
 
+	registerTranslation('es', es);
+
 	let user = store.getState();
 
 	handleMeUser()
 		.then((data: object) => {
-			store.dispatch(login({ ...data, back: '', packageSelect: '', paquetesObtenidos: [] }));
+			store.dispatch(
+				login({
+					...data,
+					back: '',
+					packageSelect: '',
+					paquetesObtenidos: [],
+					date: format(new Date(), 'yyyy/MM/dd'),
+				})
+			);
 			user = store.getState();
 		})
 		.then(() => {

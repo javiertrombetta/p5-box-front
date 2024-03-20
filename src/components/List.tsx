@@ -22,7 +22,6 @@ import Button from '../components/Button';
 import ButtonTrue from '../assets/ButtonTrue.svg';
 import { NavigationProp } from '@react-navigation/native';
 import { handlePackageCancel } from '../services/user.service';
-import { useSelector } from 'react-redux';
 import { login, store } from '../state/user';
 import Toast from 'react-native-toast-message';
 
@@ -67,20 +66,6 @@ enum RouteName {
 	NewPassword = 'NewPassword',
 }
 
-type User = {
-	_id: '';
-	name: '';
-	lastname: '';
-	email: '';
-	roles: [''];
-	packages: [''];
-	photoUrl: '';
-	state: '';
-	points: 0;
-	__v: 0;
-	back: '';
-};
-
 const List = ({
 	column1,
 	circleValue,
@@ -92,8 +77,7 @@ const List = ({
 	idPackage,
 	handleSelectPackage,
 }: listProps) => {
-	let route: any;
-	let user = useSelector((state) => state) as User;
+	let user = store.getState();
 	const { width, height } = Dimensions.get('window');
 	const WScale = width / 360;
 	const HScale = height / 640;
@@ -101,15 +85,18 @@ const List = ({
 	const isWeb = Platform.OS === 'web';
 	const arrayColumn2: string[] = content2String.split(', ');
 	const handleNavigation = () => {
-		(content3 === 'en curso' ||
-			content3 === 'pendiente' ||
-			content3 === 'entregado' ||
-			column3 === 'none') &&
-			column1 !== 'circleProgress' &&
-			column3 !== 'buttonVer' &&
-			(store.dispatch(login({ ...user, back: content3, packageSelect: idPackage })),
-			navigation.navigate(RouteName.RepartoEnCurso));
-		column3 === 'img' && navigation.navigate(RouteName.PerfilRepartidor);
+		user.roles[0] === 'repartidor'
+			? (content3 === 'en curso' ||
+					content3 === 'pendiente' ||
+					content3 === 'entregado' ||
+					column3 === 'none') &&
+			  column1 !== 'circleProgress' &&
+			  column3 !== 'buttonVer' &&
+			  (store.dispatch(login({ ...user, back: content3, packageSelect: idPackage })),
+			  navigation.navigate(RouteName.RepartoEnCurso))
+			: column3 === 'img' &&
+			  (store.dispatch(login({ ...user, userSelected: idPackage })),
+			  navigation.navigate(RouteName.PerfilRepartidor));
 	};
 	const [checked, setChecked] = useState(false);
 	const handleCheck = () => {

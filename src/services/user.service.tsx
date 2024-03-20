@@ -6,7 +6,6 @@ export const handleCreateUser = async (data: object) => {
 		const response = await axios.post('http://localhost:3000/api/v1/auth/register', data, {
 			withCredentials: true,
 		});
-		console.log('Usuario creado:', response.data);
 		return response.data;
 	} catch (error) {
 		console.error('Error al crear usuario:', error);
@@ -54,7 +53,6 @@ export const handleConditions = async (data: object) => {
 };
 
 export const handleForgot = async (email: string) => {
-	console.log(email, 'este es el email');
 	try {
 		const response = await axios.post(
 			'http://localhost:3000/api/v1/auth/forgot-password',
@@ -63,7 +61,6 @@ export const handleForgot = async (email: string) => {
 				withCredentials: true,
 			}
 		);
-
 		return response.data;
 	} catch (error) {
 		console.error(error);
@@ -79,7 +76,6 @@ export const handleVerify = async (token: string) => {
 				withCredentials: true,
 			}
 		);
-		console.log('enviado el tokennnnn', response.data);
 		return response.data;
 	} catch (error) {
 		console.error(error);
@@ -136,5 +132,26 @@ export const handleFinishPackage = async (idPackage: string) => {
 			withCredentials: true,
 		}
 	);
+	return response.data;
+};
+
+export const handleUserId = async (userId: string) => {
+	const response = await axios.get(`http://localhost:3000/api/v1/auth/users/${userId}`, {
+		withCredentials: true,
+	});
+	return response.data;
+};
+
+export const handleUserPackage = async (userId: string) => {
+	const response = await axios.get(`http://localhost:3000/api/v1/auth/users/${userId}/packages`, {
+		withCredentials: true,
+	});
+	return response.data;
+};
+
+export const handleToggleState = async (uuidUser: string) => {
+	const response = await axios.put(`http://localhost:3000/api/v1/auth/users/${uuidUser}/state`, {
+		withCredentials: true,
+	});
 	return response.data;
 };

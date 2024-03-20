@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { View, Text, Dimensions, StyleSheet, Pressable } from 'react-native';
 import { startOfWeek, addWeeks, format, addDays, isAfter, isSameDay } from 'date-fns';
-import Swiper from 'react-native-swiper';
+import { es } from 'date-fns/locale';
 import ArrowLeftBox from '../assets/ArrowLeftBox.svg';
 import ArrowRightBox from '../assets/ArrowRightBox.svg';
 
@@ -26,7 +26,7 @@ const WeeklyDatePicker = ({ handleSelect }: { handleSelect: (date: Date) => void
 			const date = addDays(start, index);
 
 			return {
-				weekday: format(date, 'EEE'),
+				weekday: format(date, 'EEE', { locale: es }),
 				date: format(date, 'd'),
 				disabled: isAfter(date, today),
 				selected: isSameDay(date, selectedDate),
@@ -58,7 +58,7 @@ const WeeklyDatePicker = ({ handleSelect }: { handleSelect: (date: Date) => void
 				</Pressable>
 			</View>
 
-			<View className="flex flex-row items-center justify-between px-1">
+			<View className="flex flex-row items-center justify-between">
 				{days.map((day, index) => (
 					<Pressable
 						style={
@@ -69,8 +69,8 @@ const WeeklyDatePicker = ({ handleSelect }: { handleSelect: (date: Date) => void
 										marginHorizontal: 4 * WScale,
 								  }
 								: {
-										width: 34 * WScale,
-										height: 34 * HScale,
+										width: 38 * WScale,
+										height: 38 * HScale,
 										marginHorizontal: 4 * WScale,
 								  }
 						}
