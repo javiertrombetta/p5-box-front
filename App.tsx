@@ -11,6 +11,7 @@ import NavigationClient from './src/navigation/NavigationClient';
 import NavigationNotClient from './src/navigation/NavigationNotClient';
 import Progress from './src/screens/Progress';
 import { format } from 'date-fns';
+import { es, registerTranslation } from 'react-native-paper-dates';
 
 NativeWindStyleSheet.setOutput({
 	default: 'native',
@@ -31,6 +32,8 @@ export default function App() {
 	if (!loaded) {
 		return <AppLoading />;
 	}
+
+	registerTranslation('es', es);
 
 	let user = store.getState();
 

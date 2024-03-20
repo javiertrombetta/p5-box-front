@@ -171,7 +171,6 @@ const AddPackage = ({ navigation }: Props) => {
 						</View>
 					</Pressable>
 				</View>
-				{/* {open && <DateTimePicker mode="date" display="spinner" value={date} />} */}
 				<DatePickerModal
 					locale="es"
 					mode="single"
