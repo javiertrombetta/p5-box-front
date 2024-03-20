@@ -93,7 +93,6 @@ const ListRepartosAdmin = ({ navigation }: Props) => {
 
 	const toggleDropdown = () => {
 		let medida = 35 + 70 * user.packagesDelivered.length;
-		console.log(medida);
 		let toValue = dropdown
 			? dropdownTitle
 				? medida

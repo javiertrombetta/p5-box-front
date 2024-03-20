@@ -491,19 +491,19 @@ const List = ({
 									>
 										PENDIENTE
 									</Text>
-									<View style={{ paddingRight: 16 * WScale }}>
-										<Button
-											navigate={RouteName.RepartoEnCurso}
-											navigation={navigation}
-											action="postI"
-											id={idPackage}
-											width={62}
-											height={20}
-											content="INICIAR"
-											spec="blanco"
-											borderR={4}
-										/>
-									</View>
+								</View>
+								<View style={{ paddingRight: 16 * WScale }}>
+									<Button
+										navigate={RouteName.RepartoEnCurso}
+										navigation={navigation}
+										action="postI"
+										id={idPackage}
+										width={62}
+										height={20}
+										content="INICIAR"
+										spec="blanco"
+										borderR={4}
+									/>
 								</View>
 							</View>
 						)}

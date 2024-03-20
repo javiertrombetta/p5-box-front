@@ -57,9 +57,7 @@ const ListPendingsAdmin = ({ navigation }: Props) => {
 			try {
 				const userData = await handleUserId(userId);
 				const userPackages = (await handleUserPackage(userId)) as ListItemPackage[];
-				console.log(userPackages);
 				const packagesPendings = userPackages.filter((pack) => pack.state === 'pendiente');
-				console.log(packagesPendings);
 				const updatedUser = {
 					...userData,
 					packagesPendings: packagesPendings,
