@@ -264,7 +264,7 @@ const ListRepartosAdmin = ({ navigation }: Props) => {
 										left: 0,
 										right: 0,
 										height: 50 * HScale,
-										top: -40 * HScale,
+										top: -50 * HScale,
 									}}
 									start={{ x: 0.5, y: 0.0 }}
 									end={{ x: 0.5, y: 1.0 }}

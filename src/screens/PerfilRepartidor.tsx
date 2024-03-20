@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import Title from '../components/Title';
 import { NavigationProp } from '@react-navigation/native';
 import { store } from '../state/user';
-import { handleUserId } from '../services/user.service';
+import { handleToggleState, handleUserId } from '../services/user.service';
 import ListRepartosAdmin from '../components/ListRepartosAdmin';
 import ListPendingsAdmin from '../components/ListPendingsAdmin';
 
@@ -44,6 +44,7 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 	const [user, setUser] = useState({
 		name: '',
 		photoUrl: '',
+		id: '',
 	});
 
 	const [isSwitchOn, setIsSwitchOn] = React.useState(true);
@@ -57,13 +58,14 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 			try {
 				const userData = await handleUserId(userId);
 				setUser(userData);
+				console.log(userData);
 			} catch (error) {
 				console.error('Error al obtener los datos del usuario:', error);
 			}
 		};
 		fetchData();
 	}, [userId]);
-  
+
 	return (
 		<ScrollView
 			style={{ paddingHorizontal: 30 * WScale, paddingVertical: 6 * HScale }}
