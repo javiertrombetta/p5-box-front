@@ -8,7 +8,7 @@ import { NavigationProp } from '@react-navigation/native';
 import Title from '../components/Title';
 import { store } from '../state/user';
 import { es } from 'date-fns/locale';
-import { handleTotalDeliveryman } from '../services/reports.service';
+import { handleDeliverymanDelivery, handleTotalDeliveryman } from '../services/reports.service';
 import { format } from 'date-fns';
 import { handleUserId } from '../services/user.service';
 
@@ -52,6 +52,7 @@ const Repartidores = ({ navigation }: Props) => {
 		name: string;
 		roles: string[];
 		photoUrl: string;
+		percentage: { percentage: number };
 	};
 
 	type idsObj = {
@@ -60,7 +61,6 @@ const Repartidores = ({ navigation }: Props) => {
 	};
 
 	const [dayFormat, setDayFormat] = useState<Date | string>();
-
 	let date = store.getState().date;
 	const [repartidores, setRepartidores] = useState<ListItemUsers[]>([]);
 
@@ -72,14 +72,25 @@ const Repartidores = ({ navigation }: Props) => {
 		setDayFormat(format(newDate, 'EEE LLLL', { locale: es }));
 		handleTotalDeliveryman(year.toString(), month.toString(), day.toString())
 			.then((res) => {
-				console.log(res);
-				const userPromises = res.map((user: idsObj) => handleUserId(user.userId));
-				return Promise.all(userPromises);
+				if (res) {
+					const userPromises = res.map((user: idsObj) => handleUserId(user.userId));
+					return Promise.all(userPromises);
+				} else {
+					// store.dispatch(login(user))
+					setRepartidores([]);
+					return null;
+				}
 			})
 			.then((userDetailsArray) => {
-				userDetailsArray.map((user: ListItemUsers) => {
-					user.roles[0] === 'repartidor' && setRepartidores((prevState) => [...prevState, user]);
-				});
+				if (userDetailsArray) {
+					userDetailsArray.map((user: ListItemUsers) => {
+						user.roles[0] === 'repartidor' &&
+							handleDeliverymanDelivery(year, month, day, user.id).then((percentage) => {
+								user = { ...user, percentage };
+								setRepartidores((prevState) => [...prevState, user]);
+							});
+					});
+				}
 			})
 			.catch((error) => {
 				console.error('Error al obtener detalles de los usuarios:', error);
@@ -91,12 +102,7 @@ const Repartidores = ({ navigation }: Props) => {
 	};
 
 	const renderItemsUsers = ({ item }: { item: ListItemUsers }) => {
-		// let deliveryState = '';
-		// data.circleValue === 0
-		// 	? (deliveryState = 'gray')
-		// 	: data.circleValue === 100
-		// 	? (deliveryState = 'black')
-		// 	: (deliveryState = 'green');
+		console.log(item.percentage.percentage);
 		if (!item) {
 			console.error('El ítem en el índice proporcionado es undefined');
 			return null;
@@ -109,7 +115,7 @@ const Repartidores = ({ navigation }: Props) => {
 				>
 					<List
 						column1="circleProgress"
-						circleValue={50}
+						circleValue={item.percentage.percentage}
 						column2="string"
 						content2String={`${item.name}`}
 						column3="img"

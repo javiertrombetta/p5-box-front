@@ -21,6 +21,21 @@ export const handleTotalDeliveryman = async (year: string, month: string, day: s
 	return response.data;
 };
 
+export const handleDeliverymanDelivery = async (
+	year: string,
+	month: string,
+	day: string | number,
+	deliveryManId: string
+) => {
+	const response = await axios.get(
+		`http://localhost:3000/api/v1/reports/deliveryman/delivery/${year}/${month}/${day}?deliverymanId=${deliveryManId}`,
+		{
+			withCredentials: true,
+		}
+	);
+	return response.data;
+};
+
 export const handlePackagesTotal = async (year: string, month: string, day: string | number) => {
 	const response = await axios.get(
 		`http://localhost:3000/api/v1/reports/packages/all/${year}/${month}/${day}`,

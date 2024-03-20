@@ -27,7 +27,7 @@ const NavigationClient = () => {
 		<Stack.Navigator
 			initialRouteName={
 				rol[0] === 'administrador'
-					? 'Repartidores'
+					? 'HomeGestionarPedido'
 					: rol[0] === 'repartidor'
 					? 'HomeIniciarJornada'
 					: 'Login'
