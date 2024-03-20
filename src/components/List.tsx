@@ -22,7 +22,6 @@ import Button from '../components/Button';
 import ButtonTrue from '../assets/ButtonTrue.svg';
 import { NavigationProp } from '@react-navigation/native';
 import { handlePackageCancel } from '../services/user.service';
-import { useSelector } from 'react-redux';
 import { login, store } from '../state/user';
 
 interface listProps {

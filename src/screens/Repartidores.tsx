@@ -1,9 +1,6 @@
 import { View, Text, Image, Dimensions, Platform, ScrollView, Pressable } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { fakeUsers } from './fakeData';
-
 import downarrow from '../assets/arrow-head-down.png';
-
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 import Header from '../components/Header';
 import List from '../components/List';
@@ -53,6 +50,7 @@ const Repartidores = ({ navigation }: Props) => {
 		id: string;
 		lastname: string;
 		name: string;
+		roles: string[];
 		photoUrl: string;
 	};
 
@@ -74,17 +72,20 @@ const Repartidores = ({ navigation }: Props) => {
 		setDayFormat(format(newDate, 'EEE LLLL', { locale: es }));
 		handleTotalDeliveryman(year.toString(), month.toString(), day.toString())
 			.then((res) => {
+				console.log(res);
 				const userPromises = res.map((user: idsObj) => handleUserId(user.userId));
 				return Promise.all(userPromises);
 			})
 			.then((userDetailsArray) => {
-				setRepartidores(userDetailsArray);
-				console.log(repartidores);
+				userDetailsArray.map((user: ListItemUsers) => {
+					user.roles[0] === 'repartidor' && setRepartidores((prevState) => [...prevState, user]);
+				});
 			})
 			.catch((error) => {
 				console.error('Error al obtener detalles de los usuarios:', error);
 			});
 	}, [date]);
+
 	const handleArrow = () => {
 		dropdown ? setDropdown(false) : setDropdown(true);
 	};
@@ -109,8 +110,8 @@ const Repartidores = ({ navigation }: Props) => {
 					<List
 						column1="circleProgress"
 						circleValue={50}
-						column2="stringsImg"
-						content2String={`${item.name}, en curso`} //corregir
+						column2="string"
+						content2String={`${item.name}`}
 						column3="img"
 						content3={item.photoUrl}
 						navigation={navigation}

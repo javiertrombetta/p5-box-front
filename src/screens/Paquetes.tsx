@@ -66,7 +66,6 @@ const Paquetes = ({ navigation }: Props) => {
 		setDayFormat(format(newDate, 'EEE LLLL', { locale: es }));
 		handlePackagesDelivered(year.toString(), month.toString(), day.toString())
 			.then((packages) => {
-				console.log(packages);
 				setPaquetes(packages);
 			})
 			.catch((error) => {

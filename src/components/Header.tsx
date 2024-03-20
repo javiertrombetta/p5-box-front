@@ -4,7 +4,7 @@ import LogoBox from '../assets/LogoBox.svg';
 import box from '../assets/box.png';
 import Button from './Button';
 import { NavigationProp } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
+import { store } from '../state/user';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -44,7 +44,7 @@ const Header = ({ navigation }: Props) => {
 	const HScale = height / 640;
 	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
-	let user = useSelector((state: any) => state.roles) as User;
+	let user = store.getState();
 	const handleNavigate = () => {
 		if (user) {
 			user.roles[0] === 'repartidor'
