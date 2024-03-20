@@ -1,16 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, ImageBackground, Text, Dimensions, Pressable } from 'react-native';
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import buenos from '../assets/buenos.png';
 import Header from '../components/Header';
 import Button from '../components/Button';
 import { NavigationProp } from '@react-navigation/native';
-
-const { width, height } = Dimensions.get('window');
-const WScale = width / 360;
-const HScale = height / 640;
-
-const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+import { login, store } from '../state/user';
+import PackageDetail from '../components/PackageDetail';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -28,15 +24,22 @@ enum RouteName {
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
 	PerfilRepartidor = 'PerfilRepartidor',
+	DeclaracionJurada = 'DeclaracionJurada',
+	ForgotPassword = 'ForgotPassword',
+	NewPassword = 'NewPassword',
 }
 
 type Props = {
 	navigation: NavigationProp<RootStackParamList>;
 };
 
-// NAVIGATION ADMIN
-
 function RepartoEnCurso({ navigation }: Props) {
+	const { width, height } = Dimensions.get('window');
+	const WScale = width / 360;
+	const HScale = height / 640;
+
+	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+	let user2 = store.getState();
 	return (
 		<View
 			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
@@ -51,10 +54,13 @@ function RepartoEnCurso({ navigation }: Props) {
 					style={{ paddingVertical: 4 * HScale, fontSize: scaledSize(18) }}
 					className="flex justify-center items-center font-sairaBold text-texto"
 				>
-					REPARTO EN CURSO
+					{user2.back ? `REPARTO ${user2.back.toUpperCase()}` : 'REPARTO DISPONIBLE'}
 				</Text>
 				<Pressable
-					onPress={() => navigation.navigate(RouteName.HomeIniciarJornada)}
+					onPress={() => {
+						store.dispatch(login({ ...user2, back: undefined, packageSelect: undefined }));
+						navigation.navigate(RouteName.HomeIniciarJornada);
+					}}
 					style={{ width: 13 * WScale, height: 40 * HScale, paddingVertical: 8 * HScale }}
 					className="flex justify-center items-center"
 				>
@@ -73,81 +79,71 @@ function RepartoEnCurso({ navigation }: Props) {
 					source={buenos}
 				>
 					<View style={{ paddingVertical: 16 * HScale }}>
-						<View
-							style={{
-								height: 75 * HScale,
-								width: 270 * WScale,
-								padding: 16 * WScale,
-							}}
-							className="bg-violeta object-cover justify-center items-start rounded-2xl"
-						>
-							<View style={{ gap: 4 * WScale }} className="flex flex-row">
-								<Text
-									style={{ fontSize: scaledSize(12) }}
-									className="font-robotoBold text-texto text-center"
-								>
-									Destino:
-								</Text>
-								<Text
-									style={{ fontSize: scaledSize(12) }}
-									className="font-roboto text-texto text-center"
-								>
-									Amenabar 2100, CABA
-								</Text>
-							</View>
-							<View style={{ gap: 4 * WScale }} className="flex flex-row">
-								<Text style={{ fontSize: scaledSize(12) }} className="font-robotoBold text-texto">
-									Número de paquete:
-								</Text>
-								<Text style={{ fontSize: scaledSize(12) }} className="font-roboto text-texto">
-									#0A235
-								</Text>
-							</View>
-							<View style={{ gap: 4 * WScale }} className="flex flex-row">
-								<Text style={{ fontSize: scaledSize(12) }} className="font-robotoBold text-texto">
-									Recibe:
-								</Text>
-								<Text style={{ fontSize: scaledSize(12) }} className="font-roboto text-texto">
-									David Rodriguez
-								</Text>
-							</View>
-						</View>
+						<PackageDetail />
 					</View>
 				</ImageBackground>
 			</View>
-
-			<View
-				style={{
-					height: 30 * HScale,
-					width: 270 * WScale,
-					marginTop: 24 * HScale,
-				}}
-			>
-				<Button
-					content="FINALIZAR"
-					width={270}
-					height={30}
-					spec="texto"
-					navigation={navigation}
-					navigate={RouteName.HomeIniciarJornada}
-				/>
-			</View>
-			<View
-				style={{
-					height: 30 * HScale,
-					width: 270 * WScale,
-					marginTop: 10 * HScale,
-				}}
-			>
-				<Button
-					content="CANCELAR ENTREGA"
-					width={270}
-					height={30}
-					spec="blanco"
-					navigation={navigation}
-					navigate={RouteName.HomeIniciarJornada}
-				/>
-			</View>
+			{user2.back === 'en curso' ? (
+				<>
+					<View
+						style={{
+							height: 30 * HScale,
+							width: 270 * WScale,
+							marginTop: 24 * HScale,
+						}}
+					>
+						<Button
+							content="FINALIZAR"
+							action="putFinalizar"
+							id={user2.packageSelect}
+							width={270}
+							height={30}
+							spec="texto"
+							navigation={navigation}
+							navigate={RouteName.HomeIniciarJornada}
+						/>
+					</View>
+					<View
+						style={{
+							height: 30 * HScale,
+							width: 270 * WScale,
+							marginTop: 10 * HScale,
+						}}
+					>
+						<Button
+							content="CANCELAR ENTREGA"
+							action="postCancelPackage"
+							id={user2.packageSelect}
+							width={270}
+							height={30}
+							spec="blanco"
+							navigation={navigation}
+							navigate={RouteName.HomeIniciarJornada}
+						/>
+					</View>
+				</>
+			) : (
+				<View
+					style={{
+						height: 30 * HScale,
+						width: 270 * WScale,
+						marginTop: 24 * HScale,
+					}}
+				>
+					<Button
+						content="VOLVER"
+						width={270}
+						height={30}
+						spec="texto"
+						navigation={navigation}
+						navigate={
+							user2.back === 'pendiente' || user2.back === 'entregado'
+								? RouteName.HomeIniciarJornada
+								: RouteName.ObtenerPaquetes
+						}
+					/>
+				</View>
+			)}
 		</View>
 	);
 }

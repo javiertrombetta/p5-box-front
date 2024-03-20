@@ -5,7 +5,7 @@ import { launchImageLibrary, ImageLibraryOptions } from 'react-native-image-pick
 import box from '../assets/box.png';
 import closeEye from '../assets/Eye.png';
 import profilePic from '../assets/profile-pic.png';
-import openEye from '../assets/close-eye.png';
+import openEye from '../assets/open-eye.png';
 
 import LogoBox from '../assets/LogoBox.svg';
 import Eye from '../assets/Eye.svg';
@@ -32,6 +32,9 @@ enum RouteName {
 	Paquetes = 'Paquetes',
 	AddPackage = 'AddPackage',
 	PerfilRepartidor = 'PerfilRepartidor',
+	DeclaracionJurada = 'DeclaracionJurada',
+	ForgotPassword = 'ForgotPassword',
+	NewPassword = 'NewPassword',
 }
 
 type Props = {
@@ -60,7 +63,7 @@ const CreateAccount = ({ navigation }: Props) => {
 	const pickImage = () => {
 		const options: ImageLibraryOptions = {
 			mediaType: 'photo',
-			includeBase64: false,
+			includeBase64: true,
 		};
 
 		launchImageLibrary(options, (response) => {
@@ -95,7 +98,7 @@ const CreateAccount = ({ navigation }: Props) => {
 	return (
 		<View
 			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
-			className="w-full bg-verde h-full flex flex-col items-center"
+			className="w-full bg-verde h-full flex flex-col items-center absolute"
 		>
 			{isWeb ? (
 				<Image
@@ -157,7 +160,6 @@ const CreateAccount = ({ navigation }: Props) => {
 						{isWeb ? <Image source={profilePic} /> : <ProfilePic width={30 * WScale} />}
 					</Pressable>
 				)}
-
 				<TextInput
 					style={{
 						height: 24 * HScale,
@@ -171,7 +173,6 @@ const CreateAccount = ({ navigation }: Props) => {
 					defaultValue={data.name}
 				/>
 				<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
-
 				<TextInput
 					style={{
 						height: 24 * HScale,
@@ -185,7 +186,6 @@ const CreateAccount = ({ navigation }: Props) => {
 					defaultValue={data.lastname}
 				/>
 				<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
-
 				<TextInput
 					style={{
 						height: 24 * HScale,
@@ -199,13 +199,12 @@ const CreateAccount = ({ navigation }: Props) => {
 					defaultValue={data.email}
 				/>
 				<View style={{ width: 260 * WScale, height: 0.5 }} className="bg-texto"></View>
-
 				<View>
 					<View className="flex flex-row">
 						<TextInput
 							style={{
 								height: 24 * HScale,
-								width: 240 * WScale,
+								width: 260 * WScale,
 								marginTop: 21 * HScale,
 								fontSize: scaledSize(14),
 							}}
@@ -215,7 +214,6 @@ const CreateAccount = ({ navigation }: Props) => {
 							onChangeText={(newText) => handleInputChange('password', newText)}
 							defaultValue={data.password}
 						/>
-
 						<Pressable className="relative" onPress={handleTogglePassword}>
 							{showPassword ? (
 								isWeb ? (
@@ -226,7 +224,7 @@ const CreateAccount = ({ navigation }: Props) => {
 											width: scaledSize(20),
 											height: scaledSize(20),
 										}}
-										className=" text-texto"
+										className="absolute text-texto"
 										source={openEye}
 									/>
 								) : (
@@ -245,7 +243,7 @@ const CreateAccount = ({ navigation }: Props) => {
 										width: scaledSize(20),
 										height: scaledSize(20),
 									}}
-									className=" text-texto"
+									className="absolute text-texto"
 									source={closeEye}
 								/>
 							) : (
@@ -260,13 +258,12 @@ const CreateAccount = ({ navigation }: Props) => {
 					</View>
 					<View style={{ width: 260 * WScale, height: 1 }} className="bg-texto"></View>
 				</View>
-
 				<View>
 					<View className="flex flex-row">
 						<TextInput
 							style={{
 								height: 24 * HScale,
-								width: 240 * WScale,
+								width: 260 * WScale,
 								marginTop: 21 * HScale,
 								fontSize: scaledSize(14),
 							}}
@@ -276,7 +273,6 @@ const CreateAccount = ({ navigation }: Props) => {
 							onChangeText={(newText) => setConfirmPassword(newText)}
 							defaultValue={confirmPassword}
 						/>
-
 						<Pressable className="relative" onPress={handleToggleConfirmPassword}>
 							{showConfirmPassword ? (
 								isWeb ? (
@@ -287,7 +283,7 @@ const CreateAccount = ({ navigation }: Props) => {
 											width: scaledSize(20),
 											height: scaledSize(20),
 										}}
-										className=" text-texto"
+										className="absolute text-texto"
 										source={openEye}
 									/>
 								) : (
@@ -306,7 +302,7 @@ const CreateAccount = ({ navigation }: Props) => {
 										width: scaledSize(20),
 										height: scaledSize(20),
 									}}
-									className=" text-texto"
+									className="absolute text-texto"
 									source={closeEye}
 								/>
 							) : (
@@ -327,7 +323,7 @@ const CreateAccount = ({ navigation }: Props) => {
 						height={28}
 						width={270}
 						content="CREAR"
-						action="postR"
+						action={data.password === confirmPassword ? 'postR' : 'post'}
 						data={{ ...data, photoUrl: 'sdasdsa' }}
 						navigate={RouteName.Login}
 						navigation={navigation}
