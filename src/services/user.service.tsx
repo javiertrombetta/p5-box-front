@@ -41,7 +41,6 @@ export const handleMeUser = async () => {
 
 export const handleConditions = async (data: object) => {
 	try {
-		console.log(data);
 		const response = await axios.put('http://localhost:3000/api/v1/auth/me/packages', data, {
 			withCredentials: true,
 		});
