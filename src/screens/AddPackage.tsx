@@ -54,7 +54,6 @@ const AddPackage = ({ navigation }: Props) => {
 			setDate(params.date);
 			setDate(params.date.setHours(0, 0, 0, 0));
 			setData((prevData) => ({ ...prevData, deliveryDate: params.date }));
-			console.log(params.date);
 		},
 		[setOpen, setDate]
 	);
@@ -172,7 +171,6 @@ const AddPackage = ({ navigation }: Props) => {
 						</View>
 					</Pressable>
 				</View>
-				{/* {open && <DateTimePicker mode="date" display="spinner" value={date} />} */}
 				<DatePickerModal
 					locale="es"
 					mode="single"

@@ -15,9 +15,8 @@ const PaquetesRepartidos = ({
 }) => {
 	let dateString = selectedDate.toString();
 	let year = dateString.slice(11, 15);
-	let day = dateString.slice(8, 10);
+	let day: string | number = dateString.slice(8, 10);
 	const month = (selectedDate.getMonth() + 1).toString().padStart(2, '0');
-	let percentage: number;
 	useEffect(() => {
 		handlePackagesTotal(year, month, day)
 			.then((res: []) => {

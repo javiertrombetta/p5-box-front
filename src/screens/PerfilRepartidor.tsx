@@ -1,18 +1,14 @@
-import { View, Text, Image, Dimensions } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import React from 'react';
-import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
+import { View, Text, Image, Dimensions, ScrollView, Platform } from 'react-native';
+import { Switch } from 'react-native-paper';
+import React, { useEffect, useState } from 'react';
 import BotonActivado from '../assets/BotonActivado.svg';
 import Header from '../components/Header';
-import List from '../components/List';
 import Title from '../components/Title';
 import { NavigationProp } from '@react-navigation/native';
-
-const { width, height } = Dimensions.get('window');
-const WScale = width / 360;
-const HScale = height / 640;
-
-const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+import { store } from '../state/user';
+import { handleToggleState, handleUserId } from '../services/user.service';
+import ListRepartosAdmin from '../components/ListRepartosAdmin';
+import ListPendingsAdmin from '../components/ListPendingsAdmin';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -40,10 +36,40 @@ type Props = {
 };
 
 const PerfilRepartidor = ({ navigation }: Props) => {
+	const { width, height } = Dimensions.get('window');
+	const WScale = width / 360;
+	const HScale = height / 640;
+	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+	const userId = store.getState().userSelected;
+	const [user, setUser] = useState({
+		name: '',
+		photoUrl: '',
+		id: '',
+	});
+
+	const [isSwitchOn, setIsSwitchOn] = React.useState(true);
+	const onToggleSwitch = () => {
+		setIsSwitchOn(!isSwitchOn);
+		handleToggleState(user.id);
+	};
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const userData = await handleUserId(userId);
+				setUser(userData);
+				console.log(userData);
+			} catch (error) {
+				console.error('Error al obtener los datos del usuario:', error);
+			}
+		};
+		fetchData();
+	}, [userId]);
+
 	return (
-		<View
-			style={{ paddingHorizontal: 30 * WScale, paddingTop: 6 * HScale }}
-			className="w-full bg-verde h-full flex flex-col items-center"
+		<ScrollView
+			style={{ paddingHorizontal: 30 * WScale, paddingVertical: 6 * HScale }}
+			className="w-full bg-verde h-full flex flex-col"
 		>
 			<Header navigation={navigation} />
 			<View style={{ height: 40 * HScale, marginTop: 28 * HScale, width: '100%' }}>
@@ -66,7 +92,7 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 							resizeMode="cover"
 							className="rounded-xl"
 							source={{
-								uri: 'https://cdn.conmebol.com/wp-content/uploads/2023/11/000_APW2000052520938-1024x879.jpg',
+								uri: `${user.photoUrl}`,
 							}}
 						/>
 					</View>
@@ -75,7 +101,7 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 							style={{ fontSize: scaledSize(14) }}
 							className="text-start font-robotoBold text-texto"
 						>
-							Palermo
+							{user?.name}
 						</Text>
 						<Text
 							style={{
@@ -92,124 +118,12 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 					</View>
 				</View>
 				<View className="flex items-end">
-					<BotonActivado width={35 * WScale} hieght={21 * HScale} />
+					<Switch color={'#CEF169'} value={isSwitchOn} onValueChange={onToggleSwitch} />
 				</View>
 			</View>
-			<View style={{ height: 48 * HScale, marginTop: 10 * HScale, width: '100%' }}>
-				<Title
-					content={'REPARTOS PENDIENTES'}
-					details={'sin repartos'}
-					arrow={'right'}
-					size={14}
-					navigation={navigation}
-					navigate={RouteName.PerfilRepartidor}
-				/>
-			</View>
-			<View
-				style={{ height: 282 * HScale, marginTop: 10 * HScale }}
-				className="w-full justify-start flex rounded-t-xl bg-white"
-			>
-				<View style={{ height: 40 * HScale, width: '100%' }}>
-					<Title
-						content={'HISTORIAL DE REPARTOS'}
-						arrow={'down'}
-						size={14}
-						navigation={navigation}
-						navigate={RouteName.PerfilRepartidor}
-					/>
-				</View>
-				<View
-					style={{
-						paddingHorizontal: 16 * WScale,
-						height: 35 * HScale,
-					}}
-					className="flex justify-center"
-				>
-					<Text
-						style={{
-							fontSize: scaledSize(12),
-						}}
-						className="text-texto font-robotoMedium"
-					>
-						58 Paquetes entregados
-					</Text>
-				</View>
-
-				<View style={{ paddingHorizontal: 16 * WScale }} className="flex w-full items-center">
-					<View style={{ height: 0.5 }} className="w-full bg-gray-300" />
-				</View>
-				<View
-					style={{ height: 192 * HScale, paddingLeft: 16 * WScale }}
-					className="flex flex-col justify-start items-center"
-				>
-					<View
-						style={{ height: 70 * HScale }}
-						className="flex flex-row justify-between items-center w-full"
-					>
-						<List
-							column1="svg"
-							column2="stringsCol"
-							content2String="#0A903, Las Heras 5678, CABA"
-							column3="svgStringButton"
-							content3="entregadoTrash"
-							navigation={navigation}
-						/>
-					</View>
-					<View style={{ paddingRight: 16 * WScale }} className="flex w-full items-center">
-						<View style={{ height: 1 }} className="w-full bg-gray-300" />
-					</View>
-					<View
-						style={{ height: 70 * HScale }}
-						className="flex flex-row justify-between items-center w-full"
-					>
-						<List
-							column1="svg"
-							column2="stringsCol"
-							content2String="#0A903, Las Heras 5678, CABA"
-							column3="svgStringButton"
-							content3="entregadoTrash"
-							navigation={navigation}
-						/>
-					</View>
-					<View style={{ paddingRight: 16 * WScale }} className="flex w-full items-center">
-						<View style={{ height: 1 }} className="w-full bg-gray-300" />
-					</View>
-					<View
-						style={{ height: 70 * HScale }}
-						className="flex flex-row justify-between items-center w-full"
-					>
-						<List
-							column1="svg"
-							column2="stringsCol"
-							content2String="#0A903, Las Heras 5678, CABA"
-							column3="svgStringButton"
-							content3="entregadoTrash"
-							navigation={navigation}
-						/>
-					</View>
-				</View>
-			</View>
-			<View style={{ position: 'relative', height: 1 }} className="w-full bg-gray-300">
-				<LinearGradient
-					colors={['rgba(255, 255, 255, 0.0)', 'rgba(255, 255, 255, 1)']}
-					style={{
-						position: 'absolute',
-						left: 0,
-						right: 0,
-						height: 50 * HScale,
-						top: -50 * HScale,
-					}}
-					start={{ x: 0.5, y: 0.0 }}
-					end={{ x: 0.5, y: 1.0 }}
-				/>
-			</View>
-			<View
-				style={{ height: 48 * HScale }}
-				className="w-full flex justify-center items-center rounded-b-xl bg-blanco z-10"
-			>
-				<ArrowHeadDown height={12 * HScale} width={24 * WScale} />
-			</View>
-		</View>
+			<ListPendingsAdmin navigation={navigation} />
+			<ListRepartosAdmin navigation={navigation} />
+		</ScrollView>
 	);
 };
 

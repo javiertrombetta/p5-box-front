@@ -19,8 +19,8 @@ import ArrowLeft from '../assets/ArrowLeft.svg';
 import leftArrow from '../assets/arrow-left.png';
 import { login, store } from '../state/user';
 import { handleIniciarPackage } from '../services/user.service';
-import { useSelector } from 'react-redux';
 import { handleAddPackage } from '../services/package.service';
+import { format } from 'date-fns';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -97,7 +97,7 @@ const Button = ({
 	id,
 }: ButtonProps) => {
 	const isWeb = Platform.OS === 'web';
-	let user = useSelector((state) => state) as User;
+	let user = store.getState();
 	const handleNavigation = () => {
 		if (navigate && navigation) {
 			navigation.navigate(navigate);
@@ -116,6 +116,7 @@ const Button = ({
 	const handleBack = () => {
 		navigate && navigation.navigate(navigate);
 	};
+	let formattedDate = format(new Date(), 'yyyy/MM/dd');
 	return (
 		<View style={{ height: height * HScale, width: width * WScale }}>
 			{action && navigate && (
@@ -132,7 +133,14 @@ const Button = ({
 							await handleLoginUser(data);
 							try {
 								await handleMeUser().then((data: object) => {
-									data = { ...data, back: '', packageSelect: '', paquetesObtenidos: [] };
+									data = {
+										...data,
+										back: '',
+										packageSelect: '',
+										paquetesObtenidos: [],
+										date: formattedDate,
+										userSelected: '',
+									};
 									store.dispatch(login(data));
 								});
 								handleNavigationRol();

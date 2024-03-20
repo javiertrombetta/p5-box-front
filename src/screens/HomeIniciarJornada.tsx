@@ -3,17 +3,15 @@ import { View, Text, Pressable, Image, Dimensions, Platform, VirtualizedList } f
 import Header from '../components/Header';
 import { NavigationProp } from '@react-navigation/native';
 import { fakePending, fakeHistory } from './fakeData';
-
 import downarrow from '../assets/arrow-head-down.png';
-
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 import Button from '../components/Button';
 import List from '../components/List';
 import { handleDelivered } from '../services/package.service';
 import { handleMePackages } from '../services/user.service';
-import { useSelector } from 'react-redux';
 import { login, store } from '../state/user';
+
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -50,10 +48,6 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 
 	const [packagesDelivered, setPackagesDelivered] = useState([]);
 	const [packagesPending, setPackagesPending] = useState([]);
-	type User = {
-		back: string;
-	};
-	let user = useSelector((state) => state) as User;
 
 	useEffect(() => {
 		handleDelivered().then((data) => data && setPackagesDelivered(data));
