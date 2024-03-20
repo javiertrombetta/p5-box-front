@@ -12,7 +12,6 @@ import Button from '../components/Button';
 import List from '../components/List';
 import { handleDelivered } from '../services/package.service';
 import { handleMePackages } from '../services/user.service';
-import { useSelector } from 'react-redux';
 import { store } from '../state/user';
 
 type RootStackParamList = {
@@ -50,10 +49,6 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 
 	const [packagesDelivered, setPackagesDelivered] = useState([]);
 	const [packagesPending, setPackagesPending] = useState([]);
-	type User = {
-		back: string;
-	};
-	let user = useSelector((state) => state) as User;
 	useEffect(() => {
 		handleDelivered().then((data) => data && setPackagesDelivered(data));
 		handleMePackages().then((data) => data && setPackagesPending(data));
