@@ -58,7 +58,7 @@ const WeeklyDatePicker = ({ handleSelect }: { handleSelect: (date: Date) => void
 				</Pressable>
 			</View>
 
-			<View className="flex flex-row items-center justify-between px-1">
+			<View className="flex flex-row items-center justify-between">
 				{days.map((day, index) => (
 					<Pressable
 						style={
@@ -69,8 +69,8 @@ const WeeklyDatePicker = ({ handleSelect }: { handleSelect: (date: Date) => void
 										marginHorizontal: 4 * WScale,
 								  }
 								: {
-										width: 34 * WScale,
-										height: 34 * HScale,
+										width: 38 * WScale,
+										height: 38 * HScale,
 										marginHorizontal: 4 * WScale,
 								  }
 						}
