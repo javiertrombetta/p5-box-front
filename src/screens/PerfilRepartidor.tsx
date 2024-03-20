@@ -5,7 +5,7 @@ import BotonActivado from '../assets/BotonActivado.svg';
 import Header from '../components/Header';
 import Title from '../components/Title';
 import { NavigationProp } from '@react-navigation/native';
-import { store } from '../state/user';
+import { login, store } from '../state/user';
 import { handleToggleState, handleUserId } from '../services/user.service';
 import ListRepartosAdmin from '../components/ListRepartosAdmin';
 import ListPendingsAdmin from '../components/ListPendingsAdmin';
@@ -41,24 +41,36 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 	const HScale = height / 640;
 	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 	const userId = store.getState().userSelected;
+	const userObj = store.getState();
+	const indexNavigation = store.getState().indexNavigation;
 	const [user, setUser] = useState({
 		name: '',
 		photoUrl: '',
 		id: '',
+		state: '',
 	});
 
-	const [isSwitchOn, setIsSwitchOn] = React.useState(true);
+	const [isSwitchOn, setIsSwitchOn] = useState(true);
 	const onToggleSwitch = () => {
 		setIsSwitchOn(!isSwitchOn);
-		handleToggleState(user.id);
+		handleToggleState(user.id).then((res) => console.log(res));
 	};
 
 	useEffect(() => {
+		store.dispatch(
+			login({
+				...userObj,
+				userSelected: userId,
+				indexNavigation: navigation.getState().index,
+				date: store.getState().date,
+			})
+		);
 		const fetchData = async () => {
 			try {
 				const userData = await handleUserId(userId);
-				setUser(userData);
+				userData.state === 'inactivo' && setIsSwitchOn(false);
 				console.log(userData);
+				setUser(userData);
 			} catch (error) {
 				console.error('Error al obtener los datos del usuario:', error);
 			}
@@ -103,18 +115,33 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 						>
 							{user?.name}
 						</Text>
-						<Text
-							style={{
-								fontSize: scaledSize(8),
-								paddingHorizontal: 1 * WScale,
-								paddingVertical: 2 * HScale,
-								width: 68 * WScale,
-								height: 16 * HScale,
-							}}
-							className="flex items-center justify-center text-center font-robotoMedium text-texto rounded-md bg-verde"
-						>
-							HABILITADO
-						</Text>
+						{isSwitchOn ? (
+							<Text
+								style={{
+									fontSize: scaledSize(8),
+									paddingHorizontal: 1 * WScale,
+									paddingVertical: 2 * HScale,
+									width: 68 * WScale,
+									height: 16 * HScale,
+								}}
+								className="flex items-center justify-center text-center font-robotoMedium text-texto rounded-md bg-verde"
+							>
+								HABILITADO
+							</Text>
+						) : (
+							<Text
+								style={{
+									fontSize: scaledSize(8),
+									paddingHorizontal: 1 * WScale,
+									paddingVertical: 2 * HScale,
+									width: 68 * WScale,
+									height: 16 * HScale,
+								}}
+								className="flex items-center justify-center text-center font-robotoMedium text-texto rounded-md bg-gray-300"
+							>
+								DESHABILITADO
+							</Text>
+						)}
 					</View>
 				</View>
 				<View className="flex items-end">

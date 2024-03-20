@@ -56,8 +56,15 @@ const HomeGestionarPedido = ({ navigation }: Props) => {
 	};
 
 	useEffect(() => {
-		store.dispatch(login({ ...user, date: format(selectedDate, 'yyyy/MM/dd') }));
-	}, []);
+		store.dispatch(
+			login({
+				...user,
+				date: format(selectedDate, 'yyyy/MM/dd'),
+				indexNavigation: navigation.getState().index,
+			})
+		);
+		console.log(navigation.getState().routes[length - 1]);
+	}, [navigation.getState().routes[length - 1]]);
 
 	const [listRepartidores, setListRepartidores] = useState({
 		circleValue: 0,
