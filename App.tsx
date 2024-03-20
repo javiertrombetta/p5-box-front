@@ -7,10 +7,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { Provider } from 'react-redux';
 import { login, store } from './src/state/user';
 import { handleMeUser } from './src/services/user.service';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import NavigationClient from './src/navigation/NavigationClient';
 import NavigationNotClient from './src/navigation/NavigationNotClient';
 import Progress from './src/screens/Progress';
+import Toast from 'react-native-toast-message';
 
 NativeWindStyleSheet.setOutput({
 	default: 'native',
@@ -51,6 +51,7 @@ export default function App() {
 			) : (
 				<NavigationContainer>
 					{user._id.length > 0 && rol ? <NavigationClient /> : <NavigationNotClient />}
+					<Toast />
 				</NavigationContainer>
 			)}
 		</Provider>

@@ -24,6 +24,15 @@ import { NavigationProp } from '@react-navigation/native';
 import { handlePackageCancel } from '../services/user.service';
 import { useSelector } from 'react-redux';
 import { login, store } from '../state/user';
+import Toast from 'react-native-toast-message';
+
+const showToast = () => {
+	Toast.show({
+		type: 'success',
+		text1: 'El paquete se elimino exitosamente',
+		text2: 'El paquete está disponible nuevamente 🔔',
+	});
+};
 
 interface listProps {
 	column1: string;
@@ -455,7 +464,11 @@ const List = ({
 								</View>
 								<View style={{ paddingRight: 16 * WScale }}>
 									<Pressable
-										onPress={() => idPackage && handlePackageCancel(idPackage)}
+										onPress={() => {
+											idPackage && handlePackageCancel(idPackage);
+											store.dispatch(login({ ...user, back: 'cancel' }));
+										}}
+										onPressIn={showToast}
 										style={{ height: scaledSize(24), width: scaledSize(56) }}
 										className="flex flex-row justify-end items-center"
 									>
@@ -491,19 +504,19 @@ const List = ({
 									>
 										PENDIENTE
 									</Text>
-								</View>
-								<View style={{ paddingRight: 16 * WScale }}>
-									<Button
-										navigate={RouteName.RepartoEnCurso}
-										navigation={navigation}
-										action="postI"
-										id={idPackage}
-										width={62}
-										height={20}
-										content="INICIAR"
-										spec="blanco"
-										borderR={4}
-									/>
+									<View style={{ paddingRight: 16 * WScale }}>
+										<Button
+											navigate={RouteName.RepartoEnCurso}
+											navigation={navigation}
+											action="postI"
+											id={idPackage}
+											width={62}
+											height={20}
+											content="INICIAR"
+											spec="blanco"
+											borderR={4}
+										/>
+									</View>
 								</View>
 							</View>
 						)}
