@@ -1,4 +1,5 @@
 import { View, Text, Image, Dimensions, ScrollView, Pressable, Platform } from 'react-native';
+import { Switch } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useEffect, useState } from 'react';
 import downArrow from '../assets/arrow-head-down.png';
@@ -9,8 +10,7 @@ import List from '../components/List';
 import Title from '../components/Title';
 import { NavigationProp } from '@react-navigation/native';
 import { store } from '../state/user';
-import { handleUserId, handleUserPackage } from '../services/user.service';
-
+import { handleToggleState, handleUserId, handleUserPackage } from '../services/user.service';
 type RootStackParamList = {
 	[key in RouteName]: undefined;
 };
@@ -52,6 +52,13 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 		photoUrl: '',
 		packages: [],
 	});
+
+	const [isSwitchOn, setIsSwitchOn] = React.useState(true);
+	const onToggleSwitch = () => {
+		setIsSwitchOn(!isSwitchOn);
+		handleToggleState(user.id);
+	};
+
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -121,6 +128,8 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 		);
 	};
 	const keyExtractorPackage = (_: ListItemPackage, index: number) => `item-${index}`;
+
+	console.log(isSwitchOn);
 	return (
 		<ScrollView
 			style={{ paddingHorizontal: 30 * WScale, paddingVertical: 6 * HScale }}
@@ -173,7 +182,7 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 					</View>
 				</View>
 				<View className="flex items-end">
-					<BotonActivado width={35 * WScale} hieght={21 * HScale} />
+					<Switch color={'#CEF169'} value={isSwitchOn} onValueChange={onToggleSwitch} />
 				</View>
 			</View>
 			<View style={{ height: 48 * HScale, marginTop: 10 * HScale, width: '100%' }}>
