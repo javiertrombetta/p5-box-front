@@ -31,7 +31,6 @@ export const handleDetailsPackage = async (idPackage: string, disponible?: boole
 };
 
 export const handleAddPackage = async (data: object) => {
-	console.log(data);
 	try {
 		let response = await axios.post(`http://localhost:3000/api/v1/packages/new`, data, {
 			withCredentials: true,

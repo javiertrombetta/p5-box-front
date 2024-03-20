@@ -19,7 +19,6 @@ import ArrowLeft from '../assets/ArrowLeft.svg';
 import leftArrow from '../assets/arrow-left.png';
 import { login, store } from '../state/user';
 import { handleIniciarPackage } from '../services/user.service';
-import { useSelector } from 'react-redux';
 import { handleAddPackage } from '../services/package.service';
 import { format } from 'date-fns';
 
@@ -98,7 +97,7 @@ const Button = ({
 	id,
 }: ButtonProps) => {
 	const isWeb = Platform.OS === 'web';
-	let user = useSelector((state) => state) as User;
+	let user = store.getState();
 	const handleNavigation = () => {
 		if (navigate && navigation) {
 			navigation.navigate(navigate);

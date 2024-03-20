@@ -15,7 +15,6 @@ import Repartidores from '../screens/Repartidores';
 import DeclaracionJurada from '../screens/DeclaracionJurada';
 import ForgotPassword from '../screens/ForgotPassword';
 import { store } from '../state/user';
-import { useSelector } from 'react-redux';
 
 type rolProps = {
 	roles: string;
@@ -23,15 +22,15 @@ type rolProps = {
 
 const NavigationClient = () => {
 	const Stack = createNativeStackNavigator();
-	let rol = useSelector((state: rolProps) => state.roles);
+	let rol = store.getState().roles;
 	return (
 		<Stack.Navigator
 			initialRouteName={
 				rol[0] === 'administrador'
-					? 'HomeGestionarPedido'
+					? 'Repartidores'
 					: rol[0] === 'repartidor'
 					? 'HomeIniciarJornada'
-					: 'AddPackage'
+					: 'Login'
 			}
 		>
 			<Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
