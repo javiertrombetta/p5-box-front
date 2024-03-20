@@ -3,16 +3,15 @@ import { View, Text, Pressable, Image, Dimensions, Platform, VirtualizedList } f
 import Header from '../components/Header';
 import { NavigationProp } from '@react-navigation/native';
 import { fakePending, fakeHistory } from './fakeData';
-
 import downarrow from '../assets/arrow-head-down.png';
-
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import ArrowHeadDown from '../assets/ArrowHeadDown.svg';
 import Button from '../components/Button';
 import List from '../components/List';
 import { handleDelivered } from '../services/package.service';
 import { handleMePackages } from '../services/user.service';
-import { store } from '../state/user';
+import { login, store } from '../state/user';
+
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -49,10 +48,16 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 
 	const [packagesDelivered, setPackagesDelivered] = useState([]);
 	const [packagesPending, setPackagesPending] = useState([]);
+
 	useEffect(() => {
 		handleDelivered().then((data) => data && setPackagesDelivered(data));
 		handleMePackages().then((data) => data && setPackagesPending(data));
-	}, [packagesPending.length, packagesDelivered.length, store.getState().back]);
+	}, [packagesPending.length, packagesDelivered.length, store.getState().back, user.back]);
+
+	useEffect(() => {
+		console.log(store.getState().back, user.back);
+		store.dispatch(login({ ...user, back: undefined }));
+	}, [user.back === `cancel`]);
 
 	type ListItemPending = {
 		deliveryAddress: string;

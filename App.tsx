@@ -10,8 +10,10 @@ import { handleMeUser } from './src/services/user.service';
 import NavigationClient from './src/navigation/NavigationClient';
 import NavigationNotClient from './src/navigation/NavigationNotClient';
 import Progress from './src/screens/Progress';
+import Toast from 'react-native-toast-message';
 import { format } from 'date-fns';
 import { es, registerTranslation } from 'react-native-paper-dates';
+
 
 NativeWindStyleSheet.setOutput({
 	default: 'native',
@@ -62,6 +64,7 @@ export default function App() {
 			) : (
 				<NavigationContainer>
 					{user._id.length > 0 && rol ? <NavigationClient /> : <NavigationNotClient />}
+					<Toast />
 				</NavigationContainer>
 			)}
 		</Provider>
