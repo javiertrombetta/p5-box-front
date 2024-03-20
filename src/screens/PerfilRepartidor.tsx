@@ -1,4 +1,5 @@
 import { View, Text, Image, Dimensions, ScrollView, Platform } from 'react-native';
+import { Switch } from 'react-native-paper';
 import React, { useEffect, useState } from 'react';
 import BotonActivado from '../assets/BotonActivado.svg';
 import Header from '../components/Header';
@@ -44,6 +45,13 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 		name: '',
 		photoUrl: '',
 	});
+
+	const [isSwitchOn, setIsSwitchOn] = React.useState(true);
+	const onToggleSwitch = () => {
+		setIsSwitchOn(!isSwitchOn);
+		handleToggleState(user.id);
+	};
+
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -55,8 +63,7 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 		};
 		fetchData();
 	}, [userId]);
-	console.log(user);
-
+  
 	return (
 		<ScrollView
 			style={{ paddingHorizontal: 30 * WScale, paddingVertical: 6 * HScale }}
@@ -109,7 +116,7 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 					</View>
 				</View>
 				<View className="flex items-end">
-					<BotonActivado width={35 * WScale} hieght={21 * HScale} />
+					<Switch color={'#CEF169'} value={isSwitchOn} onValueChange={onToggleSwitch} />
 				</View>
 			</View>
 			<ListPendingsAdmin navigation={navigation} />

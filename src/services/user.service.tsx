@@ -146,3 +146,10 @@ export const handleUserPackage = async (userId: string) => {
 	});
 	return response.data;
 };
+
+export const handleToggleState = async (uuidUser: string) => {
+	const response = await axios.put(`http://localhost:3000/api/v1/auth/users/${uuidUser}/state`, {
+		withCredentials: true,
+	});
+	return response.data;
+};
