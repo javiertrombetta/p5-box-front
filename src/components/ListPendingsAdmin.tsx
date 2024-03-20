@@ -94,7 +94,6 @@ const ListPendingsAdmin = ({ navigation }: Props) => {
 
 	const toggleDropdown = () => {
 		let medida = 35 + 70 * user.packagesPendings.length;
-		console.log(medida);
 		let toValue = dropdown
 			? dropdownTitle
 				? medida
@@ -256,7 +255,7 @@ const ListPendingsAdmin = ({ navigation }: Props) => {
 								  ))}
 						</View>
 
-						{!dropdown && dropdownTitle && (
+						{!dropdown && dropdownTitle && user.packagesPendings.length >= 4 && (
 							<View>
 								<LinearGradient
 									colors={['rgba(255, 255, 255, 0.0)', 'rgba(255, 255, 255, 1)']}

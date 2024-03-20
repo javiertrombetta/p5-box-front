@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import List from '../components/List';
 import { NavigationProp } from '@react-navigation/native';
 import Title from '../components/Title';
-import { store } from '../state/user';
+import { login, store } from '../state/user';
 import { es } from 'date-fns/locale';
 import { handleDeliverymanDelivery, handleTotalDeliveryman } from '../services/reports.service';
 import { format } from 'date-fns';
@@ -61,6 +61,7 @@ const Repartidores = ({ navigation }: Props) => {
 	};
 
 	const [dayFormat, setDayFormat] = useState<Date | string>();
+	let user = store.getState();
 	let date = store.getState().date;
 	const [repartidores, setRepartidores] = useState<ListItemUsers[]>([]);
 
@@ -69,6 +70,14 @@ const Repartidores = ({ navigation }: Props) => {
 		let month = date.slice(5, 7);
 		let day = date.slice(8, 10);
 		let newDate = new Date(parseInt(year), parseInt(month), parseInt(day));
+		store.dispatch(
+			login({
+				...user,
+				date: date,
+				roles: user.roles,
+				indexNavigation: navigation.getState().index,
+			})
+		);
 		setDayFormat(format(newDate, 'EEE LLLL', { locale: es }));
 		handleTotalDeliveryman(year.toString(), month.toString(), day.toString())
 			.then((res) => {
@@ -101,7 +110,6 @@ const Repartidores = ({ navigation }: Props) => {
 	};
 
 	const renderItemsUsers = ({ item }: { item: ListItemUsers }) => {
-		console.log(item.percentage.percentage);
 		if (!item) {
 			console.error('El ítem en el índice proporcionado es undefined');
 			return null;

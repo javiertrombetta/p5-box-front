@@ -44,14 +44,10 @@ type Props = {
 };
 
 const ListPendingsRepartidor = ({ navigation }: Props) => {
-	const isWeb = Platform.OS === 'web';
 	const { width, height } = Dimensions.get('window');
 	const WScale = width / 360;
 	const HScale = height / 640;
-
-	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 	let user = store.getState();
-
 	const [packagesDelivered, setPackagesDelivered] = useState([]);
 	const [packagesPending, setPackagesPending] = useState([]);
 
