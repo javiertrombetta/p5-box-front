@@ -88,9 +88,9 @@ const HomeGestionarPedido = ({ navigation }: Props) => {
 
 		Animated.timing(heightAnim, {
 			toValue,
-			duration: 300, // Duración en milisegundos
+			duration: 300,
 			easing: Easing.ease,
-			useNativeDriver: false, // Asegúrate de establecer esto en false para que funcione con altura
+			useNativeDriver: false,
 		}).start();
 	};
 	useEffect(() => {

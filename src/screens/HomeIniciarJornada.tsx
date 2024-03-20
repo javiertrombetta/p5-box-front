@@ -11,7 +11,8 @@ import List from '../components/List';
 import { handleDelivered } from '../services/package.service';
 import { handleMePackages } from '../services/user.service';
 import { login, store } from '../state/user';
-
+import { useSelector } from 'react-redux';
+import ListPendingsRepartidor from '../components/ListPendingsRepartidor';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -45,17 +46,24 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 	const HScale = height / 640;
 
 	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+	let user = store.getState();
 
 	const [packagesDelivered, setPackagesDelivered] = useState([]);
 	const [packagesPending, setPackagesPending] = useState([]);
 
+	type User = {
+		back: string;
+	};
+	let user1 = useSelector((state) => state) as User;
+
 	useEffect(() => {
 		handleDelivered().then((data) => data && setPackagesDelivered(data));
 		handleMePackages().then((data) => data && setPackagesPending(data));
-	}, [packagesPending.length, packagesDelivered.length, store.getState().back, user.back]);
+		console.log(store.getState().back);
+	}, [packagesPending.length, packagesDelivered.length, store.getState().back, user1.back]);
 
 	useEffect(() => {
-		console.log(store.getState().back, user.back);
+		console.log(store.getState().back);
 		store.dispatch(login({ ...user, back: undefined }));
 	}, [user.back === `cancel`]);
 
@@ -142,7 +150,7 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 			className="w-full bg-verde h-full flex flex-col items-center"
 		>
 			<Header navigation={navigation} />
-			<View
+			{/* <View
 				style={{ height: 188 * HScale, marginTop: 28 * HScale }}
 				className="w-full flex flex-col rounded-xl justify-start align-middle bg-white"
 			>
@@ -177,7 +185,8 @@ const HomeIniciarJornada = ({ navigation }: Props) => {
 				) : (
 					<Text className="text-center text-texto mt-2">No tienes paquetes pendientes.</Text>
 				)}
-			</View>
+			</View> */}
+			<ListPendingsRepartidor navigation={navigation} />
 			<View
 				style={{ height: 293 * HScale, marginTop: 10 * HScale }}
 				className="w-full justify-start flex rounded-xl bg-white"
