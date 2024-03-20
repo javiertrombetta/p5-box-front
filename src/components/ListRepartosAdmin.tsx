@@ -254,7 +254,7 @@ const ListRepartosAdmin = ({ navigation }: Props) => {
 								  ))}
 						</View>
 
-						{!dropdown && dropdownTitle && (
+						{!dropdown && dropdownTitle && user.packagesDelivered.length >= 4 && (
 							<View>
 								<LinearGradient
 									colors={['rgba(255, 255, 255, 0.0)', 'rgba(255, 255, 255, 1)']}
