@@ -84,7 +84,6 @@ const List = ({
 	const isWeb = Platform.OS === 'web';
 	const arrayColumn2: string[] = content2String.split(', ');
 	const handleNavigation = () => {
-		console.log(user.roles[0]);
 		user.roles[0] === 'repartidor'
 			? (content3 === 'en curso' ||
 					content3 === 'pendiente' ||
@@ -93,7 +92,7 @@ const List = ({
 			  column1 !== 'circleProgress' &&
 			  column3 !== 'buttonVer' &&
 			  (store.dispatch(
-					login({ ...user, roles: user.roles[0], back: content3, packageSelect: idPackage })
+					login({ ...user, roles: user.roles, back: content3, packageSelect: idPackage })
 			  ),
 			  navigation.navigate(RouteName.RepartoEnCurso))
 			: column3 === 'img' &&
