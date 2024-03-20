@@ -14,7 +14,6 @@ import Toast from 'react-native-toast-message';
 import { format } from 'date-fns';
 import { es, registerTranslation } from 'react-native-paper-dates';
 
-
 NativeWindStyleSheet.setOutput({
 	default: 'native',
 });
@@ -47,6 +46,7 @@ export default function App() {
 					back: '',
 					packageSelect: '',
 					paquetesObtenidos: [],
+					indexNavigation: 0,
 					date: format(new Date(), 'yyyy/MM/dd'),
 				})
 			);
@@ -64,7 +64,7 @@ export default function App() {
 			) : (
 				<NavigationContainer>
 					{user._id.length > 0 && rol ? <NavigationClient /> : <NavigationNotClient />}
-					<Toast  />
+					<Toast />
 				</NavigationContainer>
 			)}
 		</Provider>

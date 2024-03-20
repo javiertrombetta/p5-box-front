@@ -17,6 +17,7 @@ const initialState = {
     packages: [""],
     photoUrl: "",
     state: "",
+    indexNavigation: 0,
     points: 0,
     __v: 0,
 };
