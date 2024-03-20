@@ -3,7 +3,7 @@ axios.defaults.withCredentials = true;
 
 export const handleActiveDeliveryman = async (year: string, month: string, day: string) => {
 	const response = await axios.get(
-		`http://localhost:3000/api/v1/reports/deliveryman/all/state/totals/${year}/${month}/${day}`,
+		`http://localhost:3000/api/v1/reports/deliveryman/state/totals/${year}/${month}/${day}`,
 		{
 			withCredentials: true,
 		}
@@ -12,14 +12,12 @@ export const handleActiveDeliveryman = async (year: string, month: string, day: 
 };
 
 export const handleTotalDeliveryman = async (year: string, month: string, day: string) => {
-	console.log(year, month, day);
 	const response = await axios.get(
-		`http://localhost:3000/api/v1/reports/deliveryman/all/state/details/${year}/${month}/${day}`,
+		`http://localhost:3000/api/v1/reports/deliveryman/state/details/${year}/${month}/${day}`,
 		{
 			withCredentials: true,
 		}
 	);
-	console.log(response.data);
 	return response.data;
 };
 
@@ -34,13 +32,21 @@ export const handlePackagesTotal = async (year: string, month: string, day: stri
 };
 
 export const handlePackagesDelivered = async (year: string, month: string, day: string) => {
-	console.log(year, month, day);
 	const response = await axios.get(
 		`http://localhost:3000/api/v1/reports/packages/delivered/${year}/${month}/${day}`,
 		{
 			withCredentials: true,
 		}
 	);
-	console.log(response.data);
+	return response.data;
+};
+
+export const handlePackagesDeliveredUser = async (userId: string) => {
+	const response = await axios.get(
+		`http://localhost:3000/api/v1/reports/packages/delivered?userId=${userId}`,
+		{
+			withCredentials: true,
+		}
+	);
 	return response.data;
 };
