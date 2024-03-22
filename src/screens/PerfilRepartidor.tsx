@@ -9,7 +9,7 @@ import { login, store } from '../state/user';
 import { handleToggleState, handleUserId } from '../services/user.service';
 import ListRepartosAdmin from '../components/ListRepartosAdmin';
 import ListPendingsAdmin from '../components/ListPendingsAdmin';
-
+import Toast from 'react-native-toast-message';
 type RootStackParamList = {
 	[key in RouteName]: undefined;
 };
@@ -34,6 +34,9 @@ enum RouteName {
 type Props = {
 	navigation: NavigationProp<RootStackParamList>;
 };
+type messageObj = {
+	message: '';
+};
 
 const PerfilRepartidor = ({ navigation }: Props) => {
 	const { width, height } = Dimensions.get('window');
@@ -50,10 +53,18 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 		state: '',
 	});
 
+	const showToast = (res: messageObj) => {
+		Toast.show({
+			type: 'success',
+			text1: `${res.message}`,
+		});
+	};
+
 	const [isSwitchOn, setIsSwitchOn] = useState(true);
 	const onToggleSwitch = () => {
 		setIsSwitchOn(!isSwitchOn);
-		handleToggleState(user.id).then((res) => console.log(res));
+		handleToggleState(user.id).then((res) => showToast(res));
+
 	};
 
 	useEffect(() => {
