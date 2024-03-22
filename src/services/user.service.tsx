@@ -6,6 +6,10 @@ export const handleCreateUser = async (data: object) => {
 		const response = await axios.post('http://localhost:3000/api/v1/auth/register', data, {
 			withCredentials: true,
 		});
+		console.log(response, 'solo response');
+		console.log(data, 'soloData');
+		console.log(response.data, 'esto es response.data');
+		console.log('ahora probando si se creo bien el usuairo');
 		return response.data;
 	} catch (error) {
 		console.error('Error al crear usuario:', error);
@@ -30,6 +34,7 @@ export const handleLogout = async () => {
 	const response = await axios.post('http://localhost:3000/api/v1/auth/logout', {
 		withCredentials: true,
 	});
+	return response.data;
 };
 
 export const handleMeUser = async () => {
@@ -123,6 +128,7 @@ export const handleIniciarPackage = async (idPackage: string) => {
 	const response = await axios.put(`http://localhost:3000/api/v1/auth/me/packages/${idPackage}`, {
 		withCredentials: true,
 	});
+	console.log(response.data, 'PACKAGE');
 	return response.data;
 };
 
