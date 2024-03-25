@@ -63,11 +63,9 @@ const ListRepartosRepartidor = ({ navigation }: Props) => {
 	useEffect(() => {
 		handleDelivered().then((data) => data && setPackagesDelivered(data));
 		handleMePackages().then((data) => data && setPackagesPending(data));
-		console.log(store.getState().back);
 	}, [packagesPending.length, packagesDelivered.length, store.getState().back, user1.back]);
 
 	useEffect(() => {
-		console.log(store.getState().back);
 		store.dispatch(login({ ...user, back: undefined }));
 	}, [user.back === `cancel`]);
 

@@ -42,7 +42,6 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 	const userId = store.getState().userSelected;
 	const userObj = store.getState();
-	const indexNavigation = store.getState().indexNavigation;
 	const [user, setUser] = useState({
 		name: '',
 		photoUrl: '',
@@ -53,7 +52,8 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 	const [isSwitchOn, setIsSwitchOn] = useState(true);
 	const onToggleSwitch = () => {
 		setIsSwitchOn(!isSwitchOn);
-		handleToggleState(user.id).then((res) => console.log(res));
+		handleToggleState(user.id);
+		store.dispatch(login({ ...userObj, switch: true }));
 	};
 
 	useEffect(() => {
@@ -61,7 +61,6 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 			login({
 				...userObj,
 				userSelected: userId,
-				indexNavigation: navigation.getState().index,
 				date: store.getState().date,
 			})
 		);
@@ -69,7 +68,6 @@ const PerfilRepartidor = ({ navigation }: Props) => {
 			try {
 				const userData = await handleUserId(userId);
 				userData.state === 'inactivo' && setIsSwitchOn(false);
-				console.log(userData);
 				setUser(userData);
 			} catch (error) {
 				console.error('Error al obtener los datos del usuario:', error);
