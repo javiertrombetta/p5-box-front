@@ -10,6 +10,7 @@ const initialState = {
     email: "",
     back: "",
     date: formattedDate,
+    switch: false,
     packageSelect: "",
     roles: [""],
     paquetesObtenidos: [""],
@@ -17,7 +18,6 @@ const initialState = {
     packages: [""],
     photoUrl: "",
     state: "",
-    indexNavigation: 0,
     points: 0,
     __v: 0,
 };

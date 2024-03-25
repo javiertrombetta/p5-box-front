@@ -12,13 +12,15 @@ export const handleActiveDeliveryman = async (year: string, month: string, day: 
 };
 
 export const handleTotalDeliveryman = async (year: string, month: string, day: string) => {
-	const response = await axios.get(
-		`http://localhost:3000/api/v1/reports/deliveryman/state/details/${year}/${month}/${day}`,
-		{
-			withCredentials: true,
-		}
-	);
-	return response.data;
+	try {
+		const response = await axios.get(
+			`http://localhost:3000/api/v1/reports/deliveryman/state/details/${year}/${month}/${day}`,
+			{
+				withCredentials: true,
+			}
+		);
+		return response.data;
+	} catch {}
 };
 
 export const handleDeliverymanDelivery = async (

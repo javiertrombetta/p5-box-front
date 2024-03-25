@@ -84,7 +84,6 @@ const List = ({
 	const isWeb = Platform.OS === 'web';
 	const arrayColumn2: string[] = content2String.split(', ');
 	const handleNavigation = () => {
-		console.log(user.roles[0]);
 		user.roles[0] === 'repartidor'
 			? (content3 === 'en curso' ||
 					content3 === 'pendiente' ||

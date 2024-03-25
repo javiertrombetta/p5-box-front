@@ -67,21 +67,6 @@ enum RouteName {
 	NewPassword = 'NewPassword',
 }
 
-type User = {
-	_id: '';
-	name: '';
-	lastname: '';
-	email: '';
-	roles: [''];
-	packages: [''];
-	photoUrl: '';
-	state: '';
-	points: 0;
-	__v: 0;
-	back: '';
-	packageSelect: '';
-};
-
 const Button = ({
 	spec,
 	content,
@@ -114,6 +99,7 @@ const Button = ({
 		}
 	};
 	const handleBack = () => {
+		store.dispatch(login({ ...user, back: 'repeat' }));
 		navigate && navigation.navigate(navigate);
 	};
 	let formattedDate = format(new Date(), 'yyyy/MM/dd');
