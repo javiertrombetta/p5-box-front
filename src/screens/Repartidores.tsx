@@ -94,8 +94,10 @@ const Repartidores = ({ navigation }: Props) => {
 					userDetailsArray.map((user: ListItemUsers) => {
 						user.roles[0] === 'repartidor' &&
 							handleDeliverymanDelivery(year, month, day, user.id).then((percentage) => {
-								user = { ...user, percentage };
-								setRepartidores((prevState) => [...prevState, user]);
+								if (percentage) {
+									user = { ...user, percentage };
+									setRepartidores((prevState) => [...prevState, user]);
+								}
 							});
 					});
 				}
