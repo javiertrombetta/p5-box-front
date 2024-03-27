@@ -33,6 +33,10 @@ export const handleDeliverymanDelivery = async (
 			withCredentials: true,
 		}
 	);
+	console.log(response);
+	if (response.status === 404) {
+		return null;
+	}
 	return response.data;
 };
 

@@ -2,13 +2,14 @@
   "expo": {
     "name": "Box App",
     "slug": "boxapp",
+    "description": "This is a Box App.",
     "version": "1.0.0",
     "orientation": "portrait",
     "scheme": "boxapp",
-    "icon": "./src/assets/icon.png",
+    "icon": "./src/assets/vec-logo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./src/assets/splash.png",
+      "image": "./src/assets/fondoLogin.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -25,7 +26,7 @@
       }
     },
     "web": {
-      "favicon": "./src/assets/favicon.png"
+      "favicon": "./src/assets/vec-logo.png"
     },
     "plugins": [
       "expo-router"
