@@ -146,10 +146,7 @@ const Paquetes = ({ navigation }: Props) => {
 						/>
 					</View>
 				</View>
-				<View
-					style={{ minHeight: 442 * HScale, marginTop: 10 * HScale }}
-					className="w-full flex rounded-t-xl bg-white"
-				>
+				<View style={{ marginTop: 10 * HScale }} className="w-full flex rounded-t-xl bg-white">
 					<View
 						style={{ height: 35 * HScale, paddingHorizontal: 16 * WScale }}
 						className="w-full flex flex-row rounded-t-xl items-center justify-between bg-violeta"
@@ -184,8 +181,8 @@ const Paquetes = ({ navigation }: Props) => {
 						<View className="h-[1] w-full bg-gray-300" />
 					</View>
 					<View
-						style={{ minHeight: 350 * HScale }}
-						className="flex flex-col items-center justify-between w-full"
+						style={paquetes.length <= 5 ? { maxHeight: 350 * HScale } : { minHeight: 350 * HScale }}
+						className="flex flex-col items-center w-full"
 					>
 						{dropdown
 							? paquetes.map((item, index) => (
