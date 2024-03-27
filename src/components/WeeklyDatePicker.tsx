@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { View, Text, Dimensions, StyleSheet, Pressable } from 'react-native';
-import { startOfWeek, addWeeks, format, addDays, isAfter, isSameDay } from 'date-fns';
+import React, { useState, useEffect, useMemo } from 'react';
+import { View, Text, Dimensions, Pressable } from 'react-native';
+import { format, addDays, isAfter, isSameDay } from 'date-fns';
 import { es } from 'date-fns/locale';
 import ArrowLeftBox from '../assets/ArrowLeftBox.svg';
 import ArrowRightBox from '../assets/ArrowRightBox.svg';
@@ -11,11 +11,17 @@ const HScale = height / 640;
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
-const WeeklyDatePicker = ({ handleSelect }: { handleSelect: (date: Date) => void }) => {
+const WeeklyDatePicker = ({
+	handleSelect,
+}: {
+	handleSelect: (date: Date, month: string) => void;
+}) => {
 	const [offset, setOffset] = useState<number>(0);
 	const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+
+	const month = format(selectedDate, 'LLLL', { locale: es }).toUpperCase();
 	useEffect(() => {
-		handleSelect(selectedDate);
+		handleSelect(selectedDate, month);
 	}, [selectedDate]);
 	const today = new Date();
 
@@ -24,7 +30,6 @@ const WeeklyDatePicker = ({ handleSelect }: { handleSelect: (date: Date) => void
 
 		return Array.from({ length: 5 }).map((_, index) => {
 			const date = addDays(start, index);
-
 			return {
 				weekday: format(date, 'EEE', { locale: es }),
 				date: format(date, 'd'),
