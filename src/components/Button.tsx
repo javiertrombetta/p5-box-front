@@ -6,8 +6,6 @@ import { NavigationProp } from '@react-navigation/native';
 import {
 	handleConditions,
 	handleCreateUser,
-	handleForgot,
-	handleVerify,
 	handleFinishPackage,
 	handleLoginUser,
 	handleLogout,
@@ -22,11 +20,7 @@ import { handleIniciarPackage } from '../services/user.service';
 import { handleAddPackage } from '../services/package.service';
 import { format } from 'date-fns';
 
-const { width, height } = Dimensions.get('window');
-const WScale = width / 360;
-const HScale = height / 640;
-
-const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+import Toast from 'react-native-toast-message';
 
 interface ButtonProps {
 	height: number;
@@ -81,7 +75,12 @@ type User = {
 	back: '';
 	packageSelect: '';
 };
-
+type messageObj = {
+	message: '';
+};
+const { width, height } = Dimensions.get('window');
+const WScale = width / 360;
+const HScale = height / 640;
 const Button = ({
 	spec,
 	content,
@@ -96,6 +95,15 @@ const Button = ({
 	arrowLeft,
 	id,
 }: ButtonProps) => {
+	const showToast = (res: messageObj) => {
+		Toast.show({
+			type: 'success',
+			text1: `${res.message}`,
+		});
+	};
+
+	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+
 	const isWeb = Platform.OS === 'web';
 	let user = store.getState();
 	const handleNavigation = () => {
@@ -114,6 +122,7 @@ const Button = ({
 		}
 	};
 	const handleBack = () => {
+		store.dispatch(login({ ...user, back: 'repeat' }));
 		navigate && navigation.navigate(navigate);
 	};
 	let formattedDate = format(new Date(), 'yyyy/MM/dd');
@@ -123,14 +132,15 @@ const Button = ({
 				<Pressable
 					onPress={async () => {
 						if (action === 'postR' && data) {
-							await handleCreateUser(data);
+							// await handleCreateUser(data)
+							await handleCreateUser(data).then((res) => showToast(res));
 							try {
 								navigation.navigate(RouteName.Login);
 							} catch (error) {
 								console.error(error);
 							}
 						} else if (action === 'postL' && data) {
-							await handleLoginUser(data);
+							await handleLoginUser(data).then((res) => showToast(res));
 							try {
 								await handleMeUser().then((data: object) => {
 									data = {
@@ -149,7 +159,7 @@ const Button = ({
 							}
 						} else if (action === 'postC' && data) {
 							try {
-								await handleConditions(data);
+								await handleConditions(data).then((res) => showToast(res));
 								store.dispatch(login({ ...user, back: undefined }));
 								navigation.navigate(RouteName.HomeIniciarJornada);
 							} catch (error) {
@@ -157,7 +167,7 @@ const Button = ({
 							}
 						} else if (action === 'postCS') {
 							try {
-								await handleLogout();
+								await handleLogout().then((res) => showToast(res));
 								navigation.navigate(RouteName.Login);
 							} catch (error) {
 								console.error(error);
@@ -172,7 +182,7 @@ const Button = ({
 							}
 						} else if (action === 'putFinalizar' && id) {
 							try {
-								await handleFinishPackage(id);
+								await handleFinishPackage(id).then((res) => showToast(res));
 								store.dispatch(login({ ...user, back: undefined }));
 								navigation.navigate(RouteName.HomeIniciarJornada);
 							} catch (error) {
@@ -180,7 +190,7 @@ const Button = ({
 							}
 						} else if (action === 'postCancelPackage' && id) {
 							try {
-								await handlePackageCancel(id);
+								await handlePackageCancel(id).then((res) => showToast(res));
 								store.dispatch(login({ ...user, back: undefined }));
 								navigation.navigate(RouteName.HomeIniciarJornada);
 							} catch (error) {
@@ -197,7 +207,10 @@ const Button = ({
 							}
 						} else if (action === 'postAgregar' && data) {
 							try {
-								handleAddPackage(data);
+								handleAddPackage(data).then((res) => {
+									showToast(res);
+									console.log(res, 'add package agregar');
+								});
 								navigation.navigate(RouteName.HomeGestionarPedido);
 							} catch (error) {
 								console.error(error);

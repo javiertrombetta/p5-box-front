@@ -219,7 +219,7 @@ const ListPendingsAdmin = ({ navigation }: Props) => {
 								}}
 								className="text-texto font-robotoMedium"
 							>
-								{user.packagesPendings.length} Paquetes entregados
+								{user.packagesPendings.length} Paquetes pendientes
 							</Text>
 						</View>
 

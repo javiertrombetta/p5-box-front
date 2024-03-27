@@ -11,6 +11,7 @@ import { login, store } from '../state/user';
 import RepartidoresHabilitados from '../components/RepartidoresHabilitados';
 import PaquetesRepartidos from '../components/PaquetesRepartidos';
 import { format } from 'date-fns';
+import { useSelector } from 'react-redux';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -37,35 +38,29 @@ type Props = {
 	navigation: NavigationProp<RootStackParamList>;
 };
 
+type PropSwitch = {
+	switch: string;
+};
+
 const HomeGestionarPedido = ({ navigation }: Props) => {
 	const { width, height } = Dimensions.get('window');
 	const WScale = width / 360;
 	const HScale = height / 640;
-
+	const [monthSelected, setMonthSelected] = useState('');
 	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
 
 	let user = store.getState();
+	let switchState = useSelector((state: PropSwitch) => state.switch);
 
 	const [selectedDate, setSelectedDate] = useState(new Date());
 
-	const handleSelect = (date: Date) => {
+	const handleSelect = (date: Date, month: string) => {
+		setMonthSelected(month);
 		setSelectedDate(date);
 		date.toLocaleDateString('es-ES');
 		let formattedDate = format(date, 'yyyy/MM/dd');
 		store.dispatch(login({ ...user, date: formattedDate }));
 	};
-
-	useEffect(() => {
-		store.dispatch(
-			login({
-				...user,
-				date: format(selectedDate, 'yyyy/MM/dd'),
-				indexNavigation: navigation.getState().index,
-			})
-		);
-		// console.log(navigation.getState().routes[length - 1]);
-	}, [navigation.getState().routes[length - 1]]);
-
 	const [listRepartidores, setListRepartidores] = useState({
 		circleValue: 0,
 		cantidadHab: 0,
@@ -80,9 +75,14 @@ const HomeGestionarPedido = ({ navigation }: Props) => {
 	const setearRepartidores = (circleValue: number, cantidadHab: number, cantidad: number) => {
 		setListRepartidores({ circleValue, cantidadHab, cantidad });
 	};
+
 	const setearPaquetes = (circleValue: number, cantidadEntregados: number, cantidad: number) => {
 		setListPaquetes({ circleValue, cantidadEntregados, cantidad });
 	};
+
+	useEffect(() => {
+		RepartidoresHabilitados({ setearRepartidores, selectedDate });
+	}, [switchState, selectedDate]);
 
 	const heightAnim = useRef(new Animated.Value(40)).current;
 	const [dropdownTitle, setDropdownTitle] = useState(true);
@@ -144,14 +144,19 @@ const HomeGestionarPedido = ({ navigation }: Props) => {
 					</Text>
 				</View>
 			</View>
-			<Card header={'violet, FEBRERO, 14, true,'} heightC={84} heightT={30} dropdown={false}>
+			<Card
+				header={`violet, ${monthSelected}, 14, true,`}
+				heightC={84}
+				heightT={30}
+				dropdown={false}
+			>
 				<WeeklyDatePicker handleSelect={handleSelect} />
 			</Card>
 			<Animated.View
 				style={{
 					marginTop: 10,
 					height: heightAnim,
-					overflow: 'hidden', // Asegura que el contenido oculto esté recortado
+					overflow: 'hidden',
 				}}
 				className="w-full flex rounded-xl bg-white"
 			>
@@ -172,10 +177,6 @@ const HomeGestionarPedido = ({ navigation }: Props) => {
 						className="flex flex-col justify-evenly align-middle"
 					>
 						<View style={{ height: 100 * HScale, paddingHorizontal: 16 * WScale }}>
-							<RepartidoresHabilitados
-								setearRepartidores={setearRepartidores}
-								selectedDate={selectedDate}
-							/>
 							<List
 								column1="circleProgress"
 								circleValue={listRepartidores.circleValue}
