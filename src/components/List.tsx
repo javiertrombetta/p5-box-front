@@ -92,7 +92,7 @@ const List = ({
 			  column1 !== 'circleProgress' &&
 			  column3 !== 'buttonVer' &&
 			  (store.dispatch(
-					login({ ...user, roles: user.roles[0], back: content3, packageSelect: idPackage })
+					login({ ...user, roles: user.roles, back: content3, packageSelect: idPackage })
 			  ),
 			  navigation.navigate(RouteName.RepartoEnCurso))
 			: column3 === 'img' &&

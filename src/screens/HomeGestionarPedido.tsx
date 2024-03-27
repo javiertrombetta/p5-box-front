@@ -61,7 +61,6 @@ const HomeGestionarPedido = ({ navigation }: Props) => {
 		let formattedDate = format(date, 'yyyy/MM/dd');
 		store.dispatch(login({ ...user, date: formattedDate }));
 	};
-
 	const [listRepartidores, setListRepartidores] = useState({
 		circleValue: 0,
 		cantidadHab: 0,
