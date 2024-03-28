@@ -75,9 +75,9 @@ type User = {
 	back: '';
 	packageSelect: '';
 };
-type messageObj = {
+interface messageObj {
 	message: '';
-};
+}
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
 const HScale = height / 640;
@@ -140,6 +140,7 @@ const Button = ({
 							}
 						} else if (action === 'postL' && data) {
 							await handleLoginUser(data).then((res) => showToast(res));
+							console.log(data, 'estoy logueandome');
 							try {
 								await handleMeUser().then((data: object) => {
 									data = {
@@ -206,7 +207,7 @@ const Button = ({
 							}
 						} else if (action === 'postAgregar' && data) {
 							try {
-								handleAddPackage(data).then((res) => {
+								handleAddPackage(data).then((res: messageObj) => {
 									showToast(res);
 									console.log(res, 'add package agregar');
 								});

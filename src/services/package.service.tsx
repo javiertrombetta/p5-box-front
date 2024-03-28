@@ -35,8 +35,8 @@ export const handleAddPackage = async (data: object) => {
 		let response = await axios.post(`http://localhost:3000/api/v1/packages/new`, data, {
 			withCredentials: true,
 		});
-		// console.log(response.data, 'holaaaaaaa');
-		return response.data;
+		const obj = { ...response.data, message: 'Paquete agregado' };
+		return obj;
 	} catch (error) {
 		console.error(error);
 	}
