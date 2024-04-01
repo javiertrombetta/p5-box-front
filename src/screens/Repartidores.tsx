@@ -188,7 +188,12 @@ const Repartidores = ({ navigation }: Props) => {
 						</Text>
 					</View>
 				</View>
-				<View style={{ minHeight: 405 * HScale }} className="bg-blanco flex justify-evenly w-full">
+				<View
+					style={
+						repartidores.length <= 2 ? { minHeight: 405 * HScale } : { minHeight: 405 * HScale }
+					}
+					className="bg-blanco flex w-full"
+				>
 					{repartidores ? (
 						dropdown ? (
 							repartidores?.map((item, index) => (
