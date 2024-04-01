@@ -95,11 +95,18 @@ const Button = ({
 	arrowLeft,
 	id,
 }: ButtonProps) => {
-	const showToast = (res: messageObj) => {
-		Toast.show({
-			type: 'success',
-			text1: `${res.message}`,
-		});
+	const showToast = (text: string, boolean: boolean) => {
+		boolean &&
+			Toast.show({
+				type: 'success',
+				text1: text,
+			});
+		!boolean &&
+			text &&
+			Toast.show({
+				type: 'error',
+				text1: text,
+			});
 	};
 
 	const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
@@ -133,14 +140,15 @@ const Button = ({
 					onPress={async () => {
 						if (action === 'postR' && data) {
 							// await handleCreateUser(data)
-							await handleCreateUser(data).then((res) => showToast(res));
+							await handleCreateUser(data).then((res: messageObj) => showToast(res.message, true));
 							try {
 								navigation.navigate(RouteName.Login);
 							} catch (error) {
-								console.error(error);
+								showToast('Error al registrar', false);
+								// console.error(error);
 							}
 						} else if (action === 'postL' && data) {
-							await handleLoginUser(data).then((res) => showToast(res));
+							await handleLoginUser(data).then((res) => showToast(res.message, true));
 							console.log(data, 'estoy logueandome');
 							try {
 								await handleMeUser().then((data: object) => {
@@ -156,22 +164,24 @@ const Button = ({
 								});
 								handleNavigationRol();
 							} catch (error) {
-								console.error(error);
+								showToast('Error al iniciar sesion', false);
 							}
 						} else if (action === 'postC' && data) {
 							try {
-								await handleConditions(data).then((res) => showToast(res));
+								await handleConditions(data).then((res: messageObj) =>
+									showToast(res.message, true)
+								);
 								store.dispatch(login({ ...user, back: undefined }));
 								navigation.navigate(RouteName.HomeIniciarJornada);
 							} catch (error) {
-								console.error(error);
+								showToast('Error al iniciar sesion', false);
 							}
 						} else if (action === 'postCS') {
 							try {
-								await handleLogout().then((res) => showToast(res));
+								await handleLogout().then((res: messageObj) => showToast(res.message, true));
 								navigation.navigate(RouteName.Login);
 							} catch (error) {
-								console.error(error);
+								showToast('No se puede desloguear', false);
 							}
 						} else if (action === 'postI' && id) {
 							try {
@@ -179,23 +189,27 @@ const Button = ({
 								store.dispatch(login({ ...user, back: 'en curso', packageSelect: id }));
 								navigation.navigate(RouteName.RepartoEnCurso);
 							} catch (error) {
-								console.error(error);
+								showToast('No se ha podido iniciar el pedido', false);
 							}
 						} else if (action === 'putFinalizar' && id) {
 							try {
-								await handleFinishPackage(id).then((res) => showToast(res));
+								await handleFinishPackage(id).then((res: messageObj) =>
+									showToast(res.message, true)
+								);
 								store.dispatch(login({ ...user, back: undefined }));
 								navigation.navigate(RouteName.HomeIniciarJornada);
 							} catch (error) {
-								console.error(error);
+								showToast('No se pudo cancelar el pedido', false);
 							}
 						} else if (action === 'postCancelPackage' && id) {
 							try {
-								await handlePackageCancel(id).then((res) => showToast(res));
+								await handlePackageCancel(id).then((res: messageObj) =>
+									showToast(res.message, true)
+								);
 								store.dispatch(login({ ...user, back: undefined }));
 								navigation.navigate(RouteName.HomeIniciarJornada);
 							} catch (error) {
-								console.error(error);
+								showToast('No se pudo cancelar el pedido', false);
 							}
 						} else if (action === 'pushPackages' && data) {
 							try {
@@ -209,12 +223,12 @@ const Button = ({
 						} else if (action === 'postAgregar' && data) {
 							try {
 								handleAddPackage(data).then((res: messageObj) => {
-									showToast(res);
+									showToast(res.message, true);
 									console.log(res, 'add package agregar');
 								});
 								navigation.navigate(RouteName.HomeGestionarPedido);
 							} catch (error) {
-								console.error(error);
+								showToast('No se pudo agregar el paquete', false);
 							}
 						}
 					}}

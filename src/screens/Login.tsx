@@ -54,7 +54,7 @@ const Login = ({ navigation }: Props) => {
 					top: 185 * HScale,
 					left: 30 * WScale,
 					width: 300 * WScale,
-					height: 315 * HScale,
+					height: 335 * HScale,
 					position: 'absolute',
 				}}
 			>
