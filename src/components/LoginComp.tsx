@@ -163,9 +163,29 @@ const LoginComp = ({ client, navigation }: LoginCompProps) => {
 					width={270}
 				/>
 			</View>
+
+			{/* Boton de Google */}
+			<View
+				className="flex flex-row justify-center align-middle items-center"
+				style={{ height: 30 * HScale, top: 185 * HScale }}
+			>
+				<Pressable
+					style={{
+						width: 270 * WScale,
+					}}
+					className="relative flex flex-row items-center rounded-lg border border-gray-400 w-full h-full justify-center bg-white focus:bg-gray-300 "
+				>
+					<View style={{ position: 'absolute', left: 15 * WScale }}>
+						<Google height={20 * HScale} width={20 * WScale} />
+					</View>
+
+					<Text className="text-xs">CONTINUAR CON GOOGLE</Text>
+				</Pressable>
+			</View>
+
 			{client === true ? (
 				<View
-					style={{ top: 185 * HScale, left: 15 * WScale, height: 30 * HScale, width: 270 * WScale }}
+					style={{ top: 195 * HScale, left: 15 * WScale, height: 30 * HScale, width: 270 * WScale }}
 				>
 					<Button
 						content={'CREAR CUENTA'}
@@ -179,26 +199,9 @@ const LoginComp = ({ client, navigation }: LoginCompProps) => {
 			) : (
 				''
 			)}
-			{/* Boton de Google */}
-			<View
-				className="flex flex-row justify-center align-middle items-center"
-				style={{ height: 30 * HScale, top: 195 * HScale, paddingHorizontal: 16 * WScale }}
-			>
-				<Pressable className="bg-white flex flex-row items-center rounded-lg border border-gray-400 w-full h-full justify-center">
-					<View className="flex flex-row items-center w-full h-full justify-center gap-1">
-						<Google
-							top={108 * HScale}
-							left={155 * WScale}
-							height={20 * HScale}
-							width={20 * WScale}
-						/>
-						<Text className="text-xs">CONTINUAR CON GOOGLE</Text>
-					</View>
-				</Pressable>
-			</View>
 			<View
 				className="underline"
-				style={client === true ? { top: 190 * HScale } : { top: 195 * HScale }}
+				style={client === true ? { top: 203 * HScale } : { top: 195 * HScale }}
 				//top: 205
 			>
 				<Button
