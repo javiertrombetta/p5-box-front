@@ -13,6 +13,8 @@
     "release:patch": "standard-version --release-as patch"
   },
   "dependencies": {
+    "@expo/config": "^8.1.1",
+    "@expo/metro-config": "^0.10.0",
     "@expo/metro-runtime": "^3.1.1",
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",

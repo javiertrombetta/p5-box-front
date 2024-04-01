@@ -1,0 +1,27 @@
+version: '3.1'
+
+services:
+  boxapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - NODE_ENV=${NODE_ENV}
+    image: javiertrombetta/box-front-z:latest
+    container_name: boxapp
+    restart: always
+    ports:
+      - '${PORT}:${PORT}'
+    environment:
+      - NODE_ENV=${NODE_ENV}
+    tty: true    
+    volumes:
+      - ./:/opt/boxapp/app:delegated
+      - ./package.json:/opt/boxapp/package.json
+      - ./package-lock.json:/opt/boxapp/package-lock.json
+      - notused:/opt/boxapp/app/node_modules
+    healthcheck:
+      disable: true
+
+volumes:
+  notused:
