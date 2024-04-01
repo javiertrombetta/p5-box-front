@@ -1,4 +1,4 @@
-import { View, Dimensions, Image, Platform, TextInput, Pressable } from 'react-native';
+import { View, Dimensions, Image, Platform, TextInput, Pressable, Text } from 'react-native';
 import React, { useState } from 'react';
 import closeEye from '../assets/Eye.png';
 import Button from './Button';
@@ -7,6 +7,7 @@ import { NavigationProp } from '@react-navigation/native';
 import openEye from '../assets/open-eye.png';
 import OpenEye from '../assets/OpenEye.svg';
 import Eye from '../assets/Eye.svg';
+import Google from '../assets/google.svg';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -178,9 +179,27 @@ const LoginComp = ({ client, navigation }: LoginCompProps) => {
 			) : (
 				''
 			)}
+			{/* Boton de Google */}
+			<View
+				className="flex flex-row justify-center align-middle items-center"
+				style={{ height: 30 * HScale, top: 195 * HScale, paddingHorizontal: 16 * WScale }}
+			>
+				<Pressable className="bg-white flex flex-row items-center rounded-lg border border-gray-400 w-full h-full justify-center">
+					<View className="flex flex-row items-center w-full h-full justify-center gap-1">
+						<Google
+							top={108 * HScale}
+							left={155 * WScale}
+							height={20 * HScale}
+							width={20 * WScale}
+						/>
+						<Text className="text-xs">CONTINUAR CON GOOGLE</Text>
+					</View>
+				</Pressable>
+			</View>
 			<View
 				className="underline"
-				style={client === true ? { top: 205 * HScale } : { top: 195 * HScale }}
+				style={client === true ? { top: 190 * HScale } : { top: 195 * HScale }}
+				//top: 205
 			>
 				<Button
 					content={'Olvidé mi contraseña'}
