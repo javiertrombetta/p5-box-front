@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { handleActiveDeliveryman } from '../services/reports.service';
 import { View } from 'react-native';
+import { store } from '../state/user';
 
 type propsDeliverys = {
 	activeUsers: number;
@@ -14,6 +15,7 @@ const RepartidoresHabilitados = ({
 	setearRepartidores: (circleValue: number, cantidadHab: number, cantidad: number) => void;
 	selectedDate: Date;
 }) => {
+	let indexNavigation = store.getState().indexNavigation;
 	let dateString = selectedDate.toString();
 	let year = dateString.slice(11, 15);
 	let day = dateString.slice(8, 10);
@@ -26,7 +28,7 @@ const RepartidoresHabilitados = ({
 				  setearRepartidores(percentage, res.activeUsers, res.totalUsers))
 				: ((percentage = 0), setearRepartidores(0, 0, 0));
 		});
-	}, [day]);
+	}, [day, indexNavigation]);
 
 	return <View />;
 };
