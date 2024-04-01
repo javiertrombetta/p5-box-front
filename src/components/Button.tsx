@@ -173,14 +173,14 @@ const Button = ({
 								store.dispatch(login({ ...user, back: undefined }));
 								navigation.navigate(RouteName.HomeIniciarJornada);
 							} catch (error) {
-								showToast('Error al iniciar sesion', false);
+								showToast('Error al completar Declaración Jurada', false);
 							}
 						} else if (action === 'postCS') {
 							try {
 								await handleLogout().then((res: messageObj) => showToast(res.message, true));
 								navigation.navigate(RouteName.Login);
 							} catch (error) {
-								showToast('No se puede desloguear', false);
+								showToast('Error al desloguear', false);
 							}
 						} else if (action === 'postI' && id) {
 							try {
@@ -198,7 +198,7 @@ const Button = ({
 								store.dispatch(login({ ...user, back: undefined }));
 								navigation.navigate(RouteName.HomeIniciarJornada);
 							} catch (error) {
-								showToast('No se pudo cancelar el pedido', false);
+								showToast('No se pudo finalizar el pedido', false);
 							}
 						} else if (action === 'postCancelPackage' && id) {
 							try {
@@ -217,13 +217,12 @@ const Button = ({
 								);
 								navigation.navigate(RouteName.DeclaracionJurada);
 							} catch (error) {
-								console.error(error);
+								showToast('No se pudo iniciar la jornada', false);
 							}
 						} else if (action === 'postAgregar' && data) {
 							try {
 								handleAddPackage(data).then((res: messageObj) => {
 									showToast(res.message, true);
-									console.log(res, 'add package agregar');
 								});
 								navigation.navigate(RouteName.HomeGestionarPedido);
 							} catch (error) {
