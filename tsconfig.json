@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es2016",
     "jsx": "react-native",
-    "types": ["nativewind/types"],
+    "types": ["nativewind/types","google.maps"],
     "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,

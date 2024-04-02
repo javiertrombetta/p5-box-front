@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, Dimensions, Pressable, Platform } from 'react-native';
+import React, { useRef, useEffect, useState } from 'react';
+import { View, Text, Dimensions, Pressable, Platform, Button as RNButton, TouchableOpacity } from 'react-native';
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import Header from '../components/Header';
 import Button from '../components/Button';
@@ -106,7 +106,6 @@ interface TextValue {
 	text: string;
 }
 
-
 function RepartoEnCurso({ navigation }: Props) {
 	const { width, height } = Dimensions.get('window');
 	const WScale = width / 360;
@@ -120,37 +119,80 @@ function RepartoEnCurso({ navigation }: Props) {
 		LoadScript: any,
 		Polyline: any,
 		GoogleMap: any,
-		useJsApiLoader: any;
+		useJsApiLoader: any,
+		DirectionsService: any,
+		DirectionsRenderer: any;
 	if (Platform.OS === 'android' || Platform.OS === 'ios') {
 		MapView = require('react-native-maps').default;
 		Marker = require('react-native-maps').Marker;
 		MapViewDirections = require('react-native-maps-directions').default;
 	} else if (Platform.OS === 'web') {
-		GoogleMap = require('@react-google-maps/api').GoogleMap;
-		useJsApiLoader = require('@react-google-maps/api').useJsApiLoader;
-		MapViewDirections = require('@react-google-maps/api').default;
 		LoadScript = require('@react-google-maps/api').LoadScript;
+		useJsApiLoader = require('@react-google-maps/api').useJsApiLoader;
+		GoogleMap = require('@react-google-maps/api').GoogleMap;
+		MapView = require('@react-google-maps/api').default;
+		MapViewDirections = require('react-native-maps-directions').default;
 		Polyline = require('@react-google-maps/api').Polyline;
 		Marker = require('@react-google-maps/api').Marker;
+		DirectionsService = require('@react-google-maps/api').DirectionsService;
+		DirectionsRenderer = require('@react-google-maps/api').DirectionsRenderer;
 	}
 
 	const [route, setRoute] = useState<Route | null>(null);
+	const [origin, setOrigin] = useState('');
+	const [destination, setDestination] = useState('');
+	const [directionsResponse, setDirectionsResponse] = useState<google.maps.DirectionsResult | null>(
+		null
+	);
+
+	const mapRef = useRef<any>(null);
+
 	const containerStyle = { width: '100%', height: '100%' };
 	const pkgId = '3ad96bdd-d0d4-46d7-b17c-aedf62a9c065';
 
-	let user2 = store.getState();	
+	let user2 = store.getState();
 
-	useEffect(() => {		
-		const fetchAndSetRouteData = async () => {
+	useEffect(() => {
+		async function fetchRouteData() {
 			try {
-				const routeData = await getRouteData(pkgId);
-				setRoute(routeData);
+				const data = await getRouteData(pkgId);
+				setRoute(data);
+				if (data) {
+					setOrigin(
+						`${data.legs[0].startLocation.latLng.latitude},${data.legs[0].startLocation.latLng.longitude}`
+					);
+					setDestination(
+						`${data.legs[data.legs.length - 1].endLocation.latLng.latitude},${
+							data.legs[data.legs.length - 1].endLocation.latLng.longitude
+						}`
+					);
+				}
 			} catch (error) {
-				console.error('Error al obtener la ruta.', error);
+				console.error('Hubo un error al obtener la ruta:', error);
 			}
-		};
-		fetchAndSetRouteData();
+		}
+		fetchRouteData();
 	}, []);
+
+	useEffect(() => {
+		if (directionsResponse && mapRef.current) {
+			const bounds = new window.google.maps.LatLngBounds();
+			bounds.extend(
+				new window.google.maps.LatLng(directionsResponse.routes[0].legs[0].start_location)
+			);
+			bounds.extend(
+				new window.google.maps.LatLng(directionsResponse.routes[0].legs[0].end_location)
+			);
+
+			mapRef.current.fitBounds(bounds);
+		}
+	}, [directionsResponse, mapRef]);
+
+	useEffect(() => {
+		if (origin && destination) {
+			calculateRoute();
+		}
+	}, [origin, destination]);
 
 	const { isLoaded } =
 		Platform.OS === 'web'
@@ -160,13 +202,73 @@ function RepartoEnCurso({ navigation }: Props) {
 			  })
 			: { isLoaded: true };
 
+	const calculateRoute = () => {
+		if (origin && destination) {
+			const DirectionsService = new google.maps.DirectionsService();
+
+			DirectionsService.route(
+				{
+					origin: origin,
+					destination: destination,
+					travelMode: google.maps.TravelMode.DRIVING,
+				},
+				(result, status) => {
+					if (status === google.maps.DirectionsStatus.OK) {
+						setDirectionsResponse(result);
+					} else {
+						console.error(`Hubo un error al obtener los cálculos de ruta: ${result}`);
+					}
+				}
+			);
+		}
+	};
+
 	const renderMap = () => {
 		if (!isLoaded || !route) {
-			return <Text>Cargando mapa y datos de la ruta...</Text>;
+			return (
+				<View
+					style={{
+						height: 396 * HScale,
+						width: 300 * WScale,
+						justifyContent: 'center',
+						alignItems: 'center',
+						backgroundColor: '#f0f0f0',
+						borderRadius: 15,
+					}}
+				>
+					<Text
+						style={{
+							textAlign: 'center',
+							paddingVertical: 20,
+						}}
+					>
+						Cargando mapa y datos de la ruta...
+					</Text>
+				</View>
+			);
+		}
+
+		let distanceText = 'Calculando...';
+		let durationText = 'Calculando...';
+
+		if (
+			directionsResponse &&
+			directionsResponse.routes[0] &&
+			directionsResponse.routes[0].legs[0]
+		) {
+			const leg = directionsResponse.routes[0].legs[0];
+			if (leg.distance) {
+				distanceText = leg.distance.text;
+			}
+			if (leg.duration) {
+				durationText = leg.duration.text;
+			}
 		}
 
 		const originLatLng = route.legs[0].startLocation.latLng;
 		const destinationLatLng = route.legs[route.legs.length - 1].endLocation.latLng;
+
+		if (!originLatLng || !destinationLatLng) return <Text>Datos de ruta incompletos...</Text>;
 
 		const origin = {
 			lat: +originLatLng.latitude,
@@ -177,46 +279,129 @@ function RepartoEnCurso({ navigation }: Props) {
 			lat: +destinationLatLng.latitude,
 			lng: +destinationLatLng.longitude,
 		};
-		if (Platform.OS === 'web') {
-			if (!origin || !destination) return <Text>Datos de ruta incompletos...</Text>;
-			const waypoints = route.legs.slice(1, -1).map((leg) => leg.startLocation.latLng);
 
-			return (
-				<GoogleMap
-					mapContainerStyle={containerStyle}
-					center={origin}
-					zoom={14}	
-				>
-					<Marker position={origin} title="Salida" />
-					<Marker position={destination} title="Llegada" />
-					{/* <MapViewDirections
-						origin={origin}
-						destination={destination}
-						apikey={Constants.expoConfig?.extra?.googleMapsApiKey}
-						strokeWidth={3}
-						strokeColor="hotpink"
-						// onReady={(result: any) => {
-						// 	console.log(`Distance: ${result.distance} km`);
-						// 	console.log(`Duration: ${result.duration} min`);
-						// }}
-					/> */}					
-				</GoogleMap>
-			);
-		} else {
-			return (
-				<MapView
-					initialRegion={{
-						latitude: originLatLng.latitude,
-						longitude: originLatLng.longitude,
-						latitudeDelta: 0.0922,
-						longitudeDelta: 0.0421,
+		return (
+			<View
+				style={{
+					height: 396 * HScale,
+					width: 300 * WScale,
+					position: 'relative',
+					borderRadius: 15,
+					overflow: 'hidden',
+				}}
+			>
+				{Platform.OS === 'web' ? (
+					<GoogleMap
+						mapContainerStyle={containerStyle}
+						onLoad={(map: any) => (mapRef.current = map)}
+						center={origin}
+						zoom={14}
+					>
+						<Marker position={origin} title="Salida" />
+						<Marker position={destination} title="Llegada" />
+						{directionsResponse && <DirectionsRenderer directions={directionsResponse} />}
+					</GoogleMap>
+				) : (
+					<MapView
+						style={{ flex: 1 }}
+						initialRegion={{
+							latitude: originLatLng.latitude,
+							longitude: originLatLng.longitude,
+							latitudeDelta: 0.0922,
+							longitudeDelta: 0.0421,
+						}}
+					>
+						<Marker coordinate={origin} title="Salida" />
+						<Marker coordinate={destination} title="Llegada" />
+					</MapView>
+				)}
+				{directionsResponse && (
+					<View
+						style={{
+							position: 'absolute',
+							width: 90 * WScale,
+							height: 40 * HScale,
+							top: 10,
+							right: 10,
+							backgroundColor: 'rgba(255, 255, 255, 1)',
+							padding: 10,
+							borderRadius: 2,
+							shadowColor: '#000',
+							shadowOffset: { width: 0, height: 2 },
+							shadowOpacity: 0.25,
+							shadowRadius: 3.84,
+							elevation: 5,
+						}}
+					>
+						<View>
+							<Text style={{ fontSize: scaledSize(8) }} className="font-roboto text-texto">
+								Distancia: <Text className="font-robotoBold text-texto">{distanceText}</Text>
+							</Text>
+							<Text style={{ fontSize: scaledSize(8) }} className="font-roboto text-texto">
+								Tiempo: <Text className="font-robotoBold text-texto">{durationText}</Text>
+							</Text>
+						</View>
+					</View>
+				)}
+				<View
+					style={{
+						position: 'absolute',
+						width: 40 * WScale,
+						height: 40 * HScale,
+						top: 170,
+						right: 10,
+						alignSelf: 'center',
+						backgroundColor: '#fff',
+						borderRadius: 2,
+						shadowColor: '#000',
+						shadowOffset: {
+							width: 0,
+							height: 1,
+						},
+						shadowOpacity: 0.25,
+						shadowRadius: 3.84,
+						elevation: 2,
+						justifyContent: 'center',
+						alignItems: 'center',
 					}}
 				>
-					<Marker position={{ origin }} />
-				</MapView>
-			);
-		}
-	};
+					<TouchableOpacity
+						onPress={() => {
+							calculateRoute();
+						}}
+						style={{
+							width: '100%',
+							height: '100%',
+							justifyContent: 'center',
+							alignItems: 'center',
+							borderRadius: 2,
+						}}
+					>
+						<Text
+							style={{
+								color: '#007BFF',
+								fontWeight: 'bold',
+								fontSize: scaledSize(22),
+							}}
+						>
+							↺
+						</Text>
+					</TouchableOpacity>
+				</View>
+				<View
+					style={{
+						position: 'absolute',
+						bottom: 10,
+						paddingVertical: 16 * HScale,
+						marginLeft: 10 * WScale,
+						alignSelf: 'flex-start',
+					}}
+				>
+					<PackageDetail />
+				</View>
+			</View>
+		);
+	};	
 
 	return (
 		<View
@@ -245,32 +430,21 @@ function RepartoEnCurso({ navigation }: Props) {
 					<ArrowLeft width={scaledSize(14)} />
 				</Pressable>
 			</View>
-
 			<View
-				style={{ marginTop: 10 * HScale }}
-				className="flex items-center justify-center rounded-xl overflow-hidden"
+				style={{
+					marginTop: 10 * HScale,
+					alignItems: 'center',
+					justifyContent: 'center',
+				}}
 			>
 				<View
 					style={{
 						height: 396 * HScale,
 						width: 300 * WScale,
 						position: 'relative',
-						justifyContent: 'center',
-						alignItems: 'center',
 					}}
 				>
 					{renderMap()}
-					<View
-						style={{
-							position: 'absolute',
-							bottom: 10,
-							paddingVertical: 16 * HScale,
-							marginLeft: 10 * WScale,
-							alignSelf: 'flex-start',
-						}}
-					>
-						<PackageDetail />
-					</View>
 				</View>
 			</View>
 			{user2.back === 'en curso' ? (
