@@ -1,5 +1,5 @@
 import { View, Dimensions, Image, Platform, TextInput, Pressable, Text, Linking } from 'react-native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import closeEye from '../assets/Eye.png';
 import Button from './Button';
 import CloseEye from '../assets/Eye.svg';
@@ -9,6 +9,7 @@ import OpenEye from '../assets/OpenEye.svg';
 import Eye from '../assets/Eye.svg';
 import Google from '../assets/google.svg';
 import Constants from 'expo-constants';
+import Toast from 'react-native-toast-message';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
@@ -64,14 +65,30 @@ const LoginComp = ({ client, navigation }: LoginCompProps) => {
 		}));
 	};
 
-	const handleGoogleLogin = () => {
-		if (Platform.OS === 'web') {
-			window.location.href = `${EXPO_PUBLIC_BACKEND_URL}/auth/google`;
-		} else {
-			const authUrl = `${EXPO_PUBLIC_BACKEND_URL}/auth/google`;
-			Linking.openURL(authUrl).catch((err) => console.error("Couldn't load page", err));
+	const handleGoogleLogin = async () => {
+		try {			
+			if (Platform.OS === 'web') {
+				window.location.href = `${EXPO_PUBLIC_BACKEND_URL}/auth/google`;
+			} else {
+				const authUrl = `${EXPO_PUBLIC_BACKEND_URL}/auth/google`;
+				await Linking.openURL(authUrl);
+			}
+		} catch (error) {
+			console.error('No se pudo realizar la autenticación con Google:', error);
 		}
 	};
+
+	useEffect(() => {		
+		const error = new URLSearchParams(window.location.search).get('error');
+		if (error === 'email_in_use') {
+			Toast.show({
+				type: 'error',
+				text1: 'Error de inicio de sesión',
+				text2: 'Email ya registrado, sin usar OAuth de Google.',
+			});
+		}
+	}, []);
+
 
 	return (
 		<View className="absolute flex rounded-2xl bg-verde w-full h-full">
