@@ -1,5 +1,13 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { View, Text, Dimensions, Pressable, Platform, Button as RNButton, TouchableOpacity } from 'react-native';
+import {
+	View,
+	Text,
+	Dimensions,
+	Pressable,
+	Platform,
+	Button as RNButton,
+	TouchableOpacity,
+} from 'react-native';
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import Header from '../components/Header';
 import Button from '../components/Button';
@@ -141,6 +149,7 @@ function RepartoEnCurso({ navigation }: Props) {
 	const [route, setRoute] = useState<Route | null>(null);
 	const [origin, setOrigin] = useState('');
 	const [destination, setDestination] = useState('');
+	const [estimatedArrivalTime, setEstimatedArrivalTime] = useState('');
 	const [directionsResponse, setDirectionsResponse] = useState<google.maps.DirectionsResult | null>(
 		null
 	);
@@ -151,6 +160,41 @@ function RepartoEnCurso({ navigation }: Props) {
 	const pkgId = '3ad96bdd-d0d4-46d7-b17c-aedf62a9c065';
 
 	let user2 = store.getState();
+
+	const calculateRoute = async () => {
+		if (origin && destination) {
+			const DirectionsService = new google.maps.DirectionsService();
+			DirectionsService.route(
+				{
+					origin: origin,
+					destination: destination,
+					travelMode: google.maps.TravelMode.DRIVING,
+					avoidTolls: true,
+					drivingOptions: {
+						departureTime: new Date(Date.now() + 10000),
+						trafficModel: google.maps.TrafficModel.BEST_GUESS,
+					},
+				},
+				(result, status) => {
+					if (status === google.maps.DirectionsStatus.OK && result !== null) {
+						setDirectionsResponse(result);
+						const leg = result.routes[0].legs[0];
+						if (leg.duration) {
+							const durationInSeconds = leg.duration.value;
+							const arrivalDate = new Date(Date.now() + durationInSeconds * 1000);
+							const arrivalTime = arrivalDate.toLocaleTimeString([], {
+								hour: '2-digit',
+								minute: '2-digit',
+							});
+							setEstimatedArrivalTime(arrivalTime);
+						}
+					} else {
+						console.error(`Error al obtener la ruta: ${status}`);
+					}
+				}
+			);
+		}
+	};
 
 	useEffect(() => {
 		async function fetchRouteData() {
@@ -194,6 +238,25 @@ function RepartoEnCurso({ navigation }: Props) {
 		}
 	}, [origin, destination]);
 
+	useEffect(() => {
+		if (
+			directionsResponse &&
+			directionsResponse.routes[0] &&
+			directionsResponse.routes[0].legs[0]
+		) {
+			const leg = directionsResponse.routes[0].legs[0];
+			if (leg.duration) {
+				const durationInSeconds = leg.duration.value;
+				const arrivalDate = new Date(Date.now() + durationInSeconds * 1000);
+				const arrivalTime = arrivalDate.toLocaleTimeString([], {
+					hour: '2-digit',
+					minute: '2-digit',
+				});
+				setEstimatedArrivalTime(arrivalTime);
+			}
+		}
+	}, [directionsResponse]);
+
 	const { isLoaded } =
 		Platform.OS === 'web'
 			? useJsApiLoader({
@@ -201,27 +264,6 @@ function RepartoEnCurso({ navigation }: Props) {
 					googleMapsApiKey: Constants.expoConfig?.extra?.googleMapsApiKey,
 			  })
 			: { isLoaded: true };
-
-	const calculateRoute = () => {
-		if (origin && destination) {
-			const DirectionsService = new google.maps.DirectionsService();
-
-			DirectionsService.route(
-				{
-					origin: origin,
-					destination: destination,
-					travelMode: google.maps.TravelMode.DRIVING,
-				},
-				(result, status) => {
-					if (status === google.maps.DirectionsStatus.OK) {
-						setDirectionsResponse(result);
-					} else {
-						console.error(`Hubo un error al obtener los cálculos de ruta: ${result}`);
-					}
-				}
-			);
-		}
-	};
 
 	const renderMap = () => {
 		if (!isLoaded || !route) {
@@ -296,6 +338,11 @@ function RepartoEnCurso({ navigation }: Props) {
 						onLoad={(map: any) => (mapRef.current = map)}
 						center={origin}
 						zoom={14}
+						options={{
+							mapTypeControl: false, 
+							streetViewControl: false,
+							fullscreenControl: false,							
+						}}
 					>
 						<Marker position={origin} title="Salida" />
 						<Marker position={destination} title="Llegada" />
@@ -319,12 +366,12 @@ function RepartoEnCurso({ navigation }: Props) {
 					<View
 						style={{
 							position: 'absolute',
-							width: 90 * WScale,
-							height: 40 * HScale,
-							top: 10,
-							right: 10,
+							width: 132 * WScale,
+							height: 55 * HScale,
+							top: 11,
+							right: 11,
 							backgroundColor: 'rgba(255, 255, 255, 1)',
-							padding: 10,
+							padding: 8,
 							borderRadius: 2,
 							shadowColor: '#000',
 							shadowOffset: { width: 0, height: 2 },
@@ -334,11 +381,15 @@ function RepartoEnCurso({ navigation }: Props) {
 						}}
 					>
 						<View>
-							<Text style={{ fontSize: scaledSize(8) }} className="font-roboto text-texto">
+							<Text style={{ fontSize: scaledSize(12) }} className="font-roboto text-texto">
 								Distancia: <Text className="font-robotoBold text-texto">{distanceText}</Text>
 							</Text>
-							<Text style={{ fontSize: scaledSize(8) }} className="font-roboto text-texto">
-								Tiempo: <Text className="font-robotoBold text-texto">{durationText}</Text>
+							<Text style={{ fontSize: scaledSize(12) }} className="font-roboto text-texto">
+								Duración: <Text className="font-robotoBold text-texto">{durationText}</Text>
+							</Text>
+							<Text style={{ fontSize: scaledSize(12) }} className="font-roboto text-texto">
+								Hora estimada:{' '}
+								<Text className="font-robotoBold text-texto">{estimatedArrivalTime}</Text>
 							</Text>
 						</View>
 					</View>
@@ -348,7 +399,7 @@ function RepartoEnCurso({ navigation }: Props) {
 						position: 'absolute',
 						width: 40 * WScale,
 						height: 40 * HScale,
-						top: 170,
+						top: 230,
 						right: 10,
 						alignSelf: 'center',
 						backgroundColor: '#fff',
@@ -401,7 +452,7 @@ function RepartoEnCurso({ navigation }: Props) {
 				</View>
 			</View>
 		);
-	};	
+	};
 
 	return (
 		<View
