@@ -1,4 +1,4 @@
-import { View, Dimensions, Image, Platform, TextInput, Pressable, Text } from 'react-native';
+import { View, Dimensions, Image, Platform, TextInput, Pressable, Text, Linking } from 'react-native';
 import React, { useState } from 'react';
 import closeEye from '../assets/Eye.png';
 import Button from './Button';
@@ -8,12 +8,15 @@ import openEye from '../assets/open-eye.png';
 import OpenEye from '../assets/OpenEye.svg';
 import Eye from '../assets/Eye.svg';
 import Google from '../assets/google.svg';
+import Constants from 'expo-constants';
 
 const { width, height } = Dimensions.get('window');
 const WScale = width / 360;
 const HScale = height / 640;
 
 const scaledSize = (size: number) => Math.ceil(size * Math.min(WScale, HScale));
+
+const EXPO_PUBLIC_BACKEND_URL = Constants.expoConfig?.extra?.backendURL;
 
 interface LoginCompProps {
 	client: boolean;
@@ -60,6 +63,16 @@ const LoginComp = ({ client, navigation }: LoginCompProps) => {
 			[field]: value,
 		}));
 	};
+
+	const handleGoogleLogin = () => {
+		if (Platform.OS === 'web') {
+			window.location.href = `${EXPO_PUBLIC_BACKEND_URL}/auth/google`;
+		} else {
+			const authUrl = `${EXPO_PUBLIC_BACKEND_URL}/auth/google`;
+			Linking.openURL(authUrl).catch((err) => console.error("Couldn't load page", err));
+		}
+	};
+
 	return (
 		<View className="absolute flex rounded-2xl bg-verde w-full h-full">
 			<TextInput
@@ -170,6 +183,7 @@ const LoginComp = ({ client, navigation }: LoginCompProps) => {
 				style={{ height: 30 * HScale, top: 185 * HScale }}
 			>
 				<Pressable
+					onPress={handleGoogleLogin}					
 					style={{
 						width: 270 * WScale,
 					}}

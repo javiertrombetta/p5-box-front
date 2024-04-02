@@ -33,7 +33,7 @@ const PackageDetail = () => {
 		<View
 			style={{
 				height: 75 * HScale,
-				width: 270 * WScale,
+				width: 230 * WScale,
 				padding: 16 * WScale,
 			}}
 			className="bg-violeta object-cover justify-center items-start rounded-2xl"
