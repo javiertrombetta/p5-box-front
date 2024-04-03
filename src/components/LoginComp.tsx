@@ -78,16 +78,63 @@ const LoginComp = ({ client, navigation }: LoginCompProps) => {
 		}
 	};
 
-	useEffect(() => {		
-		const error = new URLSearchParams(window.location.search).get('error');
-		if (error === 'email_in_use') {
-			Toast.show({
-				type: 'error',
-				text1: 'Error de inicio de sesión',
-				text2: 'Email ya registrado, sin usar OAuth de Google.',
+	// useEffect(() => {		
+	// 	const error = new URLSearchParams(window.location.search).get('error');
+	// 	if (error === 'email_in_use') {
+	// 		Toast.show({
+	// 			type: 'error',
+	// 			text1: 'Error de inicio de sesión',
+	// 			text2: 'Email ya registrado, sin usar OAuth de Google.',
+	// 		});
+	// 	}
+	// }, []);
+
+	useEffect(() => {
+		const handleUrlError = (urlString:any) => {
+			let url;
+			try {
+				url = new URL(urlString);
+			} catch (error) {	
+				return;
+			}
+
+			const errorMessage = url.searchParams.get('error');
+			if (errorMessage) {
+				Toast.show({
+					type: 'error',
+					text1: 'Error de inicio de sesión',
+					text2: errorMessage,
+				});
+			}
+		};
+
+		const getUrlAsync = async () => {
+			const initialUrl = await Linking.getInitialURL();
+			if (initialUrl) handleUrlError(initialUrl);
+		};
+
+		let linkingListener:any;
+		if (Platform.OS === 'web') {
+			handleUrlError(window.location.href);
+		} else {	
+			getUrlAsync();
+			linkingListener = Linking.addEventListener('url', (event) => {
+				handleUrlError(event.url);
 			});
 		}
+
+		return () => {
+			if (Platform.OS === 'web') {
+				window.history.replaceState({}, document.title, '/');
+			} else {	
+				if (linkingListener) {
+					linkingListener.remove();
+				}
+			}
+		};
 	}, []);
+
+
 
 
 	return (

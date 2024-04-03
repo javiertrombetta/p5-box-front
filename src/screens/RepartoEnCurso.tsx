@@ -19,6 +19,7 @@ import Constants from 'expo-constants';
 
 import { getRouteData } from '../services/location.service';
 import axios from 'axios';
+import { handleDetailsPackage } from '../services/package.service';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -155,14 +156,23 @@ function RepartoEnCurso({ navigation }: Props) {
 	const [routeError, setRouteError] = useState('');
 	const [directionsResponse, setDirectionsResponse] = useState<google.maps.DirectionsResult | null>(
 		null
-	);
+	);	
 
 	const mapRef = useRef<any>(null);
 
 	const containerStyle = { width: '100%', height: '100%' };
-	const pkgId = 'e63b06fe-aeac-4409-a25f-eeabe6cf1b1d';
-
 	let user2 = store.getState();
+
+	const convertToSpanish = (distance: string, duration: string) => {
+		const distanceInSpanish = distance.replace('km', 'km').replace('m', 'm');		
+		const durationInSpanish = duration
+			.replace('hours', 'horas')
+			.replace('mins', 'minutos')
+			.replace(/\bhour\b/, 'hora')
+			.replace(/\bmin\b/, 'minuto');
+
+		return { distanceInSpanish, durationInSpanish };
+	};
 
 	const calculateRoute = async () => {
 		if (origin && destination) {
@@ -185,9 +195,11 @@ function RepartoEnCurso({ navigation }: Props) {
 						if (leg.duration) {
 							const durationInSeconds = leg.duration.value;
 							const arrivalDate = new Date(Date.now() + durationInSeconds * 1000);
-							const arrivalTime = arrivalDate.toLocaleTimeString([], {
+							
+							const arrivalTime = arrivalDate.toLocaleTimeString('es', {
 								hour: '2-digit',
 								minute: '2-digit',
+								hourCycle: 'h23',
 							});
 							setEstimatedArrivalTime(arrivalTime);
 						}
@@ -199,10 +211,11 @@ function RepartoEnCurso({ navigation }: Props) {
 		}
 	};
 
+
 	useEffect(() => {
 		async function fetchRouteData() {
 			try {
-				const data = await getRouteData(pkgId);
+				const data = await getRouteData(user2.packageSelect);
 				setRoute(data);
 				if (data) {
 					setOrigin(
@@ -214,30 +227,24 @@ function RepartoEnCurso({ navigation }: Props) {
 						}`
 					);
 				}
-			} catch (error) {
+			} catch (error) {				
+				let message = 'Ocurrió un error inesperado.';
 				if (axios.isAxiosError(error)) {
-					const backendMessage =
-						error.response?.data?.notFound || 'No tenés ubicaciones registradas.';
-					setRouteError(backendMessage);
-					Toast.show({
-						type: 'error',
-						text1: 'ERROR DE GEOLOCALIZACION',
-						text2: backendMessage,
-						visibilityTime: 4000,
-					});
-				} else {
-					setRouteError('Error al obtener la ruta.');
-					Toast.show({
-						type: 'error',
-						text1: 'ERROR',
-						text2: 'Ocurrió un error inesperado. Por favor, volvé a la página anterior.',
-						visibilityTime: 4000,
-					});
+					if (error.response && error.response.data) {						
+						message = error.response.data.message || error.response.data.notFound || message;
+					}
 				}
+				setRouteError(message);
+				Toast.show({
+					type: 'error',
+					text1: 'Error',
+					text2: message,
+					visibilityTime: 4000,
+				});
 			}
 		}
 		fetchRouteData();
-	}, []);
+	}, [user2.packageSelect]);
 
 	useEffect(() => {
 		if (directionsResponse && mapRef.current) {
@@ -266,13 +273,36 @@ function RepartoEnCurso({ navigation }: Props) {
 			directionsResponse.routes[0].legs[0]
 		) {
 			const leg = directionsResponse.routes[0].legs[0];
-			if (leg.duration) {
+			if (leg.distance && leg.duration) {
+				const { distanceInSpanish, durationInSpanish } = convertToSpanish(
+					leg.distance.text,
+					leg.duration.text
+				);
+
 				const durationInSeconds = leg.duration.value;
 				const arrivalDate = new Date(Date.now() + durationInSeconds * 1000);
-				const arrivalTime = arrivalDate.toLocaleTimeString([], {
+				const arrivalTime = arrivalDate.toLocaleTimeString('es-ES', {
 					hour: '2-digit',
 					minute: '2-digit',
+					hour12: false,
 				});
+
+				setRoute((prevRoute:any) => ({
+					...prevRoute,
+					legs: prevRoute.legs.map((prevLeg:any, index:any) => {
+						if (index === 0) {
+							return {
+								...prevLeg,
+								localizedValues: {
+									...prevLeg.localizedValues,
+									distance: { text: distanceInSpanish },
+									duration: { text: durationInSpanish },
+								},
+							};
+						}
+						return prevLeg;
+					}),
+				}));
 				setEstimatedArrivalTime(arrivalTime);
 			}
 		}
@@ -459,7 +489,7 @@ function RepartoEnCurso({ navigation }: Props) {
 					<View
 						style={{
 							position: 'absolute',
-							width: 138 * WScale,
+							minWidth: 100 * WScale,
 							height: 55 * HScale,
 							top: 11,
 							right: 11,
@@ -475,10 +505,16 @@ function RepartoEnCurso({ navigation }: Props) {
 					>
 						<View>
 							<Text style={{ fontSize: scaledSize(12) }} className="font-roboto text-texto">
-								Distancia: <Text className="font-robotoBold text-texto">{distanceText}</Text>
+								Distancia:{' '}
+								<Text className="font-robotoBold text-texto">
+									{route.legs[0].localizedValues.distance.text}
+								</Text>
 							</Text>
 							<Text style={{ fontSize: scaledSize(12) }} className="font-roboto text-texto">
-								Duración: <Text className="font-robotoBold text-texto">{durationText}</Text>
+								Duración:{' '}
+								<Text className="font-robotoBold text-texto">
+									{route.legs[0].localizedValues.duration.text}
+								</Text>
 							</Text>
 							<Text style={{ fontSize: scaledSize(12) }} className="font-roboto text-texto">
 								Hora estimada:{' '}
