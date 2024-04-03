@@ -8,6 +8,7 @@ import {
 	Button as RNButton,
 	TouchableOpacity,
 } from 'react-native';
+import Toast from 'react-native-toast-message';
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import Header from '../components/Header';
 import Button from '../components/Button';
@@ -17,6 +18,7 @@ import PackageDetail from '../components/PackageDetail';
 import Constants from 'expo-constants';
 
 import { getRouteData } from '../services/location.service';
+import axios from 'axios';
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;
@@ -150,6 +152,7 @@ function RepartoEnCurso({ navigation }: Props) {
 	const [origin, setOrigin] = useState('');
 	const [destination, setDestination] = useState('');
 	const [estimatedArrivalTime, setEstimatedArrivalTime] = useState('');
+	const [routeError, setRouteError] = useState('');
 	const [directionsResponse, setDirectionsResponse] = useState<google.maps.DirectionsResult | null>(
 		null
 	);
@@ -157,7 +160,7 @@ function RepartoEnCurso({ navigation }: Props) {
 	const mapRef = useRef<any>(null);
 
 	const containerStyle = { width: '100%', height: '100%' };
-	const pkgId = '3ad96bdd-d0d4-46d7-b17c-aedf62a9c065';
+	const pkgId = 'e63b06fe-aeac-4409-a25f-eeabe6cf1b1d';
 
 	let user2 = store.getState();
 
@@ -212,7 +215,25 @@ function RepartoEnCurso({ navigation }: Props) {
 					);
 				}
 			} catch (error) {
-				console.error('Hubo un error al obtener la ruta:', error);
+				if (axios.isAxiosError(error)) {
+					const backendMessage =
+						error.response?.data?.notFound || 'No tenés ubicaciones registradas.';
+					setRouteError(backendMessage);
+					Toast.show({
+						type: 'error',
+						text1: 'ERROR DE GEOLOCALIZACION',
+						text2: backendMessage,
+						visibilityTime: 4000,
+					});
+				} else {
+					setRouteError('Error al obtener la ruta.');
+					Toast.show({
+						type: 'error',
+						text1: 'ERROR',
+						text2: 'Ocurrió un error inesperado. Por favor, volvé a la página anterior.',
+						visibilityTime: 4000,
+					});
+				}
 			}
 		}
 		fetchRouteData();
@@ -266,7 +287,78 @@ function RepartoEnCurso({ navigation }: Props) {
 			: { isLoaded: true };
 
 	const renderMap = () => {
-		if (!isLoaded || !route) {
+		if (!isLoaded) {
+			return (
+				<View
+					style={{
+						height: 396 * HScale,
+						width: 300 * WScale,
+						justifyContent: 'center',
+						alignItems: 'center',
+						backgroundColor: '#f0f0f0',
+						borderRadius: 15,
+					}}
+				>
+					<Text
+						style={{
+							textAlign: 'center',
+							paddingVertical: 20,
+							fontSize: scaledSize(15),
+						}}
+						className="font-roboto text-texto"
+					>
+						Inicializando
+					</Text>
+					<Text
+						style={{
+							textAlign: 'center',
+							paddingVertical: 20,
+							fontSize: scaledSize(30),
+						}}
+						className="font-roboto text-texto"
+					>
+						Google Maps ® ...
+					</Text>
+				</View>
+			);
+		} else if (routeError) {
+			return (
+				<View
+					style={{
+						height: 396 * HScale,
+						width: 300 * WScale,
+						justifyContent: 'center',
+						alignItems: 'center',
+						backgroundColor: '#f0f0f0',
+						borderRadius: 15,
+					}}
+				>
+					<Text
+						style={{
+							textAlign: 'center',
+							paddingVertical: 20,
+							fontSize: scaledSize(30),
+						}}
+						className="font-robotoBold text-texto"
+					>
+						¡Algo salió mal!
+					</Text>
+					<Text style={{ fontSize: scaledSize(80) }} className="font-roboto text-texto">
+						☹
+					</Text>
+					<Text
+						style={{
+							textAlign: 'center',
+							paddingVertical: 20,
+							fontSize: scaledSize(15),
+						}}
+						className="font-roboto text-texto"
+					>
+						Volvé a la pantalla anterior
+					</Text>
+				</View>
+			);
+		} else if (!route) {
 			return (
 				<View
 					style={{
@@ -283,8 +375,9 @@ function RepartoEnCurso({ navigation }: Props) {
 							textAlign: 'center',
 							paddingVertical: 20,
 						}}
+						className="font-roboto text-texto"
 					>
-						Cargando mapa y datos de la ruta...
+						Cargando mapa y datos de ruta...
 					</Text>
 				</View>
 			);
@@ -339,9 +432,9 @@ function RepartoEnCurso({ navigation }: Props) {
 						center={origin}
 						zoom={14}
 						options={{
-							mapTypeControl: false, 
+							mapTypeControl: false,
 							streetViewControl: false,
-							fullscreenControl: false,							
+							fullscreenControl: false,
 						}}
 					>
 						<Marker position={origin} title="Salida" />
@@ -366,7 +459,7 @@ function RepartoEnCurso({ navigation }: Props) {
 					<View
 						style={{
 							position: 'absolute',
-							width: 132 * WScale,
+							width: 138 * WScale,
 							height: 55 * HScale,
 							top: 11,
 							right: 11,
