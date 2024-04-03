@@ -42,7 +42,10 @@ type Props = {
 	navigation: NavigationProp<RootStackParamList>;
 };
 
+import { EXPO_PUBLIC_API_URL } from '@env';
+
 const Login = ({ navigation }: Props) => {
+	console.log(process.env.EXPO_PUBLIC_API_URL);
 	const [text, setText] = useState('');
 	const isWeb = Platform.OS === 'web';
 
