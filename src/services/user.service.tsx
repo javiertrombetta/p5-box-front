@@ -1,44 +1,40 @@
 import axios from 'axios';
+import Constants from 'expo-constants';
 axios.defaults.withCredentials = true;
+
+const EXPO_PUBLIC_BACKEND_URL = Constants.expoConfig?.extra?.backendURL;
 
 export const handleCreateUser = async (data: object) => {
 	try {
-		const response = await axios.post('http://localhost:3000/api/v1/auth/register', data, {
+		const response = await axios.post(`${EXPO_PUBLIC_BACKEND_URL}/auth/register`, data, {
 			withCredentials: true,
-		});
-		console.log(response, 'solo response');
-		console.log(data, 'soloData');
-		console.log(response.data, 'esto es response.data');
-		console.log('ahora probando si se creo bien el usuairo');
+		});		
 		return response.data;
 	} catch (error) {
-		console.error('Error al crear usuario:', error);
 		throw error;
 	}
 };
 
 export const handleLoginUser = async (data: object) => {
 	try {
-		const response = await axios.post('http://localhost:3000/api/v1/auth/login', data, {
+		const response = await axios.post(`${EXPO_PUBLIC_BACKEND_URL}/auth/login`, data, {
 			withCredentials: true,
 		});
-		console.log('Usuario creado:', response.data);
 		return response.data;
 	} catch (error) {
-		console.error('Error al loguear usuario:', error);
 		throw error;
 	}
 };
 
 export const handleLogout = async () => {
-	const response = await axios.post('http://localhost:3000/api/v1/auth/logout', {
+	const response = await axios.post(`${EXPO_PUBLIC_BACKEND_URL}/auth/logout`, {
 		withCredentials: true,
 	});
 	return response.data;
 };
 
 export const handleMeUser = async () => {
-	const response = await axios.get('http://localhost:3000/api/v1/auth/me', {
+	const response = await axios.get(`${EXPO_PUBLIC_BACKEND_URL}/auth/me`, {
 		withCredentials: true,
 	});
 	return response.data;
@@ -46,7 +42,7 @@ export const handleMeUser = async () => {
 
 export const handleConditions = async (data: object) => {
 	try {
-		const response = await axios.put('http://localhost:3000/api/v1/auth/me/packages', data, {
+		const response = await axios.put(`${EXPO_PUBLIC_BACKEND_URL}/auth/me/packages`, data, {
 			withCredentials: true,
 		});
 		if (response.data.message === 'Se cerró la sesión debido a la declaración jurada registrada.') {
@@ -54,7 +50,6 @@ export const handleConditions = async (data: object) => {
 		}
 		return response.data;
 	} catch (error) {
-		console.error('Error al procesar la declaración:', error);
 		throw error;
 	}
 };
@@ -62,7 +57,7 @@ export const handleConditions = async (data: object) => {
 export const handleForgot = async (email: string) => {
 	try {
 		const response = await axios.post(
-			'http://localhost:3000/api/v1/auth/forgot-password',
+			`${EXPO_PUBLIC_BACKEND_URL}/auth/forgot-password`,
 			{ email },
 			{
 				withCredentials: true,
@@ -70,7 +65,6 @@ export const handleForgot = async (email: string) => {
 		);
 		return response.data;
 	} catch (error) {
-		console.error(error);
 		throw error;
 	}
 };
@@ -78,36 +72,30 @@ export const handleForgot = async (email: string) => {
 export const handleVerify = async (token: string) => {
 	try {
 		const response = await axios.get(
-			`http://localhost:3000/api/v1/auth/verify-token?token=${token}`,
+			`${EXPO_PUBLIC_BACKEND_URL}/auth/verify-token?token=${token}`,
 			{
 				withCredentials: true,
 			}
 		);
 		return response.data;
 	} catch (error) {
-		console.error(error);
 		throw error;
 	}
 };
 
 export const handleResetPassword = async (password: object) => {
 	try {
-		const response = await axios.post(
-			'http://localhost:3000/api/v1/auth/reset-password',
-			password,
-			{
-				withCredentials: true,
-			}
-		);
+		const response = await axios.post(`${EXPO_PUBLIC_BACKEND_URL}/auth/reset-password`, password, {
+			withCredentials: true,
+		});
 		return response.data;
 	} catch (error) {
-		console.error(error);
 		throw error;
 	}
 };
 
 export const handleMePackages = async () => {
-	const response = await axios.get('http://localhost:3000/api/v1/auth/me/packages', {
+	const response = await axios.get(`${EXPO_PUBLIC_BACKEND_URL}/auth/me/packages`, {
 		withCredentials: true,
 	});
 	return response.data;
@@ -115,7 +103,7 @@ export const handleMePackages = async () => {
 
 export const handlePackageCancel = async (idPackage: string) => {
 	const response = await axios.put(
-		`http://localhost:3000/api/v1/auth/me/packages/${idPackage}/cancel`,
+		`${EXPO_PUBLIC_BACKEND_URL}/auth/me/packages/${idPackage}/cancel`,
 		{
 			withCredentials: true,
 		}
@@ -125,16 +113,15 @@ export const handlePackageCancel = async (idPackage: string) => {
 };
 
 export const handleIniciarPackage = async (idPackage: string) => {
-	const response = await axios.put(`http://localhost:3000/api/v1/auth/me/packages/${idPackage}`, {
+	const response = await axios.put(`${EXPO_PUBLIC_BACKEND_URL}/auth/me/packages/${idPackage}`, {
 		withCredentials: true,
 	});
-	console.log(response.data, 'PACKAGE');
 	return response.data;
 };
 
 export const handleFinishPackage = async (idPackage: string) => {
 	const response = await axios.put(
-		`http://localhost:3000/api/v1/auth/me/packages/${idPackage}/finish`,
+		`${EXPO_PUBLIC_BACKEND_URL}/auth/me/packages/${idPackage}/finish`,
 		{
 			withCredentials: true,
 		}
@@ -143,21 +130,21 @@ export const handleFinishPackage = async (idPackage: string) => {
 };
 
 export const handleUserId = async (userId: string) => {
-	const response = await axios.get(`http://localhost:3000/api/v1/auth/users/${userId}`, {
+	const response = await axios.get(`${EXPO_PUBLIC_BACKEND_URL}/auth/users/${userId}`, {
 		withCredentials: true,
 	});
 	return response.data;
 };
 
 export const handleUserPackage = async (userId: string) => {
-	const response = await axios.get(`http://localhost:3000/api/v1/auth/users/${userId}/packages`, {
+	const response = await axios.get(`${EXPO_PUBLIC_BACKEND_URL}/auth/users/${userId}/packages`, {
 		withCredentials: true,
 	});
 	return response.data;
 };
 
 export const handleToggleState = async (uuidUser: string) => {
-	const response = await axios.put(`http://localhost:3000/api/v1/auth/users/${uuidUser}/state`, {
+	const response = await axios.put(`${EXPO_PUBLIC_BACKEND_URL}/auth/users/${uuidUser}/state`, {
 		withCredentials: true,
 	});
 	return response.data;

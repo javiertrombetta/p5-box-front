@@ -63,8 +63,6 @@ const ForgotPassword = ({ navigation }: LoginCompProps) => {
 		if (newPassword === confirmPassword) {
 			handleResetPassword({ newPassword, token }).then(() => navigation.navigate(RouteName.Login));
 			setStep(1);
-		} else {
-			console.log('La confirmacion debe coincidir con el nuevo password');
 		}
 	}
 

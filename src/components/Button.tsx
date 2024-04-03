@@ -121,11 +121,11 @@ const Button = ({
 	const handleNavigationRol = () => {
 		let user = store.getState();
 		if (user.name) {
-			user.roles[0] === 'repartidor'
-				? navigation.navigate(RouteName.HomeIniciarJornada)
-				: user.roles[0] === 'administrador'
-				? navigation.navigate(RouteName.HomeGestionarPedido)
-				: console.log('error');
+			if (user.roles[0] === 'repartidor') {
+				navigation.navigate(RouteName.HomeIniciarJornada);
+			} else if (user.roles[0] === 'administrador') {
+				navigation.navigate(RouteName.HomeGestionarPedido);
+			}			
 		}
 	};
 	const handleBack = () => {
@@ -149,7 +149,6 @@ const Button = ({
 							}
 						} else if (action === 'postL' && data) {
 							await handleLoginUser(data).then((res) => showToast(res.message, true));
-							console.log(data, 'estoy logueandome');
 							try {
 								await handleMeUser().then((data: object) => {
 									data = {

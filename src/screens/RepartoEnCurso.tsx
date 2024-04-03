@@ -8,18 +8,19 @@ import {
 	Button as RNButton,
 	TouchableOpacity,
 } from 'react-native';
+import { NavigationProp } from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
+import axios from 'axios';
+import Constants from 'expo-constants';
+
 import ArrowLeft from '../assets/ArrowLeft.svg';
 import Header from '../components/Header';
 import Button from '../components/Button';
-import { NavigationProp } from '@react-navigation/native';
-import { login, store } from '../state/user';
 import PackageDetail from '../components/PackageDetail';
-import Constants from 'expo-constants';
+import { login, store } from '../state/user';
 
 import { getRouteData } from '../services/location.service';
-import axios from 'axios';
-import { handleDetailsPackage } from '../services/package.service';
+
 
 type RootStackParamList = {
 	[key in RouteName]: undefined;

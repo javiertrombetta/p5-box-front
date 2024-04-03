@@ -67,11 +67,7 @@ const CreateAccount = ({ navigation }: Props) => {
 		};
 
 		launchImageLibrary(options, (response) => {
-			if (response.didCancel) {
-				console.log('El usuario canceló la selección');
-			} else if (response.errorCode) {
-				console.error('Error al seleccionar la imagen', response.errorMessage);
-			} else if (response.assets && response.assets.length > 0) {
+			if (response.assets && response.assets.length > 0) {
 				const uri = response.assets[0].uri;
 				if (uri) {
 					setSelectPhoto(uri);

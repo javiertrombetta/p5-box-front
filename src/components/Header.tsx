@@ -47,11 +47,11 @@ const Header = ({ navigation }: Props) => {
 	let user = store.getState();
 	const handleNavigate = () => {
 		if (user) {
-			user.roles[0] === 'repartidor'
-				? navigation.navigate(RouteName.HomeIniciarJornada)
-				: user.roles[0] === 'administrador'
-				? navigation.navigate(RouteName.HomeGestionarPedido)
-				: console.log('error');
+			if (user.roles[0] === 'repartidor') {
+				navigation.navigate(RouteName.HomeIniciarJornada);
+			} else if (user.roles[0] === 'administrador') {
+				navigation.navigate(RouteName.HomeGestionarPedido);
+			}			
 		}
 	};
 	return (

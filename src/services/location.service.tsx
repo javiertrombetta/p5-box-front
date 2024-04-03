@@ -1,8 +1,11 @@
 import axios from 'axios';
+import Constants from 'expo-constants';
 axios.defaults.withCredentials = true;
 
+const EXPO_PUBLIC_BACKEND_URL = Constants.expoConfig?.extra?.backendURL;
+
 export const getRouteData = async (idPackage: string) => {
-	const response = await axios.get(`http://localhost:3000/api/v1/locations/package/${idPackage}`, {
+	const response = await axios.get(`${EXPO_PUBLIC_BACKEND_URL}/locations/package/${idPackage}`, {
 		withCredentials: true,
 	});
 	return response.data;
